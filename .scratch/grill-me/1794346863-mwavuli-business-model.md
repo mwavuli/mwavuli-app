@@ -5,7 +5,8 @@
 - Slug: mwavuli-business-model
 - Sources: the owner's pasted business model; `brand/` docs on branch SNT-24-brand-design-language (README,
   00-inventory, 01-foundation, 06-iconography, 08-applications); this conversation
-- Output: [business/model.md](../../business/model.md) (BM1 to BM13) and ticket SNT-25
+- Output: [business/model.md](../../business/model.md) (BM1 to BM12), the separate
+  [addendum](../../business/addendum-rent-advance.md) (BM13 to BM15), ticket SNT-25 and follow-up ticket SNT-26
 - Note: every card states a 3-minute timeout, but no timer was available in this session, so nothing was applied by
   timeout. Every resolution below is the owner's own reply. Links to the model doc are re-pointed to this file's
   location; the wording is otherwise as sent.
@@ -591,6 +592,58 @@ Keep the payouts. Mwavuli keeps each monthly payout until the balance is repaid.
 
 **Other actions:** `w` apply · `i` ignore · `s` stop
 
+**Reply** `#1, on second thought, let's scope rent pay advances but demote it to low tier priority, not to be included in the initial launch, keep it separate and scope it as an addendum`
+
+Resolution: selected `1` (recommended). Recorded as BM15 (repayment by keeping the payouts). The owner also changed
+the answer to `q12`: the advance is a separate addendum, low priority, and not part of the initial launch. BM14 now
+reads that way. The terms moved to [business/addendum-rent-advance.md](../../business/addendum-rent-advance.md), and
+ticket SNT-26 (Low) holds the follow-up work.
+
+### Numbers - Question `q14`
+
+> **Assistant, before the card**
+>
+> Recorded **BM15** (Owner): if the advance is built, it is repaid by keeping the landlord's monthly payouts until the
+> balance is cleared, with 1.5% a month on what is still owed. A tenant's missed month is not covered while an advance
+> is outstanding.
+>
+> Recorded **BM14** (Owner, changed): the advance is a separate addendum, low priority, and not part of the initial
+> launch offer, pitch or agreements. It now lives in
+> [business/addendum-rent-advance.md](../../business/addendum-rent-advance.md) with its open questions parked, and the
+> main model keeps only a pointer to it. Follow-up ticket SNT-26 (Low) holds the work. Say "resume advance" any time to
+> continue it. Because it is out of the launch, the license no longer gates the launch.
+>
+> Queue: the numbers (now) · the float and launch size · the pitch paragraph and worked example. Then a final
+> read-through, the PR and moving SNT-25 to In Review.
+
+Numbers · Question `q14` · Timeout: `3 min` (not enforced here; I wait for your reply)
+
+**Question**
+Approve these starting figures for the launch offer?
+
+**Current Assumption**
+They turn the open `[#]` items into single round numbers. They are my starting figures, not market data, to test with the first landlords, and you can change any of them before the agreements are printed. The float and the launch size come next, because they need your own figures.
+
+- **N1 Coordination fee on repair quotes.** 10% of the contractor's price, shown on the quote. It pays for finding, supervising and standing behind the contractor, in plain view.
+- **N2 Approval limit.** UGX 200,000. Small fixes need no call; bigger jobs get the landlord's YES. It is half the rent of a UGX 400,000 room.
+- **N3 Emergency amount.** UGX 500,000. A burst pipe or a failed lock is fixed first and reported the same day. It sits above the approval limit, so the exception means something.
+- **N4 A job bigger than one payout.** A job never takes more than one payout. For a bigger job, the landlord pays the balance before work starts. That keeps the 1st payout whole and keeps Mwavuli from lending.
+- **N5 Final payment on exit.** 14 days after the agreement ends: long enough to close the accounts, short enough to feel fair.
+- **N6 Tail on placed tenants.** 3 months: it pays for finding the tenant without trapping the landlord.
+- **N7 Time to fix unsafe items before we start.** 30 days. We may decline a building that stays unsafe (P4).
+- **N8 Minimum building size.** None. P9 lets Mwavuli decline a building it can't fund, so a size rule isn't needed.
+
+**Recommended: `r` or `1`**
+Approve all eight as starting figures. Each is one round number or one plain rule, which keeps the offer easy to remember, and each can change by number.
+
+| Reply | Choice | Consequence |
+|---|---|---|
+| `1` | Approve N1 to N8 as proposed | Fastest. All eight go into the doc as Owner-approved starting figures |
+| `2` | Approve with changes: reply `2` and name them, for example "2: N1 12%, N2 UGX 300,000" | Only the named figures change; the rest are approved |
+| `3` | Go one at a time | Eight cards. Slow, but nothing is approved unread |
+
+**Other actions:** `w` apply · `i` ignore · `s` stop
+
 **Reply** (pending)
 
 ## Final Decisions (so far)
@@ -621,9 +674,12 @@ Keep the payouts. Mwavuli keeps each monthly payout until the balance is repaid.
 - BM12 Defaults P1 to P12 approved as written.
 - BM13 Rent advance: stated by the owner (opt-in; up to 3 to 6 months of future net rent; 1.5% a month on the reducing
   balance; not covered by the 1-month cap; the rent payments are the security; due in full when Mwavuli stops being
-  the agent). Under refinement from `q13`.
-- BM14 Rent advance go-live: with the main offer, in the pitch and the agreements from day one, license obtained first;
-  Mwavuli lends its own funds (assumed). The launch date depends on the license.
+  the agent). Scoped in the addendum.
+- BM14 Rent advance placement: a separate addendum, low priority, not part of the initial launch offer, pitch or
+  agreements. Mwavuli would lend its own funds (assumed), with the license obtained first. (The owner first answered
+  `q12` with "with the launch", then moved it out.)
+- BM15 Rent advance repayment: Mwavuli keeps the landlord's monthly payouts until the balance is repaid, with 1.5% a
+  month on what is still owed. A tenant's missed month is not covered while an advance is outstanding.
 
 ## Remaining Risks Or Assumptions
 
@@ -634,13 +690,12 @@ Keep the payouts. Mwavuli keeps each monthly payout until the balance is repaid.
 - Figures still to set: the works coordination fee, the approval limit, the emergency repair amount, the rule for a
   job larger than one payout, the final payment time and the tail on placed tenants (P8), and the float Mwavuli can
   fund to pay on the 1st. The 3rd as the latest payout day was assumed and accepted with BM8.
-- The rent advance is lending in substance and likely needs a money-lender license (counsel to confirm). Nothing is
-  offered or advertised until that is settled (`q12`). BM14 puts the advance in the launch pitch, so the launch date
-  depends on the license; if it is late, the owner chooses between waiting and launching without the advance.
+- The rent advance is lending in substance and likely needs a money-lender license (counsel to confirm). It is out of
+  the initial launch (BM14), so the license gates the addendum (SNT-26), not the launch.
 - Counsel and accountant items are listed in the notes of [business/model.md](../../business/model.md).
 - Brand follow-ups after SNT-24 lands: F1 (the proof line "Rent paid to you on the 1st, every month" drops the
-  occupied-units condition and the 1-month cover), F3, F8 (a Luganda default for landlord documents) and D15 and I7
-  (a seventh service, the rent advance).
+  occupied-units condition and the 1-month cover), F3 and F8 (a Luganda default for landlord documents). D15 and I7
+  (a seventh service) apply only if the advance addendum is built.
 
 ## Work log
 
@@ -649,4 +704,7 @@ Keep the payouts. Mwavuli keeps each monthly payout until the balance is repaid.
 - `d2686c8` docs(SNT-25): business model draft with the guarantee, payout, works and audience terms (BM1 to BM4)
 - `09f8899` docs(SNT-25): arrears, deposits and proof-of-ownership terms (BM5 to BM7)
 - `a95688e` docs(SNT-25): leaving and scope terms (BM8 to BM10)
-- This commit: languages, defaults and rent advance terms, with this transcript (BM11 to BM13)
+- `d6d4868` docs(SNT-25): languages, defaults and rent advance terms, with the grill-me transcript (BM11 to BM13)
+- `d6d1fbf` docs(SNT-25): append q12 and q13 to the grill-me transcript (BM14)
+- This commit: move the rent advance to a separate low-priority addendum (BM13 to BM15) and append q14
+- SNT-26 (Low, Backlog) filed for the addendum work

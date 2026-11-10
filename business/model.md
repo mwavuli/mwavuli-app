@@ -362,40 +362,6 @@ landlord's own language, with a witness the landlord chose.
 - P11: confirm duties under the Data Protection and Privacy Act, 2019 (registration, consent notices, retention).
 - P12: confirm governing law, the mediation step and the courts with jurisdiction.
 
-## Rent advance
-
-### BM13 · Rent advance (opt-in)
-
-*Source: Owner. Stated by the owner on 2026-11-10; being refined in the interview from q12.*
-
-**Stated terms**
-
-- It is opt-in: a landlord asks for it, and it is never added to an agreement by default.
-- Mwavuli can advance up to 3 to 6 months of the landlord's future net rent collections.
-- The cost is 1.5% a month on the reducing balance.
-- The advance is not covered by the 1-month guarantee cap (BM1). It is repaid whatever the tenants do.
-- The rent payments are the security. The whole balance is repaid once Mwavuli is no longer the landlord's
-  agent.
-
-**Open** When it goes live and who lends the money, who can opt in, how the limit is set, how it is repaid, what
-happens on exit, and what the landlord is told and signs.
-
-**Counsel note**
-
-- This is lending in substance, whatever it is called: money advanced, interest charged, repayment due whatever
-  the tenants do. Lending money at interest as a business likely needs a money-lender license in Uganda (the
-  Tier 4 Microfinance Institutions and Money Lenders Act, 2016, regulated by the Uganda Microfinance Regulatory
-  Authority). Confirm before any advance is offered or advertised, and confirm the interest cap and the
-  disclosure rules.
-- Security over future rent: confirm how to take and enforce an assignment of rents, what tenants must be told,
-  and what happens when the building is co-owned or inherited.
-- "Repaid in full when the agent ends" sits beside BM8 (leave any time, no fee). Draft it so BM8 stays true: no
-  exit fee, and any balance still owing is repaid.
-- The advance agreement is separate from the management agreement, with its own explanation and signature
-  (BM11), and states the total repayable in UGX. The landlords are the audience described in BM3.
-- A seventh service changes the six on the business card and the brand icon set (brand D15, I7). Log it for the
-  brand follow-up after SNT-24 lands.
-
 ## Numbers
 
 | Number            | Value                    |
@@ -409,10 +375,15 @@ Still to set: the works coordination fee, the approval limit, the emergency repa
 larger than one payout, the final payment time and the tail on placed tenants (P8), and the float Mwavuli can
 fund to pay on the 1st.
 
+## Addenda
+
+- [Rent advance](addendum-rent-advance.md): an opt-in advance on future rent. Low priority, and not part of the
+  initial launch offer, pitch or agreements.
+
 ## Open
 
 Settled next, in this order:
 
-- The rent advance: when it goes live and who lends the money, who can opt in, how the limit is set, how it is
-  repaid, what happens on exit, and what the landlord is told and signs.
-- The numbers round and the pitch example.
+- The numbers round: the works coordination fee, the approval and emergency amounts, the rule for a job
+  larger than one payout, the final payment time, the tail on placed tenants and the float Mwavuli can fund.
+- The pitch paragraph and the worked example.
