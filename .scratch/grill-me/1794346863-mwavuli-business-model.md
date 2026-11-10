@@ -644,6 +644,101 @@ Approve all eight as starting figures. Each is one round number or one plain rul
 
 **Other actions:** `w` apply · `i` ignore · `s` stop
 
+**Interlude 1**
+
+**Owner:** `in simple concise terms explain N5, N6`
+
+**Assistant**
+
+> **N5, Final payment on exit: 14 days.** When the agreement ends, we have 14 days to send you one last statement and
+> pay what you're owed. It is long enough to close the accounts and short enough that you aren't left waiting for your
+> money.
+>
+> - On the statement: rent we collected for you and haven't paid out yet, minus our 15%. We also take off costs you
+>   approved and any covered month a tenant still owes us.
+> - We hand over your tenants' files. A deposit we hold goes to you after any rent the tenant owes is taken from it,
+>   and the tenant is told.
+> - **Example:** the agreement ends on 20 Jun. After your 1 Jun payout we collected UGX 800,000 of late rent. By 4 Jul
+>   you get UGX 680,000, which is the UGX 800,000 minus our 15%.
+>
+> **N6, Tail on placed tenants: 3 months.** If we found a tenant and you leave us but keep that tenant, our 15% on that
+> tenant's rent continues for 3 months after you leave. It pays us for finding and vetting the tenant, and without it
+> a landlord could use us to fill rooms and then leave.
+>
+> - It applies only to tenants we found, never to tenants you already had. It does not apply if you left because we
+>   paid late (P8).
+> - **Example:** we place a tenant at UGX 400,000 in May. You leave on 30 Aug and keep them. The tail is 3 × UGX 60,000
+>   = UGX 180,000, which is less than half of one month's rent.
+> - My suggestion, which is new and yours to approve: take the tail from your final payment in one go, so you never get
+>   a bill later. If that payment is too small, we bill the rest once.
+>
+> `q14` is still open: reply `1`, `2` (name the changes) or `3`.
+
+**Interlude 2**
+
+**Owner**
+
+> refinement: N6: no tail on placed tenants, cut it out with no tombstones
+>
+> question: N5 is still unclear, what circumstances does it cover with respect to prepaid rent before the month of
+> stay is current
+
+**Assistant**
+
+> **N6 is cut.** The tail is gone from the model: P8, the figures list, the open list and the exit notes no longer
+> mention it. The cost is that a landlord can use us to find a tenant, then leave on 30 days' notice and keep them, and
+> our fee on that tenant ends when we stop managing.
+>
+> **Prepaid rent and N5.** As written, N5 only covers rent we have collected and not yet paid out. It says nothing
+> about rent a tenant paid ahead for months that haven't started, and neither do the approved defaults. That is a gap,
+> so I propose two rules:
+>
+> - **During the agreement (new default P13).** Prepaid rent is held in a separate account, like deposits. On each 1st
+>   we pay you that month's rent minus our 15%, as always, and months that haven't started stay in the account.
+> - **At exit (added to N5).** Prepaid rent for months after the end date goes to you in full within the 14 days, with
+>   no 15%, because we are no longer your agent for those months. Each tenant gets a note, "rent paid up to [month]",
+>   and you honor it.
+>
+> What that covers:
+> 1. A tenant prepaid months after the end date: the full amount goes to you, with no fee, within 14 days.
+> 2. A tenant pays ahead after the exit notice: we tell tenants to pay you directly for months after the end date, and
+>    anything that still reaches us is passed on in full.
+> 3. A tenant leaves early with months prepaid: unused months go back to the tenant under the tenancy form, not to
+>    you, with no fee on them.
+> 4. You leave because we paid late (BM8): the same as 1.
+>
+> **Example** A room at UGX 400,000. On 5 Apr the tenant prepays April, May and June (UGX 1,200,000). We pay you
+> UGX 340,000 on 1 Apr as usual and hold UGX 800,000 for May and June. The agreement ends on 20 Apr. By 4 May you get
+> the full UGX 800,000, and the tenant gets a note: "rent paid up to 30 Jun".
+
+Numbers · Question `q14` (revised) · Timeout: `3 min` (not enforced here; I wait for your reply)
+
+**Question**
+Approve these starting figures, with N5 widened to cover prepaid rent, N6 removed and one new default added?
+
+**Current Assumption**
+They turn the open `[#]` items into single round numbers. They are my starting figures, not market data, to test with the first landlords, and you can change any of them before the agreements are printed. P13 is new because the approved defaults don't say what happens to prepaid rent, and N5 depends on it. The float and the launch size come next, because they need your own figures.
+
+- **N1 Coordination fee on repair quotes.** 10% of the contractor's price, shown on the quote. It pays for finding, supervising and standing behind the contractor, in plain view.
+- **N2 Approval limit.** UGX 200,000. Small fixes need no call; bigger jobs get the landlord's YES. It is half the rent of a UGX 400,000 room.
+- **N3 Emergency amount.** UGX 500,000. A burst pipe or a failed lock is fixed first and reported the same day. It sits above the approval limit, so the exception means something.
+- **N4 A job bigger than one payout.** A job never takes more than one payout. For a bigger job, the landlord pays the balance before work starts. That keeps the 1st payout whole and keeps Mwavuli from lending.
+- **N5 Final payment on exit.** 14 days after the agreement ends. It pays the landlord the rent we collected and haven't paid out, plus prepaid rent for months after the end date in full with no 15%, less costs the landlord approved and any covered month a tenant still owes us.
+- **N7 Time to fix unsafe items before we start.** 30 days. We may decline a building that stays unsafe (P4).
+- **N8 Minimum building size.** None. P9 lets Mwavuli decline a building it can't fund, so a size rule isn't needed.
+- **P13 Prepaid rent during the agreement.** Held in a separate account, like deposits, and paid out month by month on the 1st, minus 15%. Months that haven't started stay there. If a tenant leaves early, unused months go back to the tenant under the tenancy form, with no fee on them.
+
+**Recommended: `r` or `1`**
+Approve all of them: seven starting figures and one new default. Each is one round number or one plain rule. The main alternative for P13 is to pay prepaid rent out when it arrives: the landlord gets cash sooner, but at exit we would refund the 15% taken on months after the end date, and a tenant who leaves early would have to be refunded by the landlord.
+
+| Reply | Choice | Consequence |
+|---|---|---|
+| `1` | Approve N1 to N5, N7, N8 and P13 as proposed | Fastest. All eight go into the doc as Owner-approved |
+| `2` | Approve with changes: reply `2` and name them, for example "2: N1 12%, P13 pay out on receipt" | Only the named items change; the rest are approved |
+| `3` | Go one at a time | Eight cards. Slow, but nothing is approved unread |
+
+**Other actions:** `w` apply · `i` ignore · `s` stop
+
 **Reply** (pending)
 
 ## Final Decisions (so far)
@@ -671,7 +766,7 @@ Approve all eight as starting figures. Each is one round number or one plain rul
 - BM10 One set of terms for every unit, with no rent limit.
 - BM11 Languages and signing: English and Luganda, both signed; explained aloud; a witness of the landlord's choosing;
   a signed explanation note; the landlord keeps a copy.
-- BM12 Defaults P1 to P12 approved as written.
+- BM12 Defaults P1 to P12 approved; P8 has no tail on placed tenants (cut by the owner during `q14`).
 - BM13 Rent advance: stated by the owner (opt-in; up to 3 to 6 months of future net rent; 1.5% a month on the reducing
   balance; not covered by the 1-month cap; the rent payments are the security; due in full when Mwavuli stops being
   the agent). Scoped in the addendum.
@@ -688,7 +783,7 @@ Approve all eight as starting figures. Each is one round number or one plain rul
 - BM10 has no rent limit, so one large commercial default is a large loss for Mwavuli. The right to decline a unit it
   cannot fund (P9) and the size of the float (numbers round) are the controls.
 - Figures still to set: the works coordination fee, the approval limit, the emergency repair amount, the rule for a
-  job larger than one payout, the final payment time and the tail on placed tenants (P8), and the float Mwavuli can
+  job larger than one payout, the final payment time (P8), and the float Mwavuli can
   fund to pay on the 1st. The 3rd as the latest payout day was assumed and accepted with BM8.
 - The rent advance is lending in substance and likely needs a money-lender license (counsel to confirm). It is out of
   the initial launch (BM14), so the license gates the addendum (SNT-26), not the launch.

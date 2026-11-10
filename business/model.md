@@ -236,8 +236,7 @@ signal, and the right to leave at once makes missing the 1st costly for Mwavuli.
   the end of the 3rd. The day is a number for the numbers round.
 - Define each reason Mwavuli may leave at once (taking rent directly, interfering with tenants, refusing an urgent
   safety repair) so a landlord can recognize it.
-- What happens on exit is open: the final statement, handing over tenant files and the deposits Mwavuli holds, the
-  covered-month claim, and a tail on placed tenants. Proposed defaults.
+- Exit mechanics (the final statement, tenant files, deposits and the covered-month claim) are in P8.
 
 ## Who Mwavuli serves
 
@@ -332,8 +331,7 @@ landlord's own language, with a witness the landlord chose.
   fee, and none charged to tenants. Late fees written in the tenancy form go to Mwavuli.
 - **P8 On exit.** A final statement and payment within a set time `[#]`, less any covered month not yet
   repaid. Tenant files go to the landlord. A deposit we hold goes to the landlord after any rent the tenant
-  still owes is taken from it, and tenants are told. For tenants we placed, the 15% continues for a set time
-  `[#]` if the landlord keeps them, but not if the landlord left because we paid late.
+  still owes is taken from it, and tenants are told.
 - **P9 Right to decline.** We may decline a building or unit we cannot fund, or that fails the ownership
   check or the inspection. Once we accept it, the promise applies.
 - **P10 VAT on commercial rent.** VAT a tenant pays on rent is not part of the rent for the 15%. We pass it
@@ -355,8 +353,7 @@ landlord's own language, with a witness the landlord chose.
 - P6: confirm how SMS and WhatsApp replies and recorded calls are kept and relied on as consent, including
   consent to the recording.
 - P7: confirm what late fees the Landlord and Tenant Act 2022 lets a landlord or agent charge a tenant.
-- P8: define "placed tenant" and "keeps them", and confirm the rules on handing over deposits and the tenant's
-  rights.
+- P8: confirm the rules on handing over deposits and the tenant's rights.
 - P9: record the reason each time a building or unit is declined.
 - P10: the accountant confirms the VAT treatment, the landlord's VAT status and who issues tax invoices.
 - P11: confirm duties under the Data Protection and Privacy Act, 2019 (registration, consent notices, retention).
@@ -372,8 +369,7 @@ landlord's own language, with a witness the landlord chose.
 | Latest payout day | the 3rd of the month     |
 
 Still to set: the works coordination fee, the approval limit, the emergency repair amount, the rule for a job
-larger than one payout, the final payment time and the tail on placed tenants (P8), and the float Mwavuli can
-fund to pay on the 1st.
+larger than one payout, the final payment time (P8), and the float Mwavuli can fund to pay on the 1st.
 
 ## Addenda
 
@@ -385,5 +381,5 @@ fund to pay on the 1st.
 Settled next, in this order:
 
 - The numbers round: the works coordination fee, the approval and emergency amounts, the rule for a job
-  larger than one payout, the final payment time, the tail on placed tenants and the float Mwavuli can fund.
+  larger than one payout, the final payment time and the float Mwavuli can fund.
 - The pitch paragraph and the worked example.
