@@ -839,6 +839,45 @@ Approve it as written. Every line traces to a decision (BM1, BM2, BM4, BM5, BM8,
 
 **Other actions:** `w` apply · `i` ignore · `s` stop
 
+**Reply** `1`
+
+Resolution: selected `1` (recommended): the pitch approved as written. Recorded as BM18.
+
+### Launch area - Question `q17`
+
+> **Assistant, before the card**
+>
+> Recorded **BM18** (Owner): the landlord pitch is approved as written: three lines to say aloud, one paragraph and one
+> worked example. It is in [business/model.md](../../business/model.md) under "The offer in brief", with a rule for
+> using it: say "we cover the first month", never "always paid".
+>
+> I also read the whole model end to end and fixed five things: a duplicate pitch line in BM1, two notes still marked
+> "open" or "proposed" that later answers had settled (BM6, BM10), BM3's example rule, which the short mechanics in
+> BM12 didn't meet, and the Open list. I added a documents table (what the agreement, tenancy form, inspection report,
+> explanation note and pitch take from the model) and a pointer list for counsel and the accountant, including the
+> company details the agreements need.
+>
+> One fact is left to confirm.
+
+Launch area · Question `q17` · Timeout: `3 min` (not enforced here; I wait for your reply)
+
+**Question**
+Where does Mwavuli start?
+
+**Current Assumption**
+You approved "one area" (BM9) but did not name it, so the model says Kampala and its surroundings. The pitch doesn't name an area, but BM9's plain statement and the agreements do.
+
+**Recommended: `r` or `1`**
+Confirm Kampala and its surroundings. Staff visits, contractors, lawyers and garbage collection are closest there, and the Luganda signing in BM11 fits it. If your launch is elsewhere, name the area and I'll change BM9 and the agreements' wording.
+
+| Reply | Choice | Consequence |
+|---|---|---|
+| `1` | Kampala and its surroundings | BM9 stays as written, and the open item closes |
+| `2` | Another area: reply `2` and name it | BM9 changes; check that Luganda is the right second language there |
+| `3` | Decide later | BM9 keeps the assumption and the open item stays on the list |
+
+**Other actions:** `w` apply · `i` ignore · `s` stop
+
 **Reply** (pending)
 
 ## Final Decisions (so far)
@@ -884,6 +923,8 @@ Approve it as written. Every line traces to a decision (BM1, BM2, BM4, BM5, BM8,
   building only if that account, after what is committed to accepted buildings, holds two months of the building's
   net rent (one for the payout, one for a covered month still unrecovered). The float and the launch size are
   tracked outside the repo.
+- BM18 Landlord pitch: approved as written (three lines to say aloud, one paragraph, one worked example), with the rule
+  "we cover the first month", never "always paid".
 
 ## Remaining Risks Or Assumptions
 
@@ -914,4 +955,5 @@ Approve it as written. Every line traces to a decision (BM1, BM2, BM4, BM5, BM8,
 - `c539971` docs(SNT-25): cut the tail on placed tenants from the model
 - `074467b` docs(SNT-25): approved starting figures and the prepaid rent default (BM16)
 - `abdf926` docs(SNT-25): remove stale open markers from the model
-- This commit: record the payout account rule (BM17) and append q16
+- `151afc3` docs(SNT-25): payout account rule (BM17)
+- This commit: the approved pitch (BM18), a documents table, counsel pointers and a read-through, and append q17

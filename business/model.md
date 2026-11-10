@@ -1,6 +1,6 @@
 # Mwavuli business model
 
-Status: version 0.1, draft for owner review. Ticket SNT-25. Interview started on 2026-11-10.
+Status: version 0.2, for owner sign-off and counsel review. Ticket SNT-25. Interview started on 2026-11-10.
 Interview transcript: [grill-me session](../.scratch/grill-me/1794346863-mwavuli-business-model.md).
 
 What Mwavuli Property Management offers a landlord, what it charges and what each side does. It is the single
@@ -22,6 +22,60 @@ Each term has an ID (BM1, BM2), a source, a **Plain statement**, an **Example**,
 
 Examples use round, illustrative figures in UGX. They show how a rule works; they are not quotes.
 
+## The offer in brief
+
+### BM18 · The landlord pitch
+
+*Source: Owner. Drafted from the terms below and approved by the owner.*
+
+**Say aloud**
+
+1. We pay you on the 1st, for every room with a tenant.
+2. We take 15% of the rent. No rent, no fee.
+3. Leave any time with 30 days' notice.
+
+**Paragraph** Give us your building and we pay you the rent on the 1st of every month, for every room with a
+tenant, minus our 15%. If a tenant doesn't pay, we cover that first month and do the chasing, so you are not
+left waiting. We find tenants for your empty rooms, collect the rent, arrange trusted contractors for repairs,
+and look after electricity, water and garbage. You get one payment and one statement a month, by SMS or
+WhatsApp. We ask you before any repair above UGX 200,000. There is no sign-up fee and no letting fee. If it
+isn't working, leave with 30 days' notice.
+
+**Worked example** 10 rooms at UGX 400,000, 9 with tenants. Your statement for 1 Apr:
+
+| Item                                          | UGX       |
+|-----------------------------------------------|-----------|
+| Rent from 9 rooms with tenants                | 3,600,000 |
+| Our 15%                                       | -540,000  |
+| Repair: tap, plumber UGX 100,000 plus our 10% | -110,000  |
+| Paid to you on the 1st                        | 2,950,000 |
+
+The empty room earns no rent and costs no fee, and we look for a tenant. If a tenant misses March, we still pay
+you for that room on 1 Mar (UGX 340,000). If it is still unpaid on 1 Apr, we pause that room until it is
+settled, we chase, and if it goes to court you say YES first.
+
+**Rules for using it**
+
+- Say "we cover the first month", never "always paid". Use "guaranteed" only next to "we cover the first month".
+- Quote the figures as written. The three lines hold the only numbers a landlord needs to remember: the 1st, 15%
+  and 30 days.
+- Every claim traces to a term: BM1, BM2, BM4, BM5, BM8, BM11, BM17, P1 and P7.
+
+**Counsel note**
+
+- The pitch is an advertisement. Counsel checks it against the agreement before it is printed, sent or recorded.
+- The Luganda text is a complete translation, reviewed by a qualified person (BM11).
+
+## Documents this model feeds
+
+| Document           | For      | Takes from                                                                    |
+|--------------------|----------|-------------------------------------------------------------------------------|
+| Landlord agreement | Landlord | BM1, BM2, BM4 to BM12, BM17 and the Numbers table; BM3 sets how it is written |
+| Tenancy form       | Tenant   | P2, P3, P7, P13, BM5, BM6                                                     |
+| Inspection report  | Landlord | P4, P9                                                                        |
+| Explanation note   | Landlord | BM11                                                                          |
+| Landlord pitch     | Landlord | BM18 and the plain statements                                                 |
+
 ## Audience
 
 ### BM3 · Who the offer is written for
@@ -35,7 +89,8 @@ patience for legal language.
 
 - Every plain statement passes the read-aloud test: a staff member can say it to a landlord in one breath and the
   landlord can say it back.
-- Every plain statement carries an example in UGX with round figures.
+- Every term carries an example in UGX with round figures. The short mechanics in BM12 are single plain
+  statements.
 - The offer carries few numbers and they are round, so a landlord can remember all of them.
 - Landlord documents are short. The full legal terms sit in a schedule behind them, and the plain statements say
   what they mean.
@@ -67,9 +122,6 @@ settled.
 
 **Why** A cap turns an open-ended liability into one month per unit that Mwavuli can fund and a lawyer can write,
 and the promise stays true for every month inside it.
-
-**Pitch wording** "Rent on the 1st for every occupied unit. If a tenant misses, we cover the first month." Never
-"always paid".
 
 **Counsel note**
 
@@ -186,7 +238,7 @@ deposits stay where they are so a landlord can join without handing over money.
 - Mwavuli holds new deposits for the tenant. Confirm the Landlord and Tenant Act 2022 rules on the amount, how a
   deposit is held and when it is returned.
 - Keep a register of each tenant's deposit and who holds it. A deposit a landlord holds cannot be used against
-  a month Mwavuli has covered: write this into the landlord's duties (open).
+  a month Mwavuli has covered: proposed as a landlord duty (see Open).
 - Units with existing tenants have no deposit cushion, so their legal costs fall on the landlord.
 
 ### BM17 · The payout account
@@ -304,8 +356,6 @@ rent on the 1st. No unit is left out because its rent is large.
 
 - One large unit that does not pay costs Mwavuli its whole net rent for the covered month: UGX 2,550,000 for a
   shop that rents at UGX 3,000,000. That is as much as the fees from about 40 rooms at UGX 400,000.
-- Mwavuli should be able to decline a building or unit it cannot fund when it signs up. Once accepted, the promise
-  applies. Proposed default.
 - The payout account has to cover the largest units (BM17). P9 lets Mwavuli decline a unit it cannot fund.
 
 ## Signing
@@ -412,8 +462,25 @@ landlord's own language, with a witness the landlord chose.
 | Time to fix unsafe items    | 30 days, before we start                                 |
 | Minimum building size       | none                                                     |
 
-Still to set: the launch area. Kampala and its surroundings are assumed. The float and the launch size are tracked
-outside the repo (BM17).
+The float and the launch size are tracked outside the repo (BM17).
+
+## For counsel and the accountant
+
+Each term's counsel note lists what to confirm. Start with these:
+
+- **Licensing and regulation:** whether the paid first-month cover counts as insurance or suretyship (BM1), and the
+  payment-service and anti-money-laundering duties of collecting and holding rent (P1).
+- **Client money:** deposits, prepaid rent and the payout account (BM6, P13, BM17).
+- **Language and signing:** which version governs, the signed explanation note and witnesses (BM11, BM3).
+- **Land and authority:** proof of title by tenure, mortgages, co-owners and estates (BM7).
+- **Tenancy and recovery:** the covered-month claim, eviction steps, deposits and late fees under the Landlord and
+  Tenant Act 2022 (BM5, BM6, P7, P8).
+- **Agency and works:** agent, not builder; disclosure of the coordination fee; re-billing utilities (BM2).
+- **Tax:** VAT and withholding tax on the 15% and on commercial rent, and the landlord's own duties (BM4, BM9, P5,
+  P10).
+- **Data and disputes:** the Data Protection and Privacy Act, governing law, mediation and the courts (P11, P12).
+- **Details to supply for the agreements:** the registered company name, registration number, address, TIN, VAT
+  status and the signatory.
 
 ## Addenda
 
@@ -422,8 +489,9 @@ outside the repo (BM17).
 
 ## Open
 
-Settled next, in this order:
+Not yet settled:
 
-- Construction scope: whether new buildings and extensions are in the offer or need a separate works
-  agreement.
-- The pitch paragraph and the worked example.
+- Construction scope: whether new buildings and extensions are in the offer or need a separate works agreement.
+- Proposed landlord duty, for the owner to approve: a deposit the landlord holds is not used against a month
+  Mwavuli has covered (BM6).
+- The launch area. Kampala and its surroundings are assumed (BM9).
