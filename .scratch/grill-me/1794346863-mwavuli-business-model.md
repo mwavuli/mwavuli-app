@@ -5,7 +5,7 @@
 - Slug: mwavuli-business-model
 - Sources: the owner's pasted business model; `brand/` docs on branch SNT-24-brand-design-language (README,
   00-inventory, 01-foundation, 06-iconography, 08-applications); this conversation
-- Output: [business/model.md](../../business/model.md) (BM1 to BM12), the separate
+- Output: [business/model.md](../../business/model.md) (BM1 to BM12 and BM16 to BM19), the separate
   [addendum](../../business/addendum-rent-advance.md) (BM13 to BM15), ticket SNT-25 and follow-up ticket SNT-26
 - Note: every card states a 3-minute timeout, but no timer was available in this session, so nothing was applied by
   timeout. Every resolution below is the owner's own reply. Links to the model doc are re-pointed to this file's
@@ -878,9 +878,12 @@ Confirm Kampala and its surroundings. Staff visits, contractors, lawyers and gar
 
 **Other actions:** `w` apply · `i` ignore · `s` stop
 
-**Reply** (pending)
+**Reply** `1`
 
-## Final Decisions (so far)
+Resolution: selected `1` (recommended): Kampala and its surroundings confirmed. Recorded as BM19. No question is
+pending; the interview is complete.
+
+## Final Decisions
 
 - BM1 Guarantee cap: 1 month of unpaid rent per unit. Per unit and per default; it resets when the arrears are
   cleared. (The owner chose 1 month; the recommendation was 3.)
@@ -901,7 +904,7 @@ Confirm Kampala and its surroundings. Staff visits, contractors, lawyers and gar
 - BM8 Leaving: no lock-in; 30 days' written notice either way. The landlord may leave at once, with no fee, if
   Mwavuli has not paid by the 3rd. Mwavuli may leave at once for direct rent collection, interference or refusing an
   urgent safety repair.
-- BM9 Scope: residential and commercial units in one area (Kampala and its surroundings assumed).
+- BM9 Scope: residential and commercial units in one area: Kampala and its surroundings (confirmed in `q17`, BM19).
 - BM10 One set of terms for every unit, with no rent limit.
 - BM11 Languages and signing: English and Luganda, both signed; explained aloud; a witness of the landlord's choosing;
   a signed explanation note; the landlord keeps a copy.
@@ -925,10 +928,10 @@ Confirm Kampala and its surroundings. Staff visits, contractors, lawyers and gar
   tracked outside the repo.
 - BM18 Landlord pitch: approved as written (three lines to say aloud, one paragraph, one worked example), with the rule
   "we cover the first month", never "always paid".
+- BM19 Launch area: Kampala and its surroundings, confirmed by the owner.
 
 ## Remaining Risks Or Assumptions
 
-- The launch area is assumed to be Kampala and its surroundings; the owner did not name one.
 - No timer ran: no answer was applied by timeout.
 - BM10 has no rent limit, so one large commercial default is a large loss for Mwavuli. The right to decline a unit it
   cannot fund (P9) and the size of the float (numbers round) are the controls.
@@ -940,6 +943,9 @@ Confirm Kampala and its surroundings. Staff visits, contractors, lawyers and gar
 - Brand follow-ups after SNT-24 lands: F1 (the proof line "Rent paid to you on the 1st, every month" drops the
   occupied-units condition and the 1-month cover), F3 and F8 (a Luganda default for landlord documents). D15 and I7
   (a seventh service) apply only if the advance addendum is built.
+- The Luganda text of the agreements and the pitch is a complete translation that needs a qualified reviewer (BM11).
+- Details to supply for the agreements: the registered company name, registration number, address, TIN, VAT status
+  and the signatory.
 
 ## Work log
 
@@ -956,4 +962,5 @@ Confirm Kampala and its surroundings. Staff visits, contractors, lawyers and gar
 - `074467b` docs(SNT-25): approved starting figures and the prepaid rent default (BM16)
 - `abdf926` docs(SNT-25): remove stale open markers from the model
 - `151afc3` docs(SNT-25): payout account rule (BM17)
-- This commit: the approved pitch (BM18), a documents table, counsel pointers and a read-through, and append q17
+- `fdd6f3f` docs(SNT-25): landlord pitch (BM18), documents table and counsel pointers
+- This commit: confirm the launch area (BM19) and close the transcript

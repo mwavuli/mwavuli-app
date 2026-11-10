@@ -321,7 +321,7 @@ signal, and the right to leave at once makes missing the 1st costly for Mwavuli.
 
 ### BM9 · Homes and business premises, in one area
 
-*Source: Owner. The area was not named; Kampala and its surroundings are assumed.*
+*Source: Owner. Kampala and its surroundings, confirmed by the owner.*
 
 **Plain statement** We manage homes and business premises in Kampala and its surroundings: rooms, flats, small
 blocks, shops and offices. There is no minimum number of units.
@@ -494,4 +494,3 @@ Not yet settled:
 - Construction scope: whether new buildings and extensions are in the offer or need a separate works agreement.
 - Proposed landlord duty, for the owner to approve: a deposit the landlord holds is not used against a month
   Mwavuli has covered (BM6).
-- The launch area. Kampala and its surroundings are assumed (BM9).
