@@ -78,7 +78,7 @@ and the promise stays true for every month inside it.
   Mwavuli can collect that month in its own right.
 - A paid guarantee of rent may count as insurance or suretyship. Confirm whether it needs a license or an
   approval and how to word it.
-- "Occupied" is not yet defined. Open (onboarding).
+- "Occupied" is defined in P2.
 
 ### BM4 · What we charge and how you are paid
 
@@ -160,7 +160,7 @@ is the landlord's and the landlord decides whether to go to court.
   under the Landlord and Tenant Act 2022 and related rules.
 - Legal costs come from the deposit where Mwavuli holds one (BM6). On an existing tenant's unit the landlord
   pays them directly.
-- How a landlord says YES and how it is recorded: open (duties).
+- How a landlord says YES and how it is recorded are in P6.
 
 ## Money
 
@@ -214,7 +214,6 @@ can let the building. A tiered list keeps the market wide while the check stays 
 - Check whether a mortgage or other charge on the building limits letting, and whether the lender must consent.
 - Landlords acting for family owners or an estate need written authority from every owner, or letters of
   administration.
-- Open: what "occupied" means, existing tenants and the building inspection (onboarding).
 
 ## Leaving
 
@@ -237,7 +236,7 @@ signal, and the right to leave at once makes missing the 1st costly for Mwavuli.
 - There is no minimum term. Notice is 30 days either way. Confirm how notice is given (in writing, by message) and
   from when it counts.
 - Late payment: define "not paid" as the money not having reached the landlord's account or mobile money number by
-  the end of the 3rd. The day is a number for the numbers round.
+  the end of the 3rd.
 - Define each reason Mwavuli may leave at once (taking rent directly, interfering with tenants, refusing an urgent
   safety repair) so a landlord can recognize it.
 - Exit mechanics (the final statement, tenant files, deposits and the covered-month claim) are in P8.
@@ -283,7 +282,7 @@ rent on the 1st. No unit is left out because its rent is large.
   shop that rents at UGX 3,000,000. That is as much as the fees from about 40 rooms at UGX 400,000.
 - Mwavuli should be able to decline a building or unit it cannot fund when it signs up. Once accepted, the promise
   applies. Proposed default.
-- The float is sized for the largest units: numbers round.
+- The float has to cover the largest units. P9 lets Mwavuli decline a unit it cannot fund.
 
 ## Signing
 
@@ -402,4 +401,6 @@ are assumed.
 Settled next, in this order:
 
 - The float Mwavuli can fund to pay on the 1st, and the launch size.
+- Construction scope: whether new buildings and extensions are in the offer or need a separate works
+  agreement.
 - The pitch paragraph and the worked example.
