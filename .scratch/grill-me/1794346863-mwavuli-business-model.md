@@ -554,6 +554,43 @@ Gate it. Write the advance into the model and the agreements now as a separate, 
 
 **Other actions:** `w` apply · `i` ignore · `s` stop
 
+**Reply** `2`
+
+Resolution: selected `2` (not the recommended `1`). Recorded as BM14: the advance launches with the main offer, with
+the license obtained first. Mwavuli lends its own funds (assumed).
+
+### Advance repayment - Question `q13`
+
+> **Assistant, before the card**
+>
+> Recorded **BM14** (Owner): the rent advance launches with the main offer, in the pitch and the agreements from day
+> one, and Mwavuli lends its own funds. The license comes first, so I'll write a hard rule into the model: nothing
+> about the advance is advertised, offered or signed until counsel confirms the license position. That ties the launch
+> date to the license. If you'd rather launch the main offer first and add the advance when licensed, tell me and I'll
+> switch to option 1.
+>
+> Queue for the advance: repayment (now) · who can opt in and the limit · what happens on exit · what the landlord is
+> told and signs · how much money Mwavuli sets aside for advances. Then the numbers round and the pitch example.
+
+Advance repayment · Question `q13` · Timeout: `3 min` (not enforced here; I wait for your reply)
+
+**Question**
+How is the advance repaid?
+
+**Current Assumption**
+The rent payments are the security, so repayment comes out of the landlord's monthly payout, and 1.5% a month is charged on what is still owed (about 19.6% a year). I read "not covered by the 1-month cap" this way: while an advance is outstanding, Mwavuli does not cover a missed month on the rent that repays it. A tenant's miss slows repayment, the debt stays, and the 1.5% keeps running. Example: 10 rooms at UGX 400,000 give a net payout of UGX 3,400,000 a month, and a 3-month advance is UGX 10,200,000.
+
+**Recommended: `r` or `1`**
+Keep the payouts. Mwavuli keeps each monthly payout until the balance is repaid. The plain rule: "You get 3 months of your rent now. We keep your next payments until it's paid back, plus 1.5% a month on what you still owe." It matches how you described it, it is the cheapest for the landlord, and it is the easiest to explain and the safest for Mwavuli. The landlord has no payout from the building until it is repaid.
+
+| Reply | Choice | Consequence |
+|---|---|---|
+| `1` | Keep the payouts until repaid | Example: 4 payouts kept (the 4th mostly returned), interest UGX 316,836, total repaid UGX 10,516,836. Simplest and cheapest. No payout for about 3 months |
+| `2` | A fixed monthly amount over 6, 9 or 12 months, taken from each payout | 6 months: UGX 1,790,357 a month, interest UGX 542,143. 12 months: UGX 935,136 a month, interest UGX 1,021,631. The landlord keeps the rest of each payout, but must pick and understand a term |
+| `3` | Keep half of each payout until repaid | The landlord keeps UGX 1,700,000 a month. 7 payouts, interest UGX 571,329. Slower repayment ties up Mwavuli's money longer |
+
+**Other actions:** `w` apply · `i` ignore · `s` stop
+
 **Reply** (pending)
 
 ## Final Decisions (so far)
@@ -584,7 +621,9 @@ Gate it. Write the advance into the model and the agreements now as a separate, 
 - BM12 Defaults P1 to P12 approved as written.
 - BM13 Rent advance: stated by the owner (opt-in; up to 3 to 6 months of future net rent; 1.5% a month on the reducing
   balance; not covered by the 1-month cap; the rent payments are the security; due in full when Mwavuli stops being
-  the agent). Under refinement from `q12`.
+  the agent). Under refinement from `q13`.
+- BM14 Rent advance go-live: with the main offer, in the pitch and the agreements from day one, license obtained first;
+  Mwavuli lends its own funds (assumed). The launch date depends on the license.
 
 ## Remaining Risks Or Assumptions
 
@@ -596,7 +635,8 @@ Gate it. Write the advance into the model and the agreements now as a separate, 
   job larger than one payout, the final payment time and the tail on placed tenants (P8), and the float Mwavuli can
   fund to pay on the 1st. The 3rd as the latest payout day was assumed and accepted with BM8.
 - The rent advance is lending in substance and likely needs a money-lender license (counsel to confirm). Nothing is
-  offered or advertised until that is settled (`q12`).
+  offered or advertised until that is settled (`q12`). BM14 puts the advance in the launch pitch, so the launch date
+  depends on the license; if it is late, the owner chooses between waiting and launching without the advance.
 - Counsel and accountant items are listed in the notes of [business/model.md](../../business/model.md).
 - Brand follow-ups after SNT-24 lands: F1 (the proof line "Rent paid to you on the 1st, every month" drops the
   occupied-units condition and the 1-month cover), F3, F8 (a Luganda default for landlord documents) and D15 and I7
