@@ -739,6 +739,50 @@ Approve all of them: seven starting figures and one new default. Each is one rou
 
 **Other actions:** `w` apply · `i` ignore · `s` stop
 
+**Reply** `1`
+
+Resolution: selected `1` (recommended): N1 to N5, N7, N8 and P13 approved as proposed. Recorded as BM16.
+
+### Float - Question `q15`
+
+> **Assistant, before the card**
+>
+> Recorded **BM16** (Owner): all eight approved. The figures: coordination fee 10% of the contractor's price; approval
+> limit UGX 200,000; emergency amount UGX 500,000; a job never takes more than one payout, and for a bigger job the
+> landlord pays the balance first; final payment on exit within 14 days, with prepaid rent for months after the end
+> date paid in full and no 15%; 30 days to fix unsafe items before we start; no minimum building size. New default
+> P13: prepaid rent is held in a separate account and paid out month by month on the 1st, minus 15%.
+>
+> They are in [business/model.md](../../business/model.md): the Numbers table, BM2, BM4, P4, P6, P8 and P13, with no
+> `[#]` placeholders left.
+>
+> Queue: the float rule (now) · the pitch paragraph and worked example. Then a final read-through, the PR and moving
+> SNT-25 to In Review.
+
+Float · Question `q15` · Timeout: `3 min` (not enforced here; I wait for your reply)
+
+**Question**
+What does the model commit Mwavuli to about the money behind the 1st?
+
+**Current Assumption**
+Mwavuli pays the 1st from its own money and collects afterwards, so the float decides how many units it can take on. P9 already lets it decline a building it can't fund. The float on the 1st is the payout minus the rent already in. For rooms at UGX 400,000:
+- 50 rooms: UGX 17,000,000 paid out; float UGX 7,000,000 if half the rent is in, UGX 17,000,000 if none is.
+- 100 rooms: UGX 34,000,000 paid out; float UGX 14,000,000 if half the rent is in, UGX 34,000,000 if none is.
+- 200 rooms: UGX 68,000,000 paid out; float UGX 28,000,000 if half the rent is in, UGX 68,000,000 if none is.
+
+Each tenant who doesn't pay also ties up UGX 340,000 for the covered month until it is recovered.
+
+**Recommended: `r` or `1`**
+A rule, not figures. Mwavuli keeps the money for the 1st in a payout account used for nothing else, and takes on a building only if that account can fund the building's payouts for a month plus one covered month on top. The figures stay outside the repo, where they can change without edits to the model. The pitch can then say "Your rent is paid from an account kept for payouts", and the rule makes that true.
+
+| Reply | Choice | Consequence |
+|---|---|---|
+| `1` | Rule only: a payout account used for nothing else, and an accept test for each building; figures kept outside the repo | Makes the trust claim true and keeps capital figures out of the repo. You track the float yourself |
+| `2` | Rule and figures: the same, plus the float and the launch cap recorded here (you give me the numbers) | One place for the whole plan. The figures go stale and sit in the repo |
+| `3` | No rule: rely on P9 alone; the pitch says nothing about the money behind the 1st | Simplest. Nothing stops over-signing, and the pitch loses a trust claim |
+
+**Other actions:** `w` apply · `i` ignore · `s` stop
+
 **Reply** (pending)
 
 ## Final Decisions (so far)
@@ -775,6 +819,11 @@ Approve all of them: seven starting figures and one new default. Each is one rou
   `q12` with "with the launch", then moved it out.)
 - BM15 Rent advance repayment: Mwavuli keeps the landlord's monthly payouts until the balance is repaid, with 1.5% a
   month on what is still owed. A tenant's missed month is not covered while an advance is outstanding.
+- BM16 Starting figures and P13: coordination fee 10% of the contractor's price; approval limit UGX 200,000;
+  emergency amount UGX 500,000; a job never takes more than one payout (the landlord pays the balance first); final
+  payment on exit within 14 days, including prepaid rent for months after the end date in full with no 15%; 30 days
+  to fix unsafe items before we start; no minimum building size. New default P13: prepaid rent is held in a separate
+  account and paid out month by month on the 1st, minus 15%.
 
 ## Remaining Risks Or Assumptions
 
@@ -782,9 +831,8 @@ Approve all of them: seven starting figures and one new default. Each is one rou
 - No timer ran: no answer was applied by timeout.
 - BM10 has no rent limit, so one large commercial default is a large loss for Mwavuli. The right to decline a unit it
   cannot fund (P9) and the size of the float (numbers round) are the controls.
-- Figures still to set: the works coordination fee, the approval limit, the emergency repair amount, the rule for a
-  job larger than one payout, the final payment time (P8), and the float Mwavuli can
-  fund to pay on the 1st. The 3rd as the latest payout day was assumed and accepted with BM8.
+- Figures still to set: the float Mwavuli can fund to pay on the 1st (`q15`). The 3rd as the latest payout
+  day was assumed and accepted with BM8.
 - The rent advance is lending in substance and likely needs a money-lender license (counsel to confirm). It is out of
   the initial launch (BM14), so the license gates the addendum (SNT-26), not the launch.
 - Counsel and accountant items are listed in the notes of [business/model.md](../../business/model.md).
@@ -801,5 +849,7 @@ Approve all of them: seven starting figures and one new default. Each is one rou
 - `a95688e` docs(SNT-25): leaving and scope terms (BM8 to BM10)
 - `d6d4868` docs(SNT-25): languages, defaults and rent advance terms, with the grill-me transcript (BM11 to BM13)
 - `d6d1fbf` docs(SNT-25): append q12 and q13 to the grill-me transcript (BM14)
-- This commit: move the rent advance to a separate low-priority addendum (BM13 to BM15) and append q14
 - SNT-26 (Low, Backlog) filed for the addendum work
+- `ee0b234` docs(SNT-25): move the rent advance to a separate low-priority addendum
+- `c539971` docs(SNT-25): cut the tail on placed tenants from the model
+- This commit: record the approved starting figures and the prepaid rent default (BM16) and append q15

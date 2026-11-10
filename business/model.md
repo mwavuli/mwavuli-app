@@ -86,8 +86,9 @@ and the promise stays true for every month inside it.
 
 **Plain statement** We take 15% of the rent. No rent, no fee. On the 1st we send you the rent of every unit with a
 tenant, minus our 15%, in one payment with one statement. Costs you have approved are taken off the same payment
-and listed on the statement. The 15% is charged on rent only: not on deposits, not on utility or garbage money and
-not on repair costs.
+and listed on the statement. A job never takes more than one payout: for a bigger job, you pay the balance before
+work starts. The 15% is charged on rent only: not on deposits, not on utility or garbage money and not on repair
+costs.
 
 **Example** A room rents for UGX 400,000. Our 15% is UGX 60,000. You receive UGX 340,000 on the 1st.
 
@@ -101,17 +102,20 @@ glance.
   later.
 - For the accountant: VAT on the fee, withholding tax on the fee, and whether the pitch can call 15% the final
   price.
-- A job larger than one payout needs a rule. Open (numbers round).
+- A job never takes more than one payout, so the 1st payout stays whole and Mwavuli does not lend. Confirm how the
+  landlord pays the balance (to the contractor or to Mwavuli) and how it is recorded.
 
 ### BM2 · Repairs and building work
 
 *Source: Owner*
 
 **Plain statement** When something needs fixing or building, we find a trusted contractor and bring you the price.
-You pay the contractor's price plus our coordination fee, and the fee is shown on the quote. Above a set amount we
-wait for your YES before work starts. Electricity, water and garbage bills are paid at cost, with no markup.
+You pay the contractor's price plus our coordination fee of 10%, shown on the quote. Above UGX 200,000 on the quote
+we wait for your YES before work starts. Electricity, water and garbage bills are paid at cost, with no markup.
 
-**Example** To be set in the numbers round.
+**Example** A plumber quotes UGX 100,000 to fix a tap. Our 10% is UGX 10,000, so the quote is UGX 110,000. That is
+below UGX 200,000, so we fix it and list it on your statement. A roof repair at UGX 600,000 plus our UGX 60,000 is
+UGX 660,000, so we ask you first and you reply YES.
 
 **Why** Mwavuli arranges the work as the landlord's agent and the contractor does it. Workmanship, trade licensing
 and building liability stay with the contractor, and Mwavuli earns from a fee the landlord can see.
@@ -245,12 +249,13 @@ signal, and the right to leave at once makes missing the 1st costly for Mwavuli.
 *Source: Owner. The area was not named; Kampala and its surroundings are assumed.*
 
 **Plain statement** We manage homes and business premises in Kampala and its surroundings: rooms, flats, small
-blocks, shops and offices.
+blocks, shops and offices. There is no minimum number of units.
 
 **Example** A landlord with six rooms and one shop gives us all seven units. All seven get the same terms.
 
 **Why** The brand speaks to people and businesses, and the landlords expected to sign own both. One area keeps
-staff visits, trusted contractors, lawyers and garbage collection close.
+staff visits, trusted contractors, lawyers and garbage collection close. There is no minimum size, because P9 lets
+Mwavuli decline a building it cannot fund.
 
 **Counsel note**
 
@@ -310,9 +315,9 @@ landlord's own language, with a witness the landlord chose.
 
 ## Defaults
 
-### BM12 · The mechanics, approved as a set
+### BM12 · The mechanics
 
-*Source: Owner. Proposed in the interview and approved together. `[#]` marks a figure for the numbers round.*
+*Source: Owner. Proposed in the interview and approved by the owner.*
 
 - **P1 Paying and statements.** Tenants pay only Mwavuli, by mobile money or bank, never cash to staff. The
   landlord gets one statement a month by SMS or WhatsApp in the chosen language, with paper on request.
@@ -320,18 +325,19 @@ landlord's own language, with a witness the landlord chose.
   down. The first-month cover starts on the first 1st after that.
 - **P3 Existing tenants.** Each moves onto our form after a visit. Rent owed before sign-up is not covered; we
   collect it for the same 15%.
-- **P4 Inspection.** We walk the building with the landlord first and take photos. Unsafe items are fixed first
-  or within an agreed time. We may decline a building that stays unsafe.
+- **P4 Inspection.** We walk the building with the landlord first and take photos. Unsafe items must be fixed
+  within 30 days, before we start. We may decline a building that stays unsafe.
 - **P5 Landlord duties.** Tell tenants to pay only us, and pass on any rent paid to you the same day. No side
   deals on rent or tenants. No lock-outs, and no cutting water or power. Let us in with notice. Your taxes and
   rates stay yours. Tell us the truth about ownership, debts and disputes.
 - **P6 Saying YES.** A reply by SMS or WhatsApp, or a recorded call confirmed by text. Urgent safety repairs up
-  to a set amount `[#]` go ahead first, and we tell you the same day.
+  to UGX 500,000 go ahead first, and we tell you the same day.
 - **P7 Fees.** Only the 15% on rent and the coordination fee on repair quotes. No sign-up, letting or yearly
   fee, and none charged to tenants. Late fees written in the tenancy form go to Mwavuli.
-- **P8 On exit.** A final statement and payment within a set time `[#]`, less any covered month not yet
-  repaid. Tenant files go to the landlord. A deposit we hold goes to the landlord after any rent the tenant
-  still owes is taken from it, and tenants are told.
+- **P8 On exit.** A final statement and payment within 14 days of the end date. It pays the rent we collected
+  and haven't paid out, plus prepaid rent for months after the end date in full with no 15%, less costs you
+  approved and any covered month a tenant still owes us. Tenant files go to the landlord. A deposit we hold
+  goes to the landlord after any rent the tenant still owes is taken from it, and tenants are told.
 - **P9 Right to decline.** We may decline a building or unit we cannot fund, or that fails the ownership
   check or the inspection. Once we accept it, the promise applies.
 - **P10 VAT on commercial rent.** VAT a tenant pays on rent is not part of the rent for the 15%. We pass it
@@ -339,6 +345,10 @@ landlord's own language, with a witness the landlord chose.
 - **P11 Privacy.** Landlord and tenant details are used only to manage the building and are not sold or
   shared otherwise.
 - **P12 Disagreements.** We talk first, then a mediator we both accept, and only then the courts of Uganda.
+- **P13 Prepaid rent.** Held in a separate account, like deposits, and paid out month by month on the 1st, minus
+  15%. Months that haven't started stay there. If a tenant leaves early, unused months go back to the tenant under
+  the tenancy form, with no fee on them. At exit, each tenant gets a note, "rent paid up to [month]", and the
+  landlord honors it.
 
 **Counsel note**
 
@@ -358,18 +368,29 @@ landlord's own language, with a witness the landlord chose.
 - P10: the accountant confirms the VAT treatment, the landlord's VAT status and who issues tax invoices.
 - P11: confirm duties under the Data Protection and Privacy Act, 2019 (registration, consent notices, retention).
 - P12: confirm governing law, the mediation step and the courts with jurisdiction.
+- P13: confirm that prepaid rent held for landlords and tenants is held in trust, kept apart from Mwavuli's own
+  funds and safe from its creditors, and that the tenancy form says whether unused prepaid months are refundable
+  when a tenant leaves early.
 
 ## Numbers
 
-| Number            | Value                    |
-|-------------------|--------------------------|
-| Management fee    | 15% of rent              |
-| Guarantee cap     | 1 month of rent per unit |
-| Notice to leave   | 30 days, either side     |
-| Latest payout day | the 3rd of the month     |
+*Source: Owner. The last six are starting figures to test with the first landlords.*
 
-Still to set: the works coordination fee, the approval limit, the emergency repair amount, the rule for a job
-larger than one payout, the final payment time (P8), and the float Mwavuli can fund to pay on the 1st.
+| Number                      | Value                                                    |
+|-----------------------------|----------------------------------------------------------|
+| Management fee              | 15% of rent                                              |
+| Guarantee cap               | 1 month of rent per unit                                 |
+| Notice to leave             | 30 days, either side                                     |
+| Latest payout day           | the 3rd of the month                                     |
+| Coordination fee on repairs | 10% of the contractor's price, shown on the quote        |
+| Approval limit              | UGX 200,000 on the quote; above it the landlord says YES |
+| Emergency amount            | UGX 500,000; urgent safety repairs go first              |
+| Final payment on exit       | 14 days after the agreement ends                         |
+| Time to fix unsafe items    | 30 days, before we start                                 |
+| Minimum building size       | none                                                     |
+
+Still to set: the float Mwavuli can fund to pay on the 1st, and the launch area. Kampala and its surroundings
+are assumed.
 
 ## Addenda
 
@@ -380,6 +401,5 @@ larger than one payout, the final payment time (P8), and the float Mwavuli can f
 
 Settled next, in this order:
 
-- The numbers round: the works coordination fee, the approval and emergency amounts, the rule for a job
-  larger than one payout, the final payment time and the float Mwavuli can fund.
+- The float Mwavuli can fund to pay on the 1st, and the launch size.
 - The pitch paragraph and the worked example.
