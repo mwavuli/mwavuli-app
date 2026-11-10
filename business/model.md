@@ -213,12 +213,83 @@ can let the building. A tiered list keeps the market wide while the check stays 
   administration.
 - Open: what "occupied" means, existing tenants and the building inspection (onboarding).
 
+## Leaving
+
+### BM8 · Ending the agreement
+
+*Source: Owner*
+
+**Plain statement** You can leave any time with 30 days' written notice, and so can we. If we have not paid you by
+the 3rd, you can leave straight away, with no fee. We can end the agreement straight away if you collect rent from
+tenants yourself, interfere with tenants, or refuse a repair that is urgent for safety.
+
+**Example** The rent was due to you on 1 May and we have not paid it. On 4 May you tell us in writing that you are
+leaving. The agreement ends that day and you owe no fee.
+
+**Why** A landlord who has never met Mwavuli will fear being stuck with it. No lock-in is the strongest trust
+signal, and the right to leave at once makes missing the 1st costly for Mwavuli.
+
+**Counsel note**
+
+- There is no minimum term. Notice is 30 days either way. Confirm how notice is given (in writing, by message) and
+  from when it counts.
+- Late payment: define "not paid" as the money not having reached the landlord's account or mobile money number by
+  the end of the 3rd. The day is a number for the numbers round.
+- Define each reason Mwavuli may leave at once (taking rent directly, interfering with tenants, refusing an urgent
+  safety repair) so a landlord can recognize it.
+- What happens on exit is open: the final statement, handing over tenant files and the deposits Mwavuli holds, the
+  covered-month claim, and a tail on placed tenants. Proposed defaults.
+
+## Who Mwavuli serves
+
+### BM9 · Homes and business premises, in one area
+
+*Source: Owner. The area was not named; Kampala and its surroundings are assumed.*
+
+**Plain statement** We manage homes and business premises in Kampala and its surroundings: rooms, flats, small
+blocks, shops and offices.
+
+**Example** A landlord with six rooms and one shop gives us all seven units. All seven get the same terms.
+
+**Why** The brand speaks to people and businesses, and the landlords expected to sign own both. One area keeps
+staff visits, trusted contractors, lawyers and garbage collection close.
+
+**Counsel note**
+
+- Commercial tenancies run longer and carry different terms. Prepare a commercial tenancy form to sit under the
+  same landlord agreement.
+- VAT on commercial rent and withholding tax on rent: confirm who files, and that the 15% is worked out on rent
+  excluding VAT.
+- Rent currency: confirm whether rent may be quoted in US dollars and how the guarantee and the payout work if so.
+
+### BM10 · One set of terms for every unit
+
+*Source: Owner*
+
+**Plain statement** A shop or an office gets the same terms as a room: our 15%, the first month covered, and your
+rent on the 1st. No unit is left out because its rent is large.
+
+**Example** A shop rents for UGX 3,000,000 and the tenant does not pay in March. On 1 Mar you receive UGX 2,550,000
+(the rent minus our 15%), and we collect March from the tenant.
+
+**Why** One set of terms is the simplest pitch and one agreement to explain.
+
+**Counsel note**
+
+- One large unit that does not pay costs Mwavuli its whole net rent for the covered month: UGX 2,550,000 for a
+  shop that rents at UGX 3,000,000. That is as much as the fees from about 40 rooms at UGX 400,000.
+- Mwavuli should be able to decline a building or unit it cannot fund when it signs up. Once accepted, the promise
+  applies. Proposed default.
+- The float is sized for the largest units: numbers round.
+
 ## Numbers
 
-| Number         | Value                    |
-|----------------|--------------------------|
-| Management fee | 15% of rent              |
-| Guarantee cap  | 1 month of rent per unit |
+| Number            | Value                    |
+|-------------------|--------------------------|
+| Management fee    | 15% of rent              |
+| Guarantee cap     | 1 month of rent per unit |
+| Notice to leave   | 30 days, either side     |
+| Latest payout day | the 3rd of the month     |
 
 Still to set: the works coordination fee, the approval limit, the rule for a job larger than one payout, and the
 float Mwavuli can fund to pay on the 1st.
@@ -227,10 +298,10 @@ float Mwavuli can fund to pay on the 1st.
 
 Settled next, in this order:
 
-- Ending the agreement, including when Mwavuli pays late.
 - The languages of the documents and how an agreement is explained and signed.
-- Who Mwavuli serves: residential or commercial, size and place.
 - Proposed defaults, for the owner to approve in one batch: where tenants pay and how statements reach
   the landlord, what "occupied" means, existing tenants, the building inspection, landlord duties, how a
-  landlord says YES and other fees (letting, late and tenant-paid).
+  landlord says YES, other fees (letting, late and tenant-paid), what happens on exit (final statement,
+  handover, the covered-month claim and a tail on placed tenants), the right to decline a building
+  Mwavuli cannot fund, and VAT on commercial rent.
 - The numbers round and the pitch example.
