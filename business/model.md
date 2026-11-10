@@ -189,6 +189,30 @@ deposits stay where they are so a landlord can join without handing over money.
   a month Mwavuli has covered: write this into the landlord's duties (open).
 - Units with existing tenants have no deposit cushion, so their legal costs fall on the landlord.
 
+### BM17 · The payout account
+
+*Source: Owner. The accept test was proposed and approved.*
+
+**Plain statement** We pay your rent from an account we keep for rent payouts and use for nothing else. We take on
+a building only when that account can cover its payouts, so the promise to pay you on the 1st can be kept.
+
+**Example** A building of 10 rooms at UGX 400,000 has a net payout of UGX 3,400,000 a month. Before we accept it,
+the account must hold two months of that, UGX 6,800,000, on top of what is already set aside for the buildings we
+manage: one month for the payout and one for a covered month that is still unrecovered.
+
+**Why** The promise to pay on the 1st rests on the money being there. A separate account makes the claim true and
+checkable, and the accept test stops Mwavuli signing more than it can pay.
+
+**Rule** Mwavuli accepts a building only if the payout account, after what is committed to buildings already
+accepted, holds two months of the building's net rent. The float and the launch size are tracked outside the repo.
+
+**Counsel note**
+
+- Decide the account structure with the accountant: a collection account, the payout account, and the client
+  money account for deposits and prepaid rent (BM6, P13). Confirm that client money is kept apart from Mwavuli's
+  own funds.
+- P9 lets Mwavuli decline a building it cannot fund. The agreement says so before the landlord signs.
+
 ## Taking on a building
 
 ### BM7 · Proof of ownership
@@ -282,7 +306,7 @@ rent on the 1st. No unit is left out because its rent is large.
   shop that rents at UGX 3,000,000. That is as much as the fees from about 40 rooms at UGX 400,000.
 - Mwavuli should be able to decline a building or unit it cannot fund when it signs up. Once accepted, the promise
   applies. Proposed default.
-- The float has to cover the largest units. P9 lets Mwavuli decline a unit it cannot fund.
+- The payout account has to cover the largest units (BM17). P9 lets Mwavuli decline a unit it cannot fund.
 
 ## Signing
 
@@ -388,8 +412,8 @@ landlord's own language, with a witness the landlord chose.
 | Time to fix unsafe items    | 30 days, before we start                                 |
 | Minimum building size       | none                                                     |
 
-Still to set: the float Mwavuli can fund to pay on the 1st, and the launch area. Kampala and its surroundings
-are assumed.
+Still to set: the launch area. Kampala and its surroundings are assumed. The float and the launch size are tracked
+outside the repo (BM17).
 
 ## Addenda
 
@@ -400,7 +424,6 @@ are assumed.
 
 Settled next, in this order:
 
-- The float Mwavuli can fund to pay on the 1st, and the launch size.
 - Construction scope: whether new buildings and extensions are in the offer or need a separate works
   agreement.
 - The pitch paragraph and the worked example.

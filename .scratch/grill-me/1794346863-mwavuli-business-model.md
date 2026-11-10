@@ -783,6 +783,62 @@ A rule, not figures. Mwavuli keeps the money for the 1st in a payout account use
 
 **Other actions:** `w` apply · `i` ignore · `s` stop
 
+**Reply** `1`
+
+Resolution: selected `1` (recommended): a rule, not figures. Recorded as BM17. The accept test is read as two months of
+the building's net rent: one month for the payout and one for a covered month still unrecovered.
+
+### Pitch - Question `q16`
+
+> **Assistant, before the card**
+>
+> Recorded **BM17** (Owner): rule only. Mwavuli keeps the money for the 1st in a payout account used for nothing else,
+> and accepts a building only if that account, after what is already committed to accepted buildings, holds two months
+> of the building's net rent: one month for the payout and one for a covered month still unrecovered. That is how I
+> read "a month plus one covered month on top". The float and the launch size stay outside the repo. BM17 is in
+> [business/model.md](../../business/model.md) with a plain statement the pitch can use.
+>
+> Queue: the pitch (now) · a final read-through, where you confirm the launch area · the PR and moving SNT-25 to In
+> Review.
+
+Pitch · Question `q16` · Timeout: `3 min` (not enforced here; I wait for your reply)
+
+**Question**
+Approve this landlord pitch: three lines to say aloud, one paragraph and one worked example?
+
+**Current Assumption**
+The pitch uses only what you have decided. It leads with the 1st-of-month payment, because that is your headline, and it says "cover the first month" rather than "always paid". It follows the brand voice: plain, specific, "you", no hype. The Luganda version comes after you approve this English text, and needs a reviewer.
+
+**Say aloud**
+1. We pay you on the 1st, for every room with a tenant.
+2. We take 15% of the rent. No rent, no fee.
+3. Leave any time with 30 days' notice.
+
+**Paragraph**
+Give us your building and we pay you the rent on the 1st of every month, for every room with a tenant, minus our 15%. If a tenant doesn't pay, we cover that first month and do the chasing, so you are not left waiting. We find tenants for your empty rooms, collect the rent, arrange trusted contractors for repairs, and look after electricity, water and garbage. You get one payment and one statement a month, by SMS or WhatsApp. We ask you before any repair above UGX 200,000. There is no sign-up fee and no letting fee. If it isn't working, leave with 30 days' notice.
+
+**Worked example** 10 rooms at UGX 400,000, 9 with tenants. Your statement for 1 Apr:
+
+| Item | UGX |
+|---|---|
+| Rent from 9 rooms with tenants | 3,600,000 |
+| Our 15% | −540,000 |
+| Repair: tap, plumber UGX 100,000 plus our 10% | −110,000 |
+| Paid to you on the 1st | 2,950,000 |
+
+The empty room earns no rent and costs no fee, and we look for a tenant. If a tenant misses March, we still pay you for that room on 1 Mar (UGX 340,000). If it is still unpaid on 1 Apr, we pause that room until it is settled, we chase, and if it goes to court you say YES first.
+
+**Recommended: `r` or `1`**
+Approve it as written. Every line traces to a decision (BM1, BM2, BM4, BM5, BM8, BM11, BM17, P1, P7), nothing is promised that the model doesn't back, and the three lines hold the only numbers a landlord needs to remember: the 1st, 15% and 30 days.
+
+| Reply | Choice | Consequence |
+|---|---|---|
+| `1` | Approve as written | Goes into the doc under "The offer in brief" and becomes the source for the leaflet, the script and the Luganda text |
+| `2` | Refine: reply `2` and say what to change, for example "2: shorter paragraph" | I change only what you name and show it again |
+| `3` | Lead with "No rent, no fee" instead of the 1st | Reframes the pitch around no risk to the landlord; the 1st-of-month promise moves to second place |
+
+**Other actions:** `w` apply · `i` ignore · `s` stop
+
 **Reply** (pending)
 
 ## Final Decisions (so far)
@@ -824,6 +880,10 @@ A rule, not figures. Mwavuli keeps the money for the 1st in a payout account use
   payment on exit within 14 days, including prepaid rent for months after the end date in full with no 15%; 30 days
   to fix unsafe items before we start; no minimum building size. New default P13: prepaid rent is held in a separate
   account and paid out month by month on the 1st, minus 15%.
+- BM17 Payout account: Mwavuli keeps the money for the 1st in a payout account used for nothing else, and accepts a
+  building only if that account, after what is committed to accepted buildings, holds two months of the building's
+  net rent (one for the payout, one for a covered month still unrecovered). The float and the launch size are
+  tracked outside the repo.
 
 ## Remaining Risks Or Assumptions
 
@@ -831,8 +891,8 @@ A rule, not figures. Mwavuli keeps the money for the 1st in a payout account use
 - No timer ran: no answer was applied by timeout.
 - BM10 has no rent limit, so one large commercial default is a large loss for Mwavuli. The right to decline a unit it
   cannot fund (P9) and the size of the float (numbers round) are the controls.
-- Figures still to set: the float Mwavuli can fund to pay on the 1st (`q15`). The 3rd as the latest payout
-  day was assumed and accepted with BM8.
+- The float and the launch size are tracked outside the repo (BM17). The 3rd as the latest payout day was
+  assumed and accepted with BM8.
 - The rent advance is lending in substance and likely needs a money-lender license (counsel to confirm). It is out of
   the initial launch (BM14), so the license gates the addendum (SNT-26), not the launch.
 - Counsel and accountant items are listed in the notes of [business/model.md](../../business/model.md).
@@ -852,4 +912,6 @@ A rule, not figures. Mwavuli keeps the money for the 1st in a payout account use
 - SNT-26 (Low, Backlog) filed for the addendum work
 - `ee0b234` docs(SNT-25): move the rent advance to a separate low-priority addendum
 - `c539971` docs(SNT-25): cut the tail on placed tenants from the model
-- This commit: record the approved starting figures and the prepaid rent default (BM16) and append q15
+- `074467b` docs(SNT-25): approved starting figures and the prepaid rent default (BM16)
+- `abdf926` docs(SNT-25): remove stale open markers from the model
+- This commit: record the payout account rule (BM17) and append q16
