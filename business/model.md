@@ -1,6 +1,7 @@
 # Mwavuli business model
 
 Status: version 0.1, draft for owner review. Ticket SNT-25. Interview started on 2026-11-10.
+Interview transcript: [grill-me session](../.scratch/grill-me/1794346863-mwavuli-business-model.md).
 
 What Mwavuli Property Management offers a landlord, what it charges and what each side does. It is the single
 source for the landlord agreements and for the pitch to prospective landlords. It is not legal advice: counsel
@@ -42,8 +43,6 @@ patience for legal language.
 
 **Why** A landlord who cannot follow a term cannot give informed consent to it, and an agreement the landlord
 did not understand is the first one to be disputed. Plain terms are also what make the pitch believable.
-
-**Open** The languages of the landlord documents, and how an agreement is explained and signed.
 
 **Counsel note**
 
@@ -282,6 +281,121 @@ rent on the 1st. No unit is left out because its rent is large.
   applies. Proposed default.
 - The float is sized for the largest units: numbers round.
 
+## Signing
+
+### BM11 · Languages and signing
+
+*Source: Owner*
+
+**Plain statement** The agreement comes in English and Luganda, and you sign both. One of our officers reads
+the main points to you out loud, in your language, and answers your questions. You sign, or give your
+thumbprint, in front of a witness you choose. A short signed note says who explained it to you and that you
+understood. You keep a copy.
+
+**Example** A landlord reads Luganda but not English. Our officer reads the Luganda version aloud at the
+building. The landlord signs both versions with a sister as witness, and the officer signs the note. The
+landlord leaves with both copies.
+
+**Why** If a landlord later says "I did not understand", Mwavuli can show that the terms were explained in the
+landlord's own language, with a witness the landlord chose.
+
+**Counsel note**
+
+- The Luganda text is a complete translation, reviewed by a qualified person, and reviewed again whenever the
+  terms change (brand F8).
+- Decide which version governs if the two differ, and how the agreement says so. A landlord who signed after an
+  explanation in Luganda should not lose on an English technicality.
+- The Illiterates Protection Act may require the signed explanation note. Confirm what it requires and what the
+  note must say.
+- Decide who may witness and what Mwavuli records about the witness.
+
+## Defaults
+
+### BM12 · The mechanics, approved as a set
+
+*Source: Owner. Proposed in the interview and approved together. `[#]` marks a figure for the numbers round.*
+
+- **P1 Paying and statements.** Tenants pay only Mwavuli, by mobile money or bank, never cash to staff. The
+  landlord gets one statement a month by SMS or WhatsApp in the chosen language, with paper on request.
+- **P2 "Occupied".** A tenant living in the unit under our tenancy form, with the rent and deposit written
+  down. The first-month cover starts on the first 1st after that.
+- **P3 Existing tenants.** Each moves onto our form after a visit. Rent owed before sign-up is not covered; we
+  collect it for the same 15%.
+- **P4 Inspection.** We walk the building with the landlord first and take photos. Unsafe items are fixed first
+  or within an agreed time. We may decline a building that stays unsafe.
+- **P5 Landlord duties.** Tell tenants to pay only us, and pass on any rent paid to you the same day. No side
+  deals on rent or tenants. No lock-outs, and no cutting water or power. Let us in with notice. Your taxes and
+  rates stay yours. Tell us the truth about ownership, debts and disputes.
+- **P6 Saying YES.** A reply by SMS or WhatsApp, or a recorded call confirmed by text. Urgent safety repairs up
+  to a set amount `[#]` go ahead first, and we tell you the same day.
+- **P7 Fees.** Only the 15% on rent and the coordination fee on repair quotes. No sign-up, letting or yearly
+  fee, and none charged to tenants. Late fees written in the tenancy form go to Mwavuli.
+- **P8 On exit.** A final statement and payment within a set time `[#]`, less any covered month not yet
+  repaid. Tenant files go to the landlord. A deposit we hold goes to the landlord after any rent the tenant
+  still owes is taken from it, and tenants are told. For tenants we placed, the 15% continues for a set time
+  `[#]` if the landlord keeps them, but not if the landlord left because we paid late.
+- **P9 Right to decline.** We may decline a building or unit we cannot fund, or that fails the ownership
+  check or the inspection. Once we accept it, the promise applies.
+- **P10 VAT on commercial rent.** VAT a tenant pays on rent is not part of the rent for the 15%. We pass it
+  to the landlord in the same payment and show it on the statement. Filing it is the landlord's job.
+- **P11 Privacy.** Landlord and tenant details are used only to manage the building and are not sold or
+  shared otherwise.
+- **P12 Disagreements.** We talk first, then a mediator we both accept, and only then the courts of Uganda.
+
+**Counsel note**
+
+- P1: confirm whether collecting and holding rent for landlords needs a payment-service approval, and whether
+  Mwavuli is an accountable person under the Anti-Money Laundering Act, with customer checks and records to
+  match.
+- P2, P3: write "occupied" in the tenancy form and the agreement in the same words. Old arrears Mwavuli collects
+  carry the same 15%; confirm the wording.
+- P4: define "unsafe" as a short list (roof, wiring, water, stairs) and keep the signed inspection report.
+- P5: breach of a landlord duty lets Mwavuli end the agreement at once (BM8). Confirm the landlord's tax duties
+  with the accountant, and the rules on cutting services and lock-outs.
+- P6: confirm how SMS and WhatsApp replies and recorded calls are kept and relied on as consent, including
+  consent to the recording.
+- P7: confirm what late fees the Landlord and Tenant Act 2022 lets a landlord or agent charge a tenant.
+- P8: define "placed tenant" and "keeps them", and confirm the rules on handing over deposits and the tenant's
+  rights.
+- P9: record the reason each time a building or unit is declined.
+- P10: the accountant confirms the VAT treatment, the landlord's VAT status and who issues tax invoices.
+- P11: confirm duties under the Data Protection and Privacy Act, 2019 (registration, consent notices, retention).
+- P12: confirm governing law, the mediation step and the courts with jurisdiction.
+
+## Rent advance
+
+### BM13 · Rent advance (opt-in)
+
+*Source: Owner. Stated by the owner on 2026-11-10; being refined in the interview from q12.*
+
+**Stated terms**
+
+- It is opt-in: a landlord asks for it, and it is never added to an agreement by default.
+- Mwavuli can advance up to 3 to 6 months of the landlord's future net rent collections.
+- The cost is 1.5% a month on the reducing balance.
+- The advance is not covered by the 1-month guarantee cap (BM1). It is repaid whatever the tenants do.
+- The rent payments are the security. The whole balance is repaid once Mwavuli is no longer the landlord's
+  agent.
+
+**Open** When it goes live and who lends the money, who can opt in, how the limit is set, how it is repaid, what
+happens on exit, and what the landlord is told and signs.
+
+**Counsel note**
+
+- This is lending in substance, whatever it is called: money advanced, interest charged, repayment due whatever
+  the tenants do. Lending money at interest as a business likely needs a money-lender license in Uganda (the
+  Tier 4 Microfinance Institutions and Money Lenders Act, 2016, regulated by the Uganda Microfinance Regulatory
+  Authority). Confirm before any advance is offered or advertised, and confirm the interest cap and the
+  disclosure rules.
+- Security over future rent: confirm how to take and enforce an assignment of rents, what tenants must be told,
+  and what happens when the building is co-owned or inherited.
+- "Repaid in full when the agent ends" sits beside BM8 (leave any time, no fee). Draft it so BM8 stays true: no
+  exit fee, and any balance still owing is repaid.
+- The advance agreement is separate from the management agreement, with its own explanation and signature
+  (BM11), and states the total repayable in UGX. The landlords are the audience described in BM3.
+- A seventh service changes the six on the business card and the brand icon set (brand D15, I7). Log it for the
+  brand follow-up after SNT-24 lands.
+
 ## Numbers
 
 | Number            | Value                    |
@@ -291,17 +405,14 @@ rent on the 1st. No unit is left out because its rent is large.
 | Notice to leave   | 30 days, either side     |
 | Latest payout day | the 3rd of the month     |
 
-Still to set: the works coordination fee, the approval limit, the rule for a job larger than one payout, and the
-float Mwavuli can fund to pay on the 1st.
+Still to set: the works coordination fee, the approval limit, the emergency repair amount, the rule for a job
+larger than one payout, the final payment time and the tail on placed tenants (P8), and the float Mwavuli can
+fund to pay on the 1st.
 
 ## Open
 
 Settled next, in this order:
 
-- The languages of the documents and how an agreement is explained and signed.
-- Proposed defaults, for the owner to approve in one batch: where tenants pay and how statements reach
-  the landlord, what "occupied" means, existing tenants, the building inspection, landlord duties, how a
-  landlord says YES, other fees (letting, late and tenant-paid), what happens on exit (final statement,
-  handover, the covered-month claim and a tail on placed tenants), the right to decline a building
-  Mwavuli cannot fund, and VAT on commercial rent.
+- The rent advance: when it goes live and who lends the money, who can opt in, how the limit is set, how it is
+  repaid, what happens on exit, and what the landlord is told and signs.
 - The numbers round and the pitch example.
