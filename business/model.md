@@ -22,6 +22,8 @@ Each term has an ID (BM1, BM2), a source, a **Plain statement**, an **Example**,
 
 Examples use round, illustrative figures in UGX. They show how a rule works; they are not quotes.
 
+In the plain statements, "Mwavuli" and "we" mean the contracting company (see "The company").
+
 ## The offer in brief
 
 ### BM18 · The landlord pitch
@@ -75,6 +77,20 @@ settled, we chase, and if it goes to court you say YES first.
 | Inspection report  | Landlord | P4, P9                                                                        |
 | Explanation note   | Landlord | BM11                                                                          |
 | Landlord pitch     | Landlord | BM18 and the plain statements                                                 |
+
+## The company
+
+*Source: Owner. Supplied on 2026-11-10.*
+
+| Detail          | Value                            |
+|-----------------|----------------------------------|
+| Registered name | Mwavuli Holdings                 |
+| Postal address  | P.O. Box 170886, Kampala, Uganda |
+
+Write the name as the certificate of incorporation shows it, including any suffix such as "Limited". Still to
+supply: the registration number, TIN, VAT status, the registered office (a physical address) and the signatory.
+The brand name on the card and the site is Mwavuli Property Management (brand F7). Confirm how it relates to the
+registered name, for example as a registered business name.
 
 ## Audience
 
@@ -479,8 +495,10 @@ Each term's counsel note lists what to confirm. Start with these:
 - **Tax:** VAT and withholding tax on the 15% and on commercial rent, and the landlord's own duties (BM4, BM9, P5,
   P10).
 - **Data and disputes:** the Data Protection and Privacy Act, governing law, mediation and the courts (P11, P12).
-- **Details to supply for the agreements:** the registered company name, registration number, address, TIN, VAT
-  status and the signatory.
+- **Details to supply for the agreements:** the registration number, TIN, VAT status, the registered office and the
+  signatory (see "The company").
+- **Contracting company:** the agreements are with Mwavuli Holdings. Counsel advises whether it should contract and
+  hold client money directly or through an operating company, and how the brand name relates to it.
 
 ## Addenda
 
@@ -494,3 +512,4 @@ Not yet settled:
 - Construction scope: whether new buildings and extensions are in the offer or need a separate works agreement.
 - Proposed landlord duty, for the owner to approve: a deposit the landlord holds is not used against a month
   Mwavuli has covered (BM6).
+- The exact registered form of the company name, and how the brand name relates to it (see "The company").
