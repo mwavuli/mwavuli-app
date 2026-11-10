@@ -43,8 +43,7 @@ patience for legal language.
 **Why** A landlord who cannot follow a term cannot give informed consent to it, and an agreement the landlord
 did not understand is the first one to be disputed. Plain terms are also what make the pitch believable.
 
-**Open** The languages of the landlord documents, how an agreement is explained and signed, and what proof of
-ownership Mwavuli accepts.
+**Open** The languages of the landlord documents, and how an agreement is explained and signed.
 
 **Counsel note**
 
@@ -128,6 +127,92 @@ and building liability stay with the contractor, and Mwavuli earns from a fee th
   landlord re-bills tenants.
 - Construction scope is not settled: new buildings and extensions may need a separate works agreement. Open.
 
+### BM5 · When a tenant still has not paid
+
+*Source: Owner. The covered-month claim and the oldest-month-first rule were proposed and accepted.*
+
+**Plain statement** If a tenant still has not paid after the month we covered, we do the chasing for you. We
+remind, call and visit, then send a written notice. If it must go to court, we ask you first and you say YES.
+We never lock a tenant out. Our time costs you nothing extra. A lawyer, the court and a bailiff are paid at
+cost: from the tenant's deposit first, then by you. The month we covered is ours to collect. When a tenant
+pays what is owed, the oldest month is paid first, so the month we covered is repaid before later months
+reach you.
+
+**Example** A room rents for UGX 400,000. The tenant does not pay in March, so we pay you UGX 340,000 on 1 Mar.
+On 1 Apr it is still unpaid: we send nothing for that room and give the tenant a written notice. On 20 Apr the
+tenant pays UGX 400,000. It repays March, so we keep it (UGX 340,000 we advanced and UGX 60,000 fee). April is
+still owed, so we still send nothing on 1 May. When April is paid, we send you UGX 340,000 of it.
+
+**Why** The landlord gets real help when a tenant stops paying. Mwavuli's own time is part of the 15%, and its
+loss on one room stops at one month's net rent. The landlord carries the outside legal costs because the claim
+is the landlord's and the landlord decides whether to go to court.
+
+**Counsel note**
+
+- Mwavuli acts as the landlord's agent. Legal steps are taken in the landlord's name and need the landlord's
+  YES, recorded in writing or by message.
+- The covered month passes to Mwavuli as a claim. Draft the assignment (or subrogation) and the
+  oldest-month-first rule so a court reads them the same way.
+- Mwavuli never locks a tenant out or removes belongings. Confirm the eviction steps and who may carry them out
+  under the Landlord and Tenant Act 2022 and related rules.
+- Legal costs come from the deposit where Mwavuli holds one (BM6). On an existing tenant's unit the landlord
+  pays them directly.
+- How a landlord says YES and how it is recorded: open (duties).
+
+## Money
+
+### BM6 · Deposits
+
+*Source: Owner*
+
+**Plain statement** A new tenant's deposit is paid to us and kept in a separate account. We use it only for what
+the tenancy allows (unpaid rent, damage, legal costs), and the rest goes back to the tenant. For tenants
+already in the building, you keep the deposit you hold. We write the amount down when you sign up, and you
+stay responsible for giving it back.
+
+**Example** A new tenant pays a UGX 400,000 deposit to us and we keep it apart. At move-out UGX 50,000 is kept
+for a broken door and UGX 350,000 goes back to the tenant. For a tenant already in the building, you hold
+UGX 400,000. We note it on the file and it stays yours to return.
+
+**Why** Mwavuli pays the landlord first, so a deposit is its cushion for the covered month and the first source
+for legal costs. Keeping new deposits apart protects the tenant's money and the landlord's trust. Existing
+deposits stay where they are so a landlord can join without handing over money.
+
+**Counsel note**
+
+- Mwavuli holds new deposits for the tenant. Confirm the Landlord and Tenant Act 2022 rules on the amount, how a
+  deposit is held and when it is returned.
+- Keep a register of each tenant's deposit and who holds it. A deposit a landlord holds cannot be used against
+  a month Mwavuli has covered: write this into the landlord's duties (open).
+- Units with existing tenants have no deposit cushion, so their legal costs fall on the landlord.
+
+## Taking on a building
+
+### BM7 · Proof of ownership
+
+*Source: Owner*
+
+**Plain statement** Show us your title, or the papers on our list. We check them before we start. A certificate
+of title in your name is enough. If you have no title, bring a sale agreement or letters of administration (or
+probate), a letter from your local council (LC1), and your signed statement that you own the building and may
+let it. We always need your national ID. Where there is a title, we search it. We do not take a building that
+is in dispute, or that has co-owners who have not all agreed in writing.
+
+**Example** A family building with no title: the landlord brings the sale agreement, an LC1 letter, a national ID
+and a signed statement. Mwavuli keeps copies on file and starts once all four are checked.
+
+**Why** Mwavuli pays the landlord and collects rent in the landlord's name, so it must know the person signing
+can let the building. A tiered list keeps the market wide while the check stays real.
+
+**Counsel note**
+
+- Confirm what counts as enough proof for each kind of land the landlords hold (freehold, leasehold, mailo,
+  customary) and how to run a title search.
+- Check whether a mortgage or other charge on the building limits letting, and whether the lender must consent.
+- Landlords acting for family owners or an estate need written authority from every owner, or letters of
+  administration.
+- Open: what "occupied" means, existing tenants and the building inspection (onboarding).
+
 ## Numbers
 
 | Number         | Value                    |
@@ -135,18 +220,17 @@ and building liability stay with the contractor, and Mwavuli earns from a fee th
 | Management fee | 15% of rent              |
 | Guarantee cap  | 1 month of rent per unit |
 
-Still to set: the works coordination fee, the approval limit and the rule for a job larger than one payout.
+Still to set: the works coordination fee, the approval limit, the rule for a job larger than one payout, and the
+float Mwavuli can fund to pay on the 1st.
 
 ## Open
 
 Settled next, in this order:
 
-- Arrears after the covered month: who runs recovery and who pays for the legal steps.
-- Money: where tenants pay, who holds deposits and how the 1st is funded.
-- Onboarding: what "occupied" means, proof of ownership and existing tenants.
-- Landlord duties and how a landlord says YES.
 - Ending the agreement, including when Mwavuli pays late.
 - The languages of the documents and how an agreement is explained and signed.
-- Other fees: letting, late and tenant-paid.
 - Who Mwavuli serves: residential or commercial, size and place.
+- Proposed defaults, for the owner to approve in one batch: where tenants pay and how statements reach
+  the landlord, what "occupied" means, existing tenants, the building inspection, landlord duties, how a
+  landlord says YES and other fees (letting, late and tenant-paid).
 - The numbers round and the pitch example.
