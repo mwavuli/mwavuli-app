@@ -65,10 +65,10 @@ exists. It is three steps there, and the second is a person's:
    `@nyange-app/security` as well, and CI never runs it.
 3. An apply of the new deploy-role unit, which creates the role.
 
-The draft below is not applied and not opened as a pull request. It was checked in a scratch clone of
-`nyange-org` with that repository's own `nyange validate` (which accepts it, and rejects a bad
-`permissions` value and a missing `dns_scope` in the same entry) and with `terragrunt hcl fmt --check`
-and `hcl validate`.
+Step 1 is open as [`nyange-org#101`](https://github.com/nyange-app/nyange-org/pull/101), unmerged, and
+nothing in it is applied. It was checked in a scratch clone of `nyange-org` with that repository's own
+`nyange validate` (which accepts it, and rejects a bad `permissions` value and a missing `dns_scope` in the
+same entry) and with `terragrunt hcl fmt --check` and `hcl validate`. What it adds:
 
 `catalog/workloads.yaml`:
 
@@ -196,9 +196,9 @@ an unset variable is a named failure, never a publish that lands somewhere wrong
 ## 3. Before the first deploy
 
 1. **Decide** M3 (where) and M12 (the domain, or deploy on `cloudfront.net` first).
-2. **`nyange-org`**: the catalog entry and deploy-role unit as a pull request, then the human-run
-   bootstrap apply that grants this repository its state prefix (M5, M6). Another repository, so it needs
-   the owner's go-ahead and its own review. The prefix grant has to exist before the next step can run.
+2. **`nyange-org`**: merge the catalog entry and deploy-role unit (`nyange-org#101`), then the human-run
+   bootstrap apply that grants this repository its state prefix (M5, M6). Another repository, so it has its
+   own review. The prefix grant has to exist before the next step can run.
 3. **Apply** `infra/live/shared-services/us-east-1/site` (M7). Check the plan first. An operator's own
    credentials do this; the deploy role is not needed until step 4.
 4. **`nyange-org`** again: apply the deploy-role unit, which creates `NyangeDeploy-mwavuli-site`. Then set
