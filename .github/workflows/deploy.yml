@@ -1,13 +1,14 @@
 # Deploy the built site: publish dist/ to S3, invalidate CloudFront, then smoke-check the result.
 #
-# Auth: GitHub OIDC to the deploy role nyange-org vends for this repository. The role reaches this
-# site's bucket and invalidates its distribution; it cannot change infrastructure, which a person
-# applies from infra/ (see docs/design/site-infrastructure.md).
+# Auth: GitHub OIDC to the deploy role that infra/live/prod/us-east-1/deploy-role creates in this
+# repository's own AWS account. The role reaches this site's bucket and invalidates its distribution;
+# it cannot change infrastructure, which a person applies from infra/ (see
+# docs/design/site-infrastructure.md).
 #
 # Repo variables (Settings → Secrets and variables → Actions → Variables):
 #   AWS_DEPLOY_ROLE_ARN — required. No default: a default that silently redirects a publish is not a
 #                         convenience.
-#   SITE_BUCKET         — required. The `bucket_name` output of infra/live/*/*/site.
+#   SITE_BUCKET         — required. The `bucket_name` output of infra/live/prod/us-east-1/site.
 #
 # Cache strategy: staged upload, hashed assets first and HTML last, with no --delete, so HTML held at
 # the edge never references an asset that is gone. Old hashes linger in the bucket, and so does a page

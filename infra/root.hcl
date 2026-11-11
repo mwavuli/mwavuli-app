@@ -1,50 +1,38 @@
-# Root Terragrunt configuration. Every unit includes this.
+# Root Terragrunt configuration for every unit under infra/live/<account-alias>/<region>/.
 #
 #   include "root" { path = find_in_parent_folders("root.hcl") }
 #
-# Follows nyange-site/infra/root.hcl, so a reader moving between the two repositories learns one
-# convention. The one difference is that the module lives in this repository (infra/modules/), so
-# there is no module version catalog.
+# The bootstrap units under infra/live/_bootstrap/ do not include it: they keep their own state and
+# create the backend this file points at.
 
 locals {
-  org = yamldecode(file("${get_repo_root()}/infra/catalog/org.yaml"))
+  cfg = yamldecode(file("${get_repo_root()}/infra/catalog/account.yaml"))
+
+  # account_id ships unset. regex() fails on anything but 12 digits and puts the offending value in its
+  # message, so Terragrunt stops here until infra/catalog/account.yaml names the account.
+  account_id = regex("^[0-9]{12}$", local.cfg.account_id)
 
   # Path-derived identity: infra/live/<account-alias>/<region>/<unit>/...
   relative_path = path_relative_to_include()
   all_parts     = compact(split("/", local.relative_path))
   path_parts    = local.all_parts[0] == "live" ? slice(local.all_parts, 1, length(local.all_parts)) : local.all_parts
-  account_alias = local.path_parts[0]
-  region_part   = length(local.path_parts) > 1 ? local.path_parts[1] : "global"
-  region        = local.region_part == "global" ? local.org.home_region : local.region_part
+  region        = local.path_parts[1]
 
-  # State layout is derived from the directory path and never hand-written. The <repo> segment is why
-  # repositories share one backend, and the backend's grant names this repository's deploy role, so the
-  # prefix is a boundary and not only a convention.
-  state_bucket = "${local.org.org_name}-tfstate-${local.org.state_account_alias}-${local.org.home_region}"
-  state_key    = "${local.org.repo}/${join("/", local.path_parts)}/tofu.tfstate"
-
-  # The account contract carries the governance facts nyange-org already holds in catalog/accounts.yaml,
-  # so they are read here and not restated. The tag policy and cost allocation both key on them.
-  _account = jsondecode(run_cmd(
-    "--terragrunt-quiet", "aws", "ssm", "get-parameter",
-    "--name", "/nyange/platform/account",
-    "--query", "Parameter.Value", "--output", "text",
-  ))
+  # The state layout is derived and never hand-written: the bucket from the catalog, the key from the
+  # directory path. The bucket and its key are created by infra/live/_bootstrap/00-tfstate-backend.
+  state_bucket = "${local.cfg.org_name}-tfstate-${local.cfg.account_alias}-${local.cfg.home_region}"
+  state_key    = "${local.cfg.repo}/${join("/", local.path_parts)}/tofu.tfstate"
+  state_key_id = "arn:aws:kms:${local.cfg.home_region}:${local.account_id}:alias/${local.state_bucket}"
 
   common_tags = {
-    ManagedBy          = "opentofu"
-    Repo               = local.org.repo
-    Owner              = local._account.owning_department
-    OwningDepartment   = local._account.owning_department
-    CostCenter         = local._account.cost_center
-    Environment        = local._account.environment
-    Scope              = local._account.scope
-    ScopeType          = local._account.scope_type
-    DataClassification = local._account.data_classification
+    ManagedBy   = "opentofu"
+    Repo        = local.cfg.repo
+    Project     = local.cfg.org_name
+    Environment = local.cfg.account_alias
   }
 }
 
-# S3 with native locking: no DynamoDB table (use_lockfile needs OpenTofu >= 1.10).
+# S3 with native locking: no DynamoDB table (use_lockfile needs OpenTofu 1.10 or later).
 remote_state {
   backend = "s3"
   generate = {
@@ -54,24 +42,23 @@ remote_state {
   config = {
     bucket       = local.state_bucket
     key          = local.state_key
-    region       = local.org.home_region
+    region       = local.cfg.home_region
     encrypt      = true
     use_lockfile = true
-    kms_key_id   = local.org.state_kms_key_arn
+    kms_key_id   = local.state_key_id
   }
 }
 
-# No assume_role and no profile, locally or in CI: whoever runs this arrives with credentials already
-# in the account. One path, deliberately, because the account contract above is read with run_cmd,
-# which uses ambient credentials, and a provider that hopped into another account would disagree with
-# it about which account it was in.
+# No assume_role and no profile: whoever applies arrives with credentials already in the account, and
+# allowed_account_ids makes the provider refuse any other account, so a shell logged in somewhere else
+# fails at plan and creates nothing.
 generate "provider" {
   path      = "provider_generated.tf"
   if_exists = "overwrite"
   contents  = <<-EOT
     provider "aws" {
       region              = "${local.region}"
-      allowed_account_ids = ["${local.org.account_ids[local.account_alias]}"]
+      allowed_account_ids = ["${local.account_id}"]
 
       default_tags {
         tags = ${jsonencode(local.common_tags)}

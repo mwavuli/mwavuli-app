@@ -1,10 +1,8 @@
 # The static site: a private bucket and the CloudFront distribution that serves it, in one state.
 #
-# Same shape as nyange-site's: the bucket is never public, CloudFront reads it through an origin
-# access control, and the origin's Cache-Control headers carry the caching strategy (the deploy
-# workflow sets them). Unlike nyange-site, the distribution is created here rather than borrowed from
-# another repository's, because this site has its own domain. Bucket and distribution live in one
-# account, so the bucket policy names this distribution's ARN instead of an account.
+# The bucket is never public: CloudFront reads it through an origin access control, and the origin's
+# Cache-Control headers carry the caching strategy (the deploy workflow sets them). Bucket and
+# distribution live in one account and one state, so the bucket policy names this distribution's ARN.
 #
 # Versioning is off on purpose. A build is reproducible from git, so rollback is deploying a previous
 # ref rather than restoring an object version, and versions of a whole site written on every deploy

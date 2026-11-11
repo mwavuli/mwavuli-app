@@ -40,23 +40,31 @@ jobs:
     name: opentofu validate · test
     runs-on: ubuntu-latest
     if: vars.CI_ENABLED != 'false' # CI kill-switch (see header)
-    defaults:
-      run:
-        working-directory: infra/modules/static-site
     steps:
       - uses: actions/checkout@v5
-      # The version nyange-org pins in .tool-versions.
+      # The version the modules were developed against.
       - uses: opentofu/setup-opentofu@v1
         with:
-          tofu_version: 1.12.6
+          tofu_version: 1.13.1
           tofu_wrapper: false
-      # -lockfile=readonly fails if the committed lock does not cover this runner's platform, so the
-      # provider pin cannot quietly stop applying.
-      - run: tofu init -backend=false -input=false -lockfile=readonly
-      - run: tofu fmt -check -recursive
-      - run: tofu validate
-      # Against a mocked provider: no credentials, nothing created.
-      - run: tofu test
-      - name: Shell scripts
-        working-directory: .
-        run: shellcheck scripts/*.sh
+      # -lockfile=readonly fails if a committed lock does not cover this runner's platform, so a provider
+      # pin cannot quietly stop applying. `tofu test` runs against mocked providers: no credentials,
+      # nothing created.
+      - name: Modules
+        run: |
+          set -euo pipefail
+          for module in infra/modules/*/; do
+            echo "::group::$module"
+            (
+              cd "$module"
+              tofu init -backend=false -input=false -lockfile=readonly
+              tofu fmt -check -recursive
+              tofu validate
+              tofu test
+            )
+            echo "::endgroup::"
+          done
+      - name: Scripts and committed state
+        run: |
+          shellcheck scripts/*.sh
+          scripts/check-bootstrap-state.sh

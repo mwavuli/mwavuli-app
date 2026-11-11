@@ -14,7 +14,7 @@ design language ([`brand/`](brand/README.md)) and the business documents (`busin
 | Content  | Pages in `.astro`; legal documents as an MDX content collection in `src/content/legal/`             |
 | Fonts    | Montserrat Variable and Inter Variable, self-hosted through Fontsource (brand T8)                   |
 | Icons    | The tab icon is the brand's SVG app icon; `favicon.ico` and the iOS icon are rendered from it at build time with `sharp` (brand G3) |
-| Infra    | OpenTofu through Terragrunt in `infra/`, state in nyange-org's backend; written and not applied |
+| Infra    | OpenTofu through Terragrunt in `infra/`: the account's own state backend, the site and its deploy role; standalone, written and not applied |
 | Deploy   | GitHub Actions over OIDC: staged S3 sync, CloudFront invalidation, smoke checks                     |
 | Node/PM  | Node 22, pnpm (pinned in `packageManager`; `vite@^6` pinned so `@tailwindcss/vite` binds to Astro's Vite) |
 
@@ -37,9 +37,11 @@ point `PLAYWRIGHT_DIR` at an existing install).
 brand/               brand and design language: spec, tokens, logos, icons
 business/            business model and agreements
 docs/design/         infrastructure decisions (site-infrastructure.md)
-infra/               OpenTofu through Terragrunt: modules/static-site, live/<account>/<region>/site, catalog/, root.hcl
+infra/               OpenTofu through Terragrunt: modules/ (state-backend, static-site, github-deploy-role), live/_bootstrap/ and
+                     live/prod/us-east-1/, catalog/account.yaml, root.hcl
 public/              files served as they are: social.png
-scripts/             smoke.sh, which checks a deployed copy; social-image/, card.html and build.mjs for public/social.png
+scripts/             smoke.sh (checks a deployed copy), check-bootstrap-state.sh (what state may be committed), and
+                     social-image/ (card.html and build.mjs for public/social.png)
 .github/workflows/   ci.yml (pull requests: astro check and build) and deploy.yml (publish)
 src/
   components/        Header, Footer, Hero, AudienceHero, AudienceChips, RuledList, ContactBlock, Button,
@@ -93,11 +95,13 @@ Deliberate brand deviations, recorded as brand 09-governance asks:
 
 ## Deploy
 
-The site is static files in a private S3 bucket behind CloudFront. The infrastructure is declared in `infra/`
-(OpenTofu through Terragrunt: one unit and one local module, `static-site`) and applied by a person, and
-`.github/workflows/deploy.yml` publishes `dist/` on a push to `main` or by hand. The decisions, and what must be
-decided and done before the first apply, are in [`docs/design/site-infrastructure.md`](docs/design/site-infrastructure.md).
-**Nothing is applied yet.**
+The site is static files in a private S3 bucket behind CloudFront, in an AWS account of Mwavuli's own. The
+infrastructure is standalone: `infra/` creates its own state backend, the site and the deploy role, and depends on no
+other account, organization or repository. It is OpenTofu through Terragrunt, applied by a person, and
+`.github/workflows/deploy.yml` publishes `dist/` on a push to `main` or by hand. The decisions, and what the owner must
+supply and do before the first apply, are in [`docs/design/site-infrastructure.md`](docs/design/site-infrastructure.md).
+**Nothing is applied yet**, and `infra/catalog/account.yaml` ships with the account id `unset`, so Terragrunt refuses
+to run until it names the account.
 
 | Files | `Cache-Control` |
 |---|---|
@@ -112,8 +116,9 @@ then runs `scripts/smoke.sh` against the distribution. It needs two repository v
 Checks that need no AWS credentials:
 
 ```bash
-cd infra/modules/static-site && tofu init -backend=false && tofu validate && tofu test
+for m in infra/modules/*/; do (cd "$m" && tofu init -backend=false && tofu validate && tofu test); done
 terragrunt hcl fmt --check --working-dir infra
+scripts/check-bootstrap-state.sh
 scripts/smoke.sh https://<domain>    # after `pnpm build`, against a deployed copy
 ```
 
@@ -127,8 +132,9 @@ Open, and not for the code to decide:
 - **Photography (D14).** The design uses none.
 - **Legal text.** `src/content/legal/privacy.mdx` is a placeholder pending counsel.
 - **Web manifest** with 192 and 512 px icons, only if the site should be installable.
-- **Deploy.** The infrastructure and the workflow are written and not applied. The owner decides where the resources
-  live and the domain, and `nyange-org` registers the workload first: see `docs/design/site-infrastructure.md`, section 3.
+- **Deploy.** The infrastructure and the workflow are written and not applied. The owner creates the AWS account and
+  supplies its id in `infra/catalog/account.yaml`, and decides the domain: see `docs/design/site-infrastructure.md`,
+  section 3.
 - **Analytics.**
 - **Commercial tenancies.** The model has no commercial tenancy form yet (BM9 counsel note), so the Businesses page
   describes the landlord's side and points to the Owners and Tenants pages instead of describing a shop tenant's terms.
