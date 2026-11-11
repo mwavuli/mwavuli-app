@@ -1,7 +1,6 @@
 ---
 import arrowRight from '../../brand/icons/line/arrow-right.svg?raw';
 import Button from '../components/Button.astro';
-import { buttonClass } from '../components/button-styles';
 import RoofBands from '../components/RoofBands.astro';
 import { POSTAL_ADDRESS } from '../config';
 import Layout from '../layouts/Layout.astro';
@@ -47,9 +46,8 @@ const SERVICES = [
 ---
 
 <Layout title="Home" headerTone="brand">
-  <!-- 1. First screen. BXP: one enormous headline at the foot of a flat first screen, small chips above
-       it. AppFolio: stacked statements, a small paragraph and one button beside them. Northpoint: the
-       second phrase in the accent. Brand A6 and F6: white first beat, gold second beat, on Green. -->
+  <!-- 1. First screen: one enormous headline at the foot of a flat Green screen, audience chips above
+       it, a proof card beside it. Brand A6 and F6: white first beat, gold second beat. -->
   <section
     aria-labelledby="hero-title"
     class="audience on-inverse relative isolate overflow-hidden bg-brand text-white"
@@ -110,9 +108,8 @@ const SERVICES = [
     </div>
   </section>
 
-  <!-- 2. The pitch (BM18) as three full-bleed bands on three grounds, each led by an oversize figure
-       (AppFolio's stacked statements; Northpoint's accent phrase). The figures repeat the words of
-       the statement, so they are hidden from screen readers. -->
+  <!-- 2. The pitch (BM18) as three full-bleed bands on three grounds, each led by an oversize figure.
+       The figures repeat the words of the statement, so they are hidden from screen readers. -->
   <section id="offer" aria-labelledby="offer-title">
     <div class="bg-page">
       <div class="mx-auto max-w-page px-6 pt-16 lg:px-8 lg:pt-20">
@@ -177,8 +174,8 @@ const SERVICES = [
     </ol>
   </section>
 
-  <!-- 3. The six services as one ruled typographic list (Northpoint's title-and-line rows, scaled up;
-       BXP's title-left, text-right rows). Quiet hover: a tint, the figure and a small nudge. -->
+  <!-- 3. The six services as one ruled typographic list, title left and line right. Quiet hover: a
+       tint, the figure and a small nudge. -->
   <section id="services" aria-labelledby="services-title" class="bg-surface">
     <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-20">
       <h2 id="services-title" class="t-statement font-display text-brand">What we look after for you.</h2>
@@ -207,7 +204,8 @@ const SERVICES = [
   </section>
 
   <!-- 4. Contact on the cream page. The closing statement is the primary tagline (brand F6), green
-       then gold on a light ground. The form is design only, on a raised white card (brand S4). -->
+       then gold on a light ground. There is no form until a phone, WhatsApp or email destination
+       exists to receive it, so the details are labelled placeholders. -->
   <section id="contact" aria-labelledby="contact-title" class="bg-page">
     <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-24">
       <h2 id="contact-title" class="font-display text-overline uppercase text-brand">Contact</h2>
@@ -216,54 +214,20 @@ const SERVICES = [
         <span class="block text-gold-700">Our Responsibility.</span>
       </p>
 
-      <div class="mt-12 grid gap-10 lg:mt-16 lg:grid-cols-12 lg:gap-8">
-        <dl class="grid content-start gap-8 lg:col-span-5">
-          <div>
-            <dt class="font-display text-overline uppercase text-muted">Post</dt>
-            <dd class="mt-2 font-display text-h4 text-brand">{POSTAL_ADDRESS}</dd>
-          </div>
-          <div>
-            <dt class="font-display text-overline uppercase text-muted">Phone</dt>
-            <dd class="mt-2 font-display text-h4 text-muted">Phone number to be added</dd>
-          </div>
-          <div>
-            <dt class="font-display text-overline uppercase text-muted">Email</dt>
-            <dd class="mt-2 font-display text-h4 text-muted">Email address to be added</dd>
-          </div>
-        </dl>
-
-        <!-- Design only: the button is type="button", so nothing is sent. -->
-        <form
-          class="grid content-start gap-6 rounded-xl bg-white p-6 shadow-md lg:col-span-6 lg:col-start-7 lg:p-8"
-          aria-label="Contact form"
-        >
-          <div>
-            <label for="contact-name" class="font-display text-body font-semibold text-ink">Your name</label>
-            <input
-              id="contact-name"
-              name="name"
-              type="text"
-              autocomplete="name"
-              class="mt-2 block min-h-12 w-full rounded-sm border-[1.5px] border-slate-500 bg-white px-4 text-body text-ink"
-            />
-          </div>
-          <div>
-            <label for="contact-phone" class="font-display text-body font-semibold text-ink">Your phone number</label>
-            <input
-              id="contact-phone"
-              name="phone"
-              type="tel"
-              autocomplete="tel"
-              class="mt-2 block min-h-12 w-full rounded-sm border-[1.5px] border-slate-500 bg-white px-4 text-body text-ink"
-            />
-          </div>
-          <div>
-            <button type="button" class:list={[buttonClass('primary'), 'w-full sm:w-auto']}>
-              Send your details
-            </button>
-          </div>
-        </form>
-      </div>
+      <dl class="mt-12 grid gap-8 border-t border-line pt-10 sm:grid-cols-3 lg:mt-16">
+        <div>
+          <dt class="font-display text-overline uppercase text-muted">Post</dt>
+          <dd class="mt-2 font-display text-h4 text-brand">{POSTAL_ADDRESS}</dd>
+        </div>
+        <div>
+          <dt class="font-display text-overline uppercase text-muted">Phone</dt>
+          <dd class="mt-2 font-display text-h4 text-muted">Phone number to be added</dd>
+        </div>
+        <div>
+          <dt class="font-display text-overline uppercase text-muted">Email</dt>
+          <dd class="mt-2 font-display text-h4 text-muted">Email address to be added</dd>
+        </div>
+      </dl>
     </div>
   </section>
 </Layout>

@@ -161,7 +161,7 @@
 }
 
 /* ==========================================================================
-   Prototype 03, GIANT TYPE (SNT-38). Appended below the brand blocks.
+   Site styles, appended below the brand blocks: giant type, the audience switch, motion.
    ========================================================================== */
 
 /* Brand motion tokens (S9) drive every Tailwind transition on the page. */
@@ -170,8 +170,8 @@
   --default-transition-timing-function: var(--mw-motion-easing-standard);
 }
 
-/* Giant display sizes. The concept scales the display step up (brand T3 bend, listed in the
-   prototype README); Montserrat 750 matches the wordmark (T2) and tracking tightens with size. */
+/* Giant display sizes. The display step is scaled up (brand T3 bend, recorded in the README);
+   Montserrat 750 matches the wordmark (T2) and tracking tightens with size. */
 .t-giant-hero {
   font-size: clamp(2.75rem, 15vw, 10rem);
   font-weight: 750;
