@@ -1,0 +1,120 @@
+---
+// A skyline of roof forms (brand M1, M3): flat house silhouettes at the logo's slope, about 43 degrees,
+// layered in tonal planes and cut off by both edges of the page. No gradients, no ornament.
+//   hero:   Green ground, rows in green-700 and sage-500, and a cream front row on a cream ground strip, so
+//           the hero ends in a roofline that is the page itself. The tallest front house has the mark's
+//           window (four equal squares) cut out of it.
+//   footer: the same forms rising out of the Green footer into the cream page above it.
+// Decorative: hidden from assistive technology.
+interface Props {
+  variant: 'hero' | 'footer';
+  class?: string;
+}
+
+const { variant, class: className } = Astro.props;
+
+// Rise over run at the logo's slope (brand L2, M1).
+const SLOPE = 14 / 15;
+const round = (n: number) => Math.round(n * 10) / 10;
+
+/** [left x, width, wall height] */
+type House = readonly [left: number, width: number, wall: number];
+interface Row {
+  tone: string;
+  houses: House[];
+}
+
+// The design is 1440 wide and repeats; the canvas is 2400 wide with the design in the middle, so a wide
+// screen shows more houses at the same size instead of scaling them up.
+const CANVAS = 2400;
+const PERIOD = 1440;
+const SHIFT = (CANVAS - PERIOD) / 2;
+const tile = (houses: House[]): House[] =>
+  [-PERIOD, 0, PERIOD].flatMap((offset) => houses.map(([left, width, wall]): House => [left + offset + SHIFT, width, wall]));
+
+/** One house: two walls under a pitched roof, standing on `base`. */
+function house(base: number, [left, width, wall]: House): string {
+  const eave = base - wall;
+  const peak = eave - (width / 2) * SLOPE;
+  return `M${left} ${base}V${round(eave)}L${round(left + width / 2)} ${round(peak)}L${left + width} ${round(eave)}V${base}Z`;
+}
+
+/** Ground strip along the base, in the front row's tone, so no wall of a row behind ends in mid air. */
+const groundPath = (height: number, ground: number) => `M0 ${height}V${height - ground}H${CANVAS}V${height}Z`;
+
+const layouts: Record<Props['variant'], { height: number; ground: number; rows: Row[] }> = {
+  hero: {
+    height: 190,
+    ground: 12,
+    rows: [
+      {
+        tone: 'text-green-700',
+        houses: [[-30, 300, 40], [240, 260, 50], [470, 340, 20], [760, 280, 36], [1010, 320, 24], [1290, 230, 50]],
+      },
+      {
+        tone: 'text-sage-500',
+        houses: [[90, 240, 50], [330, 200, 40], [540, 260, 56], [790, 220, 44], [1000, 250, 50], [1250, 210, 40]],
+      },
+      {
+        tone: 'text-page',
+        houses: [[-60, 200, 40], [160, 180, 28], [360, 230, 36], [610, 170, 48], [800, 210, 30], [1030, 190, 44], [1240, 240, 34]],
+      },
+    ],
+  },
+  footer: {
+    height: 120,
+    ground: 0,
+    rows: [
+      {
+        tone: 'text-green-100',
+        houses: [[-20, 240, 12], [260, 220, 16], [520, 260, 8], [820, 230, 14], [1100, 250, 10], [1360, 200, 16]],
+      },
+      {
+        tone: 'text-green-300',
+        houses: [[90, 200, 14], [330, 180, 10], [640, 210, 12], [930, 190, 16], [1200, 200, 8]],
+      },
+      {
+        tone: 'text-brand',
+        houses: [[-50, 170, 12], [160, 150, 20], [420, 190, 10], [740, 160, 18], [1040, 180, 12], [1290, 170, 16]],
+      },
+    ],
+  },
+};
+
+const { height, ground, rows } = layouts[variant];
+
+// Fixed heights: the art never grows with the screen, so it never reaches the text above it.
+const sizes: Record<Props['variant'], string> = {
+  hero: 'h-20 sm:h-28 lg:h-[11.875rem]',
+  footer: 'h-16 sm:h-24 lg:h-[7.5rem]',
+};
+
+// The mark's window: four equal squares (brand L2), cut out of the third front house (centre x 475).
+const square = 22;
+const gap = 8;
+const windowOrigin = [449 + SHIFT, 92] as const;
+const windows = [0, 1]
+  .flatMap((row) => [0, 1].map((col) => [windowOrigin[0] + col * (square + gap), windowOrigin[1] + row * (square + gap)] as const))
+  .map(([x, y]) => `M${x} ${y}h${square}v${square}h-${square}Z`)
+  .join('');
+---
+
+<svg
+  class:list={[className, sizes[variant]]}
+  viewBox={`0 0 ${CANVAS} ${height}`}
+  preserveAspectRatio="xMidYMax slice"
+  fill="currentColor"
+  aria-hidden="true"
+  focusable="false"
+>
+  {
+    rows.map((row, index) => (
+      <path
+        class:list={[row.tone, variant === 'hero' && 'skyline-rise']}
+        style={`--rise: ${index}`}
+        d={tile(row.houses).map((h) => house(height, h)).join('') + (ground && index === rows.length - 1 ? groundPath(height, ground) : '')}
+      />
+    ))
+  }
+  {variant === 'hero' && <path class="skyline-rise text-brand" style={`--rise: ${rows.length - 1}`} d={windows} />}
+</svg>

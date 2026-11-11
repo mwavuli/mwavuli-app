@@ -1,22 +1,37 @@
 ---
-import { SITE_NAME } from '../config';
+import { POSTAL_ADDRESS, SITE_DESCRIPTION, SITE_NAME } from '../config';
 import Lockup from './Lockup.astro';
+import Skyline from './Skyline.astro';
 
 const year = new Date().getFullYear();
 ---
 
-<footer class="on-inverse bg-brand text-white">
-  <div class="mx-auto max-w-page px-4 py-10 sm:px-6">
-    <Lockup reversed class="h-8" role="img" aria-label={SITE_NAME} />
-    <nav aria-label="Footer" class="mt-6">
-      <ul class="grid gap-1 text-body-sm">
-        <li>
-          <a href="/legal/privacy/" class="inline-flex min-h-11 items-center hover:underline">
-            Privacy policy
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <p class="mt-8 border-t border-white/20 pt-6 text-caption">© {year} {SITE_NAME}</p>
+<!-- Green footer with the reversed lockup (brand A6). The purpose is stated here in the board's words
+     (F1). The lockup is 195 px wide with 24 px or more of clear space on every side (L4, L5). The roofs
+     rise out of the footer into the page above it (M1, M3). -->
+<footer class="on-inverse relative bg-brand text-white">
+  <Skyline variant="footer" class="pointer-events-none absolute inset-x-0 bottom-full w-full" />
+  <div class="mx-auto max-w-page px-6 py-12 lg:px-8 lg:py-16">
+    <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
+      <div>
+        <Lockup reversed class="h-12" role="img" aria-label={SITE_NAME} />
+        <p class="mt-6 max-w-md text-body-lg">{SITE_DESCRIPTION}</p>
+      </div>
+      <nav aria-label="Footer">
+        <ul class="grid gap-1 text-body-sm">
+          <li>
+            <a href="/legal/privacy/" class="inline-flex min-h-12 items-center rounded-md hover:underline">
+              Privacy policy
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div
+      class="mt-10 flex flex-col gap-2 border-t border-white/20 pt-6 text-caption sm:flex-row sm:justify-between"
+    >
+      <p>{POSTAL_ADDRESS}</p>
+      <p>© {year} {SITE_NAME}</p>
+    </div>
   </div>
 </footer>

@@ -1,28 +1,430 @@
 ---
-import { POSTAL_ADDRESS, SITE_NAME } from '../config';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import Skyline from '../components/Skyline.astro';
+import { EXAMPLE, POSTAL_ADDRESS, SITE_NAME, TERMS } from '../config';
 import Layout from '../layouts/Layout.astro';
+import { buttonClass } from '../utils/button';
+import { amount, exampleStatement, ugx } from '../utils/money';
+
+// Every figure below is read from src/config.ts (business/model.md), never typed twice.
+const fee = `${TERMS.feePercent}%`;
+const coordination = `${TERMS.coordinationPercent}%`;
+const statement = exampleStatement();
+
+// BM18 and P7: the plain statements, as written.
+const noStatements = ['No rent, no fee.', 'No sign-up fee.', 'No letting fee.'];
+
+const pay = [
+  {
+    figure: fee,
+    title: 'of the rent',
+    text: 'Taken off the rent before we pay you. Not charged on deposits, utilities, garbage or repairs.',
+  },
+  {
+    figure: coordination,
+    title: 'on repair quotes',
+    text: "Our coordination fee. It is added to the contractor's price and shown on the quote.",
+  },
+  {
+    figure: 'No markup',
+    title: 'on bills',
+    text: 'Electricity, water and garbage bills are paid at cost.',
+  },
+];
+
+const get = [
+  { title: 'Rent on the 1st', text: 'For every room with a tenant.' },
+  {
+    title: 'The first missed month covered',
+    text: 'If a tenant does not pay, we cover that first month and do the chasing.',
+  },
+  { title: 'One payment, one statement', text: 'Every month, by SMS or WhatsApp.' },
+];
+
+// The six services on the card (brand F1, D15). "Guaranteed" appears only beside "we cover that first
+// month" (BM18).
+const services = [
+  {
+    icon: 'rental-income',
+    title: 'Guaranteed rental income on the 1st',
+    text: 'We pay you for every room with a tenant. If a tenant does not pay, we cover that first month.',
+  },
+  {
+    icon: 'tenant-management',
+    title: 'Tenant management and sourcing',
+    text: 'We find tenants for your empty rooms and collect the rent.',
+  },
+  {
+    icon: 'construction-repairs',
+    title: 'Construction and repairs',
+    text: 'When something needs fixing or building, we find a trusted contractor.',
+  },
+  {
+    icon: 'electrical-plumbing',
+    title: 'Electrical and plumbing',
+    text: 'Trusted contractors for electrical and plumbing jobs.',
+  },
+  {
+    icon: 'utilities',
+    title: 'Utilities',
+    text: 'We look after electricity and water. Bills are paid at cost, with no markup.',
+  },
+  {
+    icon: 'garbage-management',
+    title: 'Garbage disposal',
+    text: 'We look after garbage disposal. Paid at cost, with no markup.',
+  },
+];
+
+const leaving = [
+  { figure: `${TERMS.noticeDays} days`, text: `Leave any time with ${TERMS.noticeDays} days' written notice. So can we.` },
+  {
+    figure: `The ${TERMS.latestPayoutDay}`,
+    text: `Not paid by the ${TERMS.latestPayoutDay}? Leave straight away, with no fee.`,
+  },
+  {
+    figure: `${TERMS.finalPaymentDays} days`,
+    text: `After you leave, your final statement and payment come within ${TERMS.finalPaymentDays} days.`,
+  },
+];
+
+const contactLines = [
+  { icon: 'location', label: 'Address', value: POSTAL_ADDRESS, placeholder: false },
+  { icon: 'phone', label: 'Phone', value: 'Phone number to be added', placeholder: true },
+  { icon: 'mail', label: 'Email', value: 'Email address to be added', placeholder: true },
+];
+
+const overline = 'font-display text-overline uppercase text-brand';
+const badge = 'grid size-10 shrink-0 place-items-center rounded-(--mw-radius-badge) text-brand';
+const fieldClass =
+  'mt-2 block min-h-12 w-full rounded-sm border border-slate-500 bg-surface px-4 text-body text-ink transition-[border-color] duration-(--mw-motion-duration-fast) hover:border-brand motion-reduce:transition-none';
 ---
 
 <Layout title="Home">
-  <!-- Brand A6: a green band with a two-beat headline and a gold rule. The photograph
-       waits on the open photography decision (D14). -->
-  <section class="on-inverse bg-brand text-white">
-    <div class="mx-auto max-w-page px-4 py-20 sm:px-6 sm:py-28">
-      <h1 class="font-display text-h1 text-white sm:text-display">
-        Managed Properties. <span class="text-accent">Better Living.</span>
-      </h1>
-      <div class="mt-6 h-1 w-16 bg-accent" aria-hidden="true"></div>
-      <p class="mt-6 max-w-xl text-body-lg">Rent paid to you on the 1st, every month.</p>
+  <!-- Hero (brand A6, M3): a full-bleed Green field. The money is the visual: a 256 px gold 15% and the
+       three "No ..." terms. The roofs along the bottom edge are the only imagery (no photograph yet, D14);
+       their cream front row is the page ground, so the hero ends in a roofline. -->
+  <section
+    aria-labelledby="hero-title"
+    class="on-inverse relative isolate overflow-hidden bg-brand text-white"
+  >
+    <Skyline variant="hero" class="pointer-events-none absolute inset-x-0 -bottom-px -z-10 w-full" />
+    <div class="mx-auto max-w-page px-6 pt-8 pb-24 sm:pt-12 sm:pb-32 lg:px-8 lg:pt-16 lg:pb-44">
+      <div class="grid gap-6 sm:gap-8 lg:grid-cols-12 lg:items-end">
+        <div class="lg:col-span-5">
+          <h1 id="hero-title" class="text-balance text-hero text-white">
+            <span class="block">Managed Properties.</span>
+            <span class="block text-accent">Better Living.</span>
+          </h1>
+          <p class="mt-4 max-w-md text-balance font-display text-h4 text-white sm:mt-5 sm:text-h3">
+            Rent paid to you on the 1st, every month.
+          </p>
+          <div class="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:gap-4">
+            <Button href="#contact" variant="inverse">Talk to us</Button>
+            <Button href="#pay" variant="inverse-outline" class="max-sm:hidden">
+              See what you pay
+            </Button>
+          </div>
+        </div>
+        <div class="lg:col-span-7 lg:text-right">
+          <h2 class="sr-only">What we charge</h2>
+          <p>
+            <span class="block font-display text-giant text-accent lg:pr-[0.04em]">{fee}</span>
+            <span class="mt-3 block font-display text-h3 text-white">of the rent.</span>
+          </p>
+        </div>
+      </div>
+      <ul class="mt-6 grid gap-x-8 sm:mt-8 sm:grid-cols-3 lg:mt-12">
+        {
+          noStatements.map((text) => (
+            <li class="text-balance border-t border-white/30 py-3 font-display text-term text-white sm:py-4">{text}</li>
+          ))
+        }
+      </ul>
     </div>
   </section>
 
-  <section id="contact" class="bg-surface">
-    <div class="mx-auto max-w-page px-4 py-16 sm:px-6">
-      <h2 class="text-h2">Contact</h2>
-      <p class="mt-4 text-body-lg">
-        {SITE_NAME}<br />
-        {POSTAL_ADDRESS}
-      </p>
+  <!-- What you pay and what you get: one set of terms for every unit (BM10), no tiers. The card
+       straddles into the green-50 band below. -->
+  <section id="pay" aria-labelledby="pay-title" class="bg-page">
+    <div class="mx-auto max-w-page px-6 pt-12 sm:pt-16 lg:px-8 lg:pt-24">
+      <p class={overline}>Our fees</p>
+      <h2 id="pay-title" class="mt-3 max-w-2xl text-balance text-h2 lg:text-h1">
+        Two fees. Both shown to you.
+      </h2>
+
+      <div class="relative z-10 mt-10 -mb-12 overflow-hidden rounded-xl bg-surface shadow-md lg:mt-12 lg:-mb-16">
+        <div class="grid lg:grid-cols-2">
+          <div class="flex flex-col p-6 sm:p-8 lg:p-10">
+            <h3 class="text-h3">What you pay</h3>
+            <dl class="mt-6 flex flex-1 flex-col divide-y divide-line border-t border-line">
+              {
+                pay.map((row) => (
+                  <div class="flex flex-1 flex-col justify-center py-6">
+                    <dt class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                      <span class="font-display text-figure text-brand">{row.figure}</span>
+                      <span class="font-display text-h4">{row.title}</span>
+                    </dt>
+                    <dd class="mt-3 text-body text-ink">{row.text}</dd>
+                  </div>
+                ))
+              }
+            </dl>
+          </div>
+
+          <div class="bg-green-50 p-6 sm:p-8 lg:p-10">
+            <h3 class="text-h3">What you get</h3>
+            <ul class="mt-6 divide-y divide-green-100 border-t border-green-100">
+              {
+                get.map((item) => (
+                  <li class="flex gap-4 py-6">
+                    <span class:list={[badge, 'bg-white']}>
+                      <Icon name="check" class="size-6" />
+                    </span>
+                    <div>
+                      <p class="font-display text-h4 text-heading">{item.title}</p>
+                      <p class="mt-1 text-body text-ink">{item.text}</p>
+                    </div>
+                  </li>
+                ))
+              }
+              <li class="flex gap-4 py-6">
+                <span class:list={[badge, 'bg-white']}>
+                  <Icon name="check" class="size-6" />
+                </span>
+                <div>
+                  <p class="font-display text-h4 text-heading">Six services</p>
+                  <p class="mt-1 text-body text-ink">
+                    Tenants found, repairs arranged, electricity, water and garbage looked after.
+                  </p>
+                  <a
+                    href="#services"
+                    class="mt-1 inline-flex min-h-12 items-center font-semibold text-brand underline underline-offset-4 transition-[color] hover:text-brand-deep motion-reduce:transition-none"
+                  >
+                    See the six services
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <p class="border-t border-line bg-surface px-6 py-5 text-body text-ink sm:px-8 lg:px-10">
+          Every unit gets the same terms, shops and offices included. No yearly fee, and no fees charged
+          to tenants.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Repairs: the contractor's price plus our 10% (BM2), and one labelled example (BM18). -->
+  <section id="repairs" aria-labelledby="repairs-title" class="bg-green-50">
+    <div
+      class="mx-auto grid max-w-page gap-12 px-6 pt-24 pb-12 sm:pb-16 lg:grid-cols-12 lg:gap-12 lg:px-8 lg:pt-40 lg:pb-24"
+    >
+      <div class="lg:col-span-6">
+        <p class={overline}>Repairs</p>
+        <h2 id="repairs-title" class="mt-3 text-balance text-h2 lg:text-h1">
+          Repairs: the contractor's price plus our {coordination}.
+        </h2>
+        <p class="mt-4 text-body-lg">
+          We find a trusted contractor and bring you the price. Our {coordination} is shown on the quote.
+        </p>
+
+        <p class="mt-8 flex flex-wrap items-center gap-x-3 gap-y-3 font-display text-h4 text-heading">
+          <span class="rounded-sm border border-line bg-white px-3 py-2">Contractor's price</span>
+          <span class="inline-flex items-center gap-3">
+            <span class="sr-only">plus</span>
+            <span aria-hidden="true">+</span>
+            <span class="rounded-sm border border-line bg-white px-3 py-2">Our {coordination}</span>
+          </span>
+          <span class="inline-flex items-center gap-3">
+            <span class="sr-only">equals</span>
+            <span aria-hidden="true">=</span>
+            <span class="rounded-sm bg-brand px-3 py-2 text-white">The quote</span>
+          </span>
+        </p>
+
+        <ul class="mt-8 grid gap-4 sm:grid-cols-2">
+          <li class="rounded-lg bg-white p-5 shadow-md">
+            <span class:list={[badge, 'bg-green-100']}>
+              <Icon name="check" class="size-6" />
+            </span>
+            <p class="mt-4 font-display text-h4 text-heading">Up to {ugx(TERMS.approvalLimit)}</p>
+            <p class="text-body-sm text-muted">on the quote</p>
+            <p class="mt-2 text-body text-ink">We fix it and list it on your statement.</p>
+          </li>
+          <li class="rounded-lg bg-white p-5 shadow-md">
+            <span class:list={[badge, 'bg-green-100']}>
+              <Icon name="alerts" class="size-6" />
+            </span>
+            <p class="mt-4 font-display text-h4 text-heading">Above {ugx(TERMS.approvalLimit)}</p>
+            <p class="text-body-sm text-muted">on the quote</p>
+            <p class="mt-2 text-body text-ink">
+              We ask you first. You reply YES by SMS or WhatsApp, and then work starts.
+            </p>
+          </li>
+        </ul>
+        <p class="mt-6 text-body text-muted">
+          Urgent safety repairs, up to {ugx(TERMS.emergencyLimit)}, go ahead first. We tell you the same
+          day.
+        </p>
+      </div>
+
+      <div class="lg:col-span-6">
+        <div class="rounded-lg bg-white p-6 shadow-md sm:p-8">
+          <p
+            class="inline-block rounded-full bg-slate-100 px-3 py-1 font-display text-caption font-semibold uppercase tracking-wider text-ink"
+          >
+            Example, not a quote
+          </p>
+          <h3 class="mt-4 text-h3">Your statement for 1st April</h3>
+          <p class="mt-2 text-body text-ink">
+            {EXAMPLE.rooms} rooms at {ugx(EXAMPLE.rentPerRoom)}. {EXAMPLE.withTenants} rooms have tenants.
+          </p>
+          <table class="mt-6 w-full border-collapse text-left text-body">
+            <caption class="sr-only">
+              Statement for 1st April, in UGX
+            </caption>
+            <thead>
+              <tr class="border-b border-line-strong text-body-sm text-muted">
+                <th scope="col" class="py-2 pr-4 font-medium">Item</th>
+                <th scope="col" class="py-2 text-right font-medium">UGX</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-line">
+              <tr>
+                <th scope="row" class="py-4 pr-4 font-normal">
+                  Rent from {EXAMPLE.withTenants} rooms with tenants
+                </th>
+                <td class="py-4 text-right tabular-nums">{amount(statement.rent)}</td>
+              </tr>
+              <tr>
+                <th scope="row" class="py-4 pr-4 font-normal">Our {fee}</th>
+                <td class="py-4 text-right tabular-nums">−{amount(statement.fee)}</td>
+              </tr>
+              <tr>
+                <th scope="row" class="py-4 pr-4 font-normal">
+                  Repair: tap, plumber {ugx(EXAMPLE.repairPrice)} plus our&nbsp;{coordination}
+                </th>
+                <td class="py-4 text-right tabular-nums">−{amount(statement.repair)}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="mt-2 rounded-lg bg-green-50 p-5">
+            <p class="font-display text-h4 text-heading">Paid to you on the 1st</p>
+            <p class="mt-1 font-sans text-figure tabular-nums text-brand">{amount(statement.paid)}</p>
+          </div>
+          <p class="mt-6 text-body text-ink">
+            The empty room earns no rent and costs no fee. We look for a tenant.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The six services (brand F1, I7), pictograms large. -->
+  <section id="services" aria-labelledby="services-title" class="bg-surface">
+    <div class="mx-auto max-w-page px-6 py-12 sm:py-16 lg:px-8 lg:py-24">
+      <p class={overline}>Services</p>
+      <h2 id="services-title" class="mt-3 max-w-2xl text-balance text-h2 lg:text-h1">
+        What we look after.
+      </h2>
+      <ul class="mt-10 grid gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:mt-12 lg:grid-cols-3">
+        {
+          services.map((service) => (
+            <li class="grid grid-cols-[4rem_1fr] items-start gap-x-5 sm:grid-cols-[6rem_1fr] sm:gap-x-6">
+              <Icon kind="pictogram" name={service.icon} class="size-16 text-brand sm:size-24" />
+              <div>
+                <h3 class="text-balance text-h4">{service.title}</h3>
+                <p class="mt-2 text-body text-ink">{service.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Leaving (BM8, P8): a pull-statement band with big numerals. -->
+  <section id="leaving" aria-labelledby="leaving-title" class="bg-sage-100">
+    <div class="mx-auto grid max-w-page gap-8 px-6 py-12 sm:py-16 lg:grid-cols-12 lg:gap-12 lg:px-8 lg:py-24">
+      <div class="lg:col-span-5">
+        <p class={overline}>Leaving</p>
+        <h2 id="leaving-title" class="mt-3 text-balance text-hero">Leave any time.</h2>
+        <div class="mt-6 h-1 w-16 bg-accent" aria-hidden="true"></div>
+      </div>
+      <ul class="divide-y divide-sage-300 border-y border-sage-300 lg:col-span-7">
+        {
+          leaving.map((item) => (
+            <li class="grid gap-2 py-6 sm:grid-cols-[15rem_1fr] sm:items-center sm:gap-8">
+              <p class="font-display text-figure text-brand">{item.figure}</p>
+              <p class="text-body-lg text-ink">{item.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Contact. The form is design only: it sends nothing. Only the postal address is a real contact
+       fact; the rest are labelled placeholders. -->
+  <section id="contact" aria-labelledby="contact-title" class="bg-page">
+    <div
+      class="mx-auto grid max-w-page gap-12 px-6 pt-12 pb-24 sm:pt-16 sm:pb-28 lg:grid-cols-12 lg:gap-12 lg:px-8 lg:pt-24 lg:pb-40"
+    >
+      <div class="lg:col-span-5">
+        <p class={overline}>Contact</p>
+        <h2 id="contact-title" class="mt-3 text-balance text-h2 lg:text-h1">Talk to us.</h2>
+        <p class="mt-4 text-body-lg">Tell us about your building.</p>
+        <address class="mt-8 not-italic">
+          <p class="font-display text-h4 text-heading">{SITE_NAME}</p>
+          <ul class="mt-5 grid gap-4">
+            {
+              contactLines.map((line) => (
+                <li class="flex items-center gap-4">
+                  <span class="grid size-10 shrink-0 place-items-center rounded-(--mw-radius-badge) bg-brand text-page">
+                    <Icon name={line.icon} class="size-6" />
+                  </span>
+                  <span class:list={['text-body', line.placeholder ? 'text-muted' : 'text-ink']}>
+                    <span class="sr-only">{line.label}: </span>
+                    {line.value}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </address>
+      </div>
+
+      <form
+        class="rounded-xl bg-surface p-6 shadow-md sm:p-8 lg:col-span-7 lg:p-10"
+        aria-labelledby="form-title"
+      >
+        <h3 id="form-title" class="text-h3">Your details</h3>
+        <div class="mt-6 grid gap-6 sm:grid-cols-2">
+          <div>
+            <label for="name" class="text-label text-ink">Your name</label>
+            <input id="name" name="name" type="text" autocomplete="name" class={fieldClass} />
+          </div>
+          <div>
+            <label for="phone" class="text-label text-ink">Your phone number</label>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              inputmode="tel"
+              autocomplete="tel"
+              class={fieldClass}
+            />
+          </div>
+          <div class="sm:col-span-2">
+            <label for="where" class="text-label text-ink">Where is your building?</label>
+            <input id="where" name="where" type="text" class={fieldClass} />
+          </div>
+        </div>
+        <button type="button" class:list={[buttonClass('primary'), 'mt-8 w-full sm:w-auto']}>Send</button>
+      </form>
     </div>
   </section>
 </Layout>

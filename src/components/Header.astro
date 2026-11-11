@@ -1,32 +1,40 @@
 ---
 import { SITE_NAME } from '../config';
+import Button from './Button.astro';
 import Lockup from './Lockup.astro';
+
+// Anchors on the home page. They start with "/" so they also work from the legal pages.
+const links = [
+  { href: '/#pay', label: 'What you pay' },
+  { href: '/#repairs', label: 'Repairs' },
+  { href: '/#services', label: 'Services' },
+  { href: '/#leaving', label: 'Leaving' },
+];
 ---
 
+<!-- The horizontal lockup is 195 px wide (h-12, above the 180 px minimum, brand L5). 24 px of padding
+     keeps its clear space (L4: one eighth of the width) on the sides and above and below. -->
 <header class="border-b border-line bg-page">
-  <div class="mx-auto flex max-w-page items-center justify-between gap-4 px-4 py-4 sm:px-6">
+  <div class="mx-auto flex max-w-page items-center justify-between gap-6 px-6 py-6 lg:px-8">
     <a href="/" class="flex shrink-0 items-center" aria-label={`${SITE_NAME}: home`}>
-      <Lockup class="h-8" aria-hidden="true" />
+      <Lockup class="h-12" aria-hidden="true" />
     </a>
-    <nav aria-label="Main">
-      <ul class="flex items-center gap-2 sm:gap-4">
-        <li>
-          <a
-            href="/legal/privacy/"
-            class="inline-flex min-h-11 items-center px-3 font-display text-label font-semibold text-ink hover:text-brand"
-          >
-            Privacy
-          </a>
-        </li>
-        <li>
-          <a
-            href="/#contact"
-            class="inline-flex min-h-11 items-center rounded-full bg-brand px-5 font-display text-label font-semibold text-white hover:bg-brand-deep"
-          >
-            Contact
-          </a>
-        </li>
+    <nav aria-label="Main" class="flex items-center gap-2 lg:gap-4">
+      <ul class="hidden items-center gap-1 md:flex">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="inline-flex min-h-12 items-center rounded-md px-3 font-display text-label font-semibold text-ink underline-offset-8 transition-[color] duration-(--mw-motion-duration-fast) hover:text-brand hover:underline motion-reduce:transition-none"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
+      <Button href="/#contact" class="px-5">Contact</Button>
     </nav>
   </div>
 </header>

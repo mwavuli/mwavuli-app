@@ -159,3 +159,43 @@
   --tw-prose-th-borders: var(--mw-color-role-border-strong);
   --tw-prose-td-borders: var(--mw-color-role-border-default);
 }
+
+/* Simple pricing prototype (SNT-38). The brand scale stops at `display` (56 px); this concept sets its
+   money figures far larger, so four more steps are added here, below the brand's own blocks. Each one
+   scales down on phones. `giant` is the 15% (256 px on desktop), `hero` the headline, `term` the "No ..."
+   statements and `figure` the numbers in the cards. */
+@theme {
+  --text-giant: clamp(8rem, 17.8vw, 16rem);
+  --text-giant--line-height: 0.82;
+  --text-giant--letter-spacing: -0.04em;
+  --text-giant--font-weight: 800;
+  --text-hero: clamp(2.25rem, 4.4vw, 4rem);
+  --text-hero--line-height: 1.05;
+  --text-hero--letter-spacing: -0.01em;
+  --text-hero--font-weight: 700;
+  --text-term: clamp(1.75rem, 2.6vw, 2.25rem);
+  --text-term--line-height: 1.15;
+  --text-term--letter-spacing: -0.01em;
+  --text-term--font-weight: 700;
+  --text-figure: clamp(2.5rem, 4.4vw, 3.5rem);
+  --text-figure--line-height: 1;
+  --text-figure--letter-spacing: -0.02em;
+  --text-figure--font-weight: 800;
+}
+
+/* The hero roofs rise into place once on load (brand S9): opacity and transform only, the 320 ms token,
+   the standard easing, each row 90 ms after the one behind it. Nothing loops, and nothing moves under
+   `prefers-reduced-motion`. */
+@keyframes skyline-rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .skyline-rise {
+    animation: skyline-rise var(--mw-motion-duration-slow) var(--mw-motion-easing-standard) both;
+    animation-delay: calc(var(--rise, 0) * 90ms);
+  }
+}
