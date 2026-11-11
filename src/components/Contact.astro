@@ -1,0 +1,94 @@
+---
+import { POSTAL_ADDRESS } from '../config';
+import { outlineRoof, roofStack } from '../art/roof';
+import Icon from './Icon.astro';
+
+// Light roof bands behind the form card, so the card overlaps a band (M3).
+const bands = roofStack(1180, 150, [
+  { thickness: 190, className: 'fill-green-100' },
+  { thickness: 90, className: 'fill-sage-100' },
+]);
+
+// M2: staggered rows of outlined roofs, each with a window, offset by half a roof on alternate rows.
+const roofs = [
+  ...[0, 64].map((x) => outlineRoof(x, 0)),
+  ...[-32, 32, 96].map((x) => outlineRoof(x, 48)),
+];
+---
+
+<section id="contact" class="relative isolate overflow-hidden bg-page" aria-labelledby="contact-title">
+  <svg
+    class="pointer-events-none absolute bottom-36 right-0 -z-10 h-[30rem] w-auto lg:inset-y-0 lg:bottom-0 lg:h-full"
+    viewBox="0 0 1440 760"
+    preserveAspectRatio="xMaxYMid slice"
+    aria-hidden="true"
+    focusable="false"
+  >
+    {bands.map((b) => <path d={b.d} class={b.className} />)}
+  </svg>
+
+  <div class="mx-auto grid max-w-page gap-12 px-4 pb-16 pt-16 sm:px-6 lg:grid-cols-12 lg:gap-x-8 lg:px-8 lg:pb-20 lg:pt-24">
+    <div class="lg:col-span-5">
+      <p class="font-display text-overline uppercase text-brand">Contact</p>
+      <h2 id="contact-title" class="mt-3 text-h1 lg:text-display">Give us your building.</h2>
+      <!-- M4: the one gold rule in this view. -->
+      <div class="mt-6 h-1 w-16 bg-accent" aria-hidden="true"></div>
+      <p class="mt-6 max-w-sm text-body-lg">We walk it with you first.</p>
+
+      <dl class="mt-10 grid gap-6">
+        <div class="flex items-start gap-4">
+          <span class="badge" aria-hidden="true">
+            <Icon family="pictogram" name="badge-location" class="size-full" />
+          </span>
+          <div>
+            <dt class="text-label text-muted">Postal address</dt>
+            <dd class="mt-1 font-display text-h4">{POSTAL_ADDRESS}</dd>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="badge" aria-hidden="true">
+            <Icon family="pictogram" name="badge-phone" class="size-full" />
+          </span>
+          <div>
+            <dt class="text-label text-muted">Phone</dt>
+            <dd class="mt-1 text-body-lg text-muted">Phone number to be added</dd>
+          </div>
+        </div>
+      </dl>
+    </div>
+
+    <!-- Design only: the button does nothing yet. -->
+    <form class="contact-card lg:col-span-6 lg:col-start-7" aria-labelledby="form-title" novalidate>
+      <h3 id="form-title" class="text-h3">Tell us about your building</h3>
+      <div class="mt-6 grid gap-5">
+        <div>
+          <label for="f-name" class="field-label">Your name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" class="field" />
+        </div>
+        <div>
+          <label for="f-phone" class="field-label">Your phone number</label>
+          <input id="f-phone" name="phone" type="tel" autocomplete="tel" class="field" />
+        </div>
+        <div>
+          <label for="f-where" class="field-label">Where is your building?</label>
+          <input id="f-where" name="where" type="text" class="field" />
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary mt-8 w-full sm:w-auto">
+        Send
+        <Icon name="arrow-right" class="btn__icon btn__icon--right size-5" />
+      </button>
+    </form>
+  </div>
+
+  <svg class="roof-pattern" aria-hidden="true" focusable="false">
+    <defs>
+      <pattern id="roof-pattern" width="128" height="96" patternUnits="userSpaceOnUse">
+        <g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+          {roofs.map((d) => <path d={d} />)}
+        </g>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#roof-pattern)"></rect>
+  </svg>
+</section>

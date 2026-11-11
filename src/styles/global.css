@@ -159,3 +159,542 @@
   --tw-prose-th-borders: var(--mw-color-role-border-strong);
   --tw-prose-td-borders: var(--mw-color-role-border-default);
 }
+
+/* ==========================================================================
+   SNT-38 sticky story. Below the brand's base layer. Every colour, radius, type step and
+   motion value is a brand token (--mw-*) or a theme utility; the only values of its own
+   are layout measures.
+   ========================================================================== */
+
+@layer components {
+  /* Buttons: 48 px high (A5), radius-md (S3), Montserrat 600 at 16/24 (T3). */
+  .btn {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-6 font-display text-body font-semibold;
+    border: 1.5px solid transparent;
+    transition:
+      background-color var(--mw-motion-duration-base) var(--mw-motion-easing-standard),
+      border-color var(--mw-motion-duration-base) var(--mw-motion-easing-standard),
+      color var(--mw-motion-duration-base) var(--mw-motion-easing-standard);
+  }
+  .btn__icon {
+    transition: transform var(--mw-motion-duration-base) var(--mw-motion-easing-standard);
+  }
+  .btn:hover .btn__icon--down {
+    transform: translateY(0.125rem);
+  }
+  .btn:hover .btn__icon--right {
+    transform: translateX(0.25rem);
+  }
+  .btn-primary {
+    @apply bg-brand text-white;
+  }
+  .btn-primary:hover {
+    @apply bg-brand-deep;
+  }
+  .btn-primary:active {
+    background-color: var(--mw-color-ramp-green-900);
+  }
+  .btn-light {
+    @apply bg-white text-brand;
+  }
+  .btn-light:hover {
+    @apply bg-green-50;
+  }
+  .btn-light:active {
+    @apply bg-green-100;
+  }
+  .btn-outline-light {
+    @apply text-white;
+    border-color: var(--mw-color-core-white);
+  }
+  .btn-outline-light:hover {
+    @apply bg-white text-brand;
+  }
+  .btn-outline-light:active {
+    @apply bg-green-100 text-brand;
+  }
+
+  /* Text links in the header and footer: 48 px and 44 px tap targets (S8). */
+  .nav-link {
+    @apply inline-flex min-h-12 items-center rounded-md px-3 font-display text-label font-semibold text-ink;
+    transition: color var(--mw-motion-duration-base) var(--mw-motion-easing-standard);
+  }
+  .nav-link:hover {
+    @apply text-brand;
+  }
+  .nav-link--light {
+    @apply text-white;
+    text-underline-offset: 0.5rem;
+    text-decoration-thickness: 2px;
+  }
+  .nav-link--light:hover {
+    @apply text-white underline;
+  }
+  .footer-link {
+    @apply inline-flex min-h-11 items-center rounded-md text-white;
+    text-underline-offset: 0.25rem;
+  }
+  .footer-link:hover {
+    @apply underline;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn__icon,
+  .nav-link {
+    transition: none;
+  }
+  .btn:hover .btn__icon {
+    transform: none;
+  }
+}
+
+/* ---- Hero ------------------------------------------------------------------ */
+/* The hero art is drawn on a 1440 x 900 canvas and scales with the screen's height, so the
+   cream card (set in the same units) keeps its place over the bands at any window size. */
+.hero {
+  --px: calc(100svh / 900);
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+.hero__art {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+.hero__art--wide {
+  display: none;
+}
+.hero__art--narrow {
+  inset-inline: 0;
+  bottom: 0;
+  width: 100%;
+  height: 66%;
+}
+.hero__inner {
+  z-index: 1;
+  flex: 1 1 auto;
+  width: 100%;
+  padding-top: 7rem;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+.hero__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-bottom: 1.5rem;
+}
+.hero__title {
+  font-size: clamp(2.75rem, 14.5vw, 4.75rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+}
+/* The purpose line (F1), an eyebrow above the headline. It stays clear of the roof bands at every
+   window size, which the foot of the hero does not. */
+.hero__purpose {
+  max-width: 24rem;
+  margin-bottom: 1rem;
+  font-size: var(--text-body);
+  line-height: 1.5rem;
+  color: var(--mw-color-ramp-green-100);
+}
+
+/* The proof line as a key figure (F1). Small screens: in the flow, after the action. */
+.hero-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: flex-end;
+  width: 17.5rem;
+  margin-top: auto;
+  padding: 1.5rem;
+  border-radius: var(--mw-radius-xl);
+  background-color: var(--mw-color-core-cream);
+  color: var(--mw-color-core-green);
+}
+.hero-card__coin {
+  display: block;
+  width: 4.5rem;
+  aspect-ratio: 91 / 72;
+}
+.hero-card__lead,
+.hero-card__tail {
+  @apply font-display;
+  font-weight: 600;
+}
+.hero-card__lead {
+  margin-top: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.hero-card__figure {
+  margin-top: 0.25rem;
+  @apply font-display;
+  font-size: 7rem;
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+}
+.hero-card__figure > span {
+  margin-left: 0.04em;
+  font-size: 0.38em;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.hero-card__tail {
+  margin-top: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+@media (min-width: 40rem) {
+  .hero__inner {
+    padding-top: 7.5rem;
+    padding-bottom: 2.5rem;
+  }
+  .hero__copy {
+    padding-bottom: 2rem;
+  }
+  .hero__purpose {
+    max-width: 30rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  .hero__art--narrow {
+    display: none;
+  }
+  .hero__art--wide {
+    display: block;
+    right: 0;
+    bottom: 0;
+    height: 100svh;
+    width: auto;
+    aspect-ratio: 1440 / 900;
+  }
+  .hero__copy {
+    flex: 1 1 auto;
+    justify-content: center;
+    padding-bottom: 0;
+  }
+  .hero__title {
+    font-size: clamp(4.25rem, min(8vw, 12svh), 7rem);
+  }
+  .hero-card {
+    position: absolute;
+    right: calc(188 * var(--px));
+    bottom: calc(158 * var(--px));
+    width: calc(374 * var(--px));
+    margin: 0;
+    padding: calc(32 * var(--px));
+  }
+  .hero-card__coin {
+    width: calc(121 * var(--px));
+  }
+  .hero-card__lead {
+    margin-top: calc(18 * var(--px));
+    font-size: max(1rem, calc(22 * var(--px)));
+  }
+  .hero-card__figure {
+    margin-top: calc(6 * var(--px));
+    font-size: calc(196 * var(--px));
+  }
+  .hero-card__tail {
+    font-size: max(1.25rem, calc(32 * var(--px)));
+  }
+}
+
+/* ---- Story ----------------------------------------------------------------- */
+.story {
+  --stage-h: min(calc(100svh - 5rem), 50rem);
+}
+
+/* An icon tile (brand I8 radius): a line icon on a soft Green ground. */
+.tile {
+  display: inline-flex;
+  width: 3.5rem;
+  height: 3.5rem;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--mw-radius-badge);
+  background-color: var(--mw-color-ramp-green-50);
+  color: var(--mw-color-core-green);
+}
+
+/* A promise chip (A5, C6): Sage ground, Green text, an icon and words. A pill is allowed for
+   chips (S3). */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: var(--mw-radius-pill);
+  background-color: var(--mw-color-role-state-success-bg);
+  color: var(--mw-color-role-state-success-fg);
+  padding: 0.5rem 1rem 0.5rem 0.75rem;
+  font-size: var(--text-label);
+  line-height: 1.25rem;
+  font-weight: 500;
+}
+
+/* Small screens, and no scripting: each step is words and a panel, stacked. */
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-block: 2.5rem;
+}
+.step + .step {
+  border-top: 1px solid var(--mw-color-role-border-default);
+}
+.step__panel {
+  order: -1;
+}
+.step__text h3 {
+  text-wrap: balance;
+}
+.panel {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.panel__art {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: var(--mw-radius-xl);
+  background-color: var(--mw-color-core-green);
+}
+.panel__art > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Progress: dots and a counter, on the page ground under the panel. The dots are circles because
+   they are step toggles (S3 allows a pill for toggles); they are not controls. */
+.panel__progress {
+  display: flex;
+  min-height: 2.5rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.panel__dots {
+  display: flex;
+  gap: 0.5rem;
+}
+.dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: var(--mw-radius-pill);
+  border: 1.5px solid var(--mw-color-role-text-muted);
+}
+.dot[data-on] {
+  border-color: var(--mw-color-core-green);
+  background-color: var(--mw-color-core-green);
+}
+.panel__count {
+  font-size: var(--text-label);
+  line-height: 1.25rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--mw-color-role-text-muted);
+}
+.panel__count > b {
+  @apply font-display;
+  font-weight: 700;
+  color: var(--mw-color-core-green);
+}
+
+@media (min-width: 40rem) and (max-width: 63.99rem) {
+  /* Tablets: panel beside its words, so each step is a compact row. */
+  .step {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    column-gap: 2rem;
+    align-items: center;
+  }
+}
+
+@media (min-width: 64rem) {
+  /* Wide, no scripting: the same stack, in rows. */
+  .step {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 7fr);
+    column-gap: 3rem;
+    align-items: center;
+    padding-block: 2rem;
+  }
+  .step__panel {
+    order: 0;
+  }
+
+  /* Wide, with scripting: one sticky cell. The words scroll in column one; the four panels sit
+     on top of each other in column two and the active one shows. Each panel is opaque, so the
+     house they share never flickers: the next panel fades in over the last, which then drops
+     away once it is covered. */
+  .js .story__steps {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 7fr);
+    grid-template-rows: repeat(var(--steps), auto) 14svh;
+    column-gap: 3rem;
+  }
+  .js .step {
+    display: contents;
+  }
+  .js .step + .step {
+    border-top: 0;
+  }
+  .js .step__text {
+    grid-column: 1;
+    display: flex;
+    min-height: 58svh;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-block: 3rem;
+  }
+  .js .step__panel {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    position: sticky;
+    top: calc((100svh - var(--stage-h)) / 2);
+    align-self: start;
+    justify-self: end;
+    /* The art is exactly 4:5 at any window height: the panel is as wide as the art is tall,
+       less the progress row, so nothing in the scene is ever cropped. */
+    width: min(100%, calc((var(--stage-h) - 3.25rem) * 0.8));
+    height: var(--stage-h);
+    z-index: 1;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0s linear var(--mw-motion-duration-slow);
+  }
+  .js .step__panel[data-active] {
+    z-index: 2;
+    opacity: 1;
+    transition: opacity var(--mw-motion-duration-slow) var(--mw-motion-easing-standard);
+  }
+  .js .panel__art {
+    flex: 1 1 auto;
+    min-height: 0;
+    aspect-ratio: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .step__panel,
+  .js .step__panel[data-active] {
+    transition: none;
+  }
+}
+
+/* ---- Recap ----------------------------------------------------------------- */
+.recap-row {
+  display: grid;
+  gap: 0.75rem;
+  border-top: 1px solid color-mix(in srgb, var(--mw-color-core-white) 20%, transparent);
+  padding-block: 2rem;
+}
+.recap-figure {
+  @apply font-display;
+  font-size: clamp(4rem, 14vw, 7rem);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+.recap-figure > span {
+  margin-left: 0.04em;
+  font-size: 0.3em;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.recap-line {
+  max-width: 24rem;
+  text-wrap: balance;
+  font-size: var(--text-body-lg);
+  line-height: 1.75rem;
+  color: var(--mw-color-core-cream);
+}
+@media (min-width: 40rem) {
+  .recap-row {
+    grid-template-columns: minmax(0, 21rem) minmax(0, 1fr);
+    align-items: center;
+    gap: 2rem;
+  }
+}
+@media (min-width: 64rem) {
+  .recap-figure {
+    font-size: 8.5rem;
+  }
+}
+
+/* ---- Contact --------------------------------------------------------------- */
+.badge {
+  display: block;
+  width: 3.5rem;
+  flex: none;
+  color: var(--mw-color-core-green);
+}
+.contact-card {
+  border-radius: var(--mw-radius-lg);
+  background-color: var(--mw-color-core-white);
+  box-shadow: var(--mw-shadow-md);
+  padding: 1.5rem;
+}
+@media (min-width: 40rem) {
+  .contact-card {
+    padding: 2rem;
+  }
+}
+.field-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: var(--text-label);
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: var(--mw-color-role-text-primary);
+}
+/* A5 asks for a border.default hairline; WCAG 1.4.11 needs 3:1 on a field's edge, so slate-500. */
+.field {
+  display: block;
+  width: 100%;
+  min-height: 3rem;
+  border: 1px solid var(--mw-color-ramp-slate-500);
+  border-radius: var(--mw-radius-sm);
+  background-color: var(--mw-color-core-white);
+  padding: 0.75rem 1rem;
+  font-size: var(--text-body);
+  line-height: 1.5rem;
+  color: var(--mw-color-role-text-primary);
+  transition:
+    border-color var(--mw-motion-duration-base) var(--mw-motion-easing-standard),
+    box-shadow var(--mw-motion-duration-base) var(--mw-motion-easing-standard);
+}
+.field:hover {
+  border-color: var(--mw-color-ramp-slate-700);
+}
+.field:focus-visible {
+  border-color: var(--mw-color-core-green);
+  box-shadow: inset 0 0 0 1px var(--mw-color-core-green);
+}
+.roof-pattern {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 9rem;
+  background-color: var(--mw-color-role-bg-page);
+  /* Mist Cream with 5 percent Green mixed in: 1.08 to 1 against the ground (M2). */
+  color: color-mix(in srgb, var(--mw-color-core-green) 5%, var(--mw-color-core-cream));
+}

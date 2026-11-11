@@ -1,0 +1,70 @@
+---
+import { SITE_DESCRIPTION } from '../config';
+import { roofStack } from '../art/roof';
+import Icon from './Icon.astro';
+
+// M3: large roof bands at the logo's slope, bleeding off the edges. Layers run outermost first:
+// a dark plane, one thin gold band (under a tenth of the motif), a mid plane.
+const wide = roofStack(1190, 40, [
+  { thickness: 170, className: 'fill-green-900' },
+  { thickness: 28, className: 'fill-accent' },
+  { thickness: 150, className: 'fill-green-700' },
+]);
+const narrow = roofStack(590, 100, [
+  { thickness: 80, className: 'fill-green-900' },
+  { thickness: 16, className: 'fill-accent' },
+  { thickness: 70, className: 'fill-green-700' },
+]);
+---
+
+<section
+  class="hero on-inverse relative isolate overflow-hidden bg-brand text-white"
+  aria-labelledby="hero-title"
+>
+  <svg
+    class="hero__art hero__art--wide"
+    viewBox="0 0 1440 900"
+    preserveAspectRatio="xMaxYMax slice"
+    aria-hidden="true"
+    focusable="false"
+  >
+    {wide.map((b) => <path d={b.d} class={b.className} />)}
+  </svg>
+  <svg
+    class="hero__art hero__art--narrow"
+    viewBox="0 0 768 600"
+    preserveAspectRatio="xMaxYMax slice"
+    aria-hidden="true"
+    focusable="false"
+  >
+    {narrow.map((b) => <path d={b.d} class={b.className} />)}
+  </svg>
+
+  <div class="hero__inner mx-auto flex max-w-page flex-col px-4 sm:px-6 lg:px-8">
+    <div class="hero__copy">
+      <p class="hero__purpose">{SITE_DESCRIPTION}</p>
+      <!-- F6: two beats, white then gold, kept together as one unit. -->
+      <h1 id="hero-title" class="hero__title font-display text-white">
+        <span class="block">Managed<br />Properties.</span>
+        <span class="block text-accent">Better<br />Living.</span>
+      </h1>
+      <!-- M4: the one gold rule in this view. -->
+      <div class="mt-6 h-1 w-24 bg-accent sm:mt-8" aria-hidden="true"></div>
+      <a href="#story" class="btn btn-light mt-6 sm:mt-8">
+        See how it works
+        <Icon name="chevron-down" class="btn__icon btn__icon--down size-5" />
+      </a>
+    </div>
+
+    <!-- The proof line (F1), set as a key figure on a cream card that overlaps the bands. -->
+    <p class="hero-card">
+      <span class="hero-card__coin" aria-hidden="true">
+        <Icon family="pictogram" name="rental-income" class="size-full" />
+      </span>
+      <span class="hero-card__lead">Rent paid to you on the</span>
+      <span class="hero-card__figure">1<span>st</span></span>
+      <span class="sr-only">,</span>
+      <span class="hero-card__tail">every month.</span>
+    </p>
+  </div>
+</section>

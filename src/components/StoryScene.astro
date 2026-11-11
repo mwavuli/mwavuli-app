@@ -1,0 +1,112 @@
+---
+import { iconAt } from '../art/icons';
+import { house, roofLine, roofStack, windowGrid, type HouseSpec } from '../art/roof';
+
+interface Props {
+  /** Which of the four moments: 1 building, 2 signing, 3 rent, 4 leaving. */
+  scene: 1 | 2 | 3 | 4;
+}
+
+const { scene } = Astro.props;
+
+// The stage is the same in all four panels: a cream house at the logo's slope (M1), a gold roof
+// line over it (M3) and the mark's window of four equal squares in the attic. Only the planes
+// behind it and what is on its front change, so the picture stays while the words move.
+const home: HouseSpec = { cx: 300, apexY: 132, eavesY: 362, bottomY: 1600 };
+
+// The tile that sits on the front of the house: a square with a 20 percent radius, its icon at 96.
+const tile = { size: 144, radius: 28.8, icon: 96, pad: 24 };
+
+const planes = {
+  1: roofStack(300, -140, [
+    { thickness: 70, className: 'fill-green-900' },
+    { thickness: 70, className: 'fill-green-700' },
+  ]),
+  2: roofStack(500, -50, [
+    { thickness: 70, className: 'fill-green-900' },
+    { thickness: 70, className: 'fill-green-700' },
+  ]),
+  3: roofStack(100, -50, [
+    { thickness: 70, className: 'fill-green-900' },
+    { thickness: 70, className: 'fill-green-700' },
+  ]),
+  4: roofStack(300, -80, [
+    { thickness: 90, className: 'fill-green-900' },
+    { thickness: 50, className: 'fill-green-700' },
+  ]),
+}[scene];
+---
+
+<svg
+  viewBox="0 0 600 750"
+  preserveAspectRatio="xMidYMid slice"
+  aria-hidden="true"
+  focusable="false"
+>
+  <rect width="600" height="750" class="fill-brand"></rect>
+  {planes.map((p) => <path d={p.d} class={p.className} />)}
+  <path d={house(home)} class="fill-cream"></path>
+  <path d={roofLine(home, 16, 26, 22)} class="fill-accent"></path>
+  <path d={windowGrid({ cx: 300, top: 212, size: 46 })} class="fill-brand"></path>
+
+  {
+    scene === 1 && (
+      <Fragment>
+        <Fragment set:html={iconAt('line', 'leases', { x: 190, y: 380, width: 220, className: 'text-brand' })} />
+        <rect x="352" y="500" width={tile.size} height={tile.size} rx={tile.radius} class="fill-brand"></rect>
+        <Fragment set:html={iconAt('line', 'check', { x: 352 + tile.pad, y: 500 + tile.pad, width: tile.icon, className: 'text-white' })} />
+      </Fragment>
+    )
+  }
+  {
+    scene === 2 && (
+      <Fragment set:html={iconAt('pictogram', 'tenant-management', { x: 172, y: 396, width: 256, className: 'text-brand' })} />
+    )
+  }
+  {
+    scene === 3 && (
+      <Fragment>
+        <Fragment set:html={iconAt('pictogram', 'rental-income', { x: 120, y: 392, width: 256, className: 'text-brand' })} />
+        <rect x="352" y="500" width={tile.size} height={tile.size} rx={tile.radius} class="fill-brand"></rect>
+        <text
+          x="424"
+          y="598"
+          text-anchor="middle"
+          class="fill-white font-display"
+          font-size="72"
+          font-weight="800"
+          letter-spacing="-2"
+        >
+          1<tspan font-size="36" font-weight="700" letter-spacing="0">st</tspan>
+        </text>
+      </Fragment>
+    )
+  }
+  {
+    scene === 4 && (
+      <Fragment>
+        <text
+          x="116"
+          y="560"
+          class="fill-brand font-display"
+          font-size="200"
+          font-weight="800"
+          letter-spacing="-6"
+        >
+          30
+        </text>
+        <text
+          x="122"
+          y="620"
+          class="fill-brand font-display"
+          font-size="46"
+          font-weight="700"
+        >
+          days
+        </text>
+        <rect x="380" y="500" width={tile.size} height={tile.size} rx={tile.radius} class="fill-brand"></rect>
+        <Fragment set:html={iconAt('line', 'arrow-right', { x: 380 + tile.pad, y: 500 + tile.pad, width: tile.icon, className: 'text-white' })} />
+      </Fragment>
+    )
+  }
+</svg>

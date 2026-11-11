@@ -1,0 +1,20 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { iconMarkup, type IconFamily } from '../art/icons';
+
+interface Props extends HTMLAttributes<'span'> {
+  /** File name in brand/icons, without the extension (brand I6). */
+  name: string;
+  family?: IconFamily;
+}
+
+const { name, family = 'line', class: className, ...attrs } = Astro.props;
+---
+
+<!-- Decorative: the words beside an icon carry the meaning (brand I10). Size it with a class. -->
+<span
+  {...attrs}
+  class:list={['icon inline-flex shrink-0 [&>svg]:size-full', className]}
+  aria-hidden="true"
+  set:html={iconMarkup(family, name)}
+/>

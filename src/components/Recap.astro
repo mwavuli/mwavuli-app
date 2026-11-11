@@ -1,0 +1,50 @@
+---
+import { FIGURES } from '../data/story';
+import { roofStack } from '../art/roof';
+
+// M3: roof bands cropped by the section's edge, tone on tone. No gold in this band: the one gold
+// rule of the view is not needed, the figures carry it.
+const bands = roofStack(1210, -70, [
+  { thickness: 150, className: 'fill-green-700' },
+  { thickness: 60, className: 'fill-green-900' },
+]);
+---
+
+<section
+  class="on-inverse relative isolate overflow-hidden bg-brand py-16 text-white lg:py-24"
+  aria-labelledby="recap-title"
+>
+  <svg
+    class="pointer-events-none absolute right-0 top-0 -z-10 h-[26rem] w-auto sm:inset-y-0 sm:h-full"
+    viewBox="0 0 1440 640"
+    preserveAspectRatio="xMaxYMin slice"
+    aria-hidden="true"
+    focusable="false"
+  >
+    {bands.map((b) => <path d={b.d} class={b.className} />)}
+  </svg>
+
+  <div class="mx-auto grid max-w-page gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:gap-x-8 lg:px-8">
+    <header class="lg:col-span-4">
+      <p class="font-display text-overline uppercase text-green-100">In three lines</p>
+      <h2 id="recap-title" class="mt-3 text-h1 text-white lg:text-display">
+        Three things to remember.
+      </h2>
+      <!-- M4: the one gold rule in this view. -->
+      <div class="mt-6 h-1 w-16 bg-accent" aria-hidden="true"></div>
+    </header>
+
+    <ol class="lg:col-span-8 lg:col-start-5">
+      {
+        FIGURES.map((f) => (
+          <li class="recap-row">
+            <p class="recap-figure">
+              {f.value}<span>{f.unit}</span>
+            </p>
+            <p class="recap-line">{f.line}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

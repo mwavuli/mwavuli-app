@@ -1,28 +1,51 @@
 ---
 import { SITE_NAME } from '../config';
 import Lockup from './Lockup.astro';
+
+interface Props {
+  /** Float over a Green hero: reversed lockup, no bar, text-only links (brand A6, L3). */
+  overlay?: boolean;
+}
+
+const { overlay = false } = Astro.props;
 ---
 
-<header class="border-b border-line bg-page">
-  <div class="mx-auto flex max-w-page items-center justify-between gap-4 px-4 py-4 sm:px-6">
-    <a href="/" class="flex shrink-0 items-center" aria-label={`${SITE_NAME}: home`}>
-      <Lockup class="h-8" aria-hidden="true" />
+<header
+  class:list={[
+    overlay ? 'on-inverse absolute inset-x-0 top-0 z-30 text-white' : 'border-b border-line bg-page',
+  ]}
+>
+  <div
+    class="mx-auto flex max-w-page items-center justify-between gap-4 px-4 py-6 sm:px-6 lg:px-8"
+  >
+    <!-- The lockup is 195 px wide (h-12), above the 180 px minimum (L5), with 24 px of clear
+         space around it (L4). -->
+    <a
+      href="/"
+      class="flex shrink-0 items-center rounded-md"
+      aria-label={`${SITE_NAME}: home`}
+    >
+      <Lockup reversed={overlay} class="h-12" aria-hidden="true" />
     </a>
     <nav aria-label="Main">
       <ul class="flex items-center gap-2 sm:gap-4">
+        {
+          overlay ? (
+            <li class="hidden sm:block">
+              <a href="#story" class="nav-link nav-link--light">
+                How it works
+              </a>
+            </li>
+          ) : (
+            <li class="hidden sm:block">
+              <a href="/legal/privacy/" class="nav-link">
+                Privacy
+              </a>
+            </li>
+          )
+        }
         <li>
-          <a
-            href="/legal/privacy/"
-            class="inline-flex min-h-11 items-center px-3 font-display text-label font-semibold text-ink hover:text-brand"
-          >
-            Privacy
-          </a>
-        </li>
-        <li>
-          <a
-            href="/#contact"
-            class="inline-flex min-h-11 items-center rounded-full bg-brand px-5 font-display text-label font-semibold text-white hover:bg-brand-deep"
-          >
+          <a href="/#contact" class:list={['btn', overlay ? 'btn-outline-light' : 'btn-primary']}>
             Contact
           </a>
         </li>
