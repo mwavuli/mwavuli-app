@@ -24,10 +24,9 @@ The drafting notes at the end are not part of the schedule and are removed befor
 - **1.8** The "covered month" of a unit is a month whose rent the tenant has not paid by its due date, after we
   have paid you the net rent for that month on the payout date, as set out in S3.
 - **1.9** "Arrears" is rent that a tenant owes and has not paid.
-- **1.10** The "payout account" is the account in clause 10 of the agreement.
-- **1.11** A "quote" is the price for a job, shown to you in writing, with our coordination fee on it.
-- **1.12** "YES" is your reply by SMS or WhatsApp, or on a recorded call that we confirm by text.
-- **1.13** The "end date" is the day the agreement ends.
+- **1.10** A "quote" is the price for a job, shown to you in writing, with our coordination fee on it.
+- **1.11** "YES" is your reply by SMS or WhatsApp, or on a recorded call that we confirm by text.
+- **1.12** The "end date" is the day the agreement ends.
 
 ### S2. How we pay you
 
@@ -73,8 +72,6 @@ The drafting notes at the end are not part of the schedule and are removed befor
 - **5.3** Rent paid ahead for months that have not started is held in a separate account, like deposits. We pay
   it out month by month on the payout date, minus our fee. If a tenant leaves early, the unused months go back
   to the tenant under the tenancy form, with no fee on them.
-- **5.4** We pay your rent from the payout account, which we keep for rent payouts and use for nothing else. We
-  take on a building only when the payout account can cover its payouts.
 
 ### S6. Repairs, utilities and garbage
 
@@ -146,7 +143,7 @@ The drafting notes at the end are not part of the schedule and are removed befor
   units.
 - **12.2** Every unit we take on has the same terms, whatever its rent. A shop or an office gets the same terms
   as a room.
-- **12.3** The figures are in clause 21 of the agreement.
+- **12.3** The figures are in clause 20 of the agreement.
 
 ## Drafting notes
 
@@ -158,7 +155,7 @@ Not part of the schedule. Remove before use.
 | S2     | BM4, P7            | Fee base; pass-through costs; no other fees                                          |
 | S3     | BM1, BM5, BM20     | Cap per unit and its reset; assignment; the due-date trigger; timing of later months |
 | S4     | BM5                | Eviction steps; costs; who may act                                                   |
-| S5     | BM6, P13, BM17     | Held in trust; refunds; account structure                                            |
+| S5     | BM6, P13           | Held in trust; refunds                                                               |
 | S6     | BM2, P6            | Agent, not builder; re-billing utilities; consent                                    |
 | S7     | BM7, P4, P9        | Proof by kind of land; "unsafe"; declining a building                                |
 | S8     | P5                 | Landlord duties and their remedies; align with BM8                                   |

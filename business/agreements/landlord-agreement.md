@@ -83,12 +83,7 @@ statement. A job never takes more than one payout: for a bigger job, you pay the
 
 For example: a room rents for UGX 400,000. Our 15% is UGX 60,000, so you get UGX 340,000 on the 1st.
 
-### 10. The account your rent is paid from
-
-We pay your rent from an account we keep for rent payouts and use for nothing else. We take on a building only
-when that account can cover its payouts, so the promise to pay you on the 1st can be kept.
-
-### 11. Repairs and building work
+### 10. Repairs and building work
 
 We find a trusted contractor and bring you the price. You pay the contractor's price plus our coordination fee
 of 10%, shown on the quote. Above UGX 200,000 on the quote, we wait for your YES before work starts. You say YES
@@ -99,7 +94,7 @@ cost, with no markup.
 For example: a UGX 100,000 tap repair plus our 10% is UGX 110,000, so we just fix it and list it on your
 statement. A roof repair at UGX 660,000 (UGX 600,000 plus our UGX 60,000) needs your YES first.
 
-### 12. When a tenant still has not paid
+### 11. When a tenant still has not paid
 
 After the month we covered, we do the chasing: we remind, call and visit, then send a written notice. If it must
 go to court, we ask you first and you say YES. We never lock a tenant out, and our time costs you nothing extra.
@@ -111,7 +106,7 @@ For example: a room rents for UGX 400,000 and the tenant misses March. We pay yo
 nothing for that room on 1 Apr. If the tenant then pays UGX 400,000, it repays March to us, so April is still
 owed. When April is paid, we send you UGX 340,000 of it.
 
-### 13. Deposits
+### 12. Deposits
 
 A new tenant's deposit is paid to us and kept in a separate account. We use it only for what the tenancy allows
 (unpaid rent, damage, legal costs), and the rest goes back to the tenant. For tenants already in the building,
@@ -121,18 +116,18 @@ back.
 For example: a new tenant pays a UGX 400,000 deposit to us. At move-out UGX 50,000 is kept for a broken door and
 UGX 350,000 goes back to the tenant.
 
-### 14. Prepaid rent
+### 13. Prepaid rent
 
 Rent a tenant pays ahead is held in a separate account, like deposits, and paid out month by month on the 1st,
 minus 15%. Months that have not started stay there. If a tenant leaves early, unused months go back to the
 tenant under the tenancy form, with no fee on them.
 
-### 15. VAT on commercial rent
+### 14. VAT on commercial rent
 
 VAT a tenant pays on rent is not part of the rent for the 15%. We pass it to you in the same payment and show it
 on the statement. Filing it is your job.
 
-### 16. Your duties
+### 15. Your duties
 
 - Tell tenants to pay only us, and pass on any rent paid to you the same day.
 - Make no side deals on rent or tenants.
@@ -141,7 +136,7 @@ on the statement. Filing it is your job.
 - Your taxes and rates stay yours.
 - Tell us the truth about ownership, debts and disputes.
 
-### 17. Leaving
+### 16. Leaving
 
 You can leave any time with 30 days' written notice, and so can we. If we have not paid you by the 3rd, you can
 leave straight away, with no fee. We can end the agreement straight away if you collect rent from tenants
@@ -153,21 +148,21 @@ you approved and any covered month a tenant still owes us. Tenant files go to yo
 after any rent the tenant still owes is taken from it, and tenants are told. Each tenant gets a note, "rent paid
 up to [month]", and you honor it.
 
-### 18. Privacy
+### 17. Privacy
 
 Landlord and tenant details are used only to manage the building and are not sold or shared otherwise.
 
-### 19. If we disagree
+### 18. If we disagree
 
 We talk first, then a mediator we both accept, and only then the courts of Uganda.
 
-### 20. Languages and signing
+### 19. Languages and signing
 
 The agreement comes in English and Luganda, and you sign both. One of our officers reads the main points to you
 out loud, in your language, and answers your questions. You sign, or give your thumbprint, in front of a witness
 you choose. A short signed note says who explained it to you and that you understood. You keep a copy.
 
-### 21. The figures
+### 20. The figures
 
 | What                        | Figure                                            |
 |-----------------------------|---------------------------------------------------|
@@ -249,18 +244,17 @@ Not part of the agreement. Remove before use.
 | 7                   | BM1, BM20    | Insurance or suretyship; assignment of the covered month; due dates  |
 | 8                   | P1           | Payment-service and anti-money-laundering duties                     |
 | 9                   | BM4          | VAT and withholding tax on the fee; whether 15% is final             |
-| 10                  | BM17         | Account structure; client money kept apart from Mwavuli's own funds  |
-| 11                  | BM2, P6      | Agent, not builder; fee disclosure; SMS and WhatsApp as consent      |
-| 12                  | BM5          | Eviction steps; costs; the oldest-month-first wording                |
-| 13                  | BM6          | Deposit amount, holding and return; the register                     |
-| 14                  | P13          | Held in trust; refund of unused months                               |
-| 15                  | P10          | VAT treatment; who issues tax invoices                               |
-| 16                  | P5           | Landlord's tax duties; align with BM8 (see the list below)           |
-| 17                  | BM8, P8, P13 | Notice mechanics; the late-payment test; exit mechanics              |
-| 18                  | P11          | Data protection duties                                               |
-| 19                  | P12          | Governing law; the mediation step; the courts                        |
-| 20                  | BM11         | Which version governs; the explanation note; witnesses               |
-| 21                  | Numbers      | Starting figures, to test with the first landlords                   |
+| 10                  | BM2, P6      | Agent, not builder; fee disclosure; SMS and WhatsApp as consent      |
+| 11                  | BM5          | Eviction steps; costs; the oldest-month-first wording                |
+| 12                  | BM6          | Deposit amount, holding and return; the register                     |
+| 13                  | P13          | Held in trust; refund of unused months                               |
+| 14                  | P10          | VAT treatment; who issues tax invoices                               |
+| 15                  | P5           | Landlord's tax duties; align with BM8 (see the list below)           |
+| 16                  | BM8, P8, P13 | Notice mechanics; the late-payment test; exit mechanics              |
+| 17                  | P11          | Data protection duties                                               |
+| 18                  | P12          | Governing law; the mediation step; the courts                        |
+| 19                  | BM11         | Which version governs; the explanation note; witnesses               |
+| 20                  | Numbers      | Starting figures, to test with the first landlords                   |
 | Signatures          | BM11         | Who may witness; what Mwavuli records                                |
 | Annex 1             | P2, P3       | Who sets each unit's rent (not decided)                              |
 | Annex 2             | BM7          | What counts as proof for each kind of land                           |

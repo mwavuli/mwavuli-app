@@ -70,14 +70,14 @@ settled, we chase, and if it goes to court you say YES first.
 
 ## Documents this model feeds
 
-| Document                  | For      | Takes from                                 |
-|---------------------------|----------|--------------------------------------------|
-| Landlord agreement        | Landlord | BM1, BM2, BM4 to BM12, BM17, BM20, Numbers |
-| Schedule to the agreement | Landlord | The same terms, with the words defined     |
-| Tenancy form              | Tenant   | P2, P3, P7, P13, BM5, BM6, BM20            |
-| Inspection report         | Landlord | P4, P9                                     |
-| Explanation note          | Landlord | BM11                                       |
-| Landlord pitch            | Landlord | BM18 and the plain statements              |
+| Document                  | For      | Takes from                             |
+|---------------------------|----------|----------------------------------------|
+| Landlord agreement        | Landlord | BM1, BM2, BM4 to BM12, BM20, Numbers   |
+| Schedule to the agreement | Landlord | The same terms, with the words defined |
+| Tenancy form              | Tenant   | P2, P3, P7, P13, BM5, BM6, BM20        |
+| Inspection report         | Landlord | P4, P9                                 |
+| Explanation note          | Landlord | BM11                                   |
+| Landlord pitch            | Landlord | BM18 and the plain statements          |
 
 BM3 sets how every document is written.
 
