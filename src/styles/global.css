@@ -159,3 +159,101 @@
   --tw-prose-th-borders: var(--mw-color-role-border-strong);
   --tw-prose-td-borders: var(--mw-color-role-border-default);
 }
+
+/* ---------------------------------------------------------------------------
+   SNT-38 proof band. Appended below the existing blocks; nothing above is changed.
+   Every value is a --mw-* token, a theme value or a mix of them.
+   --------------------------------------------------------------------------- */
+
+/* A white surface inside a Green band (the services panel, the form card): the focus ring
+   goes back to Green, because Gold on white is 2.41 to 1 (brand C3, S8). */
+.on-surface :focus-visible {
+  outline-color: var(--mw-color-role-focus-ring);
+}
+
+/* A hairline on Green: white mixed into Green. Reversed surfaces take a lighter step,
+   not a shadow (brand S4). */
+.rule-inverse {
+  border-color: color-mix(in srgb, var(--mw-color-core-white) 20%, var(--mw-color-core-green));
+}
+
+/* The tone of the roof pattern on cream (brand M2): Mist Cream with 5 percent Green. */
+.roof-tone {
+  color: color-mix(in srgb, var(--mw-color-core-green) 5%, var(--mw-color-core-cream));
+}
+
+/* A disclosure needs no native marker: the chevron is the cue. */
+summary {
+  list-style: none;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* A card that rises over the band above it: 112 px, two steps of the spacing scale (S1). */
+.overlap-tray {
+  margin-top: calc((var(--mw-space-16) + var(--mw-space-12)) * -1);
+}
+
+/* A panel that runs off the right edge of the page, past the 1200 px container (brand S2). */
+@utility bleed-right {
+  margin-right: calc(
+    -1 * max(var(--mw-space-8), (100vw - var(--mw-size-container-max)) / 2 + var(--mw-space-8))
+  );
+}
+
+/* Hero headline: the display scale, enlarged for the first screen and reduced on phones. */
+@utility text-hero {
+  font-size: clamp(2.5rem, 0.7rem + 5.2vw, 4.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+}
+
+/* A pull statement: one step down from the hero. */
+@utility text-statement {
+  font-size: clamp(2.25rem, 1rem + 3.4vw, 4rem);
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+
+/* A proof numeral: display type with tabular figures (brand T9). */
+@utility text-figure {
+  font-size: clamp(2.5rem, 1.6rem + 2.4vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* The lead numeral: up to 160 px. */
+@utility text-giant {
+  font-size: clamp(5.5rem, 2rem + 10vw, 10rem);
+  line-height: 0.86;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* A feature numeral: one step down from the lead numeral. */
+@utility text-feature {
+  font-size: clamp(4rem, 2rem + 6vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* Colour changes ease over the base duration. The focus ring is left out of the list so it
+   appears at once and never fades from the wrong colour. Movement is not eased (brand S9). */
+.motion-colors {
+  transition-property: color, background-color, border-color;
+  transition-duration: var(--mw-motion-duration-base);
+  transition-timing-function: var(--mw-motion-easing-standard);
+}
+@media (prefers-reduced-motion: reduce) {
+  .motion-colors {
+    transition: none;
+  }
+}

@@ -1,0 +1,35 @@
+---
+/**
+ * The brand button (brand A5, S3, S8): 48 px high, a 12 px radius, Montserrat 600.
+ * `solid` is the Green button for light grounds; `inverse` is its reversal for Green grounds.
+ */
+interface Props {
+  href?: string;
+  variant?: 'solid' | 'inverse';
+  /** Used when there is no `href`. */
+  type?: 'button' | 'submit';
+  class?: string;
+}
+
+const { href, variant = 'solid', type = 'button', class: className } = Astro.props;
+
+const base =
+  'motion-colors inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-6 font-display text-body font-semibold';
+const variants = {
+  solid: 'bg-brand text-white hover:bg-brand-deep active:bg-green-900',
+  inverse: 'bg-white text-brand hover:bg-green-100 active:bg-green-300',
+};
+const classes = [base, variants[variant], className];
+---
+
+{
+  href ? (
+    <a href={href} class:list={classes}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class:list={classes}>
+      <slot />
+    </button>
+  )
+}

@@ -1,0 +1,31 @@
+---
+/**
+ * Roof bands for a cream ground (brand M3): flat, at the logo's slope, tone on tone in Green
+ * tints, cut off by the left and bottom edges of the band they sit in. Decorative, and kept
+ * clear of text.
+ */
+import { chevron } from '../geometry/roof';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const PEAK_X = 250;
+const bands = [
+  { points: chevron(PEAK_X, 90, 700, 80), tone: 'fill-green-100' },
+  { points: chevron(PEAK_X, 186, 700, 52), tone: 'fill-green-300' },
+  { points: chevron(PEAK_X, 254, 700, 34), tone: 'fill-green-100' },
+];
+---
+
+<svg
+  viewBox="0 0 700 320"
+  preserveAspectRatio="xMinYMax slice"
+  class={className}
+  aria-hidden="true"
+  focusable="false"
+>
+  {bands.map((band) => <polygon points={band.points} class={band.tone}></polygon>)}
+</svg>

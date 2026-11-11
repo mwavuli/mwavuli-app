@@ -1,28 +1,467 @@
 ---
-import { POSTAL_ADDRESS, SITE_NAME } from '../config';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import PhotoSlot from '../components/PhotoSlot.astro';
+import RoofArt from '../components/RoofArt.astro';
+import RoofCorner from '../components/RoofCorner.astro';
+import { EMAIL_PLACEHOLDER, PHONE_PLACEHOLDER, POSTAL_ADDRESS, SITE_NAME } from '../config';
+import { FIGURE_GROUPS, PROPERTY_TYPES, SERVICES } from '../data/home';
+import type { Figure } from '../data/home';
 import Layout from '../layouts/Layout.astro';
+
+const [feeGroup, ...ledgerGroups] = FIGURE_GROUPS;
+
+const serviceById = (id: string) => {
+  const found = SERVICES.find((service) => service.id === id);
+  if (!found) throw new Error(`Unknown service: ${id}`);
+  return found;
+};
+
+const motion = 'motion-colors';
+const overline = 'font-display text-overline uppercase';
+
+/** The slot scene drawn for each kind of building (BM9). */
+const slotScenes = { rooms: 'terrace', blocks: 'tower', shops: 'shopfront', offices: 'offices' } as const;
+
+/** The two repair examples from BM2, with their state chips (brand C6). */
+const repairs = [
+  {
+    title: 'A tap',
+    quote: 'UGX 110,000',
+    sum: 'Plumber UGX 100,000 plus our 10%, UGX 10,000.',
+    chip: 'Below UGX 200,000',
+    outcome: 'We fix it and list it on your statement.',
+    icon: 'check',
+    chipClass: 'bg-sage-100 text-brand',
+    pictogram: 'electrical-plumbing',
+    surface: 'bg-page',
+  },
+  {
+    title: 'A roof',
+    quote: 'UGX 660,000',
+    sum: 'Roof repair UGX 600,000 plus our 10%, UGX 60,000.',
+    chip: 'Above UGX 200,000',
+    outcome: 'We ask you first. You reply YES.',
+    icon: 'alerts',
+    chipClass: 'bg-gold-100 text-ink',
+    pictogram: 'construction-repairs',
+    surface: 'bg-green-50',
+  },
+];
+
+/** Keeps a currency code with its figure when a line wraps. */
+const nb = (text: string) => text.replaceAll('UGX ', 'UGX\u00a0');
+
+const darkBadge =
+  'flex size-16 shrink-0 items-center justify-center rounded-(--mw-radius-badge) bg-green-700 text-white';
+const lightBadge =
+  'flex size-14 shrink-0 items-center justify-center rounded-(--mw-radius-badge) bg-green-50 text-brand';
+const field =
+  'min-h-12 w-full rounded-sm border border-slate-500 bg-surface px-4 py-3 text-body text-ink';
 ---
 
+{/* Brand A6: a Green band with a two-beat headline and a gold rule. The figures tray rises over its lower edge. */}
 <Layout title="Home">
-  <!-- Brand A6: a green band with a two-beat headline and a gold rule. The photograph
-       waits on the open photography decision (D14). -->
-  <section class="on-inverse bg-brand text-white">
-    <div class="mx-auto max-w-page px-4 py-20 sm:px-6 sm:py-28">
-      <h1 class="font-display text-h1 text-white sm:text-display">
-        Managed Properties. <span class="text-accent">Better Living.</span>
+  <section class="on-inverse relative isolate overflow-hidden bg-brand text-white">
+    <RoofArt compact class="pointer-events-none absolute bottom-0 right-0 -z-10 h-64 w-full lg:hidden" />
+    <RoofArt class="pointer-events-none absolute inset-y-0 right-0 -z-10 hidden h-full w-[56%] lg:block" />
+    <div class="mx-auto max-w-page px-6 pb-64 pt-12 lg:px-8 lg:pb-40 lg:pt-12">
+      <p class={`${overline} text-cream`}>For landlords in Kampala</p>
+      <h1 class="mt-4 font-display text-hero text-white">
+        <span class="block">Managed Properties.</span>
+        <span class="block text-accent">Better Living.</span>
       </h1>
       <div class="mt-6 h-1 w-16 bg-accent" aria-hidden="true"></div>
-      <p class="mt-6 max-w-xl text-body-lg">Rent paid to you on the 1st, every month.</p>
+      <p class="mt-5 max-w-lg font-display text-h3 text-white">
+        Rent paid to you on the 1st, every month.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
+        <Button href="/#contact" variant="inverse">Talk to us</Button>
+        <a
+          href="/#figures"
+          class="group inline-flex min-h-12 items-center gap-2 rounded-sm font-display font-semibold text-white underline-offset-4 hover:underline"
+        >
+          See the figures
+          <Icon
+            name="chevron-down"
+            class="size-5 motion-safe:transition-transform motion-safe:duration-(--mw-motion-duration-base) group-hover:translate-y-1"
+          />
+        </a>
+      </div>
     </div>
   </section>
 
-  <section id="contact" class="bg-surface">
-    <div class="mx-auto max-w-page px-4 py-16 sm:px-6">
-      <h2 class="text-h2">Contact</h2>
-      <p class="mt-4 text-body-lg">
-        {SITE_NAME}<br />
-        {POSTAL_ADDRESS}
+  <section id="figures" aria-labelledby="figures-title" class="relative flow-root bg-page pb-16 lg:pb-24">
+    <div class="mx-auto max-w-page px-6 lg:px-8">
+      <div class="overlap-tray relative z-10 rounded-xl bg-surface p-6 shadow-md sm:p-8 lg:p-10">
+        <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p class={`${overline} text-brand`}>The figures</p>
+            <h2 id="figures-title" class="mt-3 text-h2 text-balance">
+              <span class="block sm:inline">Five Numbers.</span>{' '}
+              <span class="block text-gold-700 sm:inline">All in Your Agreement.</span>
+            </h2>
+          </div>
+          <p class="text-body-lg text-ink text-balance lg:text-right">No sign-up fee. No letting fee.</p>
+        </div>
+
+        <div class="mt-8 grid gap-10 lg:mt-10 lg:grid-cols-12 lg:gap-12">
+          <div class="lg:col-span-5">
+            <h3 class={`${overline} text-brand`}>{feeGroup.label}</h3>
+            <dl class="mt-4">
+              {
+                feeGroup.figures.map((figure: Figure) => (
+                  <div>
+                    <dt class="font-display text-giant text-heading">
+                      {figure.value.slice(0, -1)}<span class="text-gold-700">%</span>
+                    </dt>
+                    <dd class="mt-6 max-w-xs text-body-lg text-ink">{figure.caption}</dd>
+                  </div>
+                ))
+              }
+            </dl>
+          </div>
+
+          <div class="grid content-start gap-8 lg:col-span-7 lg:border-l lg:border-line lg:pl-12">
+            {
+              ledgerGroups.map((group, index) => (
+                <div class:list={[index > 0 && 'border-t border-line pt-8']}>
+                  <h3 class={`${overline} text-brand`}>{group.label}</h3>
+                  <dl class="mt-4 grid gap-8 sm:grid-cols-[5fr_7fr]">
+                    {group.figures.map((figure: Figure) => (
+                      <div>
+                        <dt class="font-display text-figure text-heading">
+                          {figure.prefix && <span class="mr-2 text-h4">{figure.prefix}</span>}
+                          {figure.value.endsWith('%') ? (
+                            <>
+                              {figure.value.slice(0, -1)}
+                              <span class="text-gold-700">%</span>
+                            </>
+                          ) : (
+                            figure.value
+                          )}
+                          {figure.suffix && <span class="ml-2 text-h4">{figure.suffix}</span>}
+                        </dt>
+                        <dd class="mt-3 text-body text-ink">{figure.caption}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <nav aria-label="Read how each term works" class="mt-8 grid gap-x-8 sm:grid-cols-3">
+          {
+            FIGURE_GROUPS.map((group) => (
+              <a
+                href={group.link.href}
+                class={`group/jump flex min-h-12 items-center justify-between gap-4 border-t border-line py-3 font-display font-semibold text-brand ${motion} hover:border-brand hover:text-brand-deep`}
+              >
+                {group.link.text}
+                <Icon
+                  name="arrow-right"
+                  class="size-6 motion-safe:transition-transform motion-safe:duration-(--mw-motion-duration-base) group-hover/jump:translate-x-1"
+                />
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <section id="rent" aria-labelledby="rent-title" class="on-inverse overflow-x-clip bg-brand text-white">
+    <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-20">
+      <div class="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-8">
+        <div class="lg:col-span-5">
+          <p class={`${overline} text-cream`}>Rent on the 1st</p>
+          <h2 id="rent-title" class="mt-4 text-h2 text-white lg:text-h1 text-balance">
+            <span class="block">One Payment.</span>
+            <span class="block text-accent">One Statement.</span>
+          </h2>
+          <p class="mt-6 text-body-lg text-white">
+            We pay you the rent on the 1st of every month, for every room with a tenant, minus our 15%.
+            If a tenant doesn't pay, we cover that first month and do the chasing, so you are not left
+            waiting.
+          </p>
+          <ul class="mt-8 grid gap-6">
+            {
+              ['rental-income', 'tenant-management'].map((id) => {
+                const service = serviceById(id);
+                return (
+                  <li class="flex items-center gap-4">
+                    <span class={darkBadge}>
+                      <Icon family="pictogram" name={service.id} class="size-10" />
+                    </span>
+                    <span>
+                      <span class="block font-display text-body font-semibold text-white">{service.name}</span>
+                      <span class="mt-1 block text-body-sm text-cream">{service.line}</span>
+                    </span>
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </div>
+
+        <div class="lg:col-span-6 lg:col-start-7 lg:bleed-right">
+          <PhotoSlot
+            id="rent"
+            tone="dark"
+            scene="elevation"
+            subject="a block of rooms you manage, in daylight"
+            class="aspect-[3/2] md:aspect-[2/1] lg:aspect-[5/2] lg:rounded-r-none lg:border-r-0"
+          />
+          <div
+            class="relative z-10 -mt-20 mx-2 rounded-xl bg-surface p-5 text-ink sm:mx-4 sm:p-6 lg:-ml-12 lg:mr-auto lg:max-w-[32rem]"
+          >
+            <p class={`${overline} text-brand`}>Example statement, 1st April</p>
+            <table class="mt-4 w-full text-body">
+              <caption class="sr-only">
+                An example statement for 1st April: 10 rooms at UGX 400,000, 9 with tenants.
+              </caption>
+              <thead>
+                <tr class="text-body-sm text-muted">
+                  <th scope="col" class="pb-2 text-left font-medium">Item</th>
+                  <th scope="col" class="pb-2 text-right font-medium">UGX</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-line">
+                <tr>
+                  <th scope="row" class="py-3 pr-4 text-left font-normal">Rent from 9 rooms with tenants</th>
+                  <td class="py-3 text-right tabular-nums">3,600,000</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="py-3 pr-4 text-left font-normal">Our 15%</th>
+                  <td class="py-3 text-right tabular-nums">−540,000</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="py-3 pr-4 text-left font-normal text-balance">
+                    Repair: tap, plumber UGX&nbsp;100,000 plus our&nbsp;10%
+                  </th>
+                  <td class="py-3 text-right tabular-nums">−110,000</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr class="border-t-2 border-brand">
+                  <th scope="row" class="pt-4 pr-4 text-left font-display text-h4 text-heading">
+                    Paid to you on the 1st
+                  </th>
+                  <td class="pt-4 text-right font-display text-h4 tabular-nums text-heading">2,950,000</td>
+                </tr>
+              </tfoot>
+            </table>
+            <p class="mt-4 text-body-sm text-muted">Illustration, not a quote.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="repairs" aria-labelledby="repairs-title" class="bg-surface">
+    <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-20">
+      <div class="grid gap-12 lg:grid-cols-12 lg:gap-8">
+        <div class="lg:order-2 lg:col-span-6 lg:pl-4">
+          <p class={`${overline} text-brand`}>Repairs</p>
+          <h2 id="repairs-title" class="mt-4 text-h2 lg:text-h1 text-balance">
+            <span class="block">We Find the Contractor.</span>
+            <span class="block text-gold-700">You See the Price.</span>
+          </h2>
+          <div class="mt-6 grid gap-4 text-body-lg text-ink">
+            <p>
+              When something needs fixing, we find a trusted contractor and bring you the price. You pay
+              the contractor's price plus our coordination fee of 10%, shown on the quote.
+            </p>
+            <p>Above UGX&nbsp;200,000 on the quote we wait for your YES before work starts.</p>
+          </div>
+          <div class="mt-8 flex items-center gap-4 border-t border-line pt-6">
+            <span class="flex gap-2">
+              {
+                ['utilities', 'garbage-management'].map((id) => (
+                  <span class={lightBadge}>
+                    <Icon family="pictogram" name={id} class="size-10" />
+                  </span>
+                ))
+              }
+            </span>
+            <p class="text-body text-ink">
+              Electricity, water and garbage bills are paid at cost, with no markup.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid content-center gap-4 lg:order-1 lg:col-span-6">
+          {
+            repairs.map((repair) => (
+              <article
+                class:list={[
+                  'grid items-center gap-6 rounded-xl p-6 sm:grid-cols-[auto_1fr]',
+                  repair.surface,
+                ]}
+              >
+                <Icon family="pictogram" name={repair.pictogram} class="size-24 text-brand" />
+                <div>
+                  <div class="flex flex-wrap items-baseline justify-between gap-x-4">
+                    <h3 class="font-display text-h3 text-heading">{repair.title}</h3>
+                    <p class="font-display text-h3 tabular-nums text-heading">{repair.quote}</p>
+                  </div>
+                  <p class="mt-1 text-body text-ink">{nb(repair.sum)}</p>
+                  <p class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+                    <span
+                      class:list={[
+                        'inline-flex items-center gap-2 rounded-full px-3 py-1 text-label',
+                        repair.chipClass,
+                      ]}
+                    >
+                      <Icon name={repair.icon} class="size-5" />
+                      {nb(repair.chip)}
+                    </span>
+                    <span class="text-body text-ink">{repair.outcome}</span>
+                  </p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="leaving" aria-labelledby="leaving-title" class="on-inverse bg-brand text-white">
+    <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-20">
+      <div class="grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-8">
+        <div class="lg:col-span-6">
+          <p class={`${overline} text-cream`}>Leaving</p>
+          <h2 id="leaving-title" class="mt-4 text-h2 text-white lg:text-h1 text-balance">
+            <span class="block">Leave Any Time.</span>
+            <span class="block text-accent">Be Paid Within 14 Days.</span>
+          </h2>
+        </div>
+        <div class="grid gap-4 text-body-lg text-white lg:col-span-5 lg:col-start-8">
+          <p>You can leave any time with 30 days' written notice, and so can we.</p>
+          <p>If we have not paid you by the 3rd, you can leave straight away, with no fee.</p>
+        </div>
+      </div>
+
+      <ol class="mt-10 grid gap-4 lg:grid-cols-[30fr_14fr]">
+        <li class="rounded-xl bg-surface p-6 text-ink lg:p-8">
+          <p class={`${overline} text-brand`}>Notice</p>
+          <p class="mt-6 font-display text-feature text-heading">
+            30<span class="ml-3 text-h3">days</span>
+          </p>
+          <div class="mt-6 flex items-end justify-between gap-6">
+            <p class="max-w-md text-body-lg">You give written notice. Then the agreement ends.</p>
+            <Icon name="arrow-right" class="size-12 text-brand" />
+          </div>
+        </li>
+        <li class="rounded-xl bg-green-100 p-6 text-ink lg:p-8">
+          <p class={`${overline} text-brand`}>Final payment</p>
+          <p class="mt-6 font-display text-feature text-heading">
+            14<span class="ml-3 text-h3">days</span>
+          </p>
+          <p class="mt-6 text-body-lg">Within 14 days of the end date, we send you a final statement and pay you.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="manage" aria-labelledby="manage-title" class="bg-sage-100">
+    <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-20">
+      <div class="grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-8">
+        <div class="lg:col-span-8">
+          <p class={`${overline} text-brand`}>Who we manage</p>
+          <h2 id="manage-title" class="mt-4 text-statement text-heading text-balance">Homes and Business Premises.</h2>
+        </div>
+        <div class="grid gap-3 text-body-lg text-ink lg:col-span-4">
+          <p>Kampala and its surroundings: rooms, flats, small blocks, shops and offices.</p>
+          <p class="font-display font-semibold text-heading">There is no minimum number of units.</p>
+        </div>
+      </div>
+
+      <ul class="mt-8 grid grid-cols-2 gap-4 lg:grid-cols-[2fr_1fr_1fr_2fr]">
+        {
+          PROPERTY_TYPES.map((type) => (
+            <li class="flex flex-col gap-3">
+              <PhotoSlot
+                id={`manage-${type.id}`}
+                tone="light"
+                scene={slotScenes[type.id]}
+                subject={type.label.toLowerCase()}
+                class="h-56 lg:h-60"
+              />
+              <p class="font-display text-h4 text-heading">{type.label}</p>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="mt-8 flex items-center gap-4 border-t border-green-300 pt-6 text-body-lg text-ink">
+        <span class={lightBadge}>
+          <Icon name="tenants" class="size-8" />
+        </span>
+        <span>
+          Renting from a landlord we manage? Pay your rent to us only, by mobile money or bank, never
+          cash to our staff.
+        </span>
       </p>
+    </div>
+  </section>
+
+  <section id="contact" aria-labelledby="contact-title" class="relative isolate overflow-hidden bg-page">
+    <RoofCorner class="pointer-events-none absolute bottom-0 left-0 -z-10 hidden h-64 w-[48%] lg:block" />
+    <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-20">
+      <div class="grid gap-12 lg:grid-cols-12 lg:gap-8">
+        <div class="lg:col-span-5">
+          <p class={`${overline} text-brand`}>Contact</p>
+          <h2 id="contact-title" class="mt-4 text-h2 lg:text-h1 text-balance">
+            <span class="block">Your Property.</span>
+            <span class="block text-gold-700">Our Responsibility.</span>
+          </h2>
+          <ul class="mt-8 grid gap-5 text-body-lg text-ink">
+            <li class="flex items-center gap-4">
+              <Icon family="pictogram" name="badge-location" class="size-12 text-brand" />
+              <address class="not-italic">{SITE_NAME}<br />{POSTAL_ADDRESS}</address>
+            </li>
+            <li class="flex items-center gap-4">
+              <Icon family="pictogram" name="badge-phone" class="size-12 text-brand" />
+              <span>{PHONE_PLACEHOLDER}</span>
+            </li>
+            <li class="flex items-center gap-4">
+              <span
+                class="flex size-12 shrink-0 items-center justify-center rounded-(--mw-radius-badge) bg-brand text-white"
+              >
+                <Icon name="mail" class="size-6" />
+              </span>
+              <span>{EMAIL_PLACEHOLDER}</span>
+            </li>
+          </ul>
+        </div>
+
+        <form
+          class="on-surface grid content-start gap-6 rounded-xl bg-surface p-6 shadow-md sm:p-8 lg:col-span-6 lg:col-start-7"
+          aria-labelledby="form-title"
+        >
+          <h3 id="form-title" class="text-h3">Tell us about your building</h3>
+          <div class="grid gap-2">
+            <label for="contact-name" class="text-label text-ink">Your name</label>
+            <input id="contact-name" name="name" type="text" autocomplete="name" class={field} />
+          </div>
+          <div class="grid gap-2">
+            <label for="contact-phone" class="text-label text-ink">Your phone number</label>
+            <input id="contact-phone" name="phone" type="tel" autocomplete="tel" class={field} />
+          </div>
+          <div class="grid gap-2">
+            <label for="contact-building" class="text-label text-ink">Where is your building?</label>
+            <textarea id="contact-building" name="building" rows="2" class={field}></textarea>
+          </div>
+          <div class="grid gap-3">
+            <Button type="button" class="w-full sm:w-fit">Send your details</Button>
+            <p class="text-body-sm text-muted">This form is a design only. It sends nothing yet.</p>
+          </div>
+        </form>
+      </div>
     </div>
   </section>
 </Layout>

@@ -1,0 +1,36 @@
+---
+/**
+ * An inline brand icon (brand I11): the supplied SVG, read with ?raw so `currentColor` takes the
+ * surrounding text colour. Decorative by default (brand I10): pair it with a visible label.
+ * The box is sized by the `class` (size-6, size-12, …); the glyph scales to fit it.
+ */
+interface Props {
+  name: string;
+  /** `line` for the interface set (brand I1), `pictogram` for the six service pictograms and badges. */
+  family?: 'line' | 'pictogram';
+  class?: string;
+}
+
+const { name, family = 'line', class: className } = Astro.props;
+
+const sources = {
+  line: import.meta.glob('../../brand/icons/line/*.svg', {
+    query: '?raw',
+    import: 'default',
+    eager: true,
+  }) as Record<string, string>,
+  pictogram: import.meta.glob('../../brand/icons/pictogram/*.svg', {
+    query: '?raw',
+    import: 'default',
+    eager: true,
+  }) as Record<string, string>,
+};
+
+const raw = sources[family][`../../brand/icons/${family}/${name}.svg`];
+if (!raw) throw new Error(`Unknown ${family} icon: ${name}`);
+
+// The files carry a fixed width and height; drop them so the box sets the size.
+const svg = raw.replace(/ width="[\d.]+" height="[\d.]+"/, ' aria-hidden="true" focusable="false"');
+---
+
+<span class:list={['inline-flex shrink-0 [&>svg]:size-full', className]} set:html={svg} />

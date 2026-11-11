@@ -11,3 +11,10 @@ export const SITE_DESCRIPTION = 'Professional property management for people and
 
 /** The company's postal address (business/model.md, "The company"). */
 export const POSTAL_ADDRESS = 'P.O. Box 170886, Kampala, Uganda';
+
+/** The caption on every photo slot until photography exists (brand decision D14). */
+export const PHOTO_CAPTION = 'Photograph to come (D14)';
+
+/** Contact details the owner has not supplied yet. Shown as labelled placeholders, never as values. */
+export const PHONE_PLACEHOLDER = 'Phone number to be added';
+export const EMAIL_PLACEHOLDER = 'Email address to be added';

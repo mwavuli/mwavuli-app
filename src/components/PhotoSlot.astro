@@ -1,0 +1,183 @@
+---
+/**
+ * A photo slot (open decision D14: no photography exists yet): an art-directed frame at the
+ * final ratio and crop, the S3 radius, layered flat tonal planes built from the roof form and
+ * the mark's window grid, and a caption on a solid Green chip (M6). Light grounds also get
+ * the M2 roof pattern; Green grounds get no pattern.
+ */
+import { PHOTO_CAPTION } from '../config';
+import { chevron, windowGrid } from '../geometry/roof';
+
+type Tone = 'a' | 'b' | 'c';
+type Shape =
+  | { kind: 'roof'; x: number; y: number; run: number; thickness: number; tone: Tone }
+  | { kind: 'rect'; x: number; y: number; width: number; height: number; tone: Tone }
+  | { kind: 'window'; x: number; y: number; size: number };
+
+interface SceneDefinition {
+  viewBox: string;
+  shapes: Shape[];
+}
+
+type SceneName = 'elevation' | 'terrace' | 'tower' | 'shopfront' | 'offices';
+
+/** The crops, one per kind of building. Each is drawn at the ratio of its slot. */
+const SCENES: Record<SceneName, SceneDefinition> = {
+  elevation: {
+    viewBox: '0 0 640 256',
+    shapes: [
+      { kind: 'rect', x: 0, y: 214, width: 640, height: 42, tone: 'b' },
+      { kind: 'roof', x: 500, y: 36, run: 300, thickness: 72, tone: 'a' },
+      { kind: 'roof', x: 150, y: 96, run: 300, thickness: 72, tone: 'b' },
+      { kind: 'window', x: 469, y: 122, size: 26 },
+    ],
+  },
+  terrace: {
+    viewBox: '0 0 400 320',
+    shapes: [
+      { kind: 'rect', x: 0, y: 268, width: 400, height: 52, tone: 'b' },
+      { kind: 'roof', x: 200, y: 40, run: 260, thickness: 84, tone: 'a' },
+      { kind: 'roof', x: 200, y: 144, run: 260, thickness: 34, tone: 'b' },
+      { kind: 'window', x: 164, y: 186, size: 30 },
+    ],
+  },
+  tower: {
+    viewBox: '0 0 200 320',
+    shapes: [
+      { kind: 'rect', x: 46, y: 96, width: 108, height: 190, tone: 'a' },
+      { kind: 'rect', x: 0, y: 286, width: 200, height: 34, tone: 'b' },
+      { kind: 'roof', x: 100, y: 52, run: 74, thickness: 30, tone: 'b' },
+      { kind: 'window', x: 79, y: 134, size: 18 },
+      { kind: 'window', x: 79, y: 188, size: 18 },
+      { kind: 'window', x: 79, y: 242, size: 18 },
+    ],
+  },
+  shopfront: {
+    viewBox: '0 0 200 320',
+    shapes: [
+      { kind: 'rect', x: 30, y: 150, width: 140, height: 136, tone: 'a' },
+      { kind: 'rect', x: 0, y: 286, width: 200, height: 34, tone: 'b' },
+      { kind: 'roof', x: 100, y: 96, run: 96, thickness: 40, tone: 'b' },
+      { kind: 'rect', x: 48, y: 204, width: 104, height: 48, tone: 'c' },
+      { kind: 'window', x: 78, y: 214, size: 12 },
+    ],
+  },
+  offices: {
+    viewBox: '0 0 400 320',
+    shapes: [
+      { kind: 'rect', x: 36, y: 118, width: 138, height: 168, tone: 'a' },
+      { kind: 'rect', x: 196, y: 56, width: 168, height: 230, tone: 'c' },
+      { kind: 'rect', x: 0, y: 286, width: 400, height: 34, tone: 'b' },
+      { kind: 'window', x: 56, y: 140, size: 16 },
+      { kind: 'window', x: 112, y: 140, size: 16 },
+      { kind: 'window', x: 56, y: 204, size: 16 },
+      { kind: 'window', x: 112, y: 204, size: 16 },
+      { kind: 'window', x: 220, y: 78, size: 18 },
+      { kind: 'window', x: 296, y: 78, size: 18 },
+      { kind: 'window', x: 220, y: 150, size: 18 },
+      { kind: 'window', x: 296, y: 150, size: 18 },
+      { kind: 'window', x: 220, y: 222, size: 18 },
+      { kind: 'window', x: 296, y: 222, size: 18 },
+    ],
+  },
+};
+
+interface Props {
+  /** Unique on the page: names the SVG pattern. */
+  id: string;
+  tone: 'light' | 'dark';
+  scene: SceneName;
+  /** What the photograph will show, for assistive technology. */
+  subject: string;
+  class?: string;
+}
+
+const { id, tone, scene, subject, class: className } = Astro.props;
+
+const light = tone === 'light';
+const palette = light
+  ? { field: 'bg-page', a: 'fill-green-100', b: 'fill-green-300', c: 'fill-sage-300', window: 'fill-white' }
+  : { field: 'bg-green-700', a: 'fill-green-500', b: 'fill-green-900', c: 'fill-green-300', window: 'fill-green-100' };
+
+const { viewBox, shapes } = SCENES[scene];
+type Part =
+  | { type: 'polygon'; points: string; tone: string }
+  | { type: 'rect'; x: number; y: number; width: number; height: number; tone: string };
+
+const parts: Part[] = shapes.flatMap((shape): Part[] => {
+  if (shape.kind === 'roof') {
+    return [
+      {
+        type: 'polygon',
+        points: chevron(shape.x, shape.y, shape.run, shape.thickness),
+        tone: palette[shape.tone],
+      },
+    ];
+  }
+  if (shape.kind === 'rect') {
+    return [
+      { type: 'rect', x: shape.x, y: shape.y, width: shape.width, height: shape.height, tone: palette[shape.tone] },
+    ];
+  }
+  return windowGrid(shape.x, shape.y, shape.size).map(
+    (square): Part => ({
+      type: 'rect',
+      x: square.x,
+      y: square.y,
+      width: square.size,
+      height: square.size,
+      tone: palette.window,
+    }),
+  );
+});
+---
+
+<figure
+  role="img"
+  aria-label={`${PHOTO_CAPTION}: ${subject}`}
+  class:list={[
+    'relative m-0 overflow-hidden rounded-xl border',
+    light ? 'border-line' : 'rule-inverse',
+    palette.field,
+    className,
+  ]}
+>
+  {
+    light && (
+      <svg class="roof-tone absolute inset-0 size-full" aria-hidden="true" focusable="false">
+        <defs>
+          <pattern id={`${id}-roofs`} width="64" height="96" patternUnits="userSpaceOnUse">
+            <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+              <path id={`${id}-roof`} d="M4 44V30.1L32 4l28 26.1V44ZM28.5 20.5h7v7h-7Z" />
+              <use href={`#${id}-roof`} transform="translate(-32 48)" />
+              <use href={`#${id}-roof`} transform="translate(32 48)" />
+            </g>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill={`url(#${id}-roofs)`} />
+      </svg>
+    )
+  }
+  <svg
+    viewBox={viewBox}
+    preserveAspectRatio="xMidYMax slice"
+    class="absolute inset-0 size-full"
+    aria-hidden="true"
+    focusable="false"
+  >
+    {
+      parts.map((part) =>
+        part.type === 'polygon' ? (
+          <polygon points={part.points} class={part.tone} />
+        ) : (
+          <rect x={part.x} y={part.y} width={part.width} height={part.height} class={part.tone} />
+        ),
+      )
+    }
+  </svg>
+  <figcaption
+    class="absolute left-3 top-3 max-w-[calc(100%-1.5rem)] rounded-md bg-brand px-3 py-1 text-caption text-white"
+  >
+    {PHOTO_CAPTION}
+  </figcaption>
+</figure>

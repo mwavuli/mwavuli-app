@@ -1,0 +1,42 @@
+---
+/**
+ * Hero art from the roof form (brand M1, M3): layered flat bands at the logo's slope, cut off
+ * by the edges of the band they sit in, with the mark's window grid under the innermost roof.
+ * Tone on tone on Green, with one gold band and one gold window: gold is a small part of the
+ * motif. No pattern on Green and none behind text (M2). Decorative.
+ *
+ * The wide version runs off the top edge of the hero. The compact version keeps its apex
+ * inside the frame, for a short strip on a phone or a tablet.
+ */
+import { chevron, slopeBar, windowGrid } from '../geometry/roof';
+
+interface Props {
+  compact?: boolean;
+  class?: string;
+}
+
+const { compact = false, class: className } = Astro.props;
+
+const PEAK_X = 520;
+const RUN = 640;
+const top = compact ? 24 : -30;
+const bands = [
+  { points: chevron(PEAK_X, top, RUN, 130), tone: 'fill-green-700' },
+  { points: chevron(PEAK_X, top + 154, RUN, 100), tone: 'fill-green-900' },
+  { points: chevron(PEAK_X, top + 278, RUN, 72), tone: 'fill-green-700' },
+];
+const ridge = slopeBar(PEAK_X, top, RUN, 30, 22, 520, 280, 'right');
+const windows = windowGrid(PEAK_X - 62, top + 374, 52);
+---
+
+<svg
+  viewBox="-200 0 1000 640"
+  preserveAspectRatio={compact ? 'xMaxYMax meet' : 'xMaxYMid slice'}
+  class={className}
+  aria-hidden="true"
+  focusable="false"
+>
+  {bands.map((band) => <polygon points={band.points} class={band.tone}></polygon>)}
+  <polygon points={ridge} class="fill-accent"></polygon>
+  {windows.map((w) => <rect x={w.x} y={w.y} width={w.size} height={w.size} class="fill-accent"></rect>)}
+</svg>
