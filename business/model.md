@@ -1,6 +1,6 @@
 # Mwavuli business model
 
-Status: version 0.2, for owner sign-off and counsel review. Ticket SNT-25. Interview started on 2026-11-10.
+Status: version 0.3, for owner sign-off and counsel review. Ticket SNT-25. Interview started on 2026-11-10.
 Interview transcript: [grill-me session](../.scratch/grill-me/1794346863-mwavuli-business-model.md).
 
 What Mwavuli Property Management offers a landlord, what it charges and what each side does. It is the single
@@ -70,13 +70,16 @@ settled, we chase, and if it goes to court you say YES first.
 
 ## Documents this model feeds
 
-| Document           | For      | Takes from                                                                    |
-|--------------------|----------|-------------------------------------------------------------------------------|
-| Landlord agreement | Landlord | BM1, BM2, BM4 to BM12, BM17 and the Numbers table; BM3 sets how it is written |
-| Tenancy form       | Tenant   | P2, P3, P7, P13, BM5, BM6                                                     |
-| Inspection report  | Landlord | P4, P9                                                                        |
-| Explanation note   | Landlord | BM11                                                                          |
-| Landlord pitch     | Landlord | BM18 and the plain statements                                                 |
+| Document                  | For      | Takes from                             |
+|---------------------------|----------|----------------------------------------|
+| Landlord agreement        | Landlord | BM1, BM2, BM4 to BM12, BM20, Numbers   |
+| Schedule to the agreement | Landlord | The same terms, with the words defined |
+| Tenancy form              | Tenant   | P2, P3, P7, P13, BM5, BM6, BM20        |
+| Inspection report         | Landlord | P4, P9                                 |
+| Explanation note          | Landlord | BM11                                   |
+| Landlord pitch            | Landlord | BM18 and the plain statements          |
+
+BM3 sets how every document is written.
 
 ## The company
 
@@ -84,13 +87,12 @@ settled, we chase, and if it goes to court you say YES first.
 
 | Detail          | Value                            |
 |-----------------|----------------------------------|
-| Registered name | Mwavuli Holdings                 |
+| Registered name | Mwavuli Holdings Ltd             |
 | Postal address  | P.O. Box 170886, Kampala, Uganda |
 
-Write the name as the certificate of incorporation shows it, including any suffix such as "Limited". Still to
-supply: the registration number, TIN, VAT status, the registered office (a physical address) and the signatory.
-The brand name on the card and the site is Mwavuli Property Management (brand F7). Confirm how it relates to the
-registered name, for example as a registered business name.
+Still to supply: the registration number, TIN, VAT status, the registered office (a physical address) and the
+signatory. The brand name on the card and the site is Mwavuli Property Management (brand F7). Confirm how it
+relates to the registered name, for example as a registered business name.
 
 ## Audience
 
@@ -147,6 +149,27 @@ and the promise stays true for every month inside it.
 - A paid guarantee of rent may count as insurance or suretyship. Confirm whether it needs a license or an
   approval and how to word it.
 - "Occupied" is defined in P2.
+
+### BM20 · Rent due dates
+
+*Source: Owner*
+
+**Plain statement** Each tenant's rent is due on a day of the month written in the tenancy form. The day can differ
+from tenant to tenant. We always pay you on the 1st.
+
+**Example** One tenant's rent is due on the 5th and another's on the 20th. On 1 Mar we pay you for both rooms.
+If the tenant due on the 20th has not paid by 20 Mar, March is that room's covered month.
+
+**Why** Tenants move in and are paid on different days. The payout date stays on the 1st, so the landlord's day
+never moves.
+
+**Counsel note**
+
+- The covered month starts when a tenant misses its due date. The test that stops the cover still runs on payout
+  dates: if the covered month is unpaid on the next 1st, we stop paying for that unit (BM1).
+- A later due date means Mwavuli carries that tenant's rent for longer. The payout account test (BM17) already
+  assumes that no rent has come in.
+- Confirm whether a due date can change during a tenancy, and who may change it.
 
 ### BM4 · What we charge and how you are paid
 
@@ -360,8 +383,8 @@ Mwavuli decline a building it cannot fund.
 
 *Source: Owner*
 
-**Plain statement** A shop or an office gets the same terms as a room: our 15%, the first month covered, and your
-rent on the 1st. No unit is left out because its rent is large.
+**Plain statement** Every unit we take on gets the same terms, whatever its rent, shops and offices included: we
+take 15% of its rent, we cover its first missed month, and we pay you on the 1st.
 
 **Example** A shop rents for UGX 3,000,000 and the tenant does not pay in March. On 1 Mar you receive UGX 2,550,000
 (the rent minus our 15%), and we collect March from the tenant.
@@ -497,8 +520,8 @@ Each term's counsel note lists what to confirm. Start with these:
 - **Data and disputes:** the Data Protection and Privacy Act, governing law, mediation and the courts (P11, P12).
 - **Details to supply for the agreements:** the registration number, TIN, VAT status, the registered office and the
   signatory (see "The company").
-- **Contracting company:** the agreements are with Mwavuli Holdings. Counsel advises whether it should contract and
-  hold client money directly or through an operating company, and how the brand name relates to it.
+- **Contracting company:** the agreements are with Mwavuli Holdings Ltd. Counsel advises whether it should contract
+  and hold client money directly or through an operating company, and how the brand name relates to it.
 
 ## Addenda
 
@@ -512,4 +535,4 @@ Not yet settled:
 - Construction scope: whether new buildings and extensions are in the offer or need a separate works agreement.
 - Proposed landlord duty, for the owner to approve: a deposit the landlord holds is not used against a month
   Mwavuli has covered (BM6).
-- The exact registered form of the company name, and how the brand name relates to it (see "The company").
+- How the brand name Mwavuli Property Management relates to the registered name (see "The company").
