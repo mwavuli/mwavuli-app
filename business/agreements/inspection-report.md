@@ -1,6 +1,6 @@
 # Inspection report
 
-Draft 0.1 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
+Draft 0.2 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
 the end say which term each part takes from. This draft is not legal advice.
 
 We fill this in when we walk the building with the landlord, before we start. We keep it, and the landlord gets
@@ -8,15 +8,15 @@ a copy. It goes with the [landlord agreement](landlord-agreement.md).
 
 ## About the inspection
 
-| Detail              | Fill in                                                                   |
-|---------------------|---------------------------------------------------------------------------|
-| Building            | [name or description]                                                     |
-| Address             | [to fill]                                                                 |
-| Landlord            | [full name]                                                               |
-| Date                | [day month year]                                                          |
-| Walked the building | [officer's name] for Mwavuli Holdings [confirm the exact registered form] |
-| Also there          | the landlord; others: [to fill]                                           |
-| Photos              | [to fill] photos, numbered [to fill] to [to fill]                         |
+| Detail              | Fill in                                           |
+|---------------------|---------------------------------------------------|
+| Building            | [name or description]                             |
+| Address             | [to fill]                                         |
+| Landlord            | [full name]                                       |
+| Date                | [day month year]                                  |
+| Walked the building | [officer's name] for Mwavuli Holdings Ltd         |
+| Also there          | the landlord; others: [to fill]                   |
+| Photos              | [to fill] photos, numbered [to fill] to [to fill] |
 
 ## What we looked at
 
@@ -61,10 +61,10 @@ Once we accept a building, the promise in the landlord agreement applies.
 
 ## Signatures
 
-|                      | Name        | Signature | Date |
-|----------------------|-------------|-----------|------|
-| For Mwavuli Holdings | [full name] |           |      |
-| The landlord         | [full name] |           |      |
+|                          | Name        | Signature | Date |
+|--------------------------|-------------|-----------|------|
+| For Mwavuli Holdings Ltd | [full name] |           |      |
+| The landlord             | [full name] |           |      |
 
 ## Drafting notes
 

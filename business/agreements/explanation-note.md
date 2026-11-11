@@ -1,6 +1,6 @@
 # Explanation note
 
-Draft 0.1 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
+Draft 0.2 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
 the end say which term each part takes from. This draft is not legal advice.
 
 This note is signed with the [landlord agreement](landlord-agreement.md). It is a short record that the
@@ -8,19 +8,19 @@ agreement was explained to the landlord, in the landlord's own language, before 
 
 ## The note
 
-| Detail                      | Fill in                                                                              |
-|-----------------------------|--------------------------------------------------------------------------------------|
-| Date                        | [day month year]                                                                     |
-| Place                       | [to fill]                                                                            |
-| Landlord                    | [full name]                                                                          |
-| What was explained          | The landlord agreement dated [day month year] for [building], in English and Luganda |
-| Language used to explain it | [ ] Luganda [ ] English [ ] other: [to fill]                                         |
+| Detail                      | Fill in                                                         |
+|-----------------------------|-----------------------------------------------------------------|
+| Date                        | [day month year]                                                |
+| Place                       | [to fill]                                                       |
+| Landlord                    | [full name]                                                     |
+| What was explained          | The landlord agreement and its schedule, in English and Luganda |
+| Agreement date and building | Dated [day month year], for [building]                          |
+| Language used to explain it | [ ] Luganda [ ] English [ ] other: [to fill]                    |
 
 ## Who explained it
 
-I, [officer's full name], of Mwavuli Holdings [confirm the exact registered form], whose address is [officer's
-address], read the main points of the agreement to the landlord out loud, in the language written above. I
-answered the landlord's questions.
+I, [officer's full name], of Mwavuli Holdings Ltd, whose address is [officer's address], read the main points of
+the agreement to the landlord out loud, in the language written above. I answered the landlord's questions.
 
 Officer's signature: [signature]. Date: [day month year].
 
