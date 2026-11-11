@@ -1,0 +1,24 @@
+---
+import type { SceneArt } from '../data/scenes';
+
+interface Props {
+  art: SceneArt;
+  class?: string;
+  /** SVG preserveAspectRatio. `slice` fills the box and crops at the frame edge (brand M3). */
+  fit?: string;
+}
+
+const { art, class: className, fit = 'xMidYMax slice' } = Astro.props;
+---
+
+<svg
+  class:list={['roof-art', `panel-${art.panel}`, className]}
+  viewBox={`0 0 ${art.width} ${art.height}`}
+  preserveAspectRatio={fit}
+  aria-hidden="true"
+  focusable="false"
+>
+  <g class="art-shapes">
+    {art.shapes.map((shape, i) => <polygon class={`band tone-${shape.tone}`} points={shape.points} style={`--i:${i}`} />)}
+  </g>
+</svg>

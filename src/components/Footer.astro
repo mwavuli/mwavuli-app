@@ -1,22 +1,29 @@
 ---
-import { SITE_NAME } from '../config';
+import { POSTAL_ADDRESS, SITE_NAME } from '../config';
 import Lockup from './Lockup.astro';
 
 const year = new Date().getFullYear();
 ---
 
 <footer class="on-inverse bg-brand text-white">
-  <div class="mx-auto max-w-page px-4 py-10 sm:px-6">
-    <Lockup reversed class="h-8" role="img" aria-label={SITE_NAME} />
-    <nav aria-label="Footer" class="mt-6">
-      <ul class="grid gap-1 text-body-sm">
-        <li>
-          <a href="/legal/privacy/" class="inline-flex min-h-11 items-center hover:underline">
-            Privacy policy
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <p class="mt-8 border-t border-white/20 pt-6 text-caption">© {year} {SITE_NAME}</p>
+  <div class="mx-auto max-w-page px-6 pb-10 pt-12">
+    <div class="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+      <Lockup reversed class="h-12" role="img" aria-label={SITE_NAME} />
+      <nav aria-label="Footer">
+        <ul class="grid gap-1 text-body-sm">
+          <li>
+            <a href="/legal/privacy/" class="inline-flex min-h-11 items-center hover:underline">
+              Privacy policy
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div
+      class="mt-8 flex flex-col gap-2 border-t border-white/20 pt-6 text-caption md:flex-row md:justify-between"
+    >
+      <p>© {year} {SITE_NAME}</p>
+      <p>{POSTAL_ADDRESS}</p>
+    </div>
   </div>
 </footer>

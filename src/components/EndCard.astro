@@ -1,0 +1,21 @@
+---
+import RoofArt from './RoofArt.astro';
+import { SCENES } from '../data/scenes';
+
+// The first hero scene again, as the film's last frame.
+const art = SCENES.roofs;
+---
+
+<!-- The film's last frame: the primary tagline (brand F6), set white and Gold on Green, with the
+     first scene's roofs. Not a heading: it repeats the promise, it does not open a section. -->
+<section class="endcard on-inverse" aria-label="Our promise">
+  <RoofArt art={art.desktop} class="endcard__art endcard__art--desktop" fit="xMidYMax slice" />
+  <RoofArt art={art.phone} class="endcard__art endcard__art--phone" fit="xMidYMin slice" />
+  <div class="endcard__body">
+    <p class="endcard__tagline">
+      <span class="block">Your Property.</span>
+      <span class="block text-accent">Our Responsibility.</span>
+    </p>
+    <div class="slide__rule" aria-hidden="true"></div>
+  </div>
+</section>

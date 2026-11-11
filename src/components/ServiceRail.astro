@@ -1,0 +1,69 @@
+---
+import Glyph from './Glyph.astro';
+import RoofArt from './RoofArt.astro';
+import { SERVICES } from '../data/home';
+import { CARD_ART } from '../data/scenes';
+
+const total = SERVICES.length;
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<section id="services" aria-labelledby="services-title" class="services" data-rail-root>
+  <div class="mx-auto grid max-w-page gap-6 px-4 pb-10 pt-16 sm:px-6 lg:grid-cols-12 lg:items-end lg:pt-24">
+    <div class="lg:col-span-8">
+      <p class="font-display text-overline uppercase text-brand">Services</p>
+      <h2 id="services-title" class="services__title mt-4">Six ways we look after your building.</h2>
+    </div>
+    <p class="text-body-lg lg:col-span-4 lg:pb-2">
+      You get one payment and one statement a month, by SMS or WhatsApp.
+    </p>
+  </div>
+
+  <div class="services__stage">
+    <ul class="rail" tabindex="0" aria-label="Services, scroll sideways" data-rail>
+      {
+        SERVICES.map((service, i) => (
+          <li class="card">
+            <div class="card__art">
+              <svg class="card__pattern" aria-hidden="true" focusable="false">
+                <rect width="100%" height="100%" fill="url(#roofs-g50)" />
+              </svg>
+              <RoofArt art={CARD_ART[i]} class="card__scene" fit="xMaxYMax slice" />
+              <span class="card__badge">
+                <Glyph name={`pictogram/${service.pictogram}`} class="size-28" />
+              </span>
+            </div>
+            <div class="card__body">
+              <p class="card__no">
+                {pad(i + 1)} / {pad(total)}
+              </p>
+              <h3 class="card__title">{service.title}</h3>
+              <p class="card__text">{service.text}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div class="services__foot on-inverse">
+    <div class="rail-chrome mx-auto max-w-page px-6">
+      <div class="rail-chrome__track" aria-hidden="true"><span class="rail-chrome__thumb" data-rail-thumb></span></div>
+      <p class="rail-chrome__count" aria-hidden="true">
+        <span data-rail-current>03</span> / {pad(total)}
+      </p>
+      <div class="flex gap-2">
+        <button type="button" class="icon-btn" aria-label="Previous services" data-rail-prev>
+          <Glyph name="line/chevron-right" class="size-6 rotate-180" />
+        </button>
+        <button type="button" class="icon-btn" aria-label="Next services" data-rail-next>
+          <Glyph name="line/chevron-right" class="size-6" />
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '../scripts/rail';
+</script>

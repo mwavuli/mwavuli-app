@@ -1,0 +1,29 @@
+---
+import RoofArt from './RoofArt.astro';
+import { NUMBERS } from '../data/home';
+import { TILE_ART } from '../data/scenes';
+
+// One ground per tile: a pale sage, the Green of the hero, a pale gold (brand C5 ramps).
+const grounds = ['sage', 'green', 'gold'] as const;
+---
+
+<section aria-labelledby="numbers-title" class="bg-page">
+  <div class="mx-auto flex max-w-page flex-col gap-1 px-6 pb-8 pt-14 sm:flex-row sm:items-baseline sm:gap-6">
+    <p class="font-display text-overline uppercase text-brand">The offer</p>
+    <h2 id="numbers-title" class="text-h3">Three numbers to remember.</h2>
+  </div>
+  <ol class="numbers">
+    {
+      NUMBERS.map((item, i) => (
+        <li class={`tile tile--${grounds[i]}`}>
+          <RoofArt art={TILE_ART[i]} class="tile__art" fit="xMaxYMax slice" />
+          <p class="tile__figure">
+            <span class="tile__value">{item.value}</span>
+            <span class="tile__unit">{item.unit}</span>
+          </p>
+          <p class="tile__line">{item.line}</p>
+        </li>
+      ))
+    }
+  </ol>
+</section>

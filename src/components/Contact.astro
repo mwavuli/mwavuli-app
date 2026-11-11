@@ -1,0 +1,73 @@
+---
+import Glyph from './Glyph.astro';
+import RoofArt from './RoofArt.astro';
+import { POSTAL_ADDRESS, SITE_NAME } from '../config';
+import { SLOT_ART } from '../data/scenes';
+---
+
+<section id="contact" aria-labelledby="contact-title" class="bg-subtle">
+  <div class="mx-auto grid max-w-page gap-12 px-4 py-16 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:py-24">
+    <div class="lg:order-2 lg:col-span-7 lg:pt-6">
+      <p class="font-display text-overline uppercase text-brand">Contact</p>
+      <h2 id="contact-title" class="contact__title mt-4">Talk to us.</h2>
+      <p class="mt-5 max-w-xl text-body-lg">
+        Tell us about your building. We start by walking it with you.
+      </p>
+
+      <!-- Design only: the button does nothing and the fields are not sent anywhere. -->
+      <form class="form" action="#contact" novalidate>
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label for="contact-name" class="form__label">Your name</label>
+            <input id="contact-name" name="name" type="text" autocomplete="name" class="form__input" />
+          </div>
+          <div>
+            <label for="contact-phone" class="form__label">Your phone number</label>
+            <input id="contact-phone" name="phone" type="tel" autocomplete="tel" class="form__input" />
+          </div>
+        </div>
+        <div class="mt-5">
+          <label for="contact-building" class="form__label">About your building</label>
+          <textarea id="contact-building" name="building" rows="4" class="form__input form__input--area"></textarea>
+        </div>
+        <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <button type="button" class="btn btn--solid btn--badge">
+            Send message
+            <span class="btn__badge"><Glyph name="line/arrow-right" class="size-5" /></span>
+          </button>
+          <p class="text-caption text-muted">Design only. This form does not send yet.</p>
+        </div>
+      </form>
+    </div>
+
+    <!-- Photo slot (open decision D14): an art-directed 4:5 frame with the final crop, ready for a
+         photograph of a building Mwavuli manages. The caption sits on a solid Green band (M6). -->
+    <div class="lg:order-1 lg:col-span-5">
+      <figure class="slot">
+        <svg class="slot__pattern" aria-hidden="true" focusable="false">
+          <rect width="100%" height="100%" fill="url(#roofs-s100)" />
+        </svg>
+        <RoofArt art={SLOT_ART} class="slot__art" fit="xMidYMid slice" />
+        <figcaption class="slot__caption">Photograph to come (D14)</figcaption>
+      </figure>
+
+      <address class="address not-italic">
+        <p class="font-display text-h4">{SITE_NAME}</p>
+        <ul class="mt-5 grid gap-4 not-italic">
+          <li class="flex items-center gap-4">
+            <Glyph name="pictogram/badge-location" class="size-12 text-brand" />
+            <span>{POSTAL_ADDRESS}</span>
+          </li>
+          <li class="flex items-center gap-4">
+            <Glyph name="pictogram/badge-phone" class="size-12 text-brand" />
+            <span class="text-muted">Phone number to be added</span>
+          </li>
+          <li class="flex items-center gap-4">
+            <span class="badge"><Glyph name="line/mail" class="size-6" /></span>
+            <span class="text-muted">Email address to be added</span>
+          </li>
+        </ul>
+      </address>
+    </div>
+  </div>
+</section>

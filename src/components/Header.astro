@@ -1,30 +1,41 @@
 ---
 import { SITE_NAME } from '../config';
 import Lockup from './Lockup.astro';
+
+interface Props {
+  /** Float over the first section, which sits on a Green ground (the home hero). */
+  overlay?: boolean;
+}
+
+const { overlay = false } = Astro.props;
+
+// Brand L5: the horizontal lockup is at least 180 px wide, so h-12 (195 px). Brand L4: clear
+// space of one eighth of its width, so a 24 px margin on every side.
+const links = overlay
+  ? [{ href: '#services', label: 'Services' }]
+  : [{ href: '/legal/privacy/', label: 'Privacy' }];
 ---
 
-<header class="border-b border-line bg-page">
-  <div class="mx-auto flex max-w-page items-center justify-between gap-4 px-4 py-4 sm:px-6">
+<header
+  class:list={[overlay ? 'on-inverse absolute inset-x-0 top-0 z-30 text-white' : 'border-b border-line bg-page']}
+>
+  <div class="mx-auto flex max-w-page items-center justify-between gap-4 px-6 py-6">
     <a href="/" class="flex shrink-0 items-center" aria-label={`${SITE_NAME}: home`}>
-      <Lockup class="h-8" aria-hidden="true" />
+      <Lockup reversed={overlay} class="h-12" aria-hidden="true" />
     </a>
     <nav aria-label="Main">
       <ul class="flex items-center gap-2 sm:gap-4">
+        {
+          links.map((link) => (
+            <li class:list={[overlay && 'hidden sm:block']}>
+              <a href={link.href} class="nav-link">
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
         <li>
-          <a
-            href="/legal/privacy/"
-            class="inline-flex min-h-11 items-center px-3 font-display text-label font-semibold text-ink hover:text-brand"
-          >
-            Privacy
-          </a>
-        </li>
-        <li>
-          <a
-            href="/#contact"
-            class="inline-flex min-h-11 items-center rounded-full bg-brand px-5 font-display text-label font-semibold text-white hover:bg-brand-deep"
-          >
-            Contact
-          </a>
+          <a href="/#contact" class:list={['btn', overlay ? 'btn--contact' : 'btn--solid']}>Contact</a>
         </li>
       </ul>
     </nav>

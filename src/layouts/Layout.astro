@@ -11,9 +11,11 @@ interface Props {
   description?: string;
   /** Absolute-path social image, 1200 × 630. Omitted until the brand's social image exists. */
   ogImage?: string;
+  /** Float the header over the first section, which must sit on a Green ground. */
+  overlayHeader?: boolean;
 }
 
-const { title, description = SITE_DESCRIPTION, ogImage } = Astro.props;
+const { title, description = SITE_DESCRIPTION, ogImage, overlayHeader = false } = Astro.props;
 
 const fullTitle = `${title} · ${SITE_NAME}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -43,16 +45,20 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site) : undefined;
     <meta name="twitter:description" content={description} />
     {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
 
+    <!-- Progressive enhancement hook: set before first paint so scripted layouts never flash. -->
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
     <slot name="head" />
   </head>
   <body class="flex min-h-dvh flex-col bg-page font-sans text-body text-ink antialiased">
     <a
       href="#main"
-      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-brand focus:px-4 focus:py-2 focus:text-white"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-brand focus:shadow-lg"
     >
       Skip to content
     </a>
-    <Header />
+    <Header overlay={overlayHeader} />
     <main id="main" class="flex-1">
       <slot />
     </main>

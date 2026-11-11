@@ -1,28 +1,18 @@
 ---
-import { POSTAL_ADDRESS, SITE_NAME } from '../config';
+import Contact from '../components/Contact.astro';
+import EndCard from '../components/EndCard.astro';
+import Film from '../components/Film.astro';
+import Numbers from '../components/Numbers.astro';
+import PatternDefs from '../components/PatternDefs.astro';
+import ServiceRail from '../components/ServiceRail.astro';
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Home">
-  <!-- Brand A6: a green band with a two-beat headline and a gold rule. The photograph
-       waits on the open photography decision (D14). -->
-  <section class="on-inverse bg-brand text-white">
-    <div class="mx-auto max-w-page px-4 py-20 sm:px-6 sm:py-28">
-      <h1 class="font-display text-h1 text-white sm:text-display">
-        Managed Properties. <span class="text-accent">Better Living.</span>
-      </h1>
-      <div class="mt-6 h-1 w-16 bg-accent" aria-hidden="true"></div>
-      <p class="mt-6 max-w-xl text-body-lg">Rent paid to you on the 1st, every month.</p>
-    </div>
-  </section>
-
-  <section id="contact" class="bg-surface">
-    <div class="mx-auto max-w-page px-4 py-16 sm:px-6">
-      <h2 class="text-h2">Contact</h2>
-      <p class="mt-4 text-body-lg">
-        {SITE_NAME}<br />
-        {POSTAL_ADDRESS}
-      </p>
-    </div>
-  </section>
+<Layout title="Home" overlayHeader>
+  <Film />
+  <Numbers />
+  <ServiceRail />
+  <Contact />
+  <EndCard />
+  <PatternDefs />
 </Layout>

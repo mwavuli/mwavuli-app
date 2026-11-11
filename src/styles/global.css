@@ -159,3 +159,536 @@
   --tw-prose-th-borders: var(--mw-color-role-border-strong);
   --tw-prose-td-borders: var(--mw-color-role-border-default);
 }
+
+/* =====================================================================================
+   Home page components (prototype SNT-38, cinematic slides): the buttons, the film hero,
+   the number tiles, the services row, the contact section and the end card.
+
+   Every value is a brand token. Durations are multiples of the `--mw-motion-*` tokens; the
+   film bends brand S9 on purpose (an autoplay hero that plays once and can be paused,
+   skipped and stopped), and prefers-reduced-motion removes all of its movement.
+   ================================================================================== */
+
+@layer components {
+  /* ---- Brand tones for the roof-form art (data/scenes.ts): fill for shapes, field for panels ---- */
+  .tone-green { fill: var(--mw-color-core-green); }
+  .tone-g100 { fill: var(--mw-color-ramp-green-100); }
+  .tone-g300 { fill: var(--mw-color-ramp-green-300); }
+  .tone-g700 { fill: var(--mw-color-ramp-green-700); }
+  .tone-g900 { fill: var(--mw-color-ramp-green-900); }
+  .tone-s100 { fill: var(--mw-color-ramp-sage-100); }
+  .tone-s300 { fill: var(--mw-color-ramp-sage-300); }
+  .tone-s500 { fill: var(--mw-color-ramp-sage-500); }
+  .tone-s700 { fill: var(--mw-color-ramp-sage-700); }
+  .tone-k100 { fill: var(--mw-color-ramp-gold-100); }
+  .tone-k300 { fill: var(--mw-color-ramp-gold-300); }
+  .tone-gold { fill: var(--mw-color-core-gold); }
+  .tone-cream { fill: var(--mw-color-core-cream); }
+
+  .panel-green { background-color: var(--mw-color-core-green); }
+  .panel-g50 { background-color: var(--mw-color-ramp-green-50); }
+  .panel-g700 { background-color: var(--mw-color-ramp-green-700); }
+  .panel-g900 { background-color: var(--mw-color-ramp-green-900); }
+  .panel-s100 { background-color: var(--mw-color-ramp-sage-100); }
+  .panel-s700 { background-color: var(--mw-color-ramp-sage-700); }
+  .panel-k100 { background-color: var(--mw-color-ramp-gold-100); }
+
+  .roof-art { display: block; }
+  .art-shapes { transform-box: view-box; transform-origin: 100% 100%; }
+
+  /* Brand M2: the outlined-roof pattern, a tone just darker than its ground. */
+  .roof-line { fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .roof-line--g50 { stroke: var(--mw-color-ramp-green-100); }
+  .roof-line--s100 {
+    stroke: color-mix(in srgb, var(--mw-color-core-sage) 28%, var(--mw-color-ramp-sage-100));
+  }
+
+  /* ---- Buttons (brand A5: 48 px high, radius.md; S3: pills only for chips and toggles) ---- */
+  .btn {
+    @apply inline-flex min-h-12 items-center justify-center gap-3 whitespace-nowrap rounded-md px-6 font-display text-body font-semibold;
+    transition-property: background-color, color, border-color;
+    transition-duration: var(--mw-motion-duration-base);
+    transition-timing-function: var(--mw-motion-easing-standard);
+  }
+  .btn--solid { @apply bg-brand text-white hover:bg-brand-deep active:bg-green-900; }
+  .btn--light { @apply bg-white text-brand hover:bg-green-50 active:bg-green-100; }
+  .btn--contact { @apply bg-white text-brand hover:bg-green-50 active:bg-green-100; }
+  @media (min-width: 768px) {
+    .btn--contact {
+      @apply border-[1.5px] border-white text-white hover:bg-white hover:text-brand active:bg-green-100 active:text-brand;
+      background-color: transparent;
+    }
+  }
+  /* An arrow in a rounded-square badge at the end of the label. */
+  .btn--badge { @apply pr-2; }
+  .btn__badge {
+    @apply inline-grid size-8 place-items-center;
+    border-radius: var(--mw-radius-badge);
+    transition: transform var(--mw-motion-duration-base) var(--mw-motion-easing-standard);
+  }
+  .btn--light .btn__badge { @apply bg-brand text-white; }
+  .btn--solid .btn__badge { @apply bg-white text-brand; }
+  .btn:hover .btn__badge { transform: translateX(2px); }
+
+  .nav-link {
+    @apply inline-flex min-h-12 items-center px-2 font-display text-body-lg font-semibold;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.5rem;
+    transition: text-decoration-color var(--mw-motion-duration-base) var(--mw-motion-easing-standard);
+  }
+  .nav-link:hover { text-decoration-color: currentColor; }
+
+  /* Icon-only control in a 48 px target (brand S8, I5). On Green by default. */
+  .icon-btn {
+    @apply inline-grid size-12 place-items-center rounded-md border-[1.5px] border-white text-white;
+    transition-property: background-color, color, border-color;
+    transition-duration: var(--mw-motion-duration-base);
+    transition-timing-function: var(--mw-motion-easing-standard);
+  }
+  .icon-btn:hover:not(:disabled) { @apply bg-white text-brand; }
+  .icon-btn:active:not(:disabled) { @apply bg-green-100 text-brand; }
+  .icon-btn:disabled { border-color: var(--mw-color-ramp-sage-500); color: var(--mw-color-ramp-sage-500); }
+
+  /* ---- The film hero ---- */
+  .film {
+    --deck: 0px;
+    --dwell: 9s;
+    --enter: calc(var(--mw-motion-duration-slow) * 3);
+    --swap: calc(var(--mw-motion-duration-slow) * 2);
+    --lead: var(--mw-motion-duration-slow);
+    --ease: var(--mw-motion-easing-standard);
+    position: relative;
+    isolation: isolate;
+    overflow: clip;
+    background-color: var(--mw-color-core-green);
+    color: var(--mw-color-core-white);
+  }
+  .js .film { --deck: 9.5rem; min-height: 100svh; }
+  @media (min-width: 768px) {
+    .js .film { --deck: 7.5rem; }
+  }
+
+  /* Without JavaScript the slides are a plain stack. With it they share one cell and cross-fade. */
+  .slide {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 100svh;
+  }
+  .slide + .slide {
+    min-height: 80svh;
+    border-top: 1px solid var(--mw-color-ramp-green-700);
+  }
+  .js .film__stage { display: grid; touch-action: pan-y; }
+  .js .slide {
+    grid-area: 1 / 1;
+    min-height: 100svh;
+    border-top: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity var(--swap) var(--ease),
+      visibility 0s linear var(--swap);
+  }
+  .js .slide.is-active {
+    opacity: 1;
+    visibility: visible;
+    transition:
+      opacity var(--swap) var(--ease) var(--lead),
+      visibility 0s;
+  }
+
+  /* The scene panel: a flat field of its own. Beside the text from 1024 up; above it below that, with
+     the text on a solid Green block over its lower part (text never sits on the art, brand M3). */
+  .scene { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .scene__art { position: absolute; }
+  .scene__art--phone { top: 0; left: 0; width: 100%; height: calc(100% - var(--deck)); }
+  .scene__art--desktop { display: none; }
+  @media (min-width: 1024px) {
+    .scene__art--phone { display: none; }
+    .scene__art--desktop { display: block; top: 0; right: 0; width: 38%; height: calc(100% - var(--deck)); }
+  }
+
+  .slide__body {
+    --room: 100%;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 75rem;
+    margin-inline: auto;
+    padding: 1.5rem 1.5rem calc(var(--deck) + 1.5rem);
+    background-color: var(--mw-color-core-green);
+  }
+  @media (min-width: 1024px) {
+    .slide__body {
+      /* Room for text: the 62 percent of the hero left of the panel, less the container's left edge. */
+      --room: min(46rem, calc(62vw - max(1.5rem, (100vw - 75rem) / 2 + 1.5rem) - 2rem));
+      padding: 0 1.5rem calc(var(--deck) + 2.5rem);
+      background-color: transparent;
+    }
+  }
+  .slide__overline { @apply mb-5 font-display text-overline uppercase text-white; }
+  .slide__title {
+    @apply font-display font-bold text-white;
+    max-width: var(--room);
+    font-size: clamp(2.25rem, 1.2rem + 5vw, 4.5rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  @media (min-width: 1024px) {
+    /* Sized from the room so the longest first line ("Rent paid to you", 8.5 em) fits: three lines on every slide. */
+    .slide__title { font-size: max(2.25rem, min(calc(var(--room) / 8.6), 10svh, 6rem)); }
+  }
+  .slide__title .line { display: block; text-wrap: balance; }
+  .slide__title .accent { white-space: nowrap; }
+  .slide__title .accent,
+  .endcard__tagline .accent { color: var(--mw-color-core-gold); }
+  .slide__rule { width: 4rem; height: 4px; margin-block: 1.5rem; background-color: var(--mw-color-core-gold); }
+  @media (max-width: 767.98px) {
+    .slide .slide__rule { margin-block: 1rem; }
+  }
+  .slide__lead {
+    @apply text-cream;
+    max-width: min(var(--room), 30rem);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  @media (min-width: 768px) {
+    .slide__lead { font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem); }
+  }
+
+  /* The deck: the film's control strip, the ground the scene stands on. */
+  .film__chrome { position: relative; z-index: 2; background-color: var(--mw-color-ramp-green-900); }
+  .js .film__chrome { position: absolute; inset: auto 0 0 0; height: var(--deck); }
+  .film__chrome-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    height: 100%;
+    max-width: 75rem;
+    margin-inline: auto;
+    padding: 1.5rem;
+  }
+  .film__controls { display: none; align-items: center; gap: 1rem; }
+  .film__nav { display: none; gap: 0.5rem; }
+  /* A phone: the picker across the top, the count and the pause button under it. The header's
+     Contact button is the one solid action there, so the deck drops its own. */
+  .js .film__chrome-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: 'tabs tabs' 'count play';
+    align-content: center;
+    gap: 0.5rem 1rem;
+  }
+  .js .film__controls { display: contents; }
+  .js .film__chrome-inner > .btn { display: none; }
+  .film__tabs { grid-area: tabs; }
+  .film__count { grid-area: count; }
+  .film__play { grid-area: play; }
+  @media (min-width: 768px) {
+    .film__chrome-inner { flex-direction: row; align-items: center; gap: 2rem; padding-block: 0; }
+    .js .film__chrome-inner { display: flex; }
+    .js .film__controls { display: flex; flex: 1; gap: 1.5rem; }
+    .js .film__chrome-inner > .btn { display: inline-flex; }
+  }
+  @media (min-width: 1024px) {
+    .film__nav { display: flex; }
+  }
+
+  .film__tabs { display: flex; flex: 1; gap: 0.5rem; }
+  .seg {
+    display: flex;
+    flex: 1 1 0;
+    align-items: center;
+    min-width: 2.75rem;
+    height: 3rem;
+    padding: 0;
+    cursor: pointer;
+  }
+  .seg__track {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 3px;
+    overflow: hidden;
+    background-color: var(--mw-color-ramp-sage-500);
+    transition: height var(--mw-motion-duration-fast) var(--mw-motion-easing-standard);
+  }
+  .seg:hover .seg__track { height: 6px; }
+  .seg__fill {
+    position: absolute;
+    inset: 0;
+    background-color: var(--mw-color-core-white);
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  .seg.is-done .seg__fill,
+  .film[data-state='idle'] .seg.is-active .seg__fill { transform: scaleX(1); }
+  .film[data-state='playing'] .seg.is-active .seg__fill,
+  .film[data-state='paused'] .seg.is-active .seg__fill { animation: seg-fill var(--dwell) linear both; }
+  .film[data-state='paused'] .seg.is-active .seg__fill,
+  .film[data-hold] .seg.is-active .seg__fill { animation-play-state: paused; }
+
+  .film__count {
+    @apply font-display text-h4 font-semibold text-white;
+    min-width: 4.5rem;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  .film__play {
+    @apply min-h-12 min-w-[6.5rem] rounded-md border-[1.5px] border-white px-4 font-display text-body font-semibold text-white;
+    transition-property: background-color, color;
+    transition-duration: var(--mw-motion-duration-base);
+    transition-timing-function: var(--mw-motion-easing-standard);
+  }
+  .film__play:hover { @apply bg-white text-brand; }
+  .film__play:active { @apply bg-green-100 text-brand; }
+
+  /* ---- The number tiles ---- */
+  .numbers { display: grid; grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 768px) {
+    .numbers { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tile:first-child { padding-left: max(1.5rem, calc((100vw - 75rem) / 2 + 1.5rem)); }
+  }
+  .tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 2.5rem 1.5rem 9rem;
+  }
+  @media (min-width: 768px) {
+    .tile { padding: 3rem 1.5rem 11rem; }
+  }
+  .tile--sage { background-color: var(--mw-color-ramp-sage-100); }
+  .tile--green { background-color: var(--mw-color-core-green); }
+  .tile--gold { background-color: var(--mw-color-ramp-gold-100); }
+  .tile__art { position: absolute; right: 0; bottom: 0; width: 100%; height: 8rem; background-color: transparent; }
+  @media (min-width: 768px) {
+    .tile__art { height: 10rem; }
+  }
+  .tile__figure {
+    @apply font-display font-extrabold;
+    display: flex;
+    align-items: baseline;
+    font-size: clamp(5.5rem, 11vw, 9.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--mw-color-core-green);
+  }
+  .tile__unit { margin-left: 0.04em; font-size: 0.3em; font-weight: 700; letter-spacing: 0; white-space: pre; }
+  .tile--green .tile__figure { color: var(--mw-color-core-white); }
+  .tile--green .tile__unit { color: var(--mw-color-core-gold); }
+  .tile__line { @apply mt-5 max-w-xs text-body-lg text-ink; text-wrap: balance; }
+  .tile--green .tile__line { color: var(--mw-color-core-white); }
+
+  /* ---- The services row: cards that straddle the edge of a full-bleed Green band ---- */
+  .services { position: relative; background-color: var(--mw-color-role-bg-page); }
+  .services__title {
+    @apply font-display font-bold text-heading;
+    max-width: 16ch;
+    font-size: clamp(2rem, 1rem + 3.2vw, 3.5rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .services__stage { position: relative; z-index: 1; }
+  .rail {
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0.5rem max(1rem, calc((100% - 75rem) / 2 + 1rem)) 2.5rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: max(1rem, calc((100% - 75rem) / 2 + 1rem));
+    list-style: none;
+  }
+  @media (min-width: 640px) {
+    .rail {
+      padding-inline: max(1.5rem, calc((100% - 75rem) / 2 + 1.5rem));
+      scroll-padding-inline: max(1.5rem, calc((100% - 75rem) / 2 + 1.5rem));
+    }
+  }
+  .js .rail { scrollbar-width: none; }
+  .js .rail::-webkit-scrollbar { display: none; }
+  .rail:focus-visible { outline-offset: -4px; }
+
+  .card {
+    display: flex;
+    flex: 0 0 min(82vw, 22.5rem);
+    flex-direction: column;
+    overflow: hidden;
+    scroll-snap-align: start;
+    background-color: var(--mw-color-role-bg-surface);
+    border-radius: var(--mw-radius-lg);
+    box-shadow: var(--mw-shadow-md);
+  }
+  .card__art { position: relative; height: 14rem; overflow: hidden; background-color: var(--mw-color-ramp-green-50); }
+  .card__pattern { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .card__scene { position: absolute; inset: 0; width: 100%; height: 100%; background-color: transparent; }
+  .card__badge {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    display: grid;
+    place-items: center;
+    width: 10rem;
+    height: 10rem;
+    color: var(--mw-color-core-gold);
+    background-color: var(--mw-color-core-green);
+    border-radius: var(--mw-radius-lg);
+  }
+  .card__body { padding: 1.5rem 1.5rem 2rem; }
+  .card__no { @apply font-display text-overline text-muted; font-variant-numeric: tabular-nums; }
+  .card__title { @apply mt-3 font-display text-h3 text-heading; }
+  .card__text { @apply mt-3 text-body text-ink; }
+
+  .services__foot {
+    position: relative;
+    z-index: 0;
+    margin-top: -15rem;
+    padding: 16rem 0 3.5rem;
+    color: var(--mw-color-core-white);
+    background-color: var(--mw-color-core-green);
+  }
+  .rail-chrome { display: flex; align-items: center; gap: 1.5rem; visibility: hidden; }
+  :root:not(.js) .rail-chrome { display: none; }
+  [data-ready] .rail-chrome { visibility: visible; }
+  .rail-chrome__track { position: relative; flex: 1; height: 3px; overflow: hidden; background-color: var(--mw-color-ramp-sage-500); }
+  .rail-chrome__thumb { position: absolute; inset-block: 0; left: 0; display: block; width: 40%; background-color: var(--mw-color-core-white); }
+  .rail-chrome__count {
+    @apply font-display text-h4 font-semibold text-white;
+    min-width: 4.5rem;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+
+  /* ---- Contact: the photo slot (D14), the address card and the form (design only) ---- */
+  .slot {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background-color: var(--mw-color-ramp-sage-100);
+    border-radius: var(--mw-radius-lg);
+  }
+  @media (min-width: 640px) and (max-width: 1023.98px) {
+    .slot { aspect-ratio: 16 / 9; }
+  }
+  .slot__pattern { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .slot__art { position: absolute; inset: 0; width: 100%; height: 100%; background-color: transparent; }
+  .slot__caption {
+    @apply rounded-sm text-caption text-white;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    padding: 0.375rem 0.75rem;
+    background-color: var(--mw-color-core-green);
+  }
+  .address {
+    position: relative;
+    margin: -4rem 1rem 0;
+    padding: 1.5rem;
+    background-color: var(--mw-color-role-bg-surface);
+    border-radius: var(--mw-radius-lg);
+    box-shadow: var(--mw-shadow-md);
+  }
+  @media (min-width: 640px) {
+    .address { margin-inline: 1.5rem; }
+  }
+  .badge {
+    @apply grid size-12 shrink-0 place-items-center bg-brand text-white;
+    border-radius: var(--mw-radius-badge);
+  }
+  .contact__title {
+    @apply font-display font-bold text-heading;
+    font-size: clamp(2.5rem, 1rem + 4.4vw, 4.5rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .form {
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    background-color: var(--mw-color-role-bg-surface);
+    border-radius: var(--mw-radius-lg);
+    box-shadow: var(--mw-shadow-md);
+  }
+  @media (min-width: 640px) {
+    .form { padding: 2rem; }
+  }
+  .form__label { @apply mb-2 block text-label text-ink; }
+  .form__input {
+    @apply block min-h-12 w-full rounded-sm border bg-white px-4 text-body text-ink;
+    /* slate-500 is 3.7 to 1 on white: the field's edge meets WCAG 1.4.11 (brand C3). */
+    border-color: var(--mw-color-ramp-slate-500);
+    transition: border-color var(--mw-motion-duration-fast) var(--mw-motion-easing-standard);
+  }
+  .form__input:hover { border-color: var(--mw-color-core-green); }
+  .form__input--area { min-height: 7.5rem; padding-block: 0.75rem; resize: vertical; }
+
+  /* ---- The end card: the film's last frame ---- */
+  .endcard { position: relative; overflow: hidden; background-color: var(--mw-color-core-green); color: var(--mw-color-core-white); }
+  .endcard__art--phone { position: relative; display: block; width: 100%; height: 11rem; }
+  .endcard__art--desktop { display: none; }
+  .endcard__body { position: relative; width: 100%; max-width: 75rem; margin-inline: auto; padding: 3rem 1.5rem 4rem; }
+  .endcard__tagline {
+    @apply font-display font-bold text-white;
+    font-size: clamp(2rem, 0.5rem + 4.2vw, 4.75rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  @media (min-width: 768px) {
+    .endcard__art--phone { display: none; }
+    .endcard__art--desktop { position: absolute; top: 0; right: 0; bottom: 0; display: block; width: 30%; height: auto; }
+    .endcard__body { padding-block: 6rem; }
+    .endcard__tagline { max-width: calc(70vw - max(1.5rem, (100vw - 75rem) / 2 + 1.5rem) - 2rem); }
+  }
+}
+
+/* ---- Motion: only where the person has not asked for less. A slow reveal, like a title card. ---- */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(1.5rem); }
+  to { opacity: 1; transform: none; }
+}
+/* Transform only: the bands rise from behind the deck. (Opacity animations on SVG shapes are
+   dropped by Chromium's full-page capture; the slide itself already fades in.) */
+@keyframes band-in {
+  from { transform: translateY(9rem); }
+  to { transform: none; }
+}
+@keyframes drift {
+  from { transform: scale(1); }
+  to { transform: scale(1.04); }
+}
+@keyframes seg-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js .slide.is-active .reveal {
+    animation: rise-in var(--enter) var(--ease) both;
+    animation-delay: calc(var(--lead) + var(--d, 0) * 1ms);
+  }
+  .js .slide.is-active .band {
+    animation: band-in calc(var(--enter) * 1.5) var(--ease) both;
+    animation-delay: calc(var(--lead) + var(--i, 0) * 90ms);
+  }
+  .js .slide.is-active .art-shapes { animation: drift var(--dwell) linear both; }
+  .film[data-state='paused'] .art-shapes,
+  .film[data-hold] .art-shapes { animation-play-state: paused; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Nothing moves by itself: no autoplay, no pause button (nothing to pause), a quick fade between slides. */
+  .film__play { display: none; }
+  .film[data-state] .seg.is-active .seg__fill { animation: none; transform: scaleX(1); }
+  .js .slide,
+  .js .slide.is-active { transition-delay: 0s; transition-duration: var(--mw-motion-duration-base); }
+  .btn:hover .btn__badge { transform: none; }
+}

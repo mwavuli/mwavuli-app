@@ -1,0 +1,17 @@
+---
+import { icon } from '../data/icons';
+
+interface Props {
+  /** Path under brand/icons/ without the extension, e.g. `line/arrow-right` (brand I6). */
+  name: string;
+  class?: string;
+}
+
+const { name, class: className } = Astro.props;
+---
+
+<span
+  class:list={['glyph block shrink-0 [&>svg]:block [&>svg]:size-full', className]}
+  aria-hidden="true"
+  set:html={icon(name)}
+/>

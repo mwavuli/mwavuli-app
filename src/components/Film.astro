@@ -1,0 +1,104 @@
+---
+import Glyph from './Glyph.astro';
+import RoofArt from './RoofArt.astro';
+import { SLIDES } from '../data/home';
+import { SCENES } from '../data/scenes';
+
+const total = SLIDES.length;
+const pad = (n: number) => String(n).padStart(2, '0');
+/** Milliseconds before a revealed line starts, after the slide itself has started. */
+const delay = (step: number) => 120 + step * 140;
+---
+
+<!--
+  Four slides that play once like a short film. Without JavaScript this is a plain stack of
+  four panels, every one readable. With it, the slides cross-fade, the thin bar fills over
+  each slide, and the pause button, the picker and the arrows are live (script: film.ts).
+-->
+<section class="film on-inverse" data-film data-state="playing" aria-label="Mwavuli Property Management at a glance">
+  <div class="film__stage" data-stage>
+    {
+      SLIDES.map((slide, i) => {
+        const Heading = i === 0 ? 'h1' : 'h2';
+        const art = SCENES[slide.scene];
+        const lead = delay(slide.lines.length + 1);
+        return (
+          <div class:list={['slide', i === 0 && 'is-active']} id={`slide-${i + 1}`} data-slide>
+            <div class="scene" aria-hidden="true">
+              <RoofArt art={art.desktop} class="scene__art scene__art--desktop" />
+              <RoofArt art={art.phone} class="scene__art scene__art--phone" fit="xMidYMin slice" />
+            </div>
+            <div class="slide__body">
+              <p class="slide__overline reveal" style="--d: 0">
+                {slide.overline}
+              </p>
+              <Heading class="slide__title">
+                {slide.lines.map((line, j) => (
+                  <>
+                    <span class="line reveal" style={`--d: ${delay(j)}`}>
+                      {line.map((part) => (part.accent ? <span class="accent">{part.text}</span> : part.text))}
+                    </span>{' '}
+                  </>
+                ))}
+              </Heading>
+              <div class="slide__rule reveal" style={`--d: ${lead}`} aria-hidden="true" />
+              <p class="slide__lead reveal" style={`--d: ${lead + 100}`}>
+                {slide.lead}
+              </p>
+            </div>
+          </div>
+        );
+      })
+    }
+  </div>
+
+  <div class="film__chrome">
+    <div class="film__chrome-inner">
+      <a href="#contact" class="btn btn--light btn--badge">
+        Talk to us
+        <span class="btn__badge"><Glyph name="line/arrow-right" class="size-5" /></span>
+      </a>
+      <div class="film__controls">
+        <div class="film__tabs" role="tablist" aria-label="Choose a slide">
+          {
+            SLIDES.map((slide, i) => (
+              <button
+                type="button"
+                class:list={['seg', i === 0 && 'is-active']}
+                role="tab"
+                id={`tab-${i + 1}`}
+                aria-controls={`slide-${i + 1}`}
+                aria-selected={i === 0 ? 'true' : 'false'}
+                aria-label={`Slide ${i + 1} of ${total}: ${slide.label}`}
+                tabindex={i === 0 ? 0 : -1}
+                data-tab
+              >
+                <span class="seg__track">
+                  <span class="seg__fill" />
+                </span>
+              </button>
+            ))
+          }
+        </div>
+        <p class="film__count" aria-hidden="true">
+          <span data-current>01</span> / {pad(total)}
+        </p>
+        <div class="film__nav">
+          <button type="button" class="icon-btn" aria-label="Previous slide" data-prev>
+            <Glyph name="line/chevron-right" class="size-6 rotate-180" />
+          </button>
+          <button type="button" class="icon-btn" aria-label="Next slide" data-next>
+            <Glyph name="line/chevron-right" class="size-6" />
+          </button>
+        </div>
+        <button type="button" class="film__play" aria-label="Pause the slides" data-toggle>
+          <span data-toggle-label>Pause</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '../scripts/film';
+</script>
