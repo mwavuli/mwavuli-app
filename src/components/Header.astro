@@ -1,4 +1,5 @@
 ---
+import { AUDIENCES } from '../audiences';
 import { SITE_NAME } from '../config';
 import Button from './Button.astro';
 import Lockup from './Lockup.astro';
@@ -10,10 +11,18 @@ interface Props {
 
 const { tone = 'page' } = Astro.props;
 const onBrand = tone === 'brand';
+
+const here = Astro.url.pathname.replace(/\/$/, '');
+const linkClass = [
+  'inline-flex min-h-12 items-center rounded-md px-3 font-display text-body font-semibold transition-colors aria-[current=page]:underline aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-8',
+  onBrand ? 'text-white hover:bg-white/10' : 'text-ink hover:bg-green-50 hover:text-brand',
+];
 ---
 
 <!-- Brand L4 and L5: the horizontal lockup is 195 px wide (h-12, above the 180 px minimum) with 24 px
-     clear space on every side. -->
+     clear space on every side. The audience links appear from 768 px, where they fit beside the
+     lockup and the Contact button; below that the audience chips on every page, and the footer,
+     carry them. -->
 <header class:list={[onBrand ? 'on-inverse bg-brand text-white' : 'border-b border-line bg-page']}>
   <div class="mx-auto flex max-w-page flex-wrap items-center justify-between gap-4 px-6 py-6 lg:px-8">
     <a href="/" class="flex shrink-0 items-center" aria-label={`${SITE_NAME}: home`}>
@@ -21,16 +30,21 @@ const onBrand = tone === 'brand';
     </a>
     <nav aria-label="Main">
       <ul class="flex items-center gap-2 sm:gap-4">
-        <li class="hidden sm:block">
-          <a
-            href="/#services"
-            class:list={[
-              'inline-flex min-h-12 items-center rounded-md px-3 font-display text-body font-semibold transition-colors',
-              onBrand ? 'text-white hover:bg-white/10' : 'text-ink hover:bg-green-50 hover:text-brand',
-            ]}
-          >
-            Services
-          </a>
+        {
+          AUDIENCES.map((audience) => (
+            <li class="hidden md:block">
+              <a
+                href={audience.href}
+                aria-current={here === audience.href.replace(/\/$/, '') ? 'page' : undefined}
+                class:list={linkClass}
+              >
+                {audience.label}
+              </a>
+            </li>
+          ))
+        }
+        <li class="hidden lg:block">
+          <a href="/#services" class:list={linkClass}>Services</a>
         </li>
         <li>
           <Button href="/#contact" variant={onBrand ? 'inverse' : 'primary'}>Contact</Button>

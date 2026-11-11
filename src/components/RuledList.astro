@@ -1,0 +1,72 @@
+---
+import arrowRight from '../../brand/icons/line/arrow-right.svg?raw';
+
+interface Item {
+  title: string;
+  text?: string;
+  /** Makes the whole row a link to this page. */
+  href?: string;
+}
+
+interface Props {
+  items: readonly Item[];
+  /** A two-digit gold figure left of each title. */
+  numbered?: boolean;
+  /** Which side gets the wider column: `title` for short rows, `text` for long ones. */
+  wide?: 'title' | 'text';
+  class?: string;
+}
+
+const { items, numbered = false, wide = 'title', class: className } = Astro.props;
+
+// Twelve columns from `lg`: [figure] title text. Full class names so Tailwind finds them.
+const COLUMNS = {
+  'numbered-title': { title: 'lg:col-span-6', text: 'lg:col-span-5 lg:max-w-md' },
+  'numbered-text': { title: 'lg:col-span-5', text: 'lg:col-span-6 lg:max-w-2xl' },
+  'plain-title': { title: 'lg:col-span-7', text: 'lg:col-span-5 lg:max-w-md' },
+  'plain-text': { title: 'lg:col-span-5', text: 'lg:col-span-7 lg:max-w-2xl' },
+} as const;
+
+const columns = COLUMNS[`${numbered ? 'numbered' : 'plain'}-${wide}`];
+---
+
+<!-- Rows ruled by hairlines, title left and text right. Quiet hover: a tint, the figure and a small
+     nudge. The list bleeds to the container's outer edge so the tint reaches past the text. -->
+<ol role="list" class:list={['-mx-6 border-t border-line lg:-mx-8', className]}>
+  {
+    items.map((item, index) => (
+      <li class="group/row relative border-b border-line px-6 transition-colors hover:bg-green-50 lg:px-8">
+        <div class="grid gap-x-8 gap-y-2 py-6 lg:grid-cols-12 lg:items-center lg:py-7">
+          {numbered && (
+            <span
+              aria-hidden="true"
+              class="t-giant-row font-display font-semibold text-gold-700 tabular-nums transition-colors group-hover/row:text-brand lg:col-span-1"
+            >
+              {String(index + 1).padStart(2, '0')}
+            </span>
+          )}
+          <h3
+            class:list={[
+              't-giant-row font-display text-brand transition-transform motion-safe:group-hover/row:translate-x-2',
+              columns.title,
+            ]}
+          >
+            {item.href ? (
+              <a href={item.href} class="after:absolute after:inset-0">
+                {item.title}
+                <span
+                  aria-hidden="true"
+                  class="ml-3 inline-block size-7 align-[-0.1em] [&>svg]:size-full"
+                  set:html={arrowRight}
+                />
+              </a>
+            ) : (
+              item.title
+            )}
+          </h3>
+          {item.text && <p class:list={['text-body-lg text-ink', columns.text]}>{item.text}</p>}
+        </div>
+      </li>
+    ))
+  }
+</ol>

@@ -1,0 +1,237 @@
+---
+import { OWNERS } from '../audiences';
+import AudienceHero from '../components/AudienceHero.astro';
+import ContactBlock from '../components/ContactBlock.astro';
+import RuledList from '../components/RuledList.astro';
+import Layout from '../layouts/Layout.astro';
+
+// BM18's worked example: 10 rooms at UGX 400,000, 9 with tenants. Figures as the model writes them.
+const STATEMENT = [
+  { label: 'Rent from 9 rooms with tenants', amount: 'UGX 3,600,000' },
+  { label: 'Our 15%', amount: 'UGX −540,000' },
+  { label: 'Repair: tap, plumber UGX 100,000 plus our 10%', amount: 'UGX −110,000' },
+] as const;
+
+// BM18's March and April example, with the chasing from BM5.
+const MISSED_RENT = [
+  {
+    title: '1st March',
+    text: 'A tenant misses March. We still pay you for that room on 1st March: UGX 340,000.',
+  },
+  {
+    title: '1st April',
+    text: 'Still unpaid? We pause that room until it is settled. We remind, call and visit, then send a written notice. Our time costs you nothing extra.',
+  },
+  {
+    title: 'If it goes to court',
+    text: 'We ask you first and you say YES. A lawyer, the court and a bailiff are paid at cost: from the tenant’s deposit first, then by you. We never lock a tenant out.',
+  },
+] as const;
+
+// BM2, BM4 and P7: every charge there is.
+const CHARGES = [
+  {
+    title: '15% of the rent.',
+    text: 'No rent, no fee. It is charged on rent only: not on deposits, not on utility or garbage money and not on repair costs.',
+  },
+  {
+    title: '10% on repair quotes.',
+    text: 'Our coordination fee of 10%, shown on the quote.',
+  },
+  {
+    title: 'Utilities at cost.',
+    text: 'Electricity, water and garbage bills are paid at cost, with no markup.',
+  },
+  {
+    title: 'Nothing else.',
+    text: 'There is no sign-up fee, no letting fee and no yearly fee.',
+  },
+] as const;
+
+// BM7, P4, BM17 and BM11, in the order they happen.
+const START = [
+  {
+    title: 'Your papers.',
+    text: 'A certificate of title in your name is enough. With no title, bring a sale agreement or letters of administration (or probate), a letter from your local council (LC1), and your signed statement that you own the building and may let it. We always need your national ID. We do not take a building that is in dispute, or that has co-owners who have not all agreed in writing.',
+  },
+  {
+    title: 'The building.',
+    text: 'We walk the building with you first and take photos. Unsafe items must be fixed within 30 days, before we start. We may decline a building that stays unsafe.',
+  },
+  {
+    title: 'The payout account.',
+    text: 'We pay your rent from an account we keep for rent payouts and use for nothing else. We take on a building only when that account can cover its payouts, so the promise to pay you on the 1st can be kept.',
+  },
+  {
+    title: 'Your language.',
+    text: 'The agreement comes in English and Luganda. You choose one, and you and we sign that version. One of our officers sits down with you, explains the agreement in your language and answers your questions. You sign, or give your thumbprint, in front of a witness you choose. You keep a copy.',
+  },
+] as const;
+
+// P5, the landlord's duties.
+const ASKS = [
+  'Tell tenants to pay only us, and pass on any rent paid to you the same day.',
+  'No side deals on rent or tenants.',
+  'No lock-outs, and no cutting water or power.',
+  'Let us in with notice.',
+  'Your taxes and rates stay yours.',
+  'Tell us the truth about ownership, debts and disputes.',
+] as const;
+---
+
+<Layout
+  title="Owners"
+  description="We pay you on the 1st, for every room with a tenant. We take 15% of the rent. No rent, no fee. Leave any time with 30 days’ notice."
+  headerTone="brand"
+>
+  <AudienceHero
+    audience={OWNERS}
+    beats={[
+      ['Rent on', 'the 1st.'],
+      ['No rent,', 'no fee.'],
+    ]}
+    proof="Leave any time with 30 days’ notice."
+  />
+
+  <!-- 1. The month, worked out: BM18's statement for 1st April, rows on cream and the payment on Green. -->
+  <section id="statement" aria-labelledby="statement-title">
+    <div class="bg-page">
+      <div class="mx-auto max-w-page px-6 pt-16 lg:px-8 lg:pt-20">
+        <h2 id="statement-title" class="t-statement font-display text-brand">
+          Your statement for 1st April.
+        </h2>
+        <div class="mt-4 h-1 w-16 bg-accent" aria-hidden="true"></div>
+        <p class="mt-6 max-w-2xl text-body-lg text-ink">
+          10 rooms at UGX 400,000, 9 with tenants. One payment and one statement a month, by SMS or
+          WhatsApp.
+        </p>
+        <dl class="mt-10 border-t border-line">
+          {
+            STATEMENT.map((row) => (
+              <div class="grid gap-x-8 gap-y-1 border-b border-line py-5 sm:grid-cols-[1fr_auto] sm:items-baseline lg:py-6">
+                <dt class="font-display text-h4 text-ink">{row.label}</dt>
+                <dd class="t-giant-row font-display text-brand tabular-nums">{row.amount}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+    <div class="on-inverse bg-brand text-white">
+      <div class="mx-auto max-w-page px-6 py-10 lg:px-8 lg:py-14">
+        <dl>
+          <dt class="font-display text-h4 text-green-100">Paid to you on the 1st</dt>
+          <dd class="t-figure mt-4 font-display text-accent">UGX 2,950,000</dd>
+        </dl>
+        <p class="mt-6 max-w-2xl text-body-lg text-green-100">
+          The empty room earns no rent and costs no fee, and we look for a tenant.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. When a tenant does not pay: the first month is covered, then the chasing (BM1, BM5). -->
+  <section id="missed-rent" aria-labelledby="missed-rent-title" class="bg-surface">
+    <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-20">
+      <h2 id="missed-rent-title" class="t-statement max-w-4xl font-display text-brand">
+        If a tenant doesn’t pay, we cover that first month and do the chasing.
+      </h2>
+      <p class="mt-4 font-display text-h4 text-ink">So you are not left waiting.</p>
+      <RuledList items={MISSED_RENT} wide="text" class="mt-10" />
+    </div>
+  </section>
+
+  <!-- 3. Repairs: the one figure an owner needs, the approval limit (BM2, BM18, P6). -->
+  <section id="repairs" aria-labelledby="repairs-title" class="bg-sage-100">
+    <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-20">
+      <p aria-hidden="true" class="t-figure font-display text-gold-700">UGX 200,000</p>
+      <div class="mt-8 grid gap-x-8 gap-y-8 lg:grid-cols-12">
+        <div class="lg:col-span-6">
+          <h2 id="repairs-title" class="t-statement font-display text-brand">
+            We ask you before any repair above UGX 200,000.
+          </h2>
+          <p class="mt-4 text-body-lg text-ink">
+            We find a trusted contractor and bring you the price. You pay the contractor’s price plus
+            our coordination fee of 10%, shown on the quote.
+          </p>
+        </div>
+        <ul role="list" class="border-t border-line lg:col-span-6">
+          <li class="border-b border-line py-4 text-body-lg text-ink">
+            A plumber quotes UGX 100,000 to fix a tap. Our 10% is UGX 10,000, so the quote is UGX 110,000.
+            That is below UGX 200,000, so we fix it and list it on your statement.
+          </li>
+          <li class="border-b border-line py-4 text-body-lg text-ink">
+            A roof repair at UGX 600,000 plus our UGX 60,000 is UGX 660,000, so we ask you first and you
+            reply YES.
+          </li>
+          <li class="border-b border-line py-4 text-body-lg text-ink">
+            Urgent safety repairs up to UGX 500,000 go ahead first, and we tell you the same day.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Every charge there is. -->
+  <section id="charges" aria-labelledby="charges-title" class="bg-page">
+    <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-20">
+      <h2 id="charges-title" class="t-statement font-display text-brand">What we charge.</h2>
+      <RuledList items={CHARGES} class="mt-10" />
+    </div>
+  </section>
+
+  <!-- 5. How a building is taken on. -->
+  <section id="start" aria-labelledby="start-title" class="bg-surface">
+    <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-20">
+      <h2 id="start-title" class="t-statement font-display text-brand">How we start.</h2>
+      <RuledList items={START} numbered wide="text" class="mt-10" />
+    </div>
+  </section>
+
+  <!-- 6. Leaving (BM8): no lock-in is the strongest trust signal, so it gets the Green band. -->
+  <section id="leaving" aria-labelledby="leaving-title" class="on-inverse bg-brand text-white">
+    <div class="mx-auto max-w-page px-6 pt-16 lg:px-8 lg:pt-20">
+      <h2 id="leaving-title" class="font-display text-overline uppercase text-green-100">Leaving</h2>
+    </div>
+    <ol role="list">
+      <li>
+        <div class="mx-auto max-w-page px-6 py-10 lg:px-8 lg:py-14">
+          <div class="grid items-center gap-x-8 gap-y-6 lg:grid-cols-12">
+            <p aria-hidden="true" class="t-figure font-display text-accent lg:col-span-4">
+              30<span class="ml-3 font-display text-h3 font-semibold tracking-normal">days</span>
+            </p>
+            <p class="t-statement font-display text-white lg:col-span-8">
+              You can leave any time with 30 days’ written notice, and so can we.
+            </p>
+          </div>
+        </div>
+      </li>
+      <li class="border-t border-white/20">
+        <div class="mx-auto max-w-page px-6 py-10 lg:px-8 lg:py-14">
+          <div class="grid items-center gap-x-8 gap-y-6 lg:grid-cols-12">
+            <p aria-hidden="true" class="t-figure font-display text-accent lg:col-span-4">3rd</p>
+            <p class="t-statement font-display text-white lg:col-span-8">
+              If we have not paid you by the 3rd, you can leave straight away, with no fee.
+            </p>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 7. What an owner owes in return (P5), and when Mwavuli may leave at once (BM8). -->
+  <section id="asks" aria-labelledby="asks-title" class="bg-surface">
+    <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-20">
+      <h2 id="asks-title" class="t-statement font-display text-brand">What we ask of you.</h2>
+      <ul role="list" class="mt-10 grid border-t border-line sm:grid-cols-2 sm:gap-x-12">
+        {ASKS.map((ask) => <li class="border-b border-line py-5 text-body-lg text-ink">{ask}</li>)}
+      </ul>
+      <p class="mt-8 max-w-3xl text-body-lg text-ink">
+        We can end the agreement straight away if you collect rent from tenants yourself, interfere with
+        tenants, or refuse a repair that is urgent for safety.
+      </p>
+    </div>
+  </section>
+
+  <ContactBlock />
+</Layout>

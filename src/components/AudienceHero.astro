@@ -1,0 +1,21 @@
+---
+import type { Audience } from '../audiences';
+import AudienceChips from './AudienceChips.astro';
+import Hero from './Hero.astro';
+
+interface Props {
+  audience: Audience;
+  /** The headline's two beats (brand F6), one string per line. */
+  beats: readonly [readonly string[], readonly string[]];
+  /** The one line on the proof card. */
+  proof: string;
+}
+
+const { audience, beats, proof } = Astro.props;
+---
+
+<Hero beats={beats}>
+  <AudienceChips slot="chips" current={audience} />
+  <p class="font-display text-overline uppercase text-muted">{audience.label}</p>
+  <p class="mt-2 font-display text-h3 text-brand">{proof}</p>
+</Hero>
