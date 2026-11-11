@@ -1,28 +1,343 @@
 ---
-import { POSTAL_ADDRESS, SITE_NAME } from '../config';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import PhotoSlot from '../components/PhotoSlot.astro';
+import RoofBands from '../components/RoofBands.astro';
+import RoofCorner from '../components/RoofCorner.astro';
+import { POSTAL_ADDRESS, SITE_DESCRIPTION } from '../config';
+import { SERVICES } from '../data/services';
 import Layout from '../layouts/Layout.astro';
+
+const [featured, ...others] = SERVICES;
+
+// The three lines a landlord needs to remember, as written in business/model.md (BM18).
+const numbers = [
+  { value: '1', unit: 'st', line: 'We pay you on the 1st, for every room with a tenant.' },
+  { value: '15', unit: '%', line: 'We take 15% of the rent. No rent, no fee.' },
+  { value: '30', unit: ' days', line: 'Leave any time with 30 days’ notice.' },
+];
+
+// Tenant-facing lines, restated from business/agreements/tenancy-form.md (clauses 2, 6, 3).
+const tenantPoints = [
+  {
+    icon: 'payments',
+    title: 'One place to pay',
+    line: 'Pay your rent to us only, by mobile money or bank. Never cash to our staff.',
+  },
+  {
+    icon: 'maintenance',
+    title: 'Tell us when it breaks',
+    line: 'Tell us by phone or WhatsApp if something is broken or unsafe, and we arrange a trusted contractor.',
+  },
+  {
+    icon: 'trusted',
+    title: 'Your deposit kept apart',
+    line: 'A new tenant’s deposit is kept in a separate account. We use it only for what the tenancy allows, and the rest goes back to you.',
+  },
+];
+
+const overline = 'font-display text-overline uppercase';
+const labelClass = 'block font-display text-label font-semibold text-ink';
+const fieldClass =
+  'mt-2 block w-full rounded-sm border border-slate-500 bg-surface px-4 py-3 text-body text-ink transition-colors duration-[var(--mw-motion-duration-fast)] hover:border-brand focus:border-brand motion-reduce:transition-none';
+const placeholderClass =
+  'inline-block rounded-sm border border-dashed border-slate-500 px-2 py-0.5 text-body text-ink';
 ---
 
 <Layout title="Home">
-  <!-- Brand A6: a green band with a two-beat headline and a gold rule. The photograph
-       waits on the open photography decision (D14). -->
-  <section class="on-inverse bg-brand text-white">
-    <div class="mx-auto max-w-page px-4 py-20 sm:px-6 sm:py-28">
-      <h1 class="font-display text-h1 text-white sm:text-display">
-        Managed Properties. <span class="text-accent">Better Living.</span>
-      </h1>
-      <div class="mt-6 h-1 w-16 bg-accent" aria-hidden="true"></div>
-      <p class="mt-6 max-w-xl text-body-lg">Rent paid to you on the 1st, every month.</p>
+  <!-- 1. Hero. Get Living's split: a big headline on a tinted ground against a large frame.
+       Grainger's offset shape behind the frame and card over its edge. The shape is nested
+       flat gables at the logo's slope, cropped by the top, right and bottom (M1, M3); the
+       photograph waits on D14, so the frame is a slot. The section runs under the header. -->
+  <section class="relative -mt-28 overflow-hidden bg-sage-100" aria-labelledby="hero-title">
+    <div
+      class="mx-auto grid max-w-page items-center gap-y-0 px-4 pb-0 pt-40 sm:px-6 lg:grid-cols-2 lg:gap-x-12 lg:px-8 lg:pb-24 lg:pt-[15.5rem]"
+    >
+      <div class="relative z-10">
+        <p class="rise max-w-xl font-display text-label font-semibold text-brand">
+          {SITE_DESCRIPTION}
+        </p>
+        <h1 id="hero-title" class="hero-title mt-5 text-balance">
+          <span class="rise block" style="--rise-step: 1">Managed Properties.</span>
+          <span class="rise block text-gold-700" style="--rise-step: 2">Better Living.</span>
+        </h1>
+        <div class="rise mt-6 h-1 w-16 bg-accent" style="--rise-step: 3" aria-hidden="true"></div>
+        <p class="rise mt-6 max-w-md text-body-lg text-ink" style="--rise-step: 3">
+          Rent paid to you <strong class="font-semibold text-brand">on the 1st</strong>, every
+          month.
+        </p>
+        <div class="rise mt-8" style="--rise-step: 4">
+          <Button href="#contact" arrow>Talk to us</Button>
+        </div>
+        <p class="rise mt-4 text-body-sm text-ink" style="--rise-step: 4">
+          No sign-up fee. No letting fee.
+        </p>
+      </div>
+
+      <!-- Below 1024 px the shapes are cropped to this box; from 1024 px the section crops them. -->
+      <div
+        class="max-lg:-mx-4 max-lg:overflow-hidden max-lg:px-4 max-lg:pb-16 max-lg:pt-32 sm:max-lg:-mx-6 sm:max-lg:px-6"
+      >
+        <div class="relative max-lg:mx-auto max-lg:max-w-xl">
+          <RoofBands
+            height={83.33}
+            class="absolute inset-0 size-full"
+            steps={[
+              { d: 17, className: 'fill-sage-300 max-lg:hidden' },
+              { d: 11, className: 'fill-sage-100 max-lg:hidden' },
+              { d: 6.5, className: 'fill-accent' },
+              { d: 3.5, className: 'fill-sage-100' },
+              { d: 0, className: 'fill-brand' },
+            ]}
+          />
+          <PhotoSlot
+            id="hero-roofs"
+            ratio="aspect-[6/5]"
+            height={83.33}
+            label="Photograph to come: a managed building in Kampala, in daylight (open decision D14)"
+            class="relative"
+          />
+          <div
+            class="rise absolute -bottom-12 left-4 z-10 w-[min(21rem,calc(100%-2rem))] rounded-lg bg-surface p-6 shadow-lg sm:left-6 lg:-left-12"
+            style="--rise-step: 5"
+          >
+            <span class="grid size-12 place-items-center rounded-md bg-sage-100 text-brand">
+              <Icon name="payments" class="size-6" />
+            </span>
+            <p class="mt-4 font-display text-h3 text-heading">Rent on the 1st</p>
+            <p class="mt-2 text-body text-ink">
+              One payment and one statement a month, by SMS or WhatsApp.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="contact" class="bg-surface">
-    <div class="mx-auto max-w-page px-4 py-16 sm:px-6">
-      <h2 class="text-h2">Contact</h2>
-      <p class="mt-4 text-body-lg">
-        {SITE_NAME}<br />
-        {POSTAL_ADDRESS}
-      </p>
+  <!-- 2. Three things to remember: big numerals on white. The only numbers a landlord needs
+       (BM18), each with its line as written. -->
+  <section class="bg-surface" aria-labelledby="numbers-title">
+    <div class="mx-auto max-w-page px-4 py-16 sm:px-6 md:py-24 lg:px-8">
+      <p class:list={[overline, 'text-brand']}>The offer</p>
+      <h2 id="numbers-title" class="mt-3 text-h2">Three things to remember.</h2>
+      <ol class="mt-12 grid gap-x-12 gap-y-10 tabular-nums lg:grid-cols-3">
+        {
+          numbers.map((item) => (
+            <li class="border-t-2 border-brand pt-6">
+              <p class="numeral text-brand">
+                {item.value}<span class="ml-1 text-h2 font-bold text-gold-700">{item.unit}</span>
+              </p>
+              <p class="mt-6 max-w-xs text-pretty text-body-lg text-ink">{item.line}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- 3. Services: one big tile and a stack of five. The six on the card (D15), with their
+       pictograms (I7): gold on Green, as on the card back. -->
+  <section id="services" class="scroll-mt-4 bg-green-50" aria-labelledby="services-title">
+    <div class="mx-auto max-w-page px-4 py-16 sm:px-6 md:py-24 lg:px-8">
+      <div class="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-x-12">
+        <div class="lg:col-span-6">
+          <p class:list={[overline, 'text-brand']}>What we do</p>
+          <h2 id="services-title" class="mt-3 text-h2">Six jobs we take off your hands.</h2>
+        </div>
+        <p class="text-body-lg text-ink lg:col-span-6">
+          We manage homes and business premises in Kampala and its surroundings: rooms, flats,
+          small blocks, shops and offices. There is no minimum number of units.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 lg:grid-cols-12">
+        <article
+          class="on-inverse relative overflow-hidden rounded-xl bg-brand p-8 text-white lg:col-span-5 lg:p-10"
+        >
+          <RoofCorner
+            class="absolute bottom-0 right-0 hidden size-60 lg:block"
+            bands={[
+              { x: 30, w: 100, className: 'fill-green-700' },
+              { x: 154, w: 20, className: 'fill-accent' },
+              { x: 198, w: 80, className: 'fill-green-700' },
+            ]}
+          />
+          <Icon
+            family="pictogram"
+            name={featured!.pictogram}
+            class="relative w-48 text-accent lg:w-60"
+          />
+          <h3 class="relative mt-8 font-display text-h2 text-white">{featured!.name}</h3>
+          <p class="relative mt-4 max-w-sm text-pretty text-body-lg">{featured!.line}</p>
+        </article>
+
+        <ul class="grid content-start gap-4 tabular-nums lg:col-span-7">
+          {
+            others.map((service) => (
+              <li class="flex items-center gap-5 rounded-lg bg-surface p-5 shadow-md">
+                <span class="grid size-18 shrink-0 place-items-center rounded-md bg-brand text-accent">
+                  <Icon family="pictogram" name={service.pictogram} class="size-12" />
+                </span>
+                <div>
+                  <h3 class="font-display text-h4">{service.name}</h3>
+                  <p class="mt-1 text-pretty text-body text-ink">{service.line}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. People first, on Green. The split flips: the slot at the left with nested bands
+       behind it, a white card at its corner. The People-Centric line is F2's; the card
+       carries F6's tagline, both beats together. -->
+  <section
+    id="people"
+    class="on-inverse relative scroll-mt-4 overflow-hidden bg-brand text-white"
+    aria-labelledby="people-title"
+  >
+    <div
+      class="relative mx-auto grid max-w-page items-center gap-y-6 px-4 pb-20 pt-16 sm:px-6 lg:grid-cols-12 lg:gap-x-12 lg:px-8 lg:py-24"
+    >
+      <div
+        class="max-lg:-mx-4 max-lg:overflow-hidden max-lg:px-4 max-lg:pb-12 max-lg:pt-32 sm:max-lg:-mx-6 sm:max-lg:px-6 lg:col-span-6"
+      >
+        <div class="relative max-lg:mx-auto max-lg:max-w-xl">
+          <RoofBands
+            height={75}
+            class="absolute inset-0 size-full -scale-x-100"
+            steps={[
+              { d: 15, className: 'fill-green-700 max-lg:hidden' },
+              { d: 10, className: 'fill-brand max-lg:hidden' },
+              { d: 6, className: 'fill-accent' },
+              { d: 3, className: 'fill-brand' },
+            ]}
+          />
+          <PhotoSlot
+            id="people-roofs"
+            ratio="aspect-[4/3]"
+            height={75}
+            label="Photograph to come: tenants at home in a managed building (open decision D14)"
+            artClass="-scale-x-100"
+            class="relative"
+          />
+          <div
+            class="absolute -bottom-12 right-4 z-10 w-[min(22rem,calc(100%-2rem))] rounded-lg bg-surface p-6 shadow-lg sm:right-6 lg:-right-10"
+          >
+            <p class="font-display text-h3 font-bold text-heading">
+              <span class="block">Your Property.</span>
+              <span class="block text-gold-700">Our Responsibility.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5 lg:col-start-8">
+        <p class:list={[overline, 'text-white']}>People first</p>
+        <h2 id="people-title" class="statement mt-3 text-white">Great spaces, happy tenants.</h2>
+        <ul class="mt-10 grid gap-8">
+          {
+            tenantPoints.map((point) => (
+              <li class="flex gap-5">
+                <span class="grid size-14 shrink-0 place-items-center rounded-md bg-green-700 text-accent">
+                  <Icon name={point.icon} class="size-8" />
+                </span>
+                <div>
+                  <h3 class="font-display text-h4 text-white">{point.title}</h3>
+                  <p class="mt-1 text-pretty text-body text-white">{point.line}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Contact. The only contact fact is the postal address; the rest are labelled
+       placeholders. The form is a design only and sends nothing. Its card overlaps the
+       Green band that runs into the footer. -->
+  <section id="contact" class="relative scroll-mt-4 bg-sage-100" aria-labelledby="contact-title">
+    <div class="absolute inset-x-0 bottom-0 h-24 bg-brand" aria-hidden="true"></div>
+    <div
+      class="relative mx-auto grid max-w-page gap-12 px-4 pb-12 pt-16 sm:px-6 md:pt-24 lg:grid-cols-12 lg:gap-x-12 lg:px-8"
+    >
+      <div class="self-start lg:col-span-5">
+        <p class:list={[overline, 'text-brand']}>Contact</p>
+        <h2 id="contact-title" class="statement mt-3">Talk to us.</h2>
+        <p class="mt-4 text-body-lg text-ink">
+          Tell us about your building and how to reach you.
+        </p>
+        <ul class="mt-10 grid gap-6">
+          <li class="flex items-center gap-4">
+            <Icon family="pictogram" name="badge-location" class="size-12 text-brand" />
+            <div>
+              <p class="font-display text-label font-semibold text-ink">Post</p>
+              <p class="text-body text-ink">{POSTAL_ADDRESS}</p>
+            </div>
+          </li>
+          <li class="flex items-center gap-4">
+            <Icon family="pictogram" name="badge-phone" class="size-12 text-brand" />
+            <div>
+              <p class="font-display text-label font-semibold text-ink">Phone</p>
+              <p class={placeholderClass}>Phone number to be added</p>
+            </div>
+          </li>
+          <li class="flex items-center gap-4">
+            <span
+              class="grid size-12 shrink-0 place-items-center rounded-[20%] bg-brand text-sage-100"
+            >
+              <Icon name="mail" class="size-8" />
+            </span>
+            <div>
+              <p class="font-display text-label font-semibold text-ink">Email</p>
+              <p class={placeholderClass}>Email address to be added</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <form
+        class="relative grid gap-6 rounded-xl bg-surface p-6 shadow-md sm:p-8 lg:col-span-6 lg:col-start-7"
+        aria-labelledby="form-title"
+      >
+        <h3 id="form-title" class="font-display text-h3">Tell us about your building</h3>
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div>
+            <label for="contact-name" class={labelClass}>Your name</label>
+            <input id="contact-name" type="text" autocomplete="name" class={fieldClass} />
+          </div>
+          <div>
+            <label for="contact-phone" class={labelClass}>Phone or WhatsApp number</label>
+            <input id="contact-phone" type="tel" autocomplete="tel" class={fieldClass} />
+          </div>
+        </div>
+        <div>
+          <label for="contact-building" class={labelClass}>About your building</label>
+          <textarea
+            id="contact-building"
+            rows="3"
+            aria-describedby="contact-building-hint"
+            class={fieldClass}></textarea>
+          <p id="contact-building-hint" class="mt-2 text-body-sm text-muted">
+            For example, where it is and how many rooms it has.
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-x-6 gap-y-3">
+          <button
+            type="button"
+            aria-describedby="contact-note"
+            class="inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-brand px-6 font-display text-body font-semibold text-white transition-colors duration-[var(--mw-motion-duration-fast)] hover:bg-brand-deep active:bg-green-900 motion-reduce:transition-none"
+          >
+            Send
+          </button>
+          <p id="contact-note" class="text-caption text-muted">
+            Design preview: this form does not send anything yet.
+          </p>
+        </div>
+      </form>
     </div>
   </section>
 </Layout>

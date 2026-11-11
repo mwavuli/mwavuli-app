@@ -1,0 +1,29 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import Icon from './Icon.astro';
+
+interface Props extends HTMLAttributes<'a'> {
+  href: string;
+  /** Show the arrow after the label. */
+  arrow?: boolean;
+}
+
+const { href, arrow = false, class: className, ...attrs } = Astro.props;
+
+// Brand A5 and A6: the primary button is Green with white Montserrat 600, radius.md and 48 px
+// high. Hover one ramp step darker, pressed one more. Pills are for chips and toggles only (S3).
+const classes =
+  'group/button inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-brand px-6 font-display text-body font-semibold text-white transition-colors duration-[var(--mw-motion-duration-fast)] ease-[var(--mw-motion-easing-standard)] hover:bg-brand-deep active:bg-green-900 motion-reduce:transition-none';
+---
+
+<a {href} {...attrs} class:list={[classes, className]}>
+  <slot />
+  {
+    arrow && (
+      <Icon
+        name="arrow-right"
+        class="size-5 transition-transform duration-[var(--mw-motion-duration-fast)] ease-[var(--mw-motion-easing-standard)] group-hover/button:translate-x-0.5 motion-reduce:transition-none"
+      />
+    )
+  }
+</a>

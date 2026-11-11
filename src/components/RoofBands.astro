@@ -1,0 +1,58 @@
+---
+/**
+ * Nested flat gables at the logo's slope, drawn behind a photo slot (brand M1 and M3): the
+ * roof layers of a house seen from the front. Each step is one gable, outermost first, so a
+ * later step paints over the one before and the visible rings are the bands. A step filled
+ * with the ground colour is a gap.
+ *
+ * The viewBox is the photo slot's own box with the slot's width as 100, so the shape keeps
+ * its 43 degree angle at every size. It overflows the box on purpose: the peak rises above
+ * the slot and the roof runs off the right and the bottom, where the section clips it.
+ */
+interface Step {
+  /** How far this gable stands outside the innermost one, in slot units, at right angles. */
+  d: number;
+  /** A Tailwind fill class from the theme, for example "fill-brand". */
+  className: string;
+}
+
+interface Props {
+  /** Height of the photo slot, with its width as 100. */
+  height: number;
+  steps: readonly Step[];
+  class?: string;
+}
+
+const { height, steps, class: className } = Astro.props;
+
+const slope = Math.tan((43 * Math.PI) / 180);
+const secant = Math.sqrt(1 + slope * slope);
+const peak = { x: 66, y: -22 };
+const wallX = 24;
+const bottom = height + 80;
+
+const gables = steps.map((step) => {
+  const peakY = peak.y - step.d * secant;
+  const wall = wallX - step.d;
+  const eaveY = peakY + (peak.x - wall) * slope;
+  const farX = peak.x + (bottom - peakY) / slope;
+  const points = [
+    [wall, bottom],
+    [wall, eaveY],
+    [peak.x, peakY],
+    [farX, bottom],
+  ]
+    .map(([x, y]) => `${x!.toFixed(2)},${y!.toFixed(2)}`)
+    .join(' ');
+  return { points, className: step.className };
+});
+---
+
+<svg
+  viewBox={`0 0 100 ${height}`}
+  class:list={['overflow-visible', className]}
+  aria-hidden="true"
+  focusable="false"
+>
+  {gables.map((gable) => <polygon points={gable.points} class={gable.className} />)}
+</svg>

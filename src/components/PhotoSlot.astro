@@ -1,0 +1,67 @@
+---
+import RoofPattern from './RoofPattern.astro';
+
+interface Props {
+  /** Unique per instance; names the roof pattern. */
+  id: string;
+  /** Tailwind aspect-ratio class: the final crop of the photograph. */
+  ratio: string;
+  /** Height of the slot with its width as 100: it must match the ratio. */
+  height: number;
+  /** What the photograph will show, for assistive technology. */
+  label: string;
+  /** Classes for the art, for example to mirror it. */
+  artClass?: string;
+  class?: string;
+}
+
+const { id, ratio, height, label, artClass, class: className } = Astro.props;
+
+// The art is flat tonal planes at the roof slope, in slot units (width 100): a roofline that
+// falls to the left, a thin gold-300 band above it, and a four-square window grid after the
+// mark. It shows the crop: sky above and left, the building below and right.
+const slope = Math.tan((43 * Math.PI) / 180);
+const secant = Math.sqrt(1 + slope * slope);
+const lineY = (x: number, top: number) => top + (100 - x) * slope;
+const roofTop = height * 0.14;
+const plane = `0,${(lineY(0, roofTop)).toFixed(2)} 100,${roofTop.toFixed(2)} 100,${height} 0,${height}`;
+const bandUp = (rise: number) =>
+  `0,${(lineY(0, roofTop) - rise * secant).toFixed(2)} 100,${(roofTop - rise * secant).toFixed(2)}`;
+const band = `${bandUp(5)} ${bandUp(8.5).split(' ').reverse().join(' ')}`;
+const windows = [
+  [66, height * 0.6],
+  [80, height * 0.6],
+  [66, height * 0.6 + 14],
+  [80, height * 0.6 + 14],
+];
+---
+
+<!-- Brand M5 and D14: no photography exists yet. The slot holds the final aspect ratio and
+     radius (S3), flat tonal planes on a cream field with the M2 roof pattern on the light
+     plane only, and the caption on a solid Green label (M6). -->
+<div
+  role="img"
+  aria-label={label}
+  class:list={['relative overflow-hidden rounded-xl bg-page shadow-md', ratio, className]}
+>
+  <RoofPattern {id} class="absolute inset-0 size-full" />
+  <svg
+    viewBox={`0 0 100 ${height}`}
+    class:list={['absolute inset-0 size-full', artClass]}
+    aria-hidden="true"
+    focusable="false"
+  >
+    <polygon points={band} class="fill-gold-300"></polygon>
+    <polygon points={plane} class="fill-sage-300"></polygon>
+    {
+      windows.map(([x, y]) => (
+        <rect x={x} y={y} width="10" height="10" class="fill-page"></rect>
+      ))
+    }
+  </svg>
+  <p
+    class="absolute left-4 top-4 rounded-sm bg-brand px-3 py-1.5 text-caption text-white"
+  >
+    Photograph to come (D14)
+  </p>
+</div>

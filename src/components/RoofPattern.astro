@@ -1,0 +1,30 @@
+---
+interface Props {
+  /** Unique per instance: two patterns on one page need two ids. */
+  id: string;
+  class?: string;
+}
+
+const { id, class: className } = Astro.props;
+
+// Brand M2: staggered outlined roofs, each with a small window. Roof width 64, half a roof
+// of offset on alternate rows, slope 43 degrees (rise 28 over a run of 30). The tone is set
+// by the `roof-tone` class in global.css.
+---
+
+<svg class:list={['roof-tone', className]} aria-hidden="true" focusable="false">
+  <defs>
+    <pattern {id} width="72" height="72" patternUnits="userSpaceOnUse">
+      <g fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M6 34 36 6.03 66 34" />
+        <path d="M-30 70 0 42.03 30 70M42 70 72 42.03 102 70" />
+      </g>
+      <g fill="currentColor">
+        <rect x="32" y="22" width="8" height="8"></rect>
+        <rect x="-4" y="58" width="8" height="8"></rect>
+        <rect x="68" y="58" width="8" height="8"></rect>
+      </g>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill={`url(#${id})`}></rect>
+</svg>

@@ -1,0 +1,52 @@
+---
+/**
+ * Angular roof bands in a corner (brand M3): parallel flat bands at the logo's slope that
+ * rise from the bottom edge and leave through the right edge, so the only cuts are the
+ * edges of the box they sit in. Gold stays a thin band, well under a fifth of the motif.
+ * Give the component a square size class and set it flush in the corner; flip it with
+ * `-scale-y-100` for a top corner. Keep text clear of it.
+ */
+interface Band {
+  /** Where the band starts along the bottom edge, from 0 to 320. */
+  x: number;
+  /** The band's width along the bottom edge. */
+  w: number;
+  /** A Tailwind fill class from the theme. */
+  className: string;
+}
+
+interface Props {
+  bands: readonly Band[];
+  class?: string;
+}
+
+const { bands, class: className } = Astro.props;
+
+const SIZE = 320;
+const slope = Math.tan((43 * Math.PI) / 180);
+// Where a line rising at the roof slope from (x, SIZE) meets the right edge. It stays inside
+// the box for any x of 0 or more, so no band is ever cut by the top edge.
+const rightEdge = (x: number) => SIZE - (SIZE - x) * slope;
+
+const shapes = bands.map((band) => ({
+  className: band.className,
+  points: [
+    [band.x, SIZE],
+    [band.x + band.w, SIZE],
+    [SIZE, rightEdge(band.x + band.w)],
+    [SIZE, rightEdge(band.x)],
+  ]
+    .map(([x, y]) => `${x!.toFixed(2)},${y!.toFixed(2)}`)
+    .join(' '),
+}));
+---
+
+<svg
+  viewBox={`0 0 ${SIZE} ${SIZE}`}
+  preserveAspectRatio="xMaxYMax meet"
+  class={className}
+  aria-hidden="true"
+  focusable="false"
+>
+  {shapes.map((shape) => <polygon points={shape.points} class={shape.className} />)}
+</svg>

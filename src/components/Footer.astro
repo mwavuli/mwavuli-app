@@ -1,22 +1,54 @@
 ---
-import { SITE_NAME } from '../config';
+import { POSTAL_ADDRESS, SITE_DESCRIPTION, SITE_NAME } from '../config';
 import Lockup from './Lockup.astro';
+import RoofCorner from './RoofCorner.astro';
 
 const year = new Date().getFullYear();
+
+const links = [
+  { href: '/#services', label: 'Services' },
+  { href: '/#people', label: 'For tenants' },
+  { href: '/#contact', label: 'Contact' },
+  { href: '/legal/privacy/', label: 'Privacy policy' },
+];
 ---
 
-<footer class="on-inverse bg-brand text-white">
-  <div class="mx-auto max-w-page px-4 py-10 sm:px-6">
-    <Lockup reversed class="h-8" role="img" aria-label={SITE_NAME} />
-    <nav aria-label="Footer" class="mt-6">
-      <ul class="grid gap-1 text-body-sm">
-        <li>
-          <a href="/legal/privacy/" class="inline-flex min-h-11 items-center hover:underline">
-            Privacy policy
-          </a>
-        </li>
+<!-- Brand A6: a Green footer with the reversed lockup. The lockup is 195 px wide (L5) with
+     24 px clear (L4), so the footer keeps a 24 px margin on phones. The purpose is stated in the board's words (F1). The corner bands are
+     M3: flat, tone on tone with one thin gold band, cropped by the edges and clear of text. -->
+<footer class="on-inverse relative overflow-hidden bg-brand text-white">
+  <RoofCorner
+    class="absolute bottom-0 right-0 hidden size-64 md:block lg:size-80 xl:size-[26rem]"
+    bands={[
+      { x: 30, w: 100, className: 'fill-green-700' },
+      { x: 154, w: 20, className: 'fill-accent' },
+      { x: 198, w: 80, className: 'fill-green-700' },
+    ]}
+  />
+  <div
+    class="relative mx-auto grid max-w-page gap-12 px-6 py-16 lg:grid-cols-12 lg:px-8 lg:py-20"
+  >
+    <div class="lg:col-span-6">
+      <Lockup reversed class="h-12" role="img" aria-label={SITE_NAME} />
+      <p class="mt-8 max-w-md text-body-lg">{SITE_DESCRIPTION}</p>
+      <p class="mt-6 text-body">{POSTAL_ADDRESS}</p>
+    </div>
+    <nav aria-label="Footer" class="lg:col-span-3 lg:col-start-7">
+      <ul class="grid gap-1">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="inline-flex min-h-12 items-center font-display text-body font-semibold underline-offset-4 hover:underline"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </nav>
-    <p class="mt-8 border-t border-white/20 pt-6 text-caption">© {year} {SITE_NAME}</p>
+    <p class="border-t border-white/20 pt-6 text-caption lg:col-span-12">© {year} {SITE_NAME}</p>
   </div>
 </footer>

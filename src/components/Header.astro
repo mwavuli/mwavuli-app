@@ -1,32 +1,90 @@
 ---
 import { SITE_NAME } from '../config';
+import Button from './Button.astro';
+import Icon from './Icon.astro';
 import Lockup from './Lockup.astro';
+
+const links = [
+  { href: '/#services', label: 'Services' },
+  { href: '/#people', label: 'For tenants' },
+];
+
+const linkClass =
+  'inline-flex min-h-12 items-center rounded-md px-4 font-display text-body font-semibold text-ink transition-colors duration-[var(--mw-motion-duration-fast)] hover:bg-sage-100 hover:text-brand motion-reduce:transition-none';
 ---
 
-<header class="border-b border-line bg-page">
-  <div class="mx-auto flex max-w-page items-center justify-between gap-4 px-4 py-4 sm:px-6">
-    <a href="/" class="flex shrink-0 items-center" aria-label={`${SITE_NAME}: home`}>
-      <Lockup class="h-8" aria-hidden="true" />
-    </a>
-    <nav aria-label="Main">
-      <ul class="flex items-center gap-2 sm:gap-4">
-        <li>
-          <a
-            href="/legal/privacy/"
-            class="inline-flex min-h-11 items-center px-3 font-display text-label font-semibold text-ink hover:text-brand"
-          >
-            Privacy
-          </a>
-        </li>
-        <li>
-          <a
-            href="/#contact"
-            class="inline-flex min-h-11 items-center rounded-full bg-brand px-5 font-display text-label font-semibold text-white hover:bg-brand-deep"
-          >
-            Contact
-          </a>
-        </li>
-      </ul>
-    </nav>
+<!-- Brand A6 and L4: the horizontal lockup at 195 px (L5 asks for 180 px) with one eighth of
+     its width, about 24 px, clear on every side. A floating white bar keeps the lockup on its
+     primary pairing and the targets chunky (S8). The header is 112 px tall and has no ground
+     of its own, so a hero can run underneath it. -->
+<header class="relative z-30">
+  <div class="mx-auto max-w-page px-4 pt-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between gap-6 rounded-xl bg-surface p-6 shadow-md">
+      <a href="/" class="flex shrink-0 items-center rounded-md" aria-label={`${SITE_NAME}: home`}>
+        <Lockup class="h-12" aria-hidden="true" />
+      </a>
+
+      <nav aria-label="Main" class="hidden md:block">
+        <ul class="flex items-center gap-2">
+          {
+            links.map((link) => (
+              <li>
+                <a href={link.href} class={linkClass}>
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+          <li class="ml-2">
+            <Button href="/#contact">Contact</Button>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Below 768 px the links sit in a disclosure that works without JavaScript. -->
+      <details class="group relative md:hidden" data-menu>
+        <summary
+          class="flex size-12 cursor-pointer list-none items-center justify-center rounded-md bg-sage-100 text-brand transition-colors duration-[var(--mw-motion-duration-fast)] hover:bg-sage-300 motion-reduce:transition-none [&::-webkit-details-marker]:hidden"
+        >
+          <span class="sr-only">Menu</span>
+          <span class="group-open:hidden"><Icon name="menu" class="size-6" /></span>
+          <span class="hidden group-open:block"><Icon name="close" class="size-6" /></span>
+        </summary>
+        <nav
+          aria-label="Menu"
+          class="absolute -right-6 top-full z-20 mt-8 w-72 rounded-xl bg-surface p-4 shadow-lg"
+        >
+          <ul class="grid gap-1">
+            {
+              links.map((link) => (
+                <li>
+                  <a href={link.href} class={`${linkClass} w-full`}>
+                    {link.label}
+                  </a>
+                </li>
+              ))
+            }
+            <li class="mt-3">
+              <Button href="/#contact" class="w-full">Contact</Button>
+            </li>
+          </ul>
+        </nav>
+      </details>
+    </div>
   </div>
 </header>
+
+<script>
+  // Enhancement only: close the menu after a choice and on Escape.
+  const menu = document.querySelector<HTMLDetailsElement>('details[data-menu]');
+  if (menu) {
+    const close = () => menu.removeAttribute('open');
+    menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', close));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menu.open) {
+        close();
+        menu.querySelector('summary')?.focus();
+      }
+    });
+  }
+</script>
