@@ -1,28 +1,19 @@
 ---
-import { POSTAL_ADDRESS, SITE_NAME } from '../config';
+import Contact from '../components/Contact.astro';
+import Numbers from '../components/Numbers.astro';
+import SentenceHero from '../components/SentenceHero.astro';
+import Services from '../components/Services.astro';
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Home">
-  <!-- Brand A6: a green band with a two-beat headline and a gold rule. The photograph
-       waits on the open photography decision (D14). -->
-  <section class="on-inverse bg-brand text-white">
-    <div class="mx-auto max-w-page px-4 py-20 sm:px-6 sm:py-28">
-      <h1 class="font-display text-h1 text-white sm:text-display">
-        Managed Properties. <span class="text-accent">Better Living.</span>
-      </h1>
-      <div class="mt-6 h-1 w-16 bg-accent" aria-hidden="true"></div>
-      <p class="mt-6 max-w-xl text-body-lg">Rent paid to you on the 1st, every month.</p>
-    </div>
-  </section>
+  <!-- Adds the `js` class before the first paint, so the sentence shows without a flash of the no-JS list. -->
+  <script is:inline slot="head">
+    document.documentElement.classList.add('js');
+  </script>
 
-  <section id="contact" class="bg-surface">
-    <div class="mx-auto max-w-page px-4 py-16 sm:px-6">
-      <h2 class="text-h2">Contact</h2>
-      <p class="mt-4 text-body-lg">
-        {SITE_NAME}<br />
-        {POSTAL_ADDRESS}
-      </p>
-    </div>
-  </section>
+  <SentenceHero />
+  <Numbers />
+  <Services />
+  <Contact />
 </Layout>

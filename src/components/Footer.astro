@@ -5,18 +5,24 @@ import Lockup from './Lockup.astro';
 const year = new Date().getFullYear();
 ---
 
+<!-- Brand L4/L5: the reversed horizontal lockup is 195 px wide (h-12) with 24 px clear space. -->
 <footer class="on-inverse bg-brand text-white">
-  <div class="mx-auto max-w-page px-4 py-10 sm:px-6">
-    <Lockup reversed class="h-8" role="img" aria-label={SITE_NAME} />
-    <nav aria-label="Footer" class="mt-6">
-      <ul class="grid gap-1 text-body-sm">
-        <li>
-          <a href="/legal/privacy/" class="inline-flex min-h-11 items-center hover:underline">
-            Privacy policy
-          </a>
-        </li>
-      </ul>
-    </nav>
+  <div class="mx-auto max-w-page px-6 py-12 lg:px-8">
+    <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+      <Lockup reversed class="h-12" role="img" aria-label={SITE_NAME} />
+      <nav aria-label="Footer">
+        <ul class="flex gap-4 text-body-sm sm:-mr-4">
+          <li>
+            <a
+              href="/legal/privacy/"
+              class="-ml-4 inline-flex sm:ml-0 min-h-12 items-center rounded-md px-4 font-display font-semibold underline decoration-transparent underline-offset-4 transition-colors duration-[var(--mw-motion-duration-fast)] hover:decoration-current"
+            >
+              Privacy policy
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
     <p class="mt-8 border-t border-white/20 pt-6 text-caption">© {year} {SITE_NAME}</p>
   </div>
 </footer>

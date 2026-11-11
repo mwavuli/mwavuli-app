@@ -1,0 +1,72 @@
+---
+/*
+ * The three numbers a landlord needs to remember (business/model.md, BM18). The statements are
+ * the pitch's "say aloud" lines, word for word. The figures are decoration for the statements
+ * that carry them, so they are hidden from assistive technology.
+ */
+const numbers = [
+  { figure: '1st', unit: '', statement: 'We pay you on the 1st, for every room with a tenant.' },
+  { figure: '15%', unit: '', statement: 'We take 15% of the rent. No rent, no fee.' },
+  { figure: '30', unit: 'days', statement: 'Leave any time with 30 days’ notice.' },
+];
+---
+
+<section id="numbers" class="numbers" aria-labelledby="numbers-title">
+  <div class="mx-auto max-w-page px-6 pt-24 lg:px-8 lg:pt-32">
+    <div class="grid gap-8 lg:grid-cols-12 lg:items-end">
+      <div class="lg:col-span-7">
+        <p class="font-display text-overline uppercase text-brand">For owners</p>
+        <h2 id="numbers-title" class="mt-4 text-h1 sm:text-display">Three numbers to remember.</h2>
+        <div class="mt-6 h-1 w-16 bg-accent" aria-hidden="true"></div>
+      </div>
+      <p class="font-display text-h3 text-balance text-heading lg:col-span-5">Rent paid to you on the 1st, every month.</p>
+    </div>
+
+    <ol class="cards mt-14 grid gap-6 md:grid-cols-3">
+      {
+        numbers.map((n) => (
+          <li class="rounded-lg bg-surface p-8 shadow-md">
+            <p
+              class="-ml-[0.05em] flex items-baseline gap-3 font-display text-[clamp(4.5rem,9.2vw,8rem)] font-[750] leading-none tracking-tight text-brand tabular-nums"
+              aria-hidden="true"
+            >
+              <span>{n.figure}</span>
+              {n.unit && <span class="text-h3 tracking-normal">{n.unit}</span>}
+            </p>
+            <p class="mt-6 text-body-lg">{n.statement}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  /* A full-bleed sage band behind the lower half of the cards, so the cards overlap it. */
+  .numbers {
+    position: relative;
+    isolation: isolate;
+    overflow-x: clip;
+    padding-bottom: 7rem;
+    background: var(--mw-color-role-bg-page);
+  }
+  .cards {
+    position: relative;
+  }
+  .cards::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 55%;
+    bottom: -7rem;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    background: var(--mw-color-ramp-sage-100);
+  }
+  @media (max-width: 767px) {
+    .cards::before {
+      top: 30%;
+    }
+  }
+</style>

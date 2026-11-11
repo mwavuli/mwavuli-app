@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Page not found" description="The page you were looking for does not exist.">
-  <section class="mx-auto flex max-w-3xl flex-col items-start px-4 py-24 sm:px-6">
+  <section class="mx-auto flex max-w-3xl flex-col items-start px-6 py-24 lg:px-8">
     <p class="font-display text-overline uppercase text-brand">404</p>
     <h1 class="mt-2 text-h1">Page not found</h1>
     <p class="mt-4 text-body-lg text-muted">
@@ -11,7 +11,7 @@ import Layout from '../layouts/Layout.astro';
     </p>
     <a
       href="/"
-      class="mt-8 inline-flex min-h-11 items-center rounded-full bg-brand px-5 font-display text-label font-semibold text-white hover:bg-brand-deep"
+      class="mt-8 inline-flex min-h-12 items-center rounded-md bg-brand px-6 font-display text-body font-semibold text-white transition-colors duration-[var(--mw-motion-duration-fast)] hover:bg-brand-deep active:bg-green-900"
     >
       Back to the homepage
     </a>

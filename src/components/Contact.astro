@@ -1,0 +1,91 @@
+---
+import badgeLocationRaw from '../../brand/icons/pictogram/badge-location.svg?raw';
+import badgePhoneRaw from '../../brand/icons/pictogram/badge-phone.svg?raw';
+import mailRaw from '../../brand/icons/line/mail.svg?raw';
+import { POSTAL_ADDRESS } from '../config';
+import RoofGlyph from './RoofGlyph.astro';
+
+/*
+ * The only contact fact is the postal address. The phone number and email address are plainly
+ * labelled placeholders, never realistic values and never links.
+ */
+---
+
+<section id="contact" class="contact" aria-labelledby="contact-title">
+  <RoofGlyph tone="quiet" class="contact-glyph" />
+  <div class="relative mx-auto max-w-page px-6 pb-28 pt-24 lg:px-8 lg:pb-52 lg:pt-32">
+    <div class="tagline-box">
+      <h2 id="contact-title" class="font-display text-overline uppercase text-brand">Contact</h2>
+      <p class="tagline mt-4 font-display font-bold tracking-tight text-brand">
+        <span class="block">Your Property.</span>
+        <span class="block text-gold-700">Our Responsibility.</span>
+      </p>
+    </div>
+    <div class="mt-8 h-1 w-16 bg-accent" aria-hidden="true"></div>
+
+    <div class="mt-14 rounded-xl bg-surface p-8 shadow-md lg:ml-auto lg:w-2/3 lg:p-10">
+      <dl class="grid gap-8">
+        <div class="flex items-center gap-5">
+          <span class="block h-12 flex-none text-brand [&>svg]:h-full [&>svg]:w-auto" aria-hidden="true" set:html={badgeLocationRaw} />
+          <div>
+            <dt class="text-label text-muted">Postal address</dt>
+            <dd class="font-display text-h4 text-heading">{POSTAL_ADDRESS}</dd>
+          </div>
+        </div>
+        <div class="flex items-center gap-5">
+          <span class="block h-12 flex-none text-brand [&>svg]:h-full [&>svg]:w-auto" aria-hidden="true" set:html={badgePhoneRaw} />
+          <div>
+            <dt class="text-label text-muted">Phone</dt>
+            <dd class="font-display text-h4 text-muted">Phone number to be added</dd>
+          </div>
+        </div>
+        <div class="flex items-center gap-5">
+          <!-- Brand I8: a new badge is the same Green square (20 percent radius) with a line-family glyph knocked out. -->
+          <span class="grid aspect-[60.2/58.4] h-12 flex-none place-items-center rounded-[20%] bg-brand text-surface" aria-hidden="true">
+            <span class="block h-6 w-6 [&>svg]:h-full [&>svg]:w-full" set:html={mailRaw} />
+          </span>
+          <div>
+            <dt class="text-label text-muted">Email</dt>
+            <dd class="font-display text-h4 text-muted">Email address to be added</dd>
+          </div>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: var(--mw-color-role-bg-page);
+  }
+  /* The tagline scales with its column so "Our Responsibility." always stays on one line. */
+  .tagline-box {
+    container-type: inline-size;
+  }
+  .tagline {
+    font-size: clamp(2rem, 10cqw, 5.5rem);
+    line-height: 1.2;
+  }
+  /* Tonal roofs rise out of the Green footer below: flat, cropped by the section edge, and clear of all text. */
+  .contact-glyph {
+    position: absolute;
+    z-index: -1;
+    top: calc(100% - 7rem);
+    left: 50%;
+    width: 130vw;
+    height: auto;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+  @media (min-width: 1024px) {
+    .contact-glyph {
+      top: calc(100% - 23rem);
+      left: 7vw;
+      width: min(50rem, 80vw);
+      transform: none;
+    }
+  }
+</style>

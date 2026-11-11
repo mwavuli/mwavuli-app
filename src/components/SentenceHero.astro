@@ -1,0 +1,508 @@
+---
+import alertsRaw from '../../brand/icons/line/alerts.svg?raw';
+import arrowRaw from '../../brand/icons/line/arrow-right.svg?raw';
+import chevronRaw from '../../brand/icons/line/chevron-down.svg?raw';
+import leasesRaw from '../../brand/icons/line/leases.svg?raw';
+import maintenanceRaw from '../../brand/icons/line/maintenance.svg?raw';
+import paymentsRaw from '../../brand/icons/line/payments.svg?raw';
+import propertiesRaw from '../../brand/icons/line/properties.svg?raw';
+import reportsRaw from '../../brand/icons/line/reports.svg?raw';
+import trustedRaw from '../../brand/icons/line/trusted.svg?raw';
+import { audiences } from '../data/answers';
+import RoofGlyph from './RoofGlyph.astro';
+
+/** The line icon (brand I6 catalogue) that goes with each answer. */
+const icons: Record<string, string> = {
+  paid: paymentsRaw,
+  costs: reportsRaw,
+  unpaid: alertsRaw,
+  leave: leasesRaw,
+  repairs: maintenanceRaw,
+  pay: paymentsRaw,
+  deposit: trustedRaw,
+  fixes: maintenanceRaw,
+  manage: propertiesRaw,
+  terms: leasesRaw,
+};
+
+const [firstAudience] = audiences;
+const [firstAnswer] = firstAudience.answers;
+const sentence = (label: string) => label.charAt(0).toUpperCase() + label.slice(1);
+---
+
+<section class="hero on-inverse" aria-labelledby="hero-title">
+  <RoofGlyph class="hero-glyph" />
+  <div class="hero-inner">
+    <div class="topline">
+      <h1 id="hero-title" class="hero-title">
+        <span class="beat">Managed Properties.</span> <span class="beat">Better Living.</span>
+      </h1>
+      <p class="hint">Choose an underlined word to change it.</p>
+    </div>
+
+    <div class="stage">
+      <!-- Without JavaScript: a plain prompt, then every answer in a stacked list. -->
+      <p class="prompt">What do you want to know?</p>
+
+      <div class="sentence" role="group" aria-label="Choose who you are and what you want to know">
+        <p class="line">
+          <label for="who">I’m</label>
+          <span class="choice">
+            <span class="face" aria-hidden="true"
+              ><span class="face-text">{firstAudience.label}</span>{'\u2060'}<span class="knob" set:html={chevronRaw} /></span
+            >
+            <select id="who" name="who" autocomplete="off">
+              {
+                audiences.map((audience) => (
+                  <option value={audience.id} selected={audience.id === firstAudience.id}>
+                    {audience.label}
+                  </option>
+                ))
+              }
+            </select>
+          </span>
+        </p>
+        <p class="line"><label for="want">and I want to know</label></p>
+        <p class="line">
+          <span class="choice has-stop">
+            <span class="face" aria-hidden="true"
+              ><span class="face-text">{firstAnswer.label}</span>{'\u2060'}<span class="knob" set:html={chevronRaw} /></span
+            >
+            <select id="want" name="want" autocomplete="off">
+              {
+                firstAudience.answers.map((answer) => (
+                  <option value={answer.id} selected={answer.id === firstAnswer.id}>
+                    {answer.label}
+                  </option>
+                ))
+              }
+            </select>
+          </span>
+        </p>
+      </div>
+
+      <div class="answers" id="answers" aria-live="polite" aria-atomic="true">
+        {
+          audiences.map((audience, i) => (
+            <div class:list={['group', { 'is-active': i === 0 }]} data-who={audience.id} role="group" aria-label={audience.heading}>
+              <p class="group-title">{audience.heading}</p>
+              {audience.answers.map((answer, j) => (
+                <article class:list={['answer', { 'is-active': i === 0 && j === 0 }]} data-want={answer.id} data-label={answer.label}>
+                  <div class="answer-head">
+                    <span class="badge" aria-hidden="true" set:html={icons[answer.id]} />
+                    <h2 class="kicker">{sentence(answer.label)}</h2>
+                  </div>
+                  <p class="lead">{answer.lead}</p>
+                  <p class="support">{answer.support}</p>
+                  <a class="more" href="#contact">
+                    <span>Talk to us</span>
+                    <span class="arrow" aria-hidden="true" set:html={arrowRaw} />
+                  </a>
+                </article>
+              ))}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Choosing in the sentence shows the matching answer. Every answer is already in the page.
+  const who = document.querySelector<HTMLSelectElement>('#who');
+  const want = document.querySelector<HTMLSelectElement>('#want');
+  const answers = document.querySelector<HTMLElement>('#answers');
+  const groups = [...document.querySelectorAll<HTMLElement>('.group')];
+
+  if (who && want && answers) {
+    const show = (): void => {
+      for (const group of groups) {
+        const on = group.dataset.who === who.value;
+        group.classList.toggle('is-active', on);
+        for (const answer of group.querySelectorAll<HTMLElement>('.answer')) {
+          answer.classList.toggle('is-active', on && answer.dataset.want === want.value);
+        }
+      }
+      for (const select of [who, want]) {
+        const face = select.parentElement?.querySelector('.face-text');
+        if (face) face.textContent = select.selectedOptions[0]?.text ?? '';
+      }
+    };
+
+    who.addEventListener('change', () => {
+      const group = groups.find((g) => g.dataset.who === who.value);
+      const topics = group ? [...group.querySelectorAll<HTMLElement>('.answer')] : [];
+      want.replaceChildren(...topics.map((a) => new Option(a.dataset.label, a.dataset.want)));
+      show();
+    });
+    want.addEventListener('change', show);
+    show();
+    answers.dataset.ready = '';
+  }
+</script>
+
+<style>
+  /* ---- The field: a full-bleed Green band (brand A6, reversed proportions C2). */
+  .hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: var(--mw-color-role-bg-inverse);
+    color: var(--mw-color-role-text-inverse);
+  }
+  /* On phones the roofs form a skyline under the card; from 768px they bleed off the bottom right. */
+  .hero-glyph {
+    position: absolute;
+    z-index: -1;
+    top: calc(100% - 11rem);
+    left: 50%;
+    width: 130vw;
+    height: auto;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-width: var(--mw-size-container-max);
+    min-height: calc(100svh - 6rem);
+    margin-inline: auto;
+    padding: 1.5rem 1.5rem 12rem;
+  }
+  .hero-title {
+    margin: 0;
+    font-family: var(--font-display, 'Montserrat Variable', sans-serif);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.5rem;
+    color: var(--mw-color-role-text-inverse);
+  }
+  .beat {
+    white-space: nowrap;
+  }
+  .topline {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .hint {
+    margin: 0;
+    font-size: var(--mw-type-body-sm-size);
+    line-height: var(--mw-type-body-sm-line);
+    color: var(--mw-color-ramp-green-100);
+  }
+  :global(html.js) .hint {
+    display: block;
+  }
+  .stage {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  /* ---- Without JavaScript the sentence is hidden and the answers are a stacked list. */
+  .prompt {
+    margin: 2rem 0 0;
+    font-family: var(--font-display, 'Montserrat Variable', sans-serif);
+    font-size: clamp(2rem, 9cqw, 4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  .sentence,
+  .hint {
+    display: none;
+  }
+  :global(html.js) .prompt {
+    display: none;
+  }
+  :global(html.js) .sentence {
+    display: block;
+  }
+
+  /* ---- The sentence. Type scales with the container so the longest fixed line, "and I want to
+     know", always fits; the chosen words wrap inside their own box. */
+  .sentence {
+    container-type: inline-size;
+    margin-top: 1.25rem;
+  }
+  .line {
+    margin: 0;
+    font-family: var(--font-display, 'Montserrat Variable', sans-serif);
+    font-size: clamp(1.75rem, min(10cqw, 10.5svh), 5.25rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--mw-color-role-text-inverse);
+  }
+  .line label {
+    cursor: pointer;
+  }
+  /* The full stop belongs to the sentence, so it is white and sits outside the underline. */
+  .has-stop .face-text::after {
+    content: '.';
+    display: inline-block;
+    color: var(--mw-color-role-text-inverse);
+  }
+
+  /* A choice is a native <select>, invisible and stretched over a visible face. Giant type can
+     wrap in the face, the OS picker still opens, and the select keeps its label and keyboard. */
+  .choice {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    vertical-align: baseline;
+    border-radius: var(--mw-radius-sm);
+  }
+  .face {
+    display: block;
+    color: var(--mw-color-core-gold);
+    text-decoration: underline dotted;
+    text-decoration-thickness: 0.07em;
+    text-underline-offset: 0.16em;
+    text-wrap: balance;
+    transition: color var(--mw-motion-duration-fast) var(--mw-motion-easing-standard);
+  }
+  /* The knob follows the last word, so it stays with the text however the choice wraps. */
+  .knob {
+    display: inline-grid;
+    width: max(0.62em, 1.5rem);
+    height: max(0.62em, 1.5rem);
+    margin-left: 0.2em;
+    place-items: center;
+    vertical-align: middle;
+    border-radius: var(--mw-radius-sm);
+    background: var(--mw-color-core-gold);
+    color: var(--mw-color-core-green);
+    transition: background-color var(--mw-motion-duration-fast) var(--mw-motion-easing-standard);
+  }
+  .knob :global(svg) {
+    width: 76%;
+    height: 76%;
+  }
+  .choice select {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    opacity: 0;
+    cursor: pointer;
+    background: var(--mw-color-core-white);
+    color: var(--mw-color-role-text-primary);
+    font-family: var(--font-sans, 'Inter Variable', sans-serif);
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+  .choice option {
+    background: var(--mw-color-core-white);
+    color: var(--mw-color-role-text-primary);
+  }
+  .choice:hover .face {
+    color: var(--mw-color-ramp-gold-300);
+    text-decoration-style: solid;
+  }
+  .choice:hover .knob {
+    background: var(--mw-color-ramp-gold-300);
+  }
+  /* Brand S8: a 2px Gold ring (the inverse focus ring) on the whole choice. */
+  .choice:has(select:focus-visible) {
+    outline: 2px solid var(--mw-color-role-focus-ring-inverse);
+    outline-offset: 4px;
+  }
+  @supports not selector(:has(*)) {
+    .choice:focus-within {
+      outline: 2px solid var(--mw-color-role-focus-ring-inverse);
+      outline-offset: 4px;
+    }
+  }
+
+  /* ---- The answers: white, flat cards on the Green field (no shadow on a reversed surface, S4). */
+  .answers {
+    margin-top: auto;
+    padding-top: 1.5rem;
+  }
+  .group-title {
+    margin: 2.5rem 0 1rem;
+    font-family: var(--font-display, 'Montserrat Variable', sans-serif);
+    font-size: var(--mw-type-overline-size);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    line-height: 1rem;
+    text-transform: uppercase;
+    color: var(--mw-color-ramp-green-100);
+  }
+  .answer {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 1rem;
+    max-width: 42rem;
+    margin-bottom: 1rem;
+    padding: 1.5rem;
+    border-radius: var(--mw-radius-xl);
+    background: var(--mw-color-core-white);
+    color: var(--mw-color-role-text-primary);
+  }
+  .answer-head {
+    display: flex;
+    grid-column: 1 / -1;
+    align-items: center;
+    gap: 1rem;
+  }
+  .badge {
+    display: grid;
+    flex: none;
+    width: 3rem;
+    height: 3rem;
+    place-items: center;
+    border-radius: var(--mw-radius-md);
+    background: var(--mw-color-ramp-green-50);
+    color: var(--mw-color-role-brand-primary);
+  }
+  .badge :global(svg) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .kicker {
+    margin: 0;
+    font-family: var(--font-display, 'Montserrat Variable', sans-serif);
+    font-size: var(--mw-type-overline-size);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    line-height: 1rem;
+    text-transform: uppercase;
+    color: var(--mw-color-role-text-heading);
+  }
+  .lead {
+    grid-column: 1 / -1;
+    margin: 1.25rem 0 0;
+    font-family: var(--font-display, 'Montserrat Variable', sans-serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.75rem;
+    color: var(--mw-color-role-text-heading);
+  }
+  .support {
+    grid-column: 1 / -1;
+    margin: 0.75rem 0 0;
+    font-size: var(--mw-type-body-lg-size);
+    line-height: var(--mw-type-body-lg-line);
+    font-variant-numeric: tabular-nums;
+  }
+  .more {
+    display: inline-flex;
+    grid-column: 1 / -1;
+    justify-self: start;
+    min-height: 3rem;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    font-family: var(--font-display, 'Montserrat Variable', sans-serif);
+    font-weight: 600;
+    color: var(--mw-color-role-brand-primary);
+    text-decoration: underline transparent;
+    text-underline-offset: 0.3em;
+    transition: text-decoration-color var(--mw-motion-duration-fast) var(--mw-motion-easing-standard);
+  }
+  .more:hover {
+    text-decoration-color: currentColor;
+  }
+  .arrow :global(svg) {
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  :global(html.js) .answer {
+    margin-bottom: 0;
+  }
+  :global(html.js) .group:not(.is-active),
+  :global(html.js) .answer:not(.is-active),
+  :global(html.js) .group-title {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .arrow :global(svg) {
+      transition: transform var(--mw-motion-duration-base) var(--mw-motion-easing-standard);
+    }
+    .more:hover .arrow :global(svg) {
+      transform: translateX(0.25rem);
+    }
+    .knob :global(svg) {
+      transition: transform var(--mw-motion-duration-base) var(--mw-motion-easing-standard);
+    }
+    .choice:hover .knob :global(svg) {
+      transform: translateY(0.06em);
+    }
+    .answers[data-ready] .answer.is-active {
+      animation: answer-in var(--mw-motion-duration-base) var(--mw-motion-easing-standard);
+    }
+  }
+  @keyframes answer-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @media (min-width: 640px) {
+    .answer-head {
+      grid-column: 1;
+      grid-row: 1;
+    }
+    .more {
+      grid-column: 2;
+      grid-row: 1;
+      justify-self: end;
+      margin-top: 0;
+    }
+  }
+  @media (min-width: 768px) {
+    .hero-title {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+    .topline {
+      flex-direction: row;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .sentence {
+      margin-top: 1.5rem;
+    }
+    .answers {
+      padding-top: 2rem;
+    }
+    .hero-inner {
+      min-height: min(calc(100svh - 6rem), 46rem);
+      padding-bottom: 2.5rem;
+    }
+    /* Anchored to the bottom edge with a fixed visible height (20rem), so the roofs always clear the sentence. */
+    .hero-glyph {
+      --glyph: max(43rem, min(56rem, 70vw)); /* wide enough that the roof's feet fall below the crop */
+      top: auto;
+      bottom: calc(20rem - var(--glyph));
+      left: calc(76vw - var(--glyph) / 2);
+      width: var(--glyph);
+      transform: none;
+    }
+    .lead {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .hero-inner {
+      min-height: min(calc(100svh - 6rem), 56rem);
+      padding: 2.75rem 2rem 2.25rem;
+    }
+  }
+</style>

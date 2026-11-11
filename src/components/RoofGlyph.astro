@@ -1,0 +1,80 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'svg'> {
+  /** `hero` is lighter and darker green with a gold trim, for Green grounds. `quiet` is tone on tone, for cream. */
+  tone?: 'hero' | 'quiet';
+}
+
+const { tone = 'hero', class: className, ...attrs } = Astro.props;
+
+/*
+ * Layered roof bands built from the roof form (brand M1, M3): two straight edges meeting at a
+ * peak at the logo's slope of about 43 degrees, flat colour, no ornament. Two bands sit one
+ * under the other, and a thin gold band follows the slope above them (gold is about a tenth of
+ * the motif, under the fifth M3 allows). The page crops it with the viewport edge and keeps
+ * all text clear of it. It is decorative.
+ */
+const angle = (43 * Math.PI) / 180;
+const slope = Math.tan(angle);
+const half = 380; // half the span of one roof
+const bar = 124; // band thickness, measured at right angles to the slope
+const gap = 18; // space between bands, at right angles to the slope
+const trim = 12; // gold band thickness, at right angles to the slope
+
+const vertical = (n: number) => n / Math.cos(angle);
+const f = (n: number) => n.toFixed(1);
+const rise = half * slope;
+
+/** A chevron band with its peak at (half, top). */
+function band(top: number, thickness: number): string {
+  const v = vertical(thickness);
+  return [
+    `M0 ${f(top + rise)}`,
+    `L${half} ${f(top)}`,
+    `L${half * 2} ${f(top + rise)}`,
+    `L${half * 2} ${f(top + rise + v)}`,
+    `L${half} ${f(top + v)}`,
+    `L0 ${f(top + rise + v)}`,
+    'Z',
+  ].join(' ');
+}
+
+const trimTop = 0;
+const upperTop = trimTop + vertical(trim) + vertical(gap);
+const lowerTop = upperTop + vertical(bar) + vertical(gap);
+const height = lowerTop + rise + vertical(bar);
+---
+
+<svg
+  {...attrs}
+  class:list={['roof-glyph', `roof-glyph--${tone}`, className]}
+  viewBox={`0 0 ${half * 2} ${f(height)}`}
+  aria-hidden="true"
+  focusable="false"
+>
+  <path class="roof-trim" d={band(trimTop, trim)}></path>
+  <path class="roof-upper" d={band(upperTop, bar)}></path>
+  <path class="roof-lower" d={band(lowerTop, bar)}></path>
+</svg>
+
+<style>
+  .roof-glyph--hero .roof-trim {
+    fill: var(--mw-color-core-gold);
+  }
+  .roof-glyph--hero .roof-upper {
+    fill: color-mix(in srgb, var(--mw-color-ramp-green-300) 22%, var(--mw-color-core-green));
+  }
+  .roof-glyph--hero .roof-lower {
+    fill: var(--mw-color-ramp-green-700);
+  }
+  .roof-glyph--quiet .roof-trim {
+    display: none;
+  }
+  .roof-glyph--quiet .roof-upper {
+    fill: var(--mw-color-ramp-green-100);
+  }
+  .roof-glyph--quiet .roof-lower {
+    fill: var(--mw-color-ramp-green-50);
+  }
+</style>
