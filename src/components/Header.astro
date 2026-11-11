@@ -1,32 +1,39 @@
 ---
 import { SITE_NAME } from '../config';
+import Button from './Button.astro';
 import Lockup from './Lockup.astro';
+
+// Brand A6: horizontal lockup, navigation, one Green call to action. The lockup is 195 px wide
+// (h-12, above the 180 px minimum, L5) with 24 px clear on every side (L4).
+const links = [
+  { href: '/#services', label: 'What we look after' },
+  { href: '/#costs', label: 'What it costs' },
+];
 ---
 
-<header class="border-b border-line bg-page">
-  <div class="mx-auto flex max-w-page items-center justify-between gap-4 px-4 py-4 sm:px-6">
-    <a href="/" class="flex shrink-0 items-center" aria-label={`${SITE_NAME}: home`}>
-      <Lockup class="h-8" aria-hidden="true" />
+<header class="bg-page">
+  <div class="mx-auto flex max-w-page items-center justify-between gap-6 px-6 py-6 lg:px-8">
+    <a href="/" class="flex shrink-0 items-center rounded-sm" aria-label={`${SITE_NAME}: home`}>
+      <Lockup class="h-12" aria-hidden="true" />
     </a>
-    <nav aria-label="Main">
-      <ul class="flex items-center gap-2 sm:gap-4">
-        <li>
-          <a
-            href="/legal/privacy/"
-            class="inline-flex min-h-11 items-center px-3 font-display text-label font-semibold text-ink hover:text-brand"
-          >
-            Privacy
-          </a>
-        </li>
-        <li>
-          <a
-            href="/#contact"
-            class="inline-flex min-h-11 items-center rounded-full bg-brand px-5 font-display text-label font-semibold text-white hover:bg-brand-deep"
-          >
-            Contact
-          </a>
-        </li>
+    <!-- Below 360 px the lockup and its clear space leave no room for the button; the hero's own
+         action is in the first screen there. -->
+    <nav aria-label="Main" class="hidden items-center gap-4 min-[360px]:flex">
+      <ul class="hidden items-center gap-2 md:flex">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="motion-base inline-flex min-h-11 items-center px-3 font-display text-label font-semibold text-ink underline-offset-8 hover:text-brand hover:underline"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
+      <Button href="/#contact" size="nav">Contact</Button>
     </nav>
   </div>
 </header>

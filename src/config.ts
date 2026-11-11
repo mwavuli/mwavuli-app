@@ -11,3 +11,9 @@ export const SITE_DESCRIPTION = 'Professional property management for people and
 
 /** The company's postal address (business/model.md, "The company"). */
 export const POSTAL_ADDRESS = 'P.O. Box 170886, Kampala, Uganda';
+
+/** The numbers a landlord needs to remember (business/model.md, "Numbers" and BM18). */
+export const MANAGEMENT_FEE = '15%';
+export const COORDINATION_FEE = '10%';
+export const NOTICE_TO_LEAVE = '30 days';
+export const APPROVAL_LIMIT = 'UGX 200,000';

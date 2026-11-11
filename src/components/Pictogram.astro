@@ -1,0 +1,33 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+// The six service pictograms (brand I7, PG1 to PG6): solid, one colour, `currentColor`. Give the
+// box a width and a height with classes; the drawing is fitted inside it at its own proportions.
+// Green on light grounds, gold on Green.
+const pictograms = import.meta.glob<string>('../../brand/icons/pictogram/*.svg', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+
+interface Props extends HTMLAttributes<'span'> {
+  /** A file name in brand/icons/pictogram/, without the extension, e.g. "rental-income". */
+  name: string;
+}
+
+const { name, class: className, ...attrs } = Astro.props;
+
+const raw = pictograms[`../../brand/icons/pictogram/${name}.svg`];
+if (!raw) {
+  throw new Error(`Unknown pictogram "${name}": see brand/06-iconography.md (I7).`);
+}
+
+// Decorative (brand I10): the service name beside it carries the meaning.
+const svg = raw.replace(/ width="\d+" height="\d+"/, ' aria-hidden="true" focusable="false"');
+---
+
+<span
+  {...attrs}
+  class:list={['inline-flex shrink-0 [&>svg]:size-full', className]}
+  set:html={svg}
+/>

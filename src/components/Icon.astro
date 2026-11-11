@@ -1,0 +1,33 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+// The brand's line icons (brand I11): inlined, so `currentColor` follows the text colour.
+// The files are read in place from brand/icons/line/ and never copied.
+const icons = import.meta.glob<string>('../../brand/icons/line/*.svg', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+
+interface Props extends HTMLAttributes<'span'> {
+  /** A file name in brand/icons/line/, without the extension, e.g. "payments". */
+  name: string;
+  /** Brand I5 sizes: 16, 20, 24, 32 or 48 px. */
+  size?: 16 | 20 | 24 | 32 | 48;
+}
+
+const { name, size = 24, class: className, ...attrs } = Astro.props;
+
+const raw = icons[`../../brand/icons/line/${name}.svg`];
+if (!raw) {
+  throw new Error(`Unknown line icon "${name}": see brand/06-iconography.md (I6).`);
+}
+
+// Decorative by default (brand I10): the words beside the icon carry the meaning.
+const svg = raw.replace(
+  / width="24" height="24"/,
+  ` width="${size}" height="${size}" aria-hidden="true" focusable="false"`,
+);
+---
+
+<span {...attrs} class:list={['inline-flex shrink-0', className]} set:html={svg} />

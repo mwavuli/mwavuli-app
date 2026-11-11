@@ -1,22 +1,31 @@
 ---
-import { SITE_NAME } from '../config';
+import { SITE_DESCRIPTION, SITE_NAME } from '../config';
 import Lockup from './Lockup.astro';
 
 const year = new Date().getFullYear();
 ---
 
+<!-- Brand A6: Green footer with the reversed lockup (195 px wide, 24 px clear on every side). -->
 <footer class="on-inverse bg-brand text-white">
-  <div class="mx-auto max-w-page px-4 py-10 sm:px-6">
-    <Lockup reversed class="h-8" role="img" aria-label={SITE_NAME} />
-    <nav aria-label="Footer" class="mt-6">
-      <ul class="grid gap-1 text-body-sm">
-        <li>
-          <a href="/legal/privacy/" class="inline-flex min-h-11 items-center hover:underline">
-            Privacy policy
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <p class="mt-8 border-t border-white/20 pt-6 text-caption">© {year} {SITE_NAME}</p>
+  <div class="mx-auto max-w-page px-6 lg:px-8">
+    <div class="grid gap-8 py-12 md:grid-cols-[1fr_auto] md:items-center">
+      <div>
+        <Lockup reversed class="h-12" role="img" aria-label={SITE_NAME} />
+        <p class="mt-6 max-w-md text-body text-cream">{SITE_DESCRIPTION}</p>
+      </div>
+      <nav aria-label="Footer">
+        <ul>
+          <li>
+            <a
+              href="/legal/privacy/"
+              class="inline-flex min-h-11 items-center text-body-sm underline-offset-4 hover:underline"
+            >
+              Privacy policy
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <p class="border-t border-white/20 py-6 text-caption text-cream">© {year} {SITE_NAME}</p>
   </div>
 </footer>

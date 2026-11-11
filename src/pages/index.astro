@@ -1,28 +1,327 @@
 ---
-import { POSTAL_ADDRESS, SITE_NAME } from '../config';
+import badgeLocationRaw from '../../brand/icons/pictogram/badge-location.svg?raw';
+import badgePhoneRaw from '../../brand/icons/pictogram/badge-phone.svg?raw';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import PhotoSlot from '../components/PhotoSlot.astro';
+import Pictogram from '../components/Pictogram.astro';
+import RoofBands from '../components/RoofBands.astro';
+import RoofLine from '../components/RoofLine.astro';
+import {
+  APPROVAL_LIMIT,
+  COORDINATION_FEE,
+  MANAGEMENT_FEE,
+  NOTICE_TO_LEAVE,
+  POSTAL_ADDRESS,
+  SITE_DESCRIPTION,
+} from '../config';
 import Layout from '../layouts/Layout.astro';
+
+// The four promises, each from the landlord pitch (business/model.md BM18, BM1, BM4, BM8).
+const promises = [
+  { icon: 'payments', title: 'Paid on the 1st.', text: 'For every room with a tenant.' },
+  { icon: 'trusted', title: 'No rent, no fee.', text: `We take ${MANAGEMENT_FEE} of the rent.` },
+  { icon: 'leases', title: 'Leave any time.', text: `With ${NOTICE_TO_LEAVE}’ notice.` },
+  { icon: 'reports', title: 'Clear records.', text: 'One statement a month.' },
+];
+
+// The six services of the business card, in the card's order (brand D15). The first two lead
+// the offer (BM18); the other four follow.
+const services = [
+  {
+    pictogram: 'rental-income',
+    title: 'Guaranteed rental income',
+    text: 'Paid on the 1st. If a tenant doesn’t pay, we cover the first month and do the chasing.',
+  },
+  {
+    pictogram: 'tenant-management',
+    title: 'Tenant management and sourcing',
+    text: 'We find tenants for your empty rooms and collect the rent.',
+  },
+  {
+    pictogram: 'construction-repairs',
+    title: 'Construction and repairs',
+    text: 'We find a trusted contractor and bring you the price.',
+  },
+  {
+    pictogram: 'electrical-plumbing',
+    title: 'Electrical and plumbing',
+    text: 'Trusted contractors for wiring, taps and pipes.',
+  },
+  {
+    pictogram: 'utilities',
+    title: 'Utilities',
+    text: 'Electricity and water bills, paid at cost, with no markup.',
+  },
+  {
+    pictogram: 'garbage-management',
+    title: 'Garbage disposal and management',
+    text: 'We look after the garbage and pay the bill at cost.',
+  },
+];
+const [leadServices, otherServices] = [services.slice(0, 2), services.slice(2)];
+
+// What it costs (BM4, BM2, BM18, P7). Plain statements as written.
+const costs = [
+  { label: 'Our fee', figure: MANAGEMENT_FEE, text: 'of the rent. No rent, no fee.' },
+  {
+    label: 'To start',
+    figure: 'None',
+    text: 'No sign-up fee, no letting fee and no yearly fee. We charge none to tenants.',
+  },
+  {
+    label: 'Repairs',
+    figure: `+${COORDINATION_FEE}`,
+    text: `You pay the contractor’s price plus our ${COORDINATION_FEE} coordination fee, shown on the quote.`,
+  },
+];
+
+const assurances = [
+  'Electricity, water and garbage bills are paid at cost, with no markup.',
+  `We ask you before any repair above ${APPROVAL_LIMIT}.`,
+];
+
+// Hero art (brand M3): layered flat roof-form bands at the logo's slope, back to front. On wide
+// screens the coordinates are px from the photo slot's top-left corner, so the bands stay lined
+// up with it at every width; the roof's peak stands just right of the slot and the bands bleed
+// off the viewport's right edge. Gold is under a tenth of the bands' area.
+const heroBands = [
+  { type: 'plane', cx: 420, cy: 370, fill: 'fill-green-100' },
+  { type: 'chevron', cx: 420, cy: 300, thickness: 70, fill: 'fill-green-300' },
+  { type: 'chevron', cx: 420, cy: 130, thickness: 170, fill: 'fill-brand' },
+  { type: 'chevron', cx: 420, cy: 90, thickness: 26, fill: 'fill-accent' },
+] as const;
+
+// On phones and tablets the roof stands over the photo slot like a house: px from the slot's top
+// centre. Gold is under a fifth of the roof band's area.
+const roofOverSlot = [
+  { type: 'plane', cx: 0, cy: 52, fill: 'fill-green-100' },
+  { type: 'chevron', cx: 0, cy: -48, thickness: 100, fill: 'fill-brand' },
+  { type: 'chevron', cx: 0, cy: -88, thickness: 20, fill: 'fill-accent' },
+] as const;
+
+// A corner of the roof form (M3) at the foot of the contact section: px from its bottom-left.
+// It is held well below the contact lines so the bands stay clear of them.
+const cornerBands = [
+  { type: 'plane', cx: 0, cy: -150, fill: 'fill-green-100' },
+  { type: 'chevron', cx: 0, cy: -240, thickness: 90, fill: 'fill-brand' },
+  { type: 'chevron', cx: 0, cy: -282, thickness: 22, fill: 'fill-accent' },
+] as const;
+
+// The contact badges (brand BG1, BG2) are single-colour paths with the glyph knocked out, so the
+// ground shows through the glyph. They are Green on a light ground (I8).
+const badge = (raw: string) =>
+  raw.replace(/ width="\d+" height="\d+"/, ' aria-hidden="true" focusable="false"');
+const badgeLocation = badge(badgeLocationRaw);
+const badgePhone = badge(badgePhoneRaw);
+
+const overline = 'font-display text-overline uppercase text-brand';
+const fieldClass =
+  'motion-base mt-2 block min-h-12 w-full rounded-sm border border-slate-500 bg-surface px-4 text-body text-ink hover:border-ink';
 ---
 
 <Layout title="Home">
-  <!-- Brand A6: a green band with a two-beat headline and a gold rule. The photograph
-       waits on the open photography decision (D14). -->
-  <section class="on-inverse bg-brand text-white">
-    <div class="mx-auto max-w-page px-4 py-20 sm:px-6 sm:py-28">
-      <h1 class="font-display text-h1 text-white sm:text-display">
-        Managed Properties. <span class="text-accent">Better Living.</span>
-      </h1>
-      <div class="mt-6 h-1 w-16 bg-accent" aria-hidden="true"></div>
-      <p class="mt-6 max-w-xl text-body-lg">Rent paid to you on the 1st, every month.</p>
+  <!-- Hero: kicker, two-beat headline, proof line and one action; a photo slot on layered roof
+       bands; and a raised panel with the four promises that overlaps the hero's lower edge. The
+       gold in this view is the headline's second beat and the roof band's stripe (C2). -->
+  <section aria-labelledby="hero-title" class="relative bg-page">
+    <!-- Wide screens: bands bleed off the right edge. The inner grid mirrors the content grid so the
+         bands are placed from the photo slot's own corner. -->
+    <div aria-hidden="true" class="absolute inset-0 hidden overflow-hidden lg:block">
+      <div class="mx-auto grid h-full max-w-page grid-cols-12 gap-x-6 px-8 pt-8">
+        <div class="relative col-span-4 col-start-9">
+          <RoofBands layers={heroBands} />
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="relative mx-auto grid max-w-page gap-x-6 gap-y-12 px-6 pb-10 pt-6 sm:pb-0 lg:grid-cols-12 lg:gap-y-12 lg:px-8 lg:pt-8"
+    >
+      <div
+        class="rise-in order-1 flex flex-col items-start lg:order-none lg:col-span-8 lg:row-start-1"
+      >
+        <p class="max-w-2xl text-body text-ink">{SITE_DESCRIPTION}</p>
+        <h1 id="hero-title" class="hero-title mt-6">
+          <span class="block">Managed Properties.</span>
+          <span class="block text-gold-700">Better Living.</span>
+        </h1>
+        <p class="mt-8 font-display text-h4 text-ink">Rent paid to you on the 1st, every month.</p>
+        <Button href="#contact" class="mt-10 w-full sm:w-auto">
+          Tell us about your building
+          <Icon
+            name="arrow-right"
+            size={20}
+            class="motion-base motion-safe:group-hover:translate-x-1"
+          />
+        </Button>
+      </div>
+
+      <ul
+        aria-label="What you get"
+        style="--rise-step: 2"
+        class="rise-in relative z-10 order-3 grid gap-4 rounded-xl bg-surface p-6 shadow-md sm:order-2 sm:grid-cols-2 sm:gap-6 sm:p-8 lg:order-none lg:col-span-12 lg:row-start-2 lg:-mb-24 lg:grid-cols-4 lg:gap-8 lg:p-6 lg:px-8 [&>li+li]:border-t [&>li+li]:border-line [&>li+li]:pt-4 sm:[&>li+li]:border-t-0 sm:[&>li+li]:pt-0"
+      >
+        {
+          promises.map((promise) => (
+            <li class="flex items-start gap-4 sm:flex-col sm:gap-0">
+              <span class="grid size-16 shrink-0 place-items-center rounded-md bg-brand text-white lg:size-20 lg:rounded-lg [&_svg]:size-8 lg:[&_svg]:size-12">
+                <Icon name={promise.icon} size={48} />
+              </span>
+              <div class="sm:mt-4">
+                <p class="font-display text-h4 text-heading">{promise.title}</p>
+                <p class="mt-1 text-body text-ink">{promise.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+
+      <!-- Phones and tablets: the roof stands over the photo slot. -->
+      <div
+        style="--rise-step: 1"
+        class="rise-in relative order-2 -mx-6 overflow-hidden px-6 pb-10 pt-24 sm:order-3 lg:order-none lg:col-span-4 lg:col-start-9 lg:row-start-1 lg:m-0 lg:self-start lg:overflow-visible lg:p-0"
+      >
+        <div class="relative mx-auto w-full max-w-md lg:max-w-none">
+          <div aria-hidden="true" class="absolute left-1/2 top-0 lg:hidden">
+            <RoofBands layers={roofOverSlot} />
+          </div>
+          <PhotoSlot class="relative" />
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="contact" class="bg-surface">
-    <div class="mx-auto max-w-page px-4 py-16 sm:px-6">
-      <h2 class="text-h2">Contact</h2>
-      <p class="mt-4 text-body-lg">
-        {SITE_NAME}<br />
-        {POSTAL_ADDRESS}
-      </p>
+  <!-- What we look after: the two services that lead the offer as raised cards, the other four
+       as plain items. The pictograms are the card's own (I7). -->
+  <section id="services" aria-labelledby="services-title" class="bg-green-50">
+    <div class="services-pad mx-auto max-w-page px-6 lg:px-8">
+      <div class="max-w-xl">
+        <p class={overline}>Services</p>
+        <h2 id="services-title" class="section-title mt-3">What we look after</h2>
+        <p class="mt-4 text-body text-ink">One team for the rent, the repairs and the bills.</p>
+      </div>
+
+      <ul class="mt-12 grid gap-6 lg:mt-16 lg:grid-cols-2">
+        {
+          leadServices.map((service) => (
+            <li class="flex items-start gap-5 rounded-lg bg-surface p-6 shadow-md sm:items-center sm:gap-8 sm:p-8">
+              <Pictogram name={service.pictogram} class="size-16 text-brand sm:h-32 sm:w-36" />
+              <div>
+                <h3 class="text-h4">{service.title}</h3>
+                <p class="mt-2 text-body text-ink">{service.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+
+      <ul class="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          otherServices.map((service) => (
+            <li class="flex gap-5 sm:flex-col sm:gap-0">
+              <Pictogram name={service.pictogram} class="size-16 text-brand" />
+              <div class="sm:mt-5">
+                <h3 class="text-h4">{service.title}</h3>
+                <p class="mt-2 text-body text-ink">{service.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- What it costs: a full-bleed Green band with oversize numerals. The M-shaped roofline stands on
+       its top edge. -->
+  <section
+    id="costs"
+    aria-labelledby="costs-title"
+    class="on-inverse relative bg-brand text-white lg:overflow-x-clip"
+  >
+    <RoofLine />
+    <div class="mx-auto max-w-page px-6 py-20 lg:px-8 lg:py-24">
+      <p class="font-display text-overline uppercase text-cream">Costs</p>
+      <h2 id="costs-title" class="section-title mt-3 text-white">What it costs</h2>
+      <p class="mt-4 max-w-xl text-body text-cream">We charge two fees, and nothing else.</p>
+
+      <ul class="mt-12 grid gap-12 md:grid-cols-3 md:gap-8 lg:mt-16 lg:gap-10">
+        {
+          costs.map((cost) => (
+            <li>
+              <h3 class="font-display text-overline uppercase text-cream">{cost.label}</h3>
+              <p class="cost-figure mt-3 font-display text-accent">{cost.figure}</p>
+              <p class="mt-4 max-w-xs text-body text-white">{cost.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+
+      <ul class="mt-12 grid gap-4 border-t border-white/20 pt-8 md:grid-cols-2 md:gap-8 lg:mt-16">
+        {
+          assurances.map((text) => (
+            <li class="flex items-start gap-3 text-body tabular-nums text-white">
+              <Icon name="check" size={24} class="text-cream" />
+              {text}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Contact. The form is a design only: labelled fields and a button that sends nothing. Only the
+       postal address is a real contact fact. -->
+  <section id="contact" aria-labelledby="contact-title" class="relative overflow-hidden bg-page">
+    <div aria-hidden="true" class="absolute bottom-0 left-0 size-0 scale-50 lg:scale-100">
+      <RoofBands layers={cornerBands} />
+    </div>
+    <div class="relative mx-auto grid max-w-page gap-12 px-6 py-20 lg:grid-cols-12 lg:px-8 lg:py-24">
+      <div class="lg:col-span-5">
+        <p class={overline}>Contact</p>
+        <h2 id="contact-title" class="section-title mt-3">Tell us about your building.</h2>
+        <div class="mt-6 h-1 w-16 bg-accent" aria-hidden="true"></div>
+        <ul class="mt-10 grid gap-6">
+          <li class="flex items-center gap-4">
+            <span class="w-12 shrink-0 text-brand [&>svg]:h-auto [&>svg]:w-full" set:html={badgeLocation} />
+            <span class="text-body text-ink">{POSTAL_ADDRESS}</span>
+          </li>
+          <li class="flex items-center gap-4">
+            <span class="w-12 shrink-0 text-brand [&>svg]:h-auto [&>svg]:w-full" set:html={badgePhone} />
+            <span class="text-body text-ink">Phone number to be added</span>
+          </li>
+          <li class="flex items-center gap-4">
+            <span
+              class="grid aspect-[60.2/58.4] w-12 shrink-0 place-items-center rounded-[var(--mw-radius-badge)] bg-brand text-cream"
+            >
+              <Icon name="mail" size={24} />
+            </span>
+            <span class="text-body text-ink">Email address to be added</span>
+          </li>
+        </ul>
+      </div>
+
+      <form
+        method="dialog"
+        aria-label="Contact form"
+        class="rounded-xl bg-surface p-6 shadow-md sm:p-8 lg:col-span-7"
+      >
+        <div class="grid gap-6">
+          <div>
+            <label for="contact-name" class="block text-label text-ink">Your name</label>
+            <input id="contact-name" name="name" type="text" autocomplete="name" class={fieldClass} />
+          </div>
+          <div>
+            <label for="contact-phone" class="block text-label text-ink">Phone number</label>
+            <input id="contact-phone" name="phone" type="tel" autocomplete="tel" class={fieldClass} />
+          </div>
+          <div>
+            <label for="contact-about" class="block text-label text-ink">About your building</label>
+            <textarea id="contact-about" name="about" rows="4" class={`${fieldClass} py-3`}></textarea>
+          </div>
+          <Button type="submit" class="w-full sm:w-auto sm:justify-self-start">Send</Button>
+        </div>
+      </form>
     </div>
   </section>
 </Layout>

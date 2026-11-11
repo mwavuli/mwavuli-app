@@ -1,0 +1,83 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { plane } from '../geometry/roof';
+import Icon from './Icon.astro';
+
+// Photo slot (open decision D14: no photography exists yet). An art-directed frame that holds the
+// final crop: a white mount (S4 raised card), then a frame with the S3 radius, a flat Green-tint
+// field, the M2 roof pattern (light ground only), layered tonal planes built from the roof form
+// and the mark's four-square window, and a solid Green caption band (M6).
+//
+// The art is drawn in a 300 x 400 box and cropped to the frame with `slice`, so the 3:4 crop on
+// desktop and the 4:3 crop on phones both keep the roof and the window in view.
+interface Props extends HTMLAttributes<'figure'> {
+  caption?: string;
+  /** The frame's aspect-ratio classes. Desktop 3:4, phones 4:3. */
+  frameClass?: string;
+}
+
+const {
+  caption = 'Photograph to come (D14)',
+  frameClass = 'aspect-[4/3] lg:aspect-[3/4]',
+  class: className,
+  ...attrs
+} = Astro.props;
+
+// The tonal gable: a roof apex at (150, 118), the body below it. A second, lower roof sits in
+// front of it, one step darker.
+const gable = plane(150, 118);
+const lowRoof = plane(150, 268);
+---
+
+<figure {...attrs} class:list={['rounded-xl bg-surface p-3 shadow-md', className]}>
+  <div class:list={['relative isolate overflow-hidden rounded-md bg-green-100', frameClass]}>
+    <svg
+      class="roof-pattern absolute inset-0 -z-10 size-full"
+      viewBox="0 0 300 400"
+      preserveAspectRatio="xMidYMid slice"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <defs>
+        <!-- M2: staggered outlined roofs at the logo's slope (about 43 degrees), each with a
+             window of four squares; rows offset by half a roof. The tone is the field with 9
+             percent Green mixed in. -->
+        <g id="roof-house">
+          <path
+            d="M0 52V26L28 0L56 26V52"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+          <path
+            d="M22 30h5v5h-5ZM29 30h5v5h-5ZM22 37h5v5h-5ZM29 37h5v5h-5Z"
+            fill="currentColor"></path>
+        </g>
+        <pattern id="roof-tile" width="72" height="128" patternUnits="userSpaceOnUse">
+          <use href="#roof-house" x="8" y="6"></use>
+          <use href="#roof-house" x="44" y="70"></use>
+          <use href="#roof-house" x="-28" y="70"></use>
+        </pattern>
+      </defs>
+      <rect width="300" height="400" fill="url(#roof-tile)"></rect>
+      <polygon points={gable} class="fill-green-300"></polygon>
+      <!-- The mark's window: four equal squares, centred on the roof's axis. -->
+      <g class="fill-green-100">
+        <rect x="120" y="176" width="26" height="26"></rect>
+        <rect x="154" y="176" width="26" height="26"></rect>
+        <rect x="120" y="210" width="26" height="26"></rect>
+        <rect x="154" y="210" width="26" height="26"></rect>
+      </g>
+      <!-- The 4:3 crop on phones ends above this roof; only the 3:4 crop shows it. -->
+      <polygon points={lowRoof} class="hidden fill-green-500 lg:block"></polygon>
+    </svg>
+
+    <figcaption
+      class="absolute inset-x-0 bottom-0 flex items-center gap-3 bg-brand px-6 py-4 text-body-sm text-cream"
+    >
+      <Icon name="properties" size={20} />
+      {caption}
+    </figcaption>
+  </div>
+</figure>

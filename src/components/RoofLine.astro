@@ -1,0 +1,18 @@
+---
+import { roofline } from '../geometry/roof';
+
+// Two roofs side by side, the letter M (brand M1), standing on the top edge of the section it
+// sits in. It rises into the empty space of the section above and is the same Green as its
+// section, so the two read as one shape. Flat, at the logo's slope.
+const { points, width, height } = roofline(2, 300);
+---
+
+<svg
+  class="pointer-events-none absolute bottom-[calc(100%-1px)] right-0 block h-auto w-[240px] fill-brand lg:w-[600px]"
+  viewBox={`0 0 ${width} ${height + 1}`}
+  aria-hidden="true"
+  focusable="false"
+>
+  <polygon points={points}></polygon>
+  <rect y={height - 1} width={width} height="2"></rect>
+</svg>

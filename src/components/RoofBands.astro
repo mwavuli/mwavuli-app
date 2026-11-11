@@ -1,0 +1,44 @@
+---
+import { chevron, plane } from '../geometry/roof';
+
+// Flat roof-form bands and tonal planes (brand M1, M3), back to front. Coordinates are px from
+// the point where this component sits: place it inside a positioned element of zero size or at
+// the corner the art is anchored to, and clip it with an `overflow-hidden` parent so it bleeds
+// off the edge. Fills are theme classes (tokens only); there is no gradient, shadow or opacity.
+interface Layer {
+  type: 'chevron' | 'plane';
+  cx: number;
+  cy: number;
+  /** Band thickness, measured straight down. Chevrons only. */
+  thickness?: number;
+  /** A `fill-*` theme class, e.g. "fill-brand". */
+  fill: string;
+}
+
+interface Props {
+  layers: readonly Layer[];
+}
+
+const { layers } = Astro.props;
+---
+
+<svg
+  class="pointer-events-none absolute left-0 top-0 overflow-visible"
+  width="1"
+  height="1"
+  aria-hidden="true"
+  focusable="false"
+>
+  {
+    layers.map((layer) => (
+      <polygon
+        class={layer.fill}
+        points={
+          layer.type === 'plane'
+            ? plane(layer.cx, layer.cy)
+            : chevron(layer.cx, layer.cy, layer.thickness ?? 0)
+        }
+      />
+    ))
+  }
+</svg>
