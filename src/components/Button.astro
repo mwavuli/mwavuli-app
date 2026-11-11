@@ -1,0 +1,42 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  /** A link when set, otherwise a button. */
+  href?: string;
+  type?: 'button' | 'submit';
+  /** `inverse` is the button on a Green ground: white fill, Green label. */
+  tone?: 'primary' | 'inverse';
+  /** A trailing arrow that nudges on hover (not under reduced motion). */
+  arrow?: boolean;
+  class?: string;
+}
+
+const { href, type = 'button', tone = 'primary', arrow = false, class: className } = Astro.props;
+const Tag = href ? 'a' : 'button';
+
+// Brand A5: a solid fill, Montserrat 600 label, radius.md, 48 px high. Hover is the next ramp
+// step and pressed one more (S8). On Green the fill is white with a Green label (9.82 to 1).
+const tones = {
+  primary: 'bg-brand text-white hover:bg-brand-deep active:bg-green-900',
+  inverse: 'bg-white text-brand hover:bg-green-50 active:bg-green-100',
+};
+const classes = [
+  'group mw-transition inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-6',
+  'font-display text-body font-semibold',
+  tones[tone],
+  className,
+];
+---
+
+<Tag {...href ? { href } : { type }} class:list={classes}>
+  <slot />
+  {
+    arrow && (
+      <Icon
+        name="arrow-right"
+        class="mw-transition size-5 motion-safe:group-hover:translate-x-0.5"
+      />
+    )
+  }
+</Tag>

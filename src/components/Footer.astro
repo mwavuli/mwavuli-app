@@ -1,22 +1,55 @@
 ---
-import { SITE_NAME } from '../config';
+import { POSTAL_ADDRESS, SITE_DESCRIPTION, SITE_NAME } from '../config';
 import Lockup from './Lockup.astro';
 
 const year = new Date().getFullYear();
 ---
 
 <footer class="on-inverse bg-brand text-white">
-  <div class="mx-auto max-w-page px-4 py-10 sm:px-6">
-    <Lockup reversed class="h-8" role="img" aria-label={SITE_NAME} />
-    <nav aria-label="Footer" class="mt-6">
-      <ul class="grid gap-1 text-body-sm">
-        <li>
-          <a href="/legal/privacy/" class="inline-flex min-h-11 items-center hover:underline">
-            Privacy policy
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <p class="mt-8 border-t border-white/20 pt-6 text-caption">© {year} {SITE_NAME}</p>
+  <div class="mx-auto max-w-page px-6 py-16 lg:px-8">
+    <div class="grid gap-10 md:grid-cols-12 md:gap-6">
+      <div class="md:col-span-6">
+        <!-- The reversed lockup on Green, 195 px wide (brand L1, L5). -->
+        <Lockup reversed class="h-12" role="img" aria-label={SITE_NAME} />
+        <p class="mt-6 max-w-sm text-body">{SITE_DESCRIPTION}</p>
+      </div>
+      <div class="md:col-span-3">
+        <p class="font-display text-overline uppercase text-white">Postal address</p>
+        <p class="mt-4 text-body-sm">
+          {SITE_NAME}<br />
+          {POSTAL_ADDRESS}
+        </p>
+      </div>
+      <nav aria-label="Footer" class="md:col-span-3">
+        <p class="font-display text-overline uppercase text-white">Site</p>
+        <ul class="mt-2 grid gap-2 text-body-sm">
+          <li>
+            <a
+              href="/#how"
+              class="mw-transition inline-flex min-h-11 items-center underline-offset-4 hover:underline"
+            >
+              How it works
+            </a>
+          </li>
+          <li>
+            <a
+              href="/#services"
+              class="mw-transition inline-flex min-h-11 items-center underline-offset-4 hover:underline"
+            >
+              What we look after
+            </a>
+          </li>
+          <li>
+            <a
+              href="/legal/privacy/"
+              class="mw-transition inline-flex min-h-11 items-center underline-offset-4 hover:underline"
+            >
+              Privacy policy
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <p class="mt-12 border-t border-white/20 pt-6 text-caption">© {year} {SITE_NAME}</p>
   </div>
 </footer>

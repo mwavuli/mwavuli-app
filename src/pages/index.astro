@@ -1,28 +1,368 @@
 ---
+import Button from '../components/Button.astro';
+import ContactArt from '../components/ContactArt.astro';
+import CornerBands from '../components/CornerBands.astro';
+import HeroArt from '../components/HeroArt.astro';
+import Icon from '../components/Icon.astro';
+import PhoneStatement from '../components/PhoneStatement.astro';
 import { POSTAL_ADDRESS, SITE_NAME } from '../config';
+import { amount, deduction, example, exampleSetup } from '../data/statement';
 import Layout from '../layouts/Layout.astro';
+
+// The "say aloud" lines of the landlord pitch (business/model.md, BM18), word for word.
+const offer = [
+  { figure: '1', unit: 'st', line: 'We pay you on the 1st, for every room with a tenant.' },
+  { figure: '15', unit: '%', line: 'We take 15% of the rent. No rent, no fee.' },
+  { figure: '30', unit: ' days', line: 'Leave any time with 30 days’ notice.' },
+];
+
+interface Row {
+  label: string;
+  value: string;
+  strong?: boolean;
+}
+
+// Each step carries its own line of the example statement (the same figures as the phone).
+const steps: { icon: string; title: string; text: string; rows: Row[] }[] = [
+  {
+    icon: 'payments',
+    title: 'Rent comes in',
+    text: 'Tenants pay only us, by mobile money or bank. We find tenants for your empty rooms.',
+    rows: [
+      { label: `Rent from ${example.roomsWithTenants} rooms with tenants`, value: amount(example.rent) },
+    ],
+  },
+  {
+    icon: 'maintenance',
+    title: 'Approved costs come off',
+    text: 'Our 15% and the costs you approve come off the rent. We ask you before any repair above UGX 200,000.',
+    rows: [
+      { label: `Our ${example.feePercent}%`, value: deduction(example.fee) },
+      { label: 'Repair: tap', value: deduction(example.repair) },
+    ],
+  },
+  {
+    icon: 'reports',
+    title: 'One payment, one statement',
+    text: 'On the 1st we pay you for every room with a tenant, and send one statement by SMS or WhatsApp.',
+    rows: [{ label: 'Paid to you on the 1st', value: amount(example.paid), strong: true }],
+  },
+];
+
+// The six services on the card (brand F1, I7), each said in the model's own words.
+const services = [
+  {
+    icon: 'rental-income',
+    title: 'Guaranteed rental income',
+    text: 'We pay you on the 1st. If a tenant doesn’t pay, we cover that first month.',
+  },
+  {
+    icon: 'tenant-management',
+    title: 'Tenant management and sourcing',
+    text: 'We find tenants for your empty rooms, collect the rent and do the chasing.',
+  },
+  {
+    icon: 'construction-repairs',
+    title: 'Construction and repairs',
+    text: 'We find a trusted contractor and bring you the price, with our 10% shown on the quote.',
+  },
+  {
+    icon: 'electrical-plumbing',
+    title: 'Electrical and plumbing',
+    text: 'Trusted electricians and plumbers. We ask you before any repair above UGX 200,000.',
+  },
+  {
+    icon: 'utilities',
+    title: 'Utilities',
+    text: 'We look after electricity and water. Bills are paid at cost, with no markup.',
+  },
+  {
+    icon: 'garbage-management',
+    title: 'Garbage disposal',
+    text: 'We look after garbage collection. It is paid at cost, with no markup.',
+  },
+];
+
+const overline = 'font-display text-overline uppercase';
+const field =
+  'mw-transition mt-2 min-h-12 w-full rounded-sm border border-slate-500 bg-surface px-4 text-body text-ink hover:border-brand';
 ---
 
-<Layout title="Home">
-  <!-- Brand A6: a green band with a two-beat headline and a gold rule. The photograph
-       waits on the open photography decision (D14). -->
-  <section class="on-inverse bg-brand text-white">
-    <div class="mx-auto max-w-page px-4 py-20 sm:px-6 sm:py-28">
-      <h1 class="font-display text-h1 text-white sm:text-display">
-        Managed Properties. <span class="text-accent">Better Living.</span>
-      </h1>
-      <div class="mt-6 h-1 w-16 bg-accent" aria-hidden="true"></div>
-      <p class="mt-6 max-w-xl text-body-lg">Rent paid to you on the 1st, every month.</p>
+<Layout title="Home" headerTone="green">
+  <!-- Hero: a full-bleed Green field with the header floating over it, layered roof bands
+       at the logo's slope, and the monthly statement in a phone that overhangs the field's
+       bottom edge. The overhang is the negative bottom margin on the phone's column. -->
+  <section aria-labelledby="hero-title" class="relative z-10 text-white">
+    <div class="on-inverse absolute inset-0 overflow-hidden bg-brand" aria-hidden="true">
+      <HeroArt />
+    </div>
+    <div class="on-inverse relative mx-auto max-w-page px-6 pt-24 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-12 lg:gap-6">
+        <div class="pt-4 lg:col-span-7 lg:pb-12 lg:pt-12">
+          <h1
+            id="hero-title"
+            class="font-display text-h1 text-white sm:text-display lg:text-[4.5rem] lg:leading-[1.05]"
+          >
+            <span class="block text-balance">Managed Properties.</span>
+            <span class="block text-accent">Better Living.</span>
+          </h1>
+          <div class="mt-6 h-1 w-16 bg-accent" aria-hidden="true"></div>
+          <p class="mt-6 font-display text-h3 text-white">Rent paid to you on the 1st, every month.</p>
+          <p class="mt-4 max-w-md text-body-lg">
+            Professional property management for people and businesses in Uganda.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <Button href="#contact" tone="inverse" arrow>Talk to us</Button>
+            <p class="text-body-sm">No sign-up fee. No letting fee.</p>
+          </div>
+        </div>
+
+        <div class="mb-[calc(var(--mw-overhang-phone)*-1)] max-lg:pt-16 lg:col-span-5 lg:mt-12">
+          <PhoneStatement>
+            <p class="font-medium text-heading">
+              One payment and one statement a month, by SMS or WhatsApp.
+            </p>
+            <p class="mt-1 text-muted">
+              <strong class="font-semibold">Example:</strong>
+              {exampleSetup}. Not a quote.
+            </p>
+          </PhoneStatement>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="contact" class="bg-surface">
-    <div class="mx-auto max-w-page px-4 py-16 sm:px-6">
-      <h2 class="text-h2">Contact</h2>
-      <p class="mt-4 text-body-lg">
-        {SITE_NAME}<br />
-        {POSTAL_ADDRESS}
-      </p>
+  <!-- The three numbers a landlord needs to remember (BM18), set as oversize numerals. -->
+  <section aria-labelledby="offer-title" class="relative bg-page">
+    <CornerBands
+      side="right"
+      outer="fill-green-100"
+      inner="fill-green-300"
+      legs={[300, 170]}
+    />
+    <div class="relative mx-auto max-w-page px-6 pb-16 pt-[calc(var(--mw-overhang-phone)+var(--mw-space-12))] lg:px-8 lg:pb-24 lg:pt-20">
+      <div class="lg:grid lg:grid-cols-12 lg:gap-6">
+        <div class="lg:col-span-7">
+          <h2 id="offer-title" class={`${overline} text-brand`}>The offer in three lines</h2>
+          <ul class="mt-8 grid gap-10 sm:grid-cols-3 sm:gap-6">
+            {
+              offer.map((item) => (
+                <li>
+                  <p class="whitespace-nowrap font-display text-[4.5rem] font-bold leading-none tracking-tight text-heading lg:text-[5rem] xl:text-[6rem]">
+                    {item.figure}<span class="text-h3 tracking-normal">{item.unit}</span>
+                  </p>
+                  <p class="mt-4 text-body-lg">{item.line}</p>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works: rounded white cards on a tinted band. The cards hang over the Green
+       band below (the negative bottom margin on the list). -->
+  <section id="how" aria-labelledby="how-title" class="relative z-10 bg-subtle">
+    <div class="mx-auto flow-root max-w-page px-6 pt-16 lg:px-8 lg:pt-24">
+      <div class="grid gap-4 lg:grid-cols-12 lg:items-end lg:gap-6">
+        <div class="lg:col-span-6">
+          <p class={`${overline} text-brand`}>Step by step</p>
+          <h2 id="how-title" class="mt-3 text-h2 sm:text-h1">How your month works</h2>
+        </div>
+        <div class="lg:col-span-5 lg:col-start-8">
+          <p class="text-body-lg">
+            One payment and one statement each month, so you can check your month at a glance.
+          </p>
+          <p class="mt-3 text-body-sm text-muted">
+            Example with round figures: {exampleSetup}. Not a quote.
+          </p>
+        </div>
+      </div>
+
+      <ol class="relative mb-[calc(var(--mw-overhang-cards)*-1)] mt-10 grid gap-4 lg:mt-16 lg:grid-cols-3 lg:gap-6">
+        {
+          steps.map((step, index) => (
+            <li class="relative flex flex-col overflow-hidden rounded-lg bg-surface p-6 shadow-md lg:p-8">
+              <span
+                aria-hidden="true"
+                class="pointer-events-none absolute right-5 top-3 select-none font-display text-[8rem] font-bold leading-none text-green-100"
+              >
+                {index + 1}
+              </span>
+              <span class="relative flex size-16 items-center justify-center rounded-lg bg-brand text-accent">
+                <Icon name={step.icon} class="size-8" />
+              </span>
+              <h3 class="relative mt-8 text-h3">{step.title}</h3>
+              <p class="relative mt-3 text-body">{step.text}</p>
+              <div class="relative mt-auto pt-8">
+                <table class="w-full text-body-sm tabular-nums">
+                  <caption class="sr-only">
+                    {step.title}: from the example statement, in UGX
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th scope="col" class="pb-2 text-left text-caption font-medium text-muted">
+                        On your statement
+                      </th>
+                      <th scope="col" class="pb-2 text-right text-caption font-medium text-muted">
+                        UGX
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {step.rows.map((row) => (
+                      <tr class="border-t border-line">
+                        <th
+                          scope="row"
+                          class:list={[
+                            'py-2 pr-3 text-left align-top font-normal',
+                            row.strong ? 'font-semibold text-heading' : 'text-ink',
+                          ]}
+                        >
+                          {row.label}
+                        </th>
+                        <td
+                          class:list={[
+                            'py-2 text-right align-top font-medium',
+                            row.strong ? 'font-semibold text-heading' : 'text-ink',
+                          ]}
+                        >
+                          {row.value}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Services, as the back of the business card is (brand A1): a Green ground, the tagline,
+       then the six services in gold pictograms, set big on a tile one ramp step darker. -->
+  <section id="services" aria-labelledby="services-title" class="on-inverse relative bg-brand text-white">
+    <CornerBands
+      side="left"
+      outer="fill-green-700"
+      inner="fill-green-900"
+      legs={[380, 210]}
+    />
+    <div class="relative mx-auto max-w-page px-6 pb-16 pt-[calc(var(--mw-overhang-cards)+var(--mw-space-12))] lg:px-8 lg:pb-24 lg:pt-[calc(var(--mw-overhang-cards)+var(--mw-space-24))]">
+      <div class="grid gap-12 lg:grid-cols-12 lg:gap-6">
+        <div class="lg:col-span-5 lg:self-center">
+          <p class={`${overline} text-white`}>What we look after</p>
+          <h2 id="services-title" class="mt-3 font-display text-h1 text-white">
+            <span class="block">Your Property.</span>
+            <span class="block text-accent">Our Responsibility.</span>
+          </h2>
+        </div>
+        <ul class="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:col-span-7">
+          {
+            services.map((service) => (
+              <li class="flex items-start gap-5">
+                <span class="flex size-28 shrink-0 items-center justify-center rounded-lg bg-green-700 text-accent">
+                  <Icon family="pictogram" name={service.icon} class="size-20" />
+                </span>
+                <div>
+                  <h3 class="font-display text-h4 text-white">{service.title}</h3>
+                  <p class="mt-2 text-body-sm">{service.text}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact. The form is a design only: it goes nowhere. -->
+  <section
+    id="contact"
+    aria-labelledby="contact-title"
+    class="relative overflow-hidden bg-sage-100"
+  >
+    <div class="relative mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-24">
+      <div class="grid gap-10 lg:grid-cols-12 lg:gap-6">
+        <div class="lg:col-span-5">
+          <p class={`${overline} text-brand`}>Contact</p>
+          <h2 id="contact-title" class="mt-3 text-h2 sm:text-h1">Give us your building</h2>
+          <p class="mt-4 text-body-lg">
+            We pay you the rent on the 1st of every month, for every room with a tenant, minus our
+            15%.
+          </p>
+          <ul class="mt-8 grid gap-6">
+            <li class="flex items-start gap-4">
+              <Icon family="pictogram" name="badge-location" class="size-12 text-brand" />
+              <div>
+                <p class="font-display text-label font-semibold text-heading">{SITE_NAME}</p>
+                <p class="mt-1 text-body">{POSTAL_ADDRESS}</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <Icon family="pictogram" name="badge-phone" class="size-12 text-brand" />
+              <div>
+                <p class="font-display text-label font-semibold text-heading">Phone</p>
+                <p class="mt-1 text-body">Phone number to be added</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="relative lg:col-span-6 lg:col-start-7">
+          <ContactArt />
+          <form
+            action="#contact"
+            data-design-only
+            class="relative rounded-xl bg-surface p-6 shadow-md sm:p-8"
+          >
+            <h3 class="text-h3">Tell us about your building</h3>
+            <div class="mt-6 grid gap-5">
+              <div>
+                <label for="contact-name" class="block text-label text-ink">Your name</label>
+                <input id="contact-name" type="text" autocomplete="name" class={field} />
+              </div>
+              <div>
+                <label for="contact-phone" class="block text-label text-ink">
+                  Your phone number
+                </label>
+                <input
+                  id="contact-phone"
+                  type="tel"
+                  inputmode="tel"
+                  autocomplete="tel"
+                  class={field}
+                />
+              </div>
+              <div>
+                <label for="contact-building" class="block text-label text-ink">
+                  Where is your building?
+                </label>
+                <input id="contact-building" type="text" class={field} />
+              </div>
+            </div>
+            <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <Button type="submit">Send</Button>
+              <a
+                href="/legal/privacy/"
+                class="mw-transition inline-flex min-h-12 items-center text-body-sm font-medium text-brand underline underline-offset-4 hover:text-brand-deep"
+              >
+                Privacy policy
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </section>
 </Layout>
+
+<script>
+  // The form is a design only and goes nowhere. Without JavaScript it jumps to #contact.
+  document.querySelectorAll<HTMLFormElement>('form[data-design-only]').forEach((form) => {
+    form.addEventListener('submit', (event) => event.preventDefault());
+  });
+</script>

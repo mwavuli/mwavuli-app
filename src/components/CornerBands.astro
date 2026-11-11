@@ -1,0 +1,40 @@
+---
+import { SLOPE } from '../geometry/roof';
+
+// A corner motif (brand M3): two roof slopes whose peaks are off the edge, as two flat planes
+// in the section's own tones, cut off by the side and bottom edges. No gradient, no shadow,
+// no gold. It sits in an empty corner and never under text. `outer` and `inner` are fill
+// classes, written out in full where the component is used so Tailwind can see them.
+interface Props {
+  side: 'left' | 'right';
+  outer: string;
+  inner: string;
+  /** Lengths along the bottom edge, in px: [outer, inner]. */
+  legs: [number, number];
+  /** The breakpoint from which the corner shows. */
+  class?: string;
+}
+
+const { side, outer, inner, legs, class: className } = Astro.props;
+
+const S = 640;
+// A right triangle in the corner, its hypotenuse at the roof slope.
+const triangle = (leg: number) =>
+  side === 'left'
+    ? `0,${S} ${leg},${S} 0,${(S - leg * SLOPE).toFixed(1)}`
+    : `${S},${S} ${S - leg},${S} ${S},${(S - leg * SLOPE).toFixed(1)}`;
+---
+
+<div
+  class:list={['pointer-events-none absolute inset-0 hidden overflow-hidden lg:block', className]}
+  aria-hidden="true"
+>
+  <svg
+    focusable="false"
+    viewBox={`0 0 ${S} ${S}`}
+    class:list={['absolute bottom-0 size-[40rem]', side === 'left' ? 'left-0' : 'right-0']}
+  >
+    <polygon points={triangle(legs[0])} class={outer}></polygon>
+    <polygon points={triangle(legs[1])} class={inner}></polygon>
+  </svg>
+</div>

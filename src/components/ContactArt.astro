@@ -1,0 +1,21 @@
+---
+import { gable } from '../geometry/roof';
+
+// The contact section's art (brand M1 and M3): two gables at the logo's slope, nested one
+// above the other in the section's own tones (a plane a step darker and a plane lighter than
+// the Sage ground). It is anchored to the form card, which stands in front of it, and runs
+// off the section's edges. Flat tones only, and no text sits on a plane edge.
+const W = 3000;
+const H = 1100;
+const C = W / 2;
+---
+
+<svg
+  aria-hidden="true"
+  focusable="false"
+  viewBox={`0 0 ${W} ${H}`}
+  class="pointer-events-none absolute -top-60 left-1/2 h-[68.75rem] w-[187.5rem] -translate-x-1/2"
+>
+  <polygon points={gable(C + 200, 200, 2400, H)} class="fill-sage-300"></polygon>
+  <polygon points={gable(C + 200, 312, 2400, H)} class="fill-sage-50"></polygon>
+</svg>

@@ -1,0 +1,151 @@
+---
+import appIcon from '../../brand/logo/app-icon.svg?url';
+import { SITE_NAME } from '../config';
+import { amount, deduction, example, ugx } from '../data/statement';
+import Icon from './Icon.astro';
+
+// A flat phone showing the monthly statement as a message thread. It is a picture of the
+// owner's own messaging app (SMS or WhatsApp, said in words, no third-party marks), not an
+// app of ours. Every figure is the worked example in business/model.md (BM18), labelled as
+// an example. Colours, radii and type come from the theme; the device corners use the
+// panel and card radii (S3), nested by the bezel.
+
+// M2: a staggered pattern of outlined roofs, each with a small window, at the logo's slope
+// (tan 43 degrees is 0.9325). A 64 by 80 tile holds one roof in the first row and two
+// half-roofs in the offset second row, so the rows interlock across tiles.
+const roof = (apexX: number, apexY: number) => {
+  const half = 28;
+  const eave = (apexY + half * 0.9325).toFixed(1);
+  return `M${apexX - half} ${eave}L${apexX} ${apexY}L${apexX + half} ${eave}`;
+};
+const pane = (x: number, y: number) => ({ x: x - 2.5, y });
+---
+
+<figure class="w-full">
+  <div class="mx-auto w-full max-w-96 rounded-xl bg-slate-900 p-2">
+    <div class="overflow-hidden rounded-lg bg-page text-ink">
+      <div class="bg-surface">
+        <div class="flex h-8 items-center justify-center" aria-hidden="true">
+          <div class="h-4 w-16 rounded-md bg-slate-900"></div>
+        </div>
+        <div class="flex items-center gap-3 border-b border-line px-4 pb-3">
+          <img src={appIcon} alt="" width="40" height="40" class="size-10 shrink-0" />
+          <div class="min-w-0">
+            <p class="truncate text-label font-semibold text-heading">{SITE_NAME}</p>
+            <p class="text-caption text-muted">SMS or WhatsApp</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative px-3 pb-6 pt-4">
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          class="mw-roof-tone absolute inset-0 size-full"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <defs>
+            <pattern id="mw-chat-roofs" width="64" height="80" patternUnits="userSpaceOnUse">
+              <path d={roof(32, 6)}></path>
+              <rect x={pane(32, 17).x} y={pane(32, 17).y} width="5" height="5" rx="1"></rect>
+              <path d={roof(0, 46)}></path>
+              <rect x={pane(0, 57).x} y={pane(0, 57).y} width="5" height="5" rx="1"></rect>
+              <path d={roof(64, 46)}></path>
+              <rect x={pane(64, 57).x} y={pane(64, 57).y} width="5" height="5" rx="1"></rect>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" stroke="none" fill="url(#mw-chat-roofs)"></rect>
+        </svg>
+
+        <div class="relative">
+          <p
+            class="mx-auto w-fit rounded-full bg-surface px-3 py-1 text-caption text-muted shadow-sm"
+          >
+            1st April
+          </p>
+
+          <div class="mt-3 rounded-lg rounded-tl-sm bg-surface p-4 shadow-md">
+            <p class="w-fit rounded-full bg-slate-100 px-3 py-1 text-caption text-ink">
+              Example
+            </p>
+            <p class="mt-2 text-balance font-display text-body font-semibold text-heading">
+              Your statement for 1st April
+            </p>
+
+            <table class="mt-3 w-full text-body-sm tabular-nums">
+              <caption class="sr-only">
+                Example statement for 1st April, in UGX
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col" class="sr-only">Item</th>
+                  <th scope="col" class="pb-1 text-right text-caption font-medium text-muted">
+                    UGX
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-t border-line">
+                  <th scope="row" class="py-2 pr-3 text-left align-top font-normal text-ink">
+                    Rent from {example.roomsWithTenants} rooms with tenants
+                  </th>
+                  <td class="py-2 text-right align-top font-medium text-ink">
+                    {amount(example.rent)}
+                  </td>
+                </tr>
+                <tr class="border-t border-line">
+                  <th scope="row" class="py-2 pr-3 text-left align-top font-normal text-ink">
+                    Our {example.feePercent}%
+                  </th>
+                  <td class="py-2 text-right align-top font-medium text-ink">
+                    {deduction(example.fee)}
+                  </td>
+                </tr>
+                <tr class="border-t border-line">
+                  <th scope="row" class="py-2 pr-3 text-left align-top font-normal text-ink">
+                    Repair: tap
+                    <span class="block text-caption text-muted">
+                      Plumber {ugx(example.repairQuote)} plus our {example.coordinationPercent}%
+                    </span>
+                  </th>
+                  <td class="py-2 text-right align-top font-medium text-ink">
+                    {deduction(example.repair)}
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="2" class="pt-2">
+                    <div class="on-inverse rounded-md bg-brand px-4 py-3 text-white">
+                      <span class="block text-label">Paid to you on the 1st</span>
+                      <span class="block font-display text-h3">{ugx(example.paid)}</span>
+                    </div>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div aria-hidden="true">
+        <div class="flex items-center gap-2 border-t border-line bg-surface px-3 py-3">
+          <div class="flex-1 rounded-md bg-page px-3 py-3 text-body-sm text-muted">Message</div>
+          <div class="flex size-10 items-center justify-center rounded-md bg-brand text-white">
+            <Icon name="arrow-right" class="size-5" />
+          </div>
+        </div>
+        <div class="flex justify-center bg-surface pb-2">
+          <div class="h-1 w-24 rounded-sm bg-slate-300"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <figcaption class="mt-4 text-center text-body-sm text-ink">
+    <slot />
+  </figcaption>
+</figure>

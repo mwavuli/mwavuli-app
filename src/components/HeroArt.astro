@@ -1,0 +1,46 @@
+---
+import { band, gable, ridge } from '../geometry/roof';
+
+// The hero's art (brand M1 and M3): layered flat bands at the logo's slope, about 43
+// degrees, running off the edges of the Green field. A thin gold band marks the roof edge
+// (gold is a small part of the whole), then planes one and two ramp steps darker than the
+// Green ground. No gradient, no shadow, no pattern on Green (M2): only flat tones. The art
+// sits behind the phone and well clear of the text. Both pieces are anchored to the bottom of
+// the field, which is where the phone overhangs.
+const W = 3000;
+const H = 1000;
+const C = W / 2;
+const box = `0 0 ${W} ${H}`;
+
+// Small screens: the phone is as wide as the screen, so the art is a gable whose peak shows
+// above it, as a roof over the statement. 620 px above the bottom edge puts the peak about
+// 80 px above the top of the phone.
+const PEAK = H - 620;
+---
+
+<svg
+  aria-hidden="true"
+  focusable="false"
+  viewBox={box}
+  class="pointer-events-none absolute bottom-0 left-1/2 hidden h-[62.5rem] w-[187.5rem] -translate-x-1/2 lg:block"
+>
+  <polygon points={band(C + 64, C + 300, H)} class="fill-green-700"></polygon>
+  <polygon points={band(C + 348, C + 572, H)} class="fill-green-900"></polygon>
+  <polygon points={band(C + 40, C + 64, H)} class="fill-accent"></polygon>
+</svg>
+
+<svg
+  aria-hidden="true"
+  focusable="false"
+  viewBox={box}
+  class="pointer-events-none absolute bottom-0 left-1/2 h-[62.5rem] w-[187.5rem] -translate-x-1/2 lg:hidden"
+>
+  <polygon points={gable(C, PEAK, 2400, H)} class="fill-green-700"></polygon>
+  <polygon points={gable(C, PEAK + 44, 2400, H)} class="fill-green-900"></polygon>
+  <polyline
+    points={ridge(C, PEAK, 2400)}
+    fill="none"
+    stroke-width="14"
+    stroke-linejoin="miter"
+    class="stroke-accent"></polyline>
+</svg>

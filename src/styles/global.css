@@ -159,3 +159,26 @@
   --tw-prose-th-borders: var(--mw-color-role-border-strong);
   --tw-prose-td-borders: var(--mw-color-role-border-default);
 }
+
+/* Interactive colour, border and shadow changes use the brand's base duration and standard
+   easing (S9). Under reduced motion they are instant. */
+@media (prefers-reduced-motion: no-preference) {
+  .mw-transition {
+    transition-property: color, background-color, border-color, box-shadow, transform;
+    transition-duration: var(--mw-motion-duration-base);
+    transition-timing-function: var(--mw-motion-easing-standard);
+  }
+}
+
+/* M2: the tone-on-tone roof pattern is Mist Cream with 5 percent Green mixed in. */
+.mw-roof-tone {
+  color: color-mix(in srgb, var(--mw-color-core-green) 5%, var(--mw-color-core-cream));
+}
+
+/* Overlaps are sums of the spacing steps (brand S1), set once. The phone and its caption hang
+   out of the hero by 96 + 80 px; a row of cards hangs out of its band by 96 px, and the band
+   below clears it by that and one more step. */
+:root {
+  --mw-overhang-phone: calc(var(--mw-space-24) + var(--mw-space-20));
+  --mw-overhang-cards: var(--mw-space-24);
+}
