@@ -1,32 +1,86 @@
 ---
 import { SITE_NAME } from '../config';
+import { NAV } from '../data/home';
+import Button from './Button.astro';
+import Icon from './Icon.astro';
 import Lockup from './Lockup.astro';
 ---
 
-<header class="border-b border-line bg-page">
-  <div class="mx-auto flex max-w-page items-center justify-between gap-4 px-4 py-4 sm:px-6">
-    <a href="/" class="flex shrink-0 items-center" aria-label={`${SITE_NAME}: home`}>
-      <Lockup class="h-8" aria-hidden="true" />
+<!-- The horizontal lockup at 195 px (brand L5 minimum 180 px), with 24 px of clear space on every
+     side (L4). Navigation is quiet: sentence case, one Green call to action. -->
+<header class="relative z-30 bg-surface">
+  <div class="mx-auto flex max-w-page items-center justify-between gap-6 px-6 py-6 lg:px-8">
+    <a href="/" class="flex shrink-0 items-center rounded-sm" aria-label={`${SITE_NAME}: home`}>
+      <Lockup class="h-12" aria-hidden="true" />
     </a>
-    <nav aria-label="Main">
-      <ul class="flex items-center gap-2 sm:gap-4">
-        <li>
-          <a
-            href="/legal/privacy/"
-            class="inline-flex min-h-11 items-center px-3 font-display text-label font-semibold text-ink hover:text-brand"
-          >
-            Privacy
-          </a>
-        </li>
-        <li>
-          <a
-            href="/#contact"
-            class="inline-flex min-h-11 items-center rounded-full bg-brand px-5 font-display text-label font-semibold text-white hover:bg-brand-deep"
-          >
-            Contact
-          </a>
+
+    <nav aria-label="Main" class="hidden lg:block">
+      <ul class="flex items-center gap-1">
+        {
+          NAV.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="mw-transition inline-flex min-h-12 items-center rounded-md px-4 text-label text-ink decoration-brand decoration-2 underline-offset-8 hover:text-brand hover:underline"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+        <li class="ml-4">
+          <Button href="/#contact">Contact</Button>
         </li>
       </ul>
     </nav>
+
+    <details class="group relative lg:hidden" data-menu>
+      <summary
+        class="mw-transition flex min-h-12 cursor-pointer list-none items-center gap-2 rounded-md px-3 font-display text-label font-semibold text-brand hover:bg-green-50 [&::-webkit-details-marker]:hidden"
+      >
+        <span class="group-open:hidden"><Icon name="menu" class="size-6" /></span>
+        <span class="hidden group-open:inline"><Icon name="close" class="size-6" /></span>
+        <span class="group-open:hidden">Menu</span>
+        <span class="hidden group-open:inline">Close</span>
+      </summary>
+      <div class="absolute right-0 top-full mt-2 w-72 rounded-lg bg-surface p-4 shadow-lg">
+        <nav aria-label="Main, small screens">
+          <ul>
+            {
+              NAV.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class="mw-transition flex min-h-12 items-center rounded-md px-3 text-body text-ink hover:bg-green-50 hover:text-brand"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+        <Button href="/#contact" class="mt-4 w-full">Contact</Button>
+      </div>
+    </details>
   </div>
 </header>
+
+<script>
+  // Progressive enhancement: the menu is a native disclosure and works without this. The script
+  // closes it after an in-page link is chosen, and on Escape.
+  const menu = document.querySelector<HTMLDetailsElement>('[data-menu]');
+  if (menu) {
+    menu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        menu.open = false;
+      });
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menu.open) {
+        menu.open = false;
+        menu.querySelector('summary')?.focus();
+      }
+    });
+  }
+</script>

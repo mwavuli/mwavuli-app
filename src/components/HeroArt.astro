@@ -1,0 +1,47 @@
+---
+import { bundle } from '../geometry/roof';
+
+// Brand M1 and M3: layered flat roof bands at the logo's slope, cropped by the hero's edges and
+// kept clear of the text. Tones are shades and one tint of Green; the one gold stripe is about
+// a thirtieth of each motif's area (M3 allows a fifth). Desktop art is drawn on 1440 by 640.
+const wide = [
+  { tone: 'fill-green-700', thickness: 88 },
+  { tone: 'fill-accent', thickness: 8, gap: 14 },
+  { tone: 'band-tint', thickness: 60, gap: 14 },
+  { tone: 'fill-green-900', thickness: 30, gap: 14 },
+];
+const left = bundle([196, 150], 'down-left', 900, wide);
+const right = bundle([1244, 150], 'down-right', 900, wide);
+
+// Phone art is drawn on 393 by 640, below the button.
+const narrow = [
+  { tone: 'fill-green-700', thickness: 40 },
+  { tone: 'fill-accent', thickness: 4, gap: 8 },
+  { tone: 'band-tint', thickness: 26, gap: 8 },
+  { tone: 'fill-green-900', thickness: 14, gap: 8 },
+];
+const narrowLeft = bundle([36, 468], 'down-left', 500, narrow);
+const narrowRight = bundle([357, 468], 'down-right', 500, narrow);
+---
+
+<svg
+  viewBox="0 0 1440 640"
+  preserveAspectRatio="xMidYMin slice"
+  aria-hidden="true"
+  focusable="false"
+  class="pointer-events-none absolute inset-0 hidden h-full w-full md:block"
+>
+  {left.map((bar) => <polygon points={bar.points} class={bar.tone} />)}
+  {right.map((bar) => <polygon points={bar.points} class={bar.tone} />)}
+</svg>
+
+<svg
+  viewBox="0 0 393 640"
+  preserveAspectRatio="xMidYMax slice"
+  aria-hidden="true"
+  focusable="false"
+  class="pointer-events-none absolute inset-0 h-full w-full md:hidden"
+>
+  {narrowLeft.map((bar) => <polygon points={bar.points} class={bar.tone} />)}
+  {narrowRight.map((bar) => <polygon points={bar.points} class={bar.tone} />)}
+</svg>

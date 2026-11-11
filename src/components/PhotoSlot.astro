@@ -1,0 +1,37 @@
+---
+import RoofPattern from './RoofPattern.astro';
+import SlotArt from './SlotArt.astro';
+
+interface Props {
+  /** Unique within the page: names the pattern. */
+  id: string;
+  /** The framing of the future photograph, drawn as flat planes. */
+  art: 'home' | 'frame' | 'roofline' | 'slope';
+  /** Ground colour: a light brand tint, so the M2 roof pattern may sit on it. */
+  ground?: 'green-100' | 'sage-100';
+  /** Size, ratio and radius come from the caller. */
+  class?: string;
+}
+
+const { id, art, ground = 'green-100', class: className } = Astro.props;
+
+const groundClass = ground === 'green-100' ? 'bg-green-100' : 'bg-sage-100';
+const patternClass = ground === 'green-100' ? 'roof-pattern-green-100' : 'roof-pattern-sage-100';
+---
+
+<!-- A photo slot (open decision D14): the final ratio and crop, a flat light ground with the
+     M2 pattern, art-directed planes, and a caption. It is a graphic until the photograph exists. -->
+<div
+  role="img"
+  aria-label="Photograph to come (D14)"
+  class:list={['relative isolate overflow-hidden', groundClass, className]}
+>
+  <RoofPattern id={`roofs-${id}`} class={patternClass} />
+  <SlotArt variant={art} />
+  <span
+    aria-hidden="true"
+    class="absolute bottom-4 left-4 inline-flex items-center rounded-full bg-surface px-3 py-1 text-caption text-brand"
+  >
+    Photograph to come (D14)
+  </span>
+</div>

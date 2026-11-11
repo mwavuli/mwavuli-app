@@ -1,28 +1,210 @@
 ---
-import { POSTAL_ADDRESS, SITE_NAME } from '../config';
+import Button from '../components/Button.astro';
+import HeroArt from '../components/HeroArt.astro';
+import Icon from '../components/Icon.astro';
+import PhotoSlot from '../components/PhotoSlot.astro';
+import RoofPattern from '../components/RoofPattern.astro';
 import Layout from '../layouts/Layout.astro';
+import { AUDIENCES, CONTACT_ROWS, SERVICE_GROUPS, TERMS } from '../data/home';
+
+// One art direction per service slot; the middle card sits on sage for a quieter rhythm.
+const serviceSlots = [
+  { art: 'home', ground: 'green-100' },
+  { art: 'frame', ground: 'sage-100' },
+  { art: 'roofline', ground: 'green-100' },
+] as const;
 ---
 
 <Layout title="Home">
-  <!-- Brand A6: a green band with a two-beat headline and a gold rule. The photograph
-       waits on the open photography decision (D14). -->
-  <section class="on-inverse bg-brand text-white">
-    <div class="mx-auto max-w-page px-4 py-20 sm:px-6 sm:py-28">
-      <h1 class="font-display text-h1 text-white sm:text-display">
-        Managed Properties. <span class="text-accent">Better Living.</span>
+  <!-- 1. Hero. Green field, layered roof bands at the logo's slope (M3), the two-beat headline
+       over them (F6), one gold rule (M4), one outlined call to action. The photograph waits on
+       decision D14. -->
+  <section
+    aria-labelledby="hero-title"
+    class="on-inverse relative isolate overflow-hidden bg-brand text-white lg:min-h-[40rem]"
+  >
+    <HeroArt />
+    <div
+      class="relative mx-auto flex max-w-page flex-col items-center px-6 pb-44 pt-16 text-center md:pb-40 lg:px-8 lg:pt-24"
+    >
+      <p class="font-display text-overline uppercase text-green-100">Kampala, Uganda</p>
+      <h1 id="hero-title" class="mt-6 font-display text-balance font-[720] type-hero">
+        <span class="block text-white">Managed Properties.</span>
+        <span class="block text-accent">Better Living.</span>
       </h1>
-      <div class="mt-6 h-1 w-16 bg-accent" aria-hidden="true"></div>
-      <p class="mt-6 max-w-xl text-body-lg">Rent paid to you on the 1st, every month.</p>
+      <div class="mt-8 h-1 w-16 bg-accent" aria-hidden="true"></div>
+      <p class="mt-8 max-w-xl text-balance text-body-lg text-white">Rent paid to you on the 1st, every month.</p>
+      <div class="mt-10">
+        <Button href="#contact" variant="outline-inverse">Talk to us about your building</Button>
+      </div>
+    </div>
+    <p
+      class="absolute bottom-16 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-green-300 px-3 py-1 text-caption text-white md:bottom-auto md:left-auto md:right-8 md:top-6 md:translate-x-0"
+    >
+      Photograph to come (D14)
+    </p>
+  </section>
+
+  <!-- 2. Audiences (F3). Three white cards overlap the hero's lower edge, with a badge, one line
+       from the documents and a text link each. The whole card is the link target. The card straddles
+       Green and cream, so its focus ring is two tones: Green shows on cream, gold on Green. -->
+  <section aria-labelledby="audiences-title" class="relative z-10 flow-root bg-page px-6 pb-20 lg:px-8 lg:pb-24">
+    <h2 id="audiences-title" class="sr-only">Who we serve</h2>
+    <ul
+      class="-mt-12 mx-auto grid max-w-page gap-6 md:-mt-24 md:grid-cols-3 md:grid-rows-[auto_auto_1fr_auto] md:gap-y-0"
+    >
+      {
+        AUDIENCES.map((audience) => (
+          <li
+            id={audience.id}
+            class="mw-transition mw-lift group relative flex flex-col rounded-lg bg-surface p-6 shadow-md hover:shadow-lg has-[a:focus-visible]:outline has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-brand has-[a:focus-visible]:ring-4 has-[a:focus-visible]:ring-accent md:row-span-4 md:grid md:grid-rows-subgrid"
+          >
+            <span class="mw-transition inline-flex size-16 items-center justify-center rounded-[var(--mw-radius-badge)] bg-green-50 text-brand group-hover:bg-brand group-hover:text-white">
+              <Icon name={audience.icon} class="size-8" />
+            </span>
+            <h3 class="mt-6 text-h3">{audience.title}</h3>
+            <p class="mt-3 text-pretty text-ink">{audience.line}</p>
+            <a
+              href={audience.href}
+              class="mw-transition mt-6 inline-flex min-h-11 items-center gap-2 self-start justify-self-start font-display text-label font-semibold text-brand decoration-2 underline-offset-4 after:absolute after:inset-0 after:rounded-lg focus-visible:underline focus-visible:outline-none group-hover:underline"
+            >
+              {audience.cta}
+              <Icon name="arrow-right" class="mw-transition size-5 motion-safe:group-hover:translate-x-1" />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <!-- 3. Purpose, in the board's words (F1). A pull statement on sage, with a full-bleed slot. -->
+  <section aria-labelledby="purpose-title" class="bg-sage-100">
+    <div class="grid lg:grid-cols-[minmax(0,8fr)_minmax(0,4fr)]">
+      <div class="px-6 py-20 lg:py-24 lg:pl-[max(2rem,calc((100vw_-_1200px)/2_+_2rem))] lg:pr-12">
+        <p class="font-display text-overline uppercase text-brand">Our purpose</p>
+        <h2 id="purpose-title" class="mt-4 font-display text-balance font-bold text-brand type-statement">
+          Professional property management for people and businesses in Uganda.
+        </h2>
+        <a
+          href="#terms"
+          class="mw-transition group mt-10 inline-flex min-h-12 items-center gap-3 font-display text-body font-semibold text-brand decoration-2 underline-offset-4 hover:underline"
+        >
+          What you get as a landlord
+          <Icon name="arrow-right" class="mw-transition size-6 motion-safe:group-hover:translate-x-1" />
+        </a>
+      </div>
+      <PhotoSlot id="purpose" art="slope" ground="green-100" class="min-h-80 lg:min-h-[30rem]" />
     </div>
   </section>
 
-  <section id="contact" class="bg-surface">
-    <div class="mx-auto max-w-page px-4 py-16 sm:px-6">
-      <h2 class="text-h2">Contact</h2>
-      <p class="mt-4 text-body-lg">
-        {SITE_NAME}<br />
-        {POSTAL_ADDRESS}
-      </p>
+  <!-- 4. The landlord pitch (BM18): the only three numbers a landlord needs to remember, set oversize. -->
+  <section id="terms" aria-labelledby="terms-title" class="bg-surface px-6 py-20 lg:px-8 lg:py-24">
+    <div class="mx-auto max-w-page">
+      <h2 id="terms-title" class="mx-auto max-w-2xl text-balance text-center text-h2 lg:text-h1">
+        For landlords, it comes down to three things.
+      </h2>
+      <ul class="mt-12 grid gap-12 md:grid-cols-3 md:gap-8 lg:mt-16">
+        {
+          TERMS.map((term) => (
+            <li class="border-t border-line pt-8 text-center">
+              <p aria-hidden="true" class="font-display font-bold tabular-nums text-brand type-figure">
+                {term.figure}<span class="ml-1 text-h2 text-gold-700">{term.unit}</span>
+              </p>
+              <p class="mx-auto mt-6 max-w-xs text-pretty text-body-lg text-ink">{term.line}</p>
+            </li>
+          ))
+        }
+      </ul>
     </div>
+  </section>
+
+  <!-- 5. The six services (F1, D15) in three groups. Three tall slots straddle a colour split;
+       the middle one sits lower. -->
+  <section id="services" aria-labelledby="services-title">
+    <div class="bg-page">
+      <div class="mx-auto max-w-page px-6 pt-20 lg:px-8 lg:pt-24">
+        <div class="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-8">
+          <div class="lg:col-span-5">
+            <p class="font-display text-overline uppercase text-brand">Services</p>
+            <h2 id="services-title" class="mt-3 text-h2 lg:text-h1">What we look after</h2>
+          </div>
+          <p class="text-pretty text-body-lg text-ink lg:col-span-6 lg:col-start-7">
+            We find tenants for your empty rooms, collect the rent, arrange trusted contractors for
+            repairs, and look after electricity, water and garbage.
+          </p>
+        </div>
+        <div class="pb-[calc(18%_+_3rem)]" aria-hidden="true"></div>
+      </div>
+    </div>
+    <div class="on-inverse bg-brand text-white">
+      <div class="mx-auto flow-root max-w-page px-6 pb-20 lg:px-8 lg:pb-24">
+        <ul class="-mt-[18%] grid gap-12 md:grid-cols-3 md:gap-8">
+          {
+            SERVICE_GROUPS.map((group, index) => (
+              <li class={index === 1 ? 'md:mt-16' : ''}>
+                <PhotoSlot
+                  id={`service-${index + 1}`}
+                  art={serviceSlots[index].art}
+                  ground={serviceSlots[index].ground}
+                  class="aspect-[4/3] rounded-lg shadow-md md:aspect-[3/4]"
+                />
+                <div class="mt-8">
+                  <h3 class="text-h3 text-white">{group.title}</h3>
+                  <p class="mt-3 text-pretty text-green-100">{group.line}</p>
+                  <ul class="mt-8 grid grid-cols-2 gap-4">
+                    {group.services.map((service) => (
+                      <li class="flex flex-col items-start gap-3">
+                        <Icon family="pictogram" name={service.pictogram} class="size-20 text-accent" />
+                        <span class="font-display text-body font-semibold text-white">{service.label}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Contact. The panel overlaps the Green strip above the footer, as the cards overlap the
+       hero. The postal address is the only contact fact; the rest are labelled placeholders. -->
+  <section id="contact" aria-labelledby="contact-title">
+    <div class="relative isolate flow-root bg-page px-6 pt-20 lg:px-8 lg:pt-24">
+      <RoofPattern id="roofs-contact" class="roof-pattern-cream -z-10" />
+      <div
+        class="relative z-10 mx-auto -mb-24 grid max-w-page gap-10 rounded-xl bg-surface p-8 shadow-md lg:grid-cols-2 lg:gap-16 lg:p-16"
+      >
+        <div>
+          <p class="font-display text-overline uppercase text-brand">Contact</p>
+          <h2 id="contact-title" class="mt-3 text-balance text-h2 lg:text-h1">
+            Talk to us about your building.
+          </h2>
+          <p class="mt-6 max-w-md text-pretty text-body-lg text-ink">
+            One of our officers sits down with you, explains the agreement in your language and
+            answers your questions.
+          </p>
+        </div>
+        <ul class="divide-y divide-line self-center">
+          {
+            CONTACT_ROWS.map((row) => (
+              <li class="flex items-center gap-4 py-5 first:pt-0 last:pb-0">
+                <span class="inline-flex size-12 shrink-0 items-center justify-center rounded-[var(--mw-radius-badge)] bg-brand text-white">
+                  <Icon name={row.icon} class="size-6" />
+                </span>
+                <div>
+                  <p class="text-label text-muted">{row.label}</p>
+                  <p class:list={['text-body-lg', row.placeholder ? 'text-muted' : 'font-medium text-ink']}>
+                    {row.value}
+                  </p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+    <div class="on-inverse h-24 bg-brand" aria-hidden="true"></div>
   </section>
 </Layout>

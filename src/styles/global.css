@@ -159,3 +159,72 @@
   --tw-prose-th-borders: var(--mw-color-role-border-strong);
   --tw-prose-td-borders: var(--mw-color-role-border-default);
 }
+
+/* ==========================================================================
+   Calm authority prototype (SNT-38). Appended below the brand blocks; every value is a
+   brand token or a mix of two tokens.
+   ========================================================================== */
+
+/* Fluid type. The brand display and h1 steps scaled up for a large, quiet statement on
+   wide screens and held at the h1 size on phones. */
+@utility type-hero {
+  font-size: clamp(2.5rem, 0.9rem + 5vw, 5rem);
+  line-height: 1.04;
+  letter-spacing: var(--mw-type-display-tracking);
+}
+
+@utility type-statement {
+  font-size: clamp(2rem, 1.15rem + 2.4vw, 2.875rem);
+  line-height: 1.12;
+  letter-spacing: var(--mw-type-display-tracking);
+}
+
+/* Oversize numerals for the three terms. One column on phones; three columns from 768 px, where
+   the size follows the column width so "30 days" always fits. */
+@utility type-figure {
+  font-size: clamp(6rem, 25vw, 7.5rem);
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+  @media (min-width: 768px) {
+    font-size: clamp(6rem, 18.75vw - 3rem, 11rem);
+  }
+}
+
+/* Brand M2: the roof pattern is Green mixed into the ground it sits on, about 1.1 to 1 against it. */
+.roof-pattern-cream {
+  color: color-mix(in srgb, var(--mw-color-core-green) 5%, var(--mw-color-core-cream));
+}
+.roof-pattern-green-100 {
+  color: color-mix(in srgb, var(--mw-color-core-green) 8%, var(--mw-color-ramp-green-100));
+}
+.roof-pattern-sage-100 {
+  color: color-mix(in srgb, var(--mw-color-core-green) 7%, var(--mw-color-ramp-sage-100));
+}
+
+/* Roof-band tones on Green (brand C5): shades toward black, one tint toward white, no new hue. */
+.band-tint {
+  fill: color-mix(in srgb, var(--mw-color-core-white) 7%, var(--mw-color-core-green));
+}
+
+/* Hover and press transitions run on the motion tokens (brand S9). Under reduced motion the
+   movement goes and the colour and shadow changes stay. */
+.mw-transition {
+  transition-property: color, background-color, border-color, box-shadow, transform, opacity;
+  transition-duration: var(--mw-motion-duration-base);
+  transition-timing-function: var(--mw-motion-easing-standard);
+}
+@media (prefers-reduced-motion: reduce) {
+  .mw-transition {
+    transition-property: color, background-color, border-color, box-shadow;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .mw-lift:hover {
+    transform: translateY(-4px);
+  }
+}
+
+::selection {
+  background: var(--mw-color-ramp-green-100);
+  color: var(--mw-color-core-green);
+}

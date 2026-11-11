@@ -1,0 +1,75 @@
+---
+import { bundle, gable, roofBand, windowGrid } from '../geometry/roof';
+
+interface Props {
+  /**
+   * The art direction of the slot: how the future photograph is framed and cropped, drawn as
+   * flat tonal planes built from the roof form (brand M1) and the mark's window grid.
+   * `home`, `frame` and `roofline` are 3:4; `slope` is a wide panel cropped to fit.
+   */
+  variant: 'home' | 'frame' | 'roofline' | 'slope';
+}
+
+const { variant } = Astro.props;
+
+// `slope`: a diagonal split at the roof slope, a bundle of bars along it, a window grid below.
+const slopeBars = bundle([418, 37], 'down-left', 900, [
+  { tone: 'fill-green-700', thickness: 70 },
+  { tone: 'fill-accent', thickness: 10, gap: 12 },
+  { tone: 'fill-green-300', thickness: 46, gap: 12 },
+]);
+const slopeWindows = windowGrid(392, 322, 66);
+const homeWindows = windowGrid(102, 244, 40);
+const roofWindows = windowGrid(168, 334, 20);
+---
+
+{
+  variant === 'home' && (
+    <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false" class="absolute inset-0 h-full w-full">
+      <polygon points={gable(150, 164.5, 400)} class="fill-green-300" />
+      <polygon points={roofBand(150, 118, 34, 260)} class="fill-brand" />
+      {homeWindows.map((w) => (
+        <rect x={w.x} y={w.y} width={w.size} height={w.size} class="fill-brand" />
+      ))}
+      <rect y="366" width="300" height="34" class="fill-green-700" />
+    </svg>
+  )
+}
+
+{
+  variant === 'frame' && (
+    <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false" class="absolute inset-0 h-full w-full">
+      <polygon points={roofBand(150, 66, 34, 260)} class="fill-green-300" />
+      <polygon points={roofBand(150, 148, 34, 260)} class="fill-brand" />
+      <polygon points={roofBand(150, 208, 8, 260)} class="fill-accent" />
+      <polygon points={roofBand(150, 232, 34, 260)} class="fill-green-700" />
+    </svg>
+  )
+}
+
+{
+  variant === 'roofline' && (
+    <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false" class="absolute inset-0 h-full w-full">
+      <polygon points={gable(235, 190, 400)} class="fill-green-50" />
+      <polygon points={gable(70, 245, 400)} class="fill-green-300" />
+      <polygon points={gable(190, 290, 400)} class="fill-brand" />
+      {roofWindows.map((w) => (
+        <rect x={w.x} y={w.y} width={w.size} height={w.size} class="fill-green-100" />
+      ))}
+    </svg>
+  )
+}
+
+{
+  variant === 'slope' && (
+    <svg viewBox="0 0 600 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false" class="absolute inset-0 h-full w-full">
+      <polygon points="120,520 600,72.4 600,520" class="fill-brand" />
+      {slopeBars.map((bar) => (
+        <polygon points={bar.points} class={bar.tone} />
+      ))}
+      {slopeWindows.map((w) => (
+        <rect x={w.x} y={w.y} width={w.size} height={w.size} class="fill-green-50" />
+      ))}
+    </svg>
+  )
+}

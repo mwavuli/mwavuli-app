@@ -1,0 +1,27 @@
+---
+interface Props {
+  href: string;
+  /**
+   * `primary`: filled Green. `outline`: a 1.5 px Green outline, for light grounds.
+   * `outline-inverse`: a white outline, for Green grounds, where a Green outline cannot show.
+   */
+  variant?: 'primary' | 'outline' | 'outline-inverse';
+  class?: string;
+}
+
+const { href, variant = 'primary', class: className } = Astro.props;
+
+// Brand A5: 48 px high, radius.md, Montserrat 600. Never a pill (brand S3).
+const base =
+  'mw-transition inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-6 text-center font-display text-body font-semibold';
+
+const variants = {
+  primary: 'bg-brand text-white hover:bg-brand-deep active:bg-green-900',
+  outline:
+    'border-[1.5px] border-brand text-brand hover:bg-green-50 active:bg-green-100',
+  'outline-inverse':
+    'border-[1.5px] border-white text-white hover:bg-white hover:text-brand active:bg-green-50 active:text-brand',
+};
+---
+
+<a href={href} class:list={[base, variants[variant], className]}><slot /></a>

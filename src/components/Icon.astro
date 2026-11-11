@@ -1,0 +1,37 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+// Brand line icons and service pictograms, inlined from brand/ so `currentColor` works
+// (brand I11). The supplied files stay the source; nothing is redrawn here.
+const files = import.meta.glob<string>('../../brand/icons/{line,pictogram}/*.svg', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+
+interface Props extends HTMLAttributes<'span'> {
+  /** File name without extension, for example `arrow-right` or `rental-income`. */
+  name: string;
+  /** `line` for the interface, `pictogram` for the six services. */
+  family?: 'line' | 'pictogram';
+}
+
+const { name, family = 'line', class: className, ...attrs } = Astro.props;
+
+const source = files[`../../brand/icons/${family}/${name}.svg`];
+if (!source) {
+  throw new Error(`Unknown ${family} icon: ${name}`);
+}
+
+// The files carry fixed width and height. Dropped, the wrapper's size class sizes the icon
+// and the viewBox keeps the proportions. Icons here are decorative: the text beside them
+// carries the meaning (brand I10).
+const svg = source.replace(/ width="[\d.]+" height="[\d.]+"/, ' aria-hidden="true" focusable="false"');
+---
+
+<span
+  {...attrs}
+  aria-hidden="true"
+  class:list={['inline-block shrink-0 [&>svg]:block [&>svg]:h-full [&>svg]:w-full', className]}
+  set:html={svg}
+/>

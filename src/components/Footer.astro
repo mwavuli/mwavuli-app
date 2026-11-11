@@ -1,22 +1,109 @@
 ---
-import { SITE_NAME } from '../config';
+import { POSTAL_ADDRESS, SITE_NAME } from '../config';
+import { AUDIENCES, SERVICE_GROUPS, TAGLINE } from '../data/home';
+import { bundle } from '../geometry/roof';
 import Lockup from './Lockup.astro';
 
 const year = new Date().getFullYear();
+
+// Brand M3: a corner motif of flat roof bands, cropped by the footer's corner and clear of the
+// text. Tones are Green shades and a tint, no gold. Drawn on 560 by 360.
+const corner = bundle([250, 20], 'down-right', 700, [
+  { tone: 'fill-green-700', thickness: 64 },
+  { tone: 'band-tint', thickness: 34, gap: 14 },
+  { tone: 'fill-green-900', thickness: 18, gap: 14 },
+]);
+
 ---
 
-<footer class="on-inverse bg-brand text-white">
-  <div class="mx-auto max-w-page px-4 py-10 sm:px-6">
-    <Lockup reversed class="h-8" role="img" aria-label={SITE_NAME} />
-    <nav aria-label="Footer" class="mt-6">
-      <ul class="grid gap-1 text-body-sm">
-        <li>
-          <a href="/legal/privacy/" class="inline-flex min-h-11 items-center hover:underline">
-            Privacy policy
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <p class="mt-8 border-t border-white/20 pt-6 text-caption">© {year} {SITE_NAME}</p>
+<footer class="on-inverse relative overflow-hidden bg-brand text-white">
+  <svg
+    viewBox="0 0 560 360"
+    preserveAspectRatio="xMaxYMax meet"
+    aria-hidden="true"
+    focusable="false"
+    class="pointer-events-none absolute bottom-0 right-0 hidden h-72 w-auto md:block"
+  >
+    {corner.map((bar) => <polygon points={bar.points} class={bar.tone} />)}
+  </svg>
+
+  <div class="relative mx-auto max-w-page px-6 pb-10 pt-16 lg:px-8 lg:pb-12 lg:pt-20">
+    <!-- The top group of the business card back (brand A1): lockup, a gold divider, the two-beat tagline. -->
+    <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-8">
+      <Lockup reversed class="h-12" role="img" aria-label={SITE_NAME} />
+      <div class="hidden h-12 w-0.5 bg-accent sm:block" aria-hidden="true"></div>
+      <p class="font-display text-h3 font-[720] text-white">
+        {TAGLINE[0]} <span class="text-accent">{TAGLINE[1]}</span>
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-10 border-t border-green-700 pt-12 lg:grid-cols-12">
+      <nav aria-label="Footer" class="grid gap-10 sm:grid-cols-3 lg:col-span-7">
+        <div>
+          <h2 class="font-display text-overline uppercase text-green-100">Who we serve</h2>
+          <ul class="mt-4">
+            {
+              AUDIENCES.map((audience) => (
+                <li>
+                  <a
+                    href={`/#${audience.id}`}
+                    class="mw-transition inline-flex min-h-11 items-center text-body-sm text-white underline-offset-4 hover:underline"
+                  >
+                    {audience.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div class="sm:col-span-1">
+          <h2 class="font-display text-overline uppercase text-green-100">What we look after</h2>
+          <ul class="mt-4">
+            {
+              SERVICE_GROUPS.map((group) => (
+                <li>
+                  <a
+                    href="/#services"
+                    class="mw-transition inline-flex min-h-11 items-center text-body-sm text-white underline-offset-4 hover:underline"
+                  >
+                    {group.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div>
+          <h2 class="font-display text-overline uppercase text-green-100">Company</h2>
+          <ul class="mt-4">
+            <li>
+              <a
+                href="/#contact"
+                class="mw-transition inline-flex min-h-11 items-center text-body-sm text-white underline-offset-4 hover:underline"
+              >
+                Contact
+              </a>
+            </li>
+            <li>
+              <a
+                href="/legal/privacy/"
+                class="mw-transition inline-flex min-h-11 items-center text-body-sm text-white underline-offset-4 hover:underline"
+              >
+                Privacy policy
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="lg:col-span-3 lg:col-start-9">
+        <h2 class="font-display text-overline uppercase text-green-100">Postal address</h2>
+        <address class="mt-4 text-body-sm not-italic text-white">{POSTAL_ADDRESS}</address>
+      </div>
+    </div>
+
+    <p class="mt-12 border-t border-green-700 pt-6 text-caption text-green-100">
+      © {year} {SITE_NAME}
+    </p>
   </div>
 </footer>
