@@ -13,6 +13,7 @@ design language ([`brand/`](brand/README.md)) and the business documents (`busin
 | Brand    | Tokens, logos and icons are read from `brand/` in place; `src/styles/global.css` bridges the tokens to the Tailwind theme and resets Tailwind's default palette, fonts, radii and shadows |
 | Content  | Pages in `.astro`; legal documents as an MDX content collection in `src/content/legal/`             |
 | Fonts    | Montserrat Variable and Inter Variable, self-hosted through Fontsource (brand T8)                   |
+| Icons    | The tab icon is the brand's SVG app icon; `favicon.ico` and the iOS icon are rendered from it at build time with `sharp` (brand G3) |
 | Node/PM  | Node 22, pnpm (pinned in `packageManager`; `vite@^6` pinned so `@tailwindcss/vite` binds to Astro's Vite) |
 
 ## Local development
@@ -40,10 +41,12 @@ src/
                      Lockup (the horizontal lockup, inlined), RoofBands
   content/legal/     legal documents (MDX); schema in src/content.config.ts
   layouts/Layout.astro
-  pages/             home, owners, tenants, businesses, 404, legal/[slug]
+  pages/             home, owners, tenants, businesses, 404, legal/[slug], and the generated
+                     favicon.ico and apple-touch-icon.png
   styles/global.css  brand tokens bridged to the Tailwind theme, then the site's type and motion
   audiences.ts       the three audiences: labels, paths, and the home page's proof lines
   config.ts          site-wide constants
+  icons.ts           renders favicon.ico and apple-touch-icon.png from brand/logo/app-icon.svg
 ```
 
 ## Design
@@ -67,6 +70,11 @@ in `src/config.ts`. The card reads the brand tokens and the site's Montserrat, s
 400 px wide, so it stays above the 180 px screen minimum (L5) when a feed shows the card at 45 percent, and the text
 stays 40 px inside the top and bottom edges for the 1.91:1 and 2:1 crops.
 
+The tab icon is the brand's SVG app icon. `favicon.ico` (the tile at 32 and 48 px) and `apple-touch-icon.png` (180 px)
+are generated from the same file when the site is built, because a platform that needs a fixed filename gets a
+generated file, not a copy (G3). iOS rounds its icon and paints transparency black, so the iOS icon puts the tile on a
+full-bleed square of its own gold, with the mark unchanged at 59 percent of the width (L7, "Bend when").
+
 Deliberate brand deviations, recorded as brand 09-governance asks:
 
 - **T3** (Default): display sizes above the scale's top step (hero up to 160 px, figures 192 px on the home page and
@@ -74,6 +82,9 @@ Deliberate brand deviations, recorded as brand 09-governance asks:
 - **S2** (Default): a 24 px page margin on phones, not 16 px, so the 195 px lockup keeps its L4 clear space.
 - **A6** (Default): the header sits on Green with the reversed lockup to join the first screen. There is no photograph
   (D14), and the gold roof band stands in for the gold rule under the headline.
+- **G3** (Default): `public/social.png` is a committed PNG export of artwork that can be regenerated, because rendering
+  the card in the site's Montserrat needs Chromium, which the build does not have. Its source is
+  `scripts/social-image/card.html`; the favicon files, which `sharp` can render, are generated in the build.
 
 ## Before launch
 
@@ -84,7 +95,7 @@ Open, and not for the code to decide:
 - **Contact.** Phone and email read "to be added". There is no contact form: it needs a destination that can receive it.
 - **Photography (D14).** The design uses none.
 - **Legal text.** `src/content/legal/privacy.mdx` is a placeholder pending counsel.
-- **PNG favicon fallbacks.** The favicon is the brand's SVG app icon only.
+- **Web manifest** with 192 and 512 px icons, only if the site should be installable.
 - **Deploy, infrastructure and analytics.**
 - **Commercial tenancies.** The model has no commercial tenancy form yet (BM9 counsel note), so the Businesses page
   describes the landlord's side and points to the Owners and Tenants pages instead of describing a shop tenant's terms.
