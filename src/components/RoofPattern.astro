@@ -1,0 +1,49 @@
+---
+import { RISE } from '../geometry/roof';
+
+// M2 tone-on-tone pattern: staggered outlined roofs, each with a small window, in the ground with
+// 5 percent Green mixed in (.roof-pattern). Light grounds only, behind large quiet areas, never
+// behind body text. Set `--ground` on an ancestor or on this element for a ground other than cream.
+interface Props {
+  /** Unique pattern id within the page. */
+  id: string;
+  class?: string;
+}
+const { id, class: className } = Astro.props;
+
+const cellW = 64;
+const cellH = 76;
+const halfW = 22;
+const rise = halfW * RISE;
+const wallH = 12;
+
+// One roof outline centred on `cx` whose apex is at `top`.
+const roof = (cx: number, top: number) =>
+  `M${cx - halfW} ${top + rise + wallH}V${top + rise}L${cx} ${top}L${cx + halfW} ${top + rise}V${top + rise + wallH}Z`;
+const window = (cx: number, top: number) => ({ x: cx - 3.5, y: top + rise + 4, size: 7 });
+
+const rows = [
+  { cx: cellW / 2, top: 4 },
+  { cx: 0, top: 42 },
+  { cx: cellW, top: 42 },
+];
+---
+
+<svg class:list={['roof-pattern', className]} aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id={id} width={cellW} height={cellH} patternUnits="userSpaceOnUse">
+      {
+        rows.map((r) => {
+          const w = window(r.cx, r.top);
+          return (
+            <>
+              <path d={roof(r.cx, r.top)} fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+              <rect x={w.x} y={w.y} width={w.size} height={w.size} fill="none" stroke="currentColor" stroke-width="1.5" />
+            </>
+          );
+        })
+      }
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill={`url(#${id})`}></rect>
+</svg>

@@ -1,0 +1,67 @@
+---
+import { NO_FEES } from '../data/home';
+import Button from './Button.astro';
+import Field from './Field.astro';
+import Icon from './Icon.astro';
+
+// The enquiry card: one white card that starts a conversation. Design only (see README): the
+// fields carry no name, the form has method="dialog" so a submit does nothing by itself, and the
+// script below only takes the visitor on to the contact section.
+const unitOptions = ['1 unit', '2 to 5 units', '6 to 10 units', '11 to 20 units', 'More than 20 units'];
+---
+
+<form
+  id="enquiry"
+  method="dialog"
+  data-enquiry
+  aria-labelledby="enquiry-title"
+  class="grid gap-8 rounded-xl bg-white p-6 shadow-md sm:p-8 xl:grid-cols-[19rem_1fr] xl:gap-x-8"
+>
+  <div class="md:flex md:items-center md:gap-5 xl:block">
+    <span class="grid size-12 shrink-0 place-items-center rounded-[var(--mw-radius-badge)] bg-brand text-white">
+      <Icon name="properties" class="size-6" />
+    </span>
+    <div class="mt-5 md:mt-0 xl:mt-5">
+      <h2 id="enquiry-title" class="text-h2 text-heading">Tell us about your building</h2>
+      <p class="mt-3 flex items-start gap-2 text-body text-muted">
+        <Icon name="check" class="mt-0.5 size-5 shrink-0 text-brand" />
+        {NO_FEES}
+      </p>
+    </div>
+  </div>
+
+  <div class="grid gap-x-4 gap-y-5 sm:grid-cols-2 lg:grid-cols-3 xl:border-l xl:border-line xl:pl-8">
+    <Field
+      id="enquiry-where"
+      label="Where is the building?"
+      icon="location"
+      placeholder="Area or village"
+      autocomplete="off"
+      class="sm:col-span-2"
+    />
+    <Field id="enquiry-units" label="How many units?" icon="properties" options={unitOptions} placeholder="Choose a number" />
+    <Field id="enquiry-name" label="Your name" icon="tenants" placeholder="Full name" autocomplete="name" />
+    <Field
+      id="enquiry-contact"
+      label="How can we reach you?"
+      icon="phone"
+      type="tel"
+      inputmode="tel"
+      placeholder="Phone or WhatsApp"
+      autocomplete="tel"
+      class="sm:col-span-2 lg:col-span-1"
+    />
+    <div class="flex items-end sm:col-span-2 lg:col-span-1">
+      <Button type="submit" arrow class="w-full">Talk to us</Button>
+    </div>
+  </div>
+</form>
+
+<script>
+  // Progressive enhancement: the form is design only, so "Talk to us" takes the visitor to the
+  // contact section. Without JavaScript the button does nothing.
+  document.querySelector<HTMLFormElement>('[data-enquiry]')?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    location.hash = 'contact';
+  });
+</script>

@@ -1,32 +1,33 @@
 ---
-import { SITE_NAME } from '../config';
+import { NAV_LINKS, SITE_NAME } from '../config';
+import Button from './Button.astro';
 import Lockup from './Lockup.astro';
+
+// A6 header: the horizontal lockup at 195 px (L5, minimum 180) with its L4 clear space (one eighth
+// of its width, 24 px), the navigation, and one Green call to action. Sticky from md up.
 ---
 
-<header class="border-b border-line bg-page">
-  <div class="mx-auto flex max-w-page items-center justify-between gap-4 px-4 py-4 sm:px-6">
-    <a href="/" class="flex shrink-0 items-center" aria-label={`${SITE_NAME}: home`}>
-      <Lockup class="h-8" aria-hidden="true" />
+<header class="border-b border-line bg-page md:sticky md:top-0 md:z-40">
+  <div class="mx-auto flex max-w-page items-center justify-between gap-4 px-4 py-6 sm:px-6 lg:px-8">
+    <a href="/" class="flex shrink-0 items-center rounded-sm" aria-label={`${SITE_NAME}: home`}>
+      <Lockup class="h-12" aria-hidden="true" />
     </a>
-    <nav aria-label="Main">
-      <ul class="flex items-center gap-2 sm:gap-4">
-        <li>
-          <a
-            href="/legal/privacy/"
-            class="inline-flex min-h-11 items-center px-3 font-display text-label font-semibold text-ink hover:text-brand"
-          >
-            Privacy
-          </a>
-        </li>
-        <li>
-          <a
-            href="/#contact"
-            class="inline-flex min-h-11 items-center rounded-full bg-brand px-5 font-display text-label font-semibold text-white hover:bg-brand-deep"
-          >
-            Contact
-          </a>
-        </li>
+    <nav aria-label="Main" class="flex items-center gap-2 lg:gap-4">
+      <ul class="hidden items-center gap-1 lg:flex">
+        {
+          NAV_LINKS.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="inline-flex min-h-12 items-center rounded-md px-3 font-display text-label font-semibold text-ink underline-offset-8 decoration-2 decoration-brand transition-colors duration-(--mw-motion-duration-fast) hover:text-brand hover:underline"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
+      <Button href="/#enquiry" arrow="sm" class="whitespace-nowrap px-4 sm:px-6">Talk to us</Button>
     </nav>
   </div>
 </header>

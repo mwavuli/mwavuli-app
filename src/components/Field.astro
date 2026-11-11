@@ -1,0 +1,59 @@
+---
+import Icon from './Icon.astro';
+
+// A labelled form field (A5): label above, `body` text, radius.sm, a leading line icon. The border
+// is slate-500 (3.7 to 1 on white) so the field's edge meets WCAG 1.4.11; border.default is 1.5 to 1.
+// Design only: the controls carry no `name`, so nothing is ever sent.
+interface Props {
+  id: string;
+  label: string;
+  icon: string;
+  placeholder?: string;
+  /** Options turn the field into a select; `placeholder` is its first, unselectable line. */
+  options?: readonly string[];
+  type?: 'text' | 'tel';
+  inputmode?: 'text' | 'tel';
+  autocomplete?: string;
+  class?: string;
+}
+
+const { id, label, icon, placeholder, options, type = 'text', inputmode, autocomplete, class: className } = Astro.props;
+
+const control = [
+  'h-12 w-full rounded-sm border border-slate-500 bg-white pl-11 text-body text-ink',
+  'transition-[border-color] duration-(--mw-motion-duration-fast) ease-(--mw-motion-easing-standard)',
+  'hover:border-slate-700 focus:border-brand',
+];
+---
+
+<div class={className}>
+  <label for={id} class="block text-label text-ink">{label}</label>
+  <div class="relative mt-2 flex">
+    <Icon name={icon} class="pointer-events-none absolute left-3.5 top-1/2 size-5 -translate-y-1/2 text-slate-500" />
+    {
+      options ? (
+        <>
+          <select id={id} class:list={['field-select appearance-none pr-10', control]}>
+            <option value="" disabled selected hidden>
+              {placeholder}
+            </option>
+            {options.map((option) => <option value={option}>{option}</option>)}
+          </select>
+          <Icon
+            name="chevron-down"
+            class="pointer-events-none absolute right-3.5 top-1/2 size-5 -translate-y-1/2 text-slate-700"
+          />
+        </>
+      ) : (
+        <input
+          id={id}
+          type={type}
+          inputmode={inputmode}
+          autocomplete={autocomplete}
+          placeholder={placeholder}
+          class:list={['pr-3 placeholder:text-muted', control]}
+        />
+      )
+    }
+  </div>
+</div>

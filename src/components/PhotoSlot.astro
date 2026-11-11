@@ -1,0 +1,42 @@
+---
+import { COS, gable, points, windowGrid } from '../geometry/roof';
+import RoofPattern from './RoofPattern.astro';
+
+// A photograph slot (D14): the final crop, the S3 radius, a flat light ground with the M2 roof
+// pattern, layered tonal planes in the shape of the building to be photographed, and a solid
+// Green caption band (M6). When the photograph exists it replaces the planes and the pattern.
+interface Props {
+  /** Unique pattern id within the page. */
+  id: string;
+  caption?: string;
+  class?: string;
+}
+const { id, caption = 'Photograph to come (D14)', class: className } = Astro.props;
+
+const half = 228;
+const outline = 46;
+const back = points(gable([240, 118], half, 700));
+const inner = points(gable([240, 118 + outline / COS], half - outline, 700));
+const squares = windowGrid(240, 330, half * 2);
+---
+
+<figure
+  class:list={[
+    'relative isolate overflow-hidden rounded-xl bg-green-100 [--ground:var(--mw-color-ramp-green-100)]',
+    className,
+  ]}
+>
+  <RoofPattern id={id} class="absolute inset-0 -z-10 size-full" />
+  <svg
+    viewBox="0 0 480 560"
+    preserveAspectRatio="xMidYMax slice"
+    class="absolute inset-0 size-full"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <polygon points={back} class="fill-green-300"></polygon>
+    <polygon points={inner} class="fill-brand"></polygon>
+    {squares.map((s) => <rect x={s.x} y={s.y} width={s.side} height={s.side} class="fill-cream" />)}
+  </svg>
+  <figcaption class="absolute inset-x-0 bottom-0 bg-brand px-5 py-3 text-caption text-white">{caption}</figcaption>
+</figure>

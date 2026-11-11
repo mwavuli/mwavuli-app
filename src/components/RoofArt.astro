@@ -1,0 +1,44 @@
+---
+import { COS, bar, eave, gable, points, windowGrid } from '../geometry/roof';
+
+// Hero art (brand M1, M3): flat roof planes at the logo's slope, bleeding off the top and right
+// edges. A back plane, a house outline in the construction of the mark with its four-square
+// window (L2 proportions), and one gold bar along the left roof plane (gold is well under a
+// fifth of the motif). Flat colour only: no gradient, shadow or transparency.
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+
+const bottom = 640;
+const backApex = [470, -40] as const;
+const backHalf = 470;
+const houseApex = [470, 60] as const;
+const houseHalf = 300;
+/** The outline's thickness at right angles to the roof: lighter than the mark's, as hero art. */
+const wall = 56;
+const innerApex = [470, houseApex[1] + wall / COS] as const;
+
+const back = points(gable(backApex, backHalf, bottom));
+const outer = points(gable(houseApex, houseHalf, bottom));
+const inner = points(gable(innerApex, houseHalf - wall, bottom));
+const squares = windowGrid(470, 250, houseHalf * 2);
+const left = eave(backApex, backHalf);
+const goldBar = points(bar(left, [-260, 520], 26, 30));
+const railBar = points(bar(left, [-260, 470], 84, 12));
+---
+
+<svg
+  viewBox="-200 0 960 560"
+  preserveAspectRatio="xMaxYMin slice"
+  class={className}
+  aria-hidden="true"
+  focusable="false"
+>
+  <polygon points={back} class="fill-green-700"></polygon>
+  <polygon points={railBar} class="fill-green-700 max-lg:hidden"></polygon>
+  <polygon points={outer} class="fill-green-900"></polygon>
+  <polygon points={inner} class="fill-brand"></polygon>
+  {squares.map((s) => <rect x={s.x} y={s.y} width={s.side} height={s.side} class="fill-green-300" />)}
+  <polygon points={goldBar} class="fill-accent"></polygon>
+</svg>

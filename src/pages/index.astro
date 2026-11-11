@@ -1,28 +1,217 @@
 ---
-import { POSTAL_ADDRESS, SITE_NAME } from '../config';
+import Button from '../components/Button.astro';
+import CornerBands from '../components/CornerBands.astro';
+import Hero from '../components/Hero.astro';
+import Icon from '../components/Icon.astro';
+import PhotoSlot from '../components/PhotoSlot.astro';
+import Pictogram from '../components/Pictogram.astro';
+import RoofPattern from '../components/RoofPattern.astro';
+import { POSTAL_ADDRESS } from '../config';
+import { AREA_LONG, LOOKS_AFTER, OFFER, PURPOSE, SERVICES, STEPS } from '../data/home';
 import Layout from '../layouts/Layout.astro';
+
+const overline = 'font-display text-overline uppercase text-brand';
+const tileLift =
+  'transition-shadow duration-(--mw-motion-duration-base) ease-(--mw-motion-easing-standard) hover:shadow-lg';
+const tileLink =
+  'mt-5 inline-flex min-h-12 items-center gap-2 font-display text-body font-semibold text-brand underline-offset-4 hover:underline';
 ---
 
-<Layout title="Home">
-  <!-- Brand A6: a green band with a two-beat headline and a gold rule. The photograph
-       waits on the open photography decision (D14). -->
-  <section class="on-inverse bg-brand text-white">
-    <div class="mx-auto max-w-page px-4 py-20 sm:px-6 sm:py-28">
-      <h1 class="font-display text-h1 text-white sm:text-display">
-        Managed Properties. <span class="text-accent">Better Living.</span>
-      </h1>
+<Layout title="Home" footerOverlap>
+  <Hero />
+
+  <!-- 2. The offer in brief (BM18): three oversize figures, cream ground. -->
+  <section id="offer" class="bg-page" aria-labelledby="offer-title">
+    <div class="mx-auto max-w-page px-4 pb-20 pt-16 sm:px-6 lg:px-8 lg:pb-28 lg:pt-24">
+      <p class={overline}>The offer in brief</p>
+      <h2 id="offer-title" class="mt-3 text-h2 lg:text-h1">Three things to remember</h2>
       <div class="mt-6 h-1 w-16 bg-accent" aria-hidden="true"></div>
-      <p class="mt-6 max-w-xl text-body-lg">Rent paid to you on the 1st, every month.</p>
+      <ol class="mt-12 grid gap-12 lg:mt-16 lg:grid-cols-3 lg:gap-0">
+        {
+          OFFER.map((item, index) => (
+            <li class:list={['lg:px-10', index === 0 ? 'lg:pl-0' : 'lg:border-l lg:border-line', index === 2 && 'lg:pr-0']}>
+              <p aria-hidden="true" class="flex items-baseline gap-2 font-display text-brand">
+                <span class="text-numeral">{item.figure}</span>
+                <span class="text-h2 text-gold-700">{item.unit}</span>
+              </p>
+              <p class="mt-6 max-w-xs font-display text-h4 text-ink">{item.line}</p>
+            </li>
+          ))
+        }
+      </ol>
     </div>
   </section>
 
-  <section id="contact" class="bg-surface">
-    <div class="mx-auto max-w-page px-4 py-16 sm:px-6">
-      <h2 class="text-h2">Contact</h2>
-      <p class="mt-4 text-body-lg">
-        {SITE_NAME}<br />
-        {POSTAL_ADDRESS}
-      </p>
+  <!-- 3. How a conversation starts (P4, BM7, BM11): steps beside an art-directed photo slot, white ground. -->
+  <section id="how" class="bg-surface" aria-labelledby="how-title">
+    <div class="mx-auto max-w-page px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+      <div class="grid gap-12 lg:grid-cols-12 lg:gap-x-12">
+        <div class="lg:col-span-6">
+          <p class={overline}>For property owners</p>
+          <h2 id="how-title" class="mt-3 text-h2 lg:text-h1">How a conversation starts</h2>
+          <ol class="mt-10">
+            {
+              STEPS.map((step, index) => (
+                <li class="relative flex gap-6 pb-10 last:pb-0">
+                  {index < STEPS.length - 1 && (
+                    <span aria-hidden="true" class="absolute bottom-2 left-7 top-16 w-1 -translate-x-1/2 bg-accent" />
+                  )}
+                  <span class="relative grid size-14 shrink-0 place-items-center rounded-lg bg-brand text-white">
+                    <Icon name={step.icon} class="size-8" />
+                  </span>
+                  <div>
+                    <p class={overline}>Step {index + 1}</p>
+                    <h3 class="mt-1 text-h3">{step.title}</h3>
+                    <p class="mt-2 max-w-md text-body-lg text-ink">{step.text}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+        <div class="lg:col-span-6">
+          <PhotoSlot id="pattern-slot" class="h-full min-h-[26rem]" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. What we look after (the card back, F6, I7): Green band, big gold pictograms. -->
+  <section
+    id="services"
+    class="on-inverse relative isolate overflow-hidden bg-brand text-white"
+    aria-labelledby="services-title"
+  >
+    <CornerBands gold class="pointer-events-none absolute right-0 top-0 -z-10 hidden w-40 md:block lg:w-80" />
+    <CornerBands class="pointer-events-none absolute left-0 top-0 -z-10 hidden w-24 -scale-x-100 md:block lg:w-48" />
+    <div class="mx-auto max-w-page px-4 py-20 text-center sm:px-6 lg:px-8 lg:py-28">
+      <p class="font-display text-overline uppercase text-white">What we look after</p>
+      <h2 id="services-title" class="mt-4 font-display text-statement text-white">
+        <span class="block">Your Property.</span>
+        <span class="block text-accent">Our Responsibility.</span>
+      </h2>
+      <div class="mx-auto mt-8 h-1 w-16 bg-accent" aria-hidden="true"></div>
+      <p class="mx-auto mt-8 max-w-2xl text-body-lg text-white">{LOOKS_AFTER}</p>
+      <ul class="mt-16 grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-3 lg:grid-cols-6">
+        {
+          SERVICES.map((service) => (
+            <li class="flex flex-col items-center">
+              <Pictogram name={service.pictogram} class="h-24 w-28 text-accent lg:h-32 lg:w-36" />
+              <p class="mt-6 font-display text-body font-semibold text-white">{service.label}</p>
+              {'note' in service && <p class="mt-1 text-body-sm text-white">{service.note}</p>}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. Who we serve: a bento of three tiles, green-50 ground. -->
+  <section id="audiences" class="bg-green-50" aria-labelledby="audiences-title">
+    <div class="mx-auto max-w-page px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+      <div class="grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-x-8">
+        <div class="lg:col-span-7">
+          <p class={overline}>Who we serve</p>
+          <h2 id="audiences-title" class="mt-3 text-h2 lg:text-h1">For people and businesses</h2>
+        </div>
+        <p class="text-body-lg text-ink lg:col-span-5">{PURPOSE}</p>
+      </div>
+
+      <div class="mt-12 grid gap-6 lg:grid-cols-12">
+        <article
+          class="on-inverse relative isolate flex min-h-[28rem] flex-col items-start overflow-hidden rounded-xl bg-brand p-8 text-white lg:col-span-7 lg:row-span-2 lg:p-12"
+        >
+          <Icon
+            name="properties"
+            class="pointer-events-none absolute -bottom-12 -right-12 -z-10 size-[22rem] text-green-700 lg:size-[26rem]"
+          />
+          <p class="font-display text-overline uppercase text-white">Property owners and investors</p>
+          <h3 class="mt-4 max-w-sm text-h1 text-white">Give us your building.</h3>
+          <p class="mt-4 max-w-sm text-body-lg text-white">
+            We pay you the rent on the 1st of every month, for every room with a tenant, minus our 15%.
+          </p>
+          <Button href="#enquiry" variant="inverse" arrow class="mt-auto">Tell us about your building</Button>
+        </article>
+
+        <article class:list={['group flex flex-col overflow-hidden rounded-xl bg-white shadow-md sm:flex-row lg:col-span-5', tileLift]}>
+          <div class="roof-pattern relative h-28 shrink-0 bg-page [--ground:var(--mw-color-core-cream)] sm:h-auto sm:w-40">
+            <RoofPattern id="pattern-tenants" class="absolute inset-0 size-full" />
+            <span class="absolute inset-0 grid place-items-center">
+              <span class="grid size-16 place-items-center rounded-[var(--mw-radius-badge)] bg-brand text-white">
+                <Icon name="tenants" class="size-8" />
+              </span>
+            </span>
+          </div>
+          <div class="p-6 lg:p-8">
+            <p class={overline}>Residential tenants</p>
+            <h3 class="mt-2 text-h3">Pay only Mwavuli</h3>
+            <p class="mt-3 text-body text-ink">
+              Pay by mobile money or bank, never cash to our staff. If something is broken, tell us and we arrange a trusted contractor.
+            </p>
+            <a href="#contact" class={tileLink}>Contact us <Icon name="arrow-right" class="size-5" /></a>
+          </div>
+        </article>
+
+        <article class:list={['group flex flex-col overflow-hidden rounded-xl bg-white shadow-md sm:flex-row-reverse lg:col-span-5', tileLift]}>
+          <div class="roof-pattern relative h-28 shrink-0 bg-page [--ground:var(--mw-color-core-cream)] sm:h-auto sm:w-40">
+            <RoofPattern id="pattern-commercial" class="absolute inset-0 size-full" />
+            <span class="absolute inset-0 grid place-items-center">
+              <span class="grid size-16 place-items-center rounded-[var(--mw-radius-badge)] bg-brand text-white">
+                <Icon name="commercial" class="size-8" />
+              </span>
+            </span>
+          </div>
+          <div class="p-6 lg:p-8">
+            <p class={overline}>Commercial occupiers</p>
+            <h3 class="mt-2 text-h3">Shops and offices</h3>
+            <p class="mt-3 text-body text-ink">
+              We manage business premises as well as homes, in Kampala and its surroundings.
+            </p>
+            <a href="#contact" class={tileLink}>Contact us <Icon name="arrow-right" class="size-5" /></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Contact: a white card on sage-100 that overlaps the footer, echoing the enquiry card. -->
+  <section id="contact" class="bg-sage-100 pt-16 lg:pt-24" aria-labelledby="contact-title">
+    <div class="relative z-10 mx-auto -mb-32 max-w-page px-4 sm:px-6 lg:px-8">
+      <div class="rounded-xl bg-white p-6 shadow-md sm:p-10 lg:p-12">
+        <div class="grid gap-10 lg:grid-cols-12 lg:gap-x-12">
+          <div class="lg:col-span-5">
+            <p class={overline}>Contact</p>
+            <h2 id="contact-title" class="mt-3 text-h2 lg:text-h1">Talk to us</h2>
+            <p class="mt-4 text-body-lg text-ink">{AREA_LONG}</p>
+            <Button href="#enquiry" arrow class="mt-8">Tell us about your building</Button>
+          </div>
+          <ul class="grid divide-y divide-line lg:col-span-7">
+            <li class="flex items-center gap-5 py-5 first:pt-0">
+              <Pictogram name="badge-location" class="size-14 text-brand" />
+              <div>
+                <p class="text-label text-muted">Post</p>
+                <p class="font-display text-h4 text-ink">{POSTAL_ADDRESS}</p>
+              </div>
+            </li>
+            <li class="flex items-center gap-5 py-5">
+              <Pictogram name="badge-phone" class="size-14 text-brand" />
+              <div>
+                <p class="text-label text-muted">Phone</p>
+                <p class="font-display text-h4 text-muted">Phone number to be added</p>
+              </div>
+            </li>
+            <li class="flex items-center gap-5 py-5 last:pb-0">
+              <span class="grid size-14 shrink-0 place-items-center rounded-[var(--mw-radius-badge)] bg-brand text-white">
+                <Icon name="mail" class="size-7" />
+              </span>
+              <div>
+                <p class="text-label text-muted">Email</p>
+                <p class="font-display text-h4 text-muted">Email address to be added</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 </Layout>

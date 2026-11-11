@@ -1,0 +1,26 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+// Service pictograms and contact badges (I7, I8): solid, one colour, `currentColor`.
+const pictograms = import.meta.glob<string>('../../brand/icons/pictogram/*.svg', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+
+interface Props extends HTMLAttributes<'span'> {
+  /** File name in brand/icons/pictogram without the extension, e.g. "rental-income". */
+  name: string;
+}
+
+const { name, class: className, ...attrs } = Astro.props;
+const svg = pictograms[`../../brand/icons/pictogram/${name}.svg`];
+if (!svg) throw new Error(`Unknown pictogram: ${name}`);
+---
+
+<span
+  {...attrs}
+  class:list={['inline-flex shrink-0 items-center justify-center [&>svg]:size-full', className]}
+  aria-hidden="true"
+  set:html={svg}
+/>

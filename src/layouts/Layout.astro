@@ -11,9 +11,11 @@ interface Props {
   description?: string;
   /** Absolute-path social image, 1200 × 630. Omitted until the brand's social image exists. */
   ogImage?: string;
+  /** A card overlaps the footer's top edge: leave it room. */
+  footerOverlap?: boolean;
 }
 
-const { title, description = SITE_DESCRIPTION, ogImage } = Astro.props;
+const { title, description = SITE_DESCRIPTION, ogImage, footerOverlap = false } = Astro.props;
 
 const fullTitle = `${title} · ${SITE_NAME}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -56,6 +58,6 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site) : undefined;
     <main id="main" class="flex-1">
       <slot />
     </main>
-    <Footer />
+    <Footer overlap={footerOverlap} />
   </body>
 </html>

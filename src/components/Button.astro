@@ -1,0 +1,52 @@
+---
+import Icon from './Icon.astro';
+
+// Buttons (A5, S3, S8): 48 px high, radius.md (never a pill), Montserrat 600.
+// `inverse` is the Green-ground pair: white fill, Green text (9.82 to 1).
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'inverse' | 'outline';
+  type?: 'button' | 'submit';
+  /** Show the arrow that nudges forward on hover; "sm" shows it from the sm breakpoint up. */
+  arrow?: boolean | 'sm';
+  class?: string;
+}
+
+const { href, variant = 'primary', type = 'button', arrow = false, class: className } = Astro.props;
+
+const variants = {
+  primary: 'bg-brand text-white hover:bg-brand-deep active:bg-green-900',
+  inverse: 'bg-white text-brand hover:bg-green-50 active:bg-green-100',
+  outline: 'border-[1.5px] border-brand text-brand hover:bg-green-50 active:bg-green-100',
+};
+
+const arrowClass = [
+  'size-5 transition-transform duration-(--mw-motion-duration-base) ease-(--mw-motion-easing-standard) motion-safe:group-hover:translate-x-0.5',
+  arrow === 'sm' && 'max-sm:hidden',
+];
+
+const classes = [
+  'group inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-6 font-display text-body font-semibold',
+  'transition-[background-color,color,border-color] duration-(--mw-motion-duration-fast) ease-(--mw-motion-easing-standard)',
+  variants[variant],
+  className,
+];
+---
+
+{
+  href ? (
+    <a href={href} class:list={classes}>
+      <slot />
+      {arrow && (
+        <Icon name="arrow-right" class:list={arrowClass} />
+      )}
+    </a>
+  ) : (
+    <button type={type} class:list={classes}>
+      <slot />
+      {arrow && (
+        <Icon name="arrow-right" class:list={arrowClass} />
+      )}
+    </button>
+  )
+}

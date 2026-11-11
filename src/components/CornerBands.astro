@@ -1,0 +1,26 @@
+---
+import { RISE, bar, points } from '../geometry/roof';
+
+// M3 corner motif: a flat roof band cut off by the corner, at the logo's slope. The top right
+// corner can carry one thin gold band (gold stays under a fifth of the motif). Keep it clear of text.
+interface Props {
+  /** Add the gold band. */
+  gold?: boolean;
+  class?: string;
+}
+const { gold = false, class: className } = Astro.props;
+
+const w = 320;
+const h = Math.round(w * RISE);
+const wedge = points([
+  [0, 0],
+  [w, 0],
+  [w, h],
+]);
+const goldBand = points(bar([0, 0], [24, 330], 46, 14, 'falling'));
+---
+
+<svg viewBox={`0 0 ${w} ${h}`} class={className} aria-hidden="true" focusable="false">
+  <polygon points={wedge} class="fill-green-700"></polygon>
+  {gold && <polygon points={goldBand} class="fill-accent"></polygon>}
+</svg>

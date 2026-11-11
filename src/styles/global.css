@@ -159,3 +159,57 @@
   --tw-prose-th-borders: var(--mw-color-role-border-strong);
   --tw-prose-td-borders: var(--mw-color-role-border-default);
 }
+
+/* ---------------------------------------------------------------------------------------------
+   Home page additions (SNT-38). Below the theme and base blocks; tokens only.
+   --------------------------------------------------------------------------------------------- */
+
+/* Anchors clear the sticky header (96 px: a 48 px lockup with its L4 clear space). */
+html {
+  scroll-padding-top: 7rem;
+}
+
+/* Display type scaled up for a hero or a pull statement (T2 weight 750, T3 fluid sizing). */
+@utility text-hero {
+  font-size: clamp(2.5rem, 1.6rem + 2.6vw, 4rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  font-weight: 750;
+}
+
+@utility text-statement {
+  font-size: clamp(2.25rem, 1.4rem + 3.4vw, 4.5rem);
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  font-weight: 750;
+}
+
+/* Oversize figures: tight, proportional so the "1" sits flush with the text beneath it. */
+@utility text-numeral {
+  font-size: clamp(5rem, 2.4rem + 6.4vw, 8.5rem);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  font-weight: 750;
+}
+
+/* M2 tone-on-tone roof pattern: the ground with 5 percent Green mixed in. Set --ground to the
+   ground the pattern sits on; it defaults to Mist Cream. */
+.roof-pattern {
+  color: color-mix(in srgb, var(--mw-color-core-green) 5%, var(--ground, var(--mw-color-core-cream)));
+}
+
+/* A select that still shows its placeholder option reads as a placeholder (C3: muted, 5.23 to 1). */
+.field-select:has(option[value='']:checked) {
+  color: var(--mw-color-role-text-muted);
+}
+
+/* S9: nothing slides or lifts under reduced motion; colour and shadow still change. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
