@@ -383,8 +383,8 @@ Mwavuli decline a building it cannot fund.
 
 *Source: Owner*
 
-**Plain statement** A shop or an office gets the same terms as a room: our 15%, the first month covered, and your
-rent on the 1st. No unit is left out because its rent is large.
+**Plain statement** Every unit we take on gets the same terms, whatever its rent, shops and offices included: we
+take 15% of its rent, we cover its first missed month, and we pay you on the 1st.
 
 **Example** A shop rents for UGX 3,000,000 and the tenant does not pay in March. On 1 Mar you receive UGX 2,550,000
 (the rent minus our 15%), and we collect March from the tenant.

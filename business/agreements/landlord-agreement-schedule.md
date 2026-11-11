@@ -144,8 +144,8 @@ The drafting notes at the end are not part of the schedule and are removed befor
 
 - **12.1** We manage homes and business premises in Kampala and its surroundings. There is no minimum number of
   units.
-- **12.2** Every unit has the same terms, whatever its rent. A shop or an office is not left out because its
-  rent is large.
+- **12.2** Every unit we take on has the same terms, whatever its rent. A shop or an office gets the same terms
+  as a room.
 - **12.3** The figures are in clause 21 of the agreement.
 
 ## Drafting notes

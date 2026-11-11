@@ -34,8 +34,8 @@ sign-up fee and no letting fee.
 ### 3. Your building
 
 We manage homes and business premises in Kampala and its surroundings: rooms, flats, small blocks, shops and
-offices, with no minimum number of units. Every unit gets the same terms, whatever its rent: our 15%, the first
-month covered, and your rent on the 1st. Your units are listed in Annex 1.
+offices, with no minimum number of units. Every unit we take on gets the same terms, whatever its rent: we take
+15% of its rent, we cover its first missed month, and we pay you on the 1st. Your units are listed in Annex 1.
 
 ### 4. Showing us you own it
 
