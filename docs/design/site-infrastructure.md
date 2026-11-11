@@ -8,7 +8,7 @@ or depends on any other account, organization or repository.
 | | |
 |---|---|
 | This repository owns | the state backend (a bucket, two KMS keys and a replica), the site (a bucket and a CloudFront distribution), the deploy role, and the workflow that publishes |
-| The owner supplies | an AWS account of Mwavuli's own with an administrator identity, its 12-digit id in `infra/catalog/account.yaml`, and later the domain |
+| The owner supplies | an AWS account of Mwavuli's own with an administrator identity, its 12-digit id in `infra/live/prod/account.hcl`, and later the domain |
 | Status | written and validated offline; **nothing is applied** |
 
 Decisions are numbered `M1…` and are the record of *why*. A decision that stops being true is replaced,
@@ -25,12 +25,13 @@ administrator identity for whoever applies. The IaC creates no IAM user and no a
 the root user and choosing how a person signs in (IAM Identity Center, or a role behind MFA) are the
 owner's.
 
-The account's 12-digit id goes in `infra/catalog/account.yaml`, where it ships as `unset`. Terragrunt
+The account's 12-digit id goes in `infra/live/prod/account.hcl`, where it ships as `unset`. Terragrunt
 refuses to run until it is replaced, and the generated provider then refuses any other account, so a shell
 logged in somewhere else fails at plan and creates nothing.
 
-The alias is `prod` and the regions are `us-east-1` (home) and `us-west-2` (state replica). Both are one
-line in the same file. `us-east-1` is where CloudFront wants its certificates.
+The account is `prod` (the directory under `infra/live/`), the home region is `us-east-1` and the state
+replica's is `us-west-2`; each is one line in `account.hcl` or `region.hcl`. `us-east-1` is where CloudFront
+wants its certificates.
 
 ### M2 — The domain (open, brand D4)
 
@@ -75,7 +76,7 @@ The conventions are the owner's for any repository that owns remote state, and t
   CI if a committed bootstrap state holds one, or if any other state file is committed.
 - **S3 with native locking**, `use_lockfile = true`, no DynamoDB table.
 - **Names derived, never hand-written**: the bucket is `<org>-tfstate-<account-alias>-<region>` and a
-  unit's key is `<repo>/<account-alias>/<region>/<unit-path>/tofu.tfstate`, from the catalog and the
+  unit's key is `<repo>/<account-alias>/<region>/<unit-path>/tofu.tfstate`, from `account.hcl` and the
   directory path. For this site: `mwavuli-tfstate-prod-us-east-1` and `mwavuli-site/prod/us-east-1/site/tofu.tfstate`.
 - **The bucket**: versioned, encrypted with its own KMS key, public access blocked, plain HTTP denied,
   replicated to a second region. Replaced versions are kept for a year, and the lifecycle rule also clears
@@ -143,7 +144,7 @@ an unset variable is a named failure, never a publish that lands somewhere wrong
 
 ## 3. Before the first deploy
 
-1. **Create the AWS account** (M1), and put its id in `infra/catalog/account.yaml`.
+1. **Create the AWS account** (M1), and put its id in `infra/live/prod/account.hcl`.
 2. **Bootstrap the backend** (M5), as an administrator in that account, then commit the state it wrote:
    ```bash
    cd infra/live/_bootstrap/00-tfstate-backend

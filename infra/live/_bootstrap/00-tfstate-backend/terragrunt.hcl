@@ -19,18 +19,8 @@ exclude {
 }
 
 locals {
-  cfg        = yamldecode(file("${get_repo_root()}/infra/catalog/account.yaml"))
-  account_id = regex("^[0-9]{12}$", local.cfg.account_id)
-
-  bucket         = "${local.cfg.org_name}-tfstate-${local.cfg.account_alias}-${local.cfg.home_region}"
-  replica_bucket = "${local.cfg.org_name}-tfstate-${local.cfg.account_alias}-${local.cfg.replica_region}"
-
-  tags = {
-    ManagedBy   = "opentofu"
-    Repo        = local.cfg.repo
-    Project     = local.cfg.org_name
-    Environment = local.cfg.account_alias
-  }
+  account        = read_terragrunt_config("${get_repo_root()}/infra/live/prod/account.hcl").locals
+  aws_account_id = regex("^[0-9]{12}$", local.account.aws_account_id)
 }
 
 terraform {
@@ -49,34 +39,34 @@ generate "backend" {
   EOT
 }
 
-# The second provider is the replica's region. Both refuse any account but the catalog's.
+# The second provider is the replica's region. Both refuse any account but the one in account.hcl.
 generate "provider" {
   path      = "provider_generated.tf"
   if_exists = "overwrite"
   contents  = <<-EOT
     provider "aws" {
-      region              = "${local.cfg.home_region}"
-      allowed_account_ids = ["${local.account_id}"]
+      region              = "${local.account.home_region}"
+      allowed_account_ids = ["${local.aws_account_id}"]
 
       default_tags {
-        tags = ${jsonencode(local.tags)}
+        tags = ${jsonencode(local.account.common_tags)}
       }
     }
 
     provider "aws" {
       alias               = "replica"
-      region              = "${local.cfg.replica_region}"
-      allowed_account_ids = ["${local.account_id}"]
+      region              = "${local.account.replica_region}"
+      allowed_account_ids = ["${local.aws_account_id}"]
 
       default_tags {
-        tags = ${jsonencode(local.tags)}
+        tags = ${jsonencode(local.account.common_tags)}
       }
     }
   EOT
 }
 
 inputs = {
-  bucket_name         = local.bucket
-  replica_bucket_name = local.replica_bucket
-  tags                = local.tags
+  bucket_name         = local.account.state_bucket
+  replica_bucket_name = local.account.state_replica_bucket
+  tags                = local.account.common_tags
 }

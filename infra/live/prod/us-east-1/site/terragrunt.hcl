@@ -7,7 +7,7 @@
 include "root" { path = find_in_parent_folders("root.hcl") }
 
 locals {
-  cfg = yamldecode(file("${get_repo_root()}/infra/catalog/account.yaml"))
+  account = read_terragrunt_config(find_in_parent_folders("account.hcl")).locals
 }
 
 terraform {
@@ -15,8 +15,8 @@ terraform {
 }
 
 inputs = {
-  name        = local.cfg.repo
-  bucket_name = local.cfg.site_bucket_name
+  name        = local.account.repo
+  bucket_name = local.account.site_bucket_name
 
   # Pre-launch the bucket holds a site that rebuilds from git, but one that empties itself on
   # destroy is a footgun the moment it holds anything else. Teardown flips this deliberately.

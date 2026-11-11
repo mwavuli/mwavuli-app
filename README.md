@@ -38,7 +38,7 @@ brand/               brand and design language: spec, tokens, logos, icons
 business/            business model and agreements
 docs/design/         infrastructure decisions (site-infrastructure.md)
 infra/               OpenTofu through Terragrunt: modules/ (state-backend, static-site, github-deploy-role), live/_bootstrap/ and
-                     live/prod/us-east-1/, catalog/account.yaml, root.hcl
+                     live/prod/ (account.hcl, then us-east-1/ with region.hcl and the units), root.hcl
 public/              files served as they are: social.png
 scripts/             smoke.sh (checks a deployed copy), check-bootstrap-state.sh (what state may be committed), and
                      social-image/ (card.html and build.mjs for public/social.png)
@@ -100,7 +100,7 @@ infrastructure is standalone: `infra/` creates its own state backend, the site a
 other account, organization or repository. It is OpenTofu through Terragrunt, applied by a person, and
 `.github/workflows/deploy.yml` publishes `dist/` on a push to `main` or by hand. The decisions, and what the owner must
 supply and do before the first apply, are in [`docs/design/site-infrastructure.md`](docs/design/site-infrastructure.md).
-**Nothing is applied yet**, and `infra/catalog/account.yaml` ships with the account id `unset`, so Terragrunt refuses
+**Nothing is applied yet**, and `infra/live/prod/account.hcl` ships with the account id `unset`, so Terragrunt refuses
 to run until it names the account.
 
 | Files | `Cache-Control` |
@@ -133,7 +133,7 @@ Open, and not for the code to decide:
 - **Legal text.** `src/content/legal/privacy.mdx` is a placeholder pending counsel.
 - **Web manifest** with 192 and 512 px icons, only if the site should be installable.
 - **Deploy.** The infrastructure and the workflow are written and not applied. The owner creates the AWS account and
-  supplies its id in `infra/catalog/account.yaml`, and decides the domain: see `docs/design/site-infrastructure.md`,
+  supplies its id in `infra/live/prod/account.hcl`, and decides the domain: see `docs/design/site-infrastructure.md`,
   section 3.
 - **Analytics.**
 - **Commercial tenancies.** The model has no commercial tenancy form yet (BM9 counsel note), so the Businesses page

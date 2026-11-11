@@ -1,38 +1,29 @@
-# Root Terragrunt configuration for every unit under infra/live/<account-alias>/<region>/.
+# Root Terragrunt configuration for every unit under infra/live/<account>/<region>/.
 #
 #   include "root" { path = find_in_parent_folders("root.hcl") }
 #
-# The bootstrap units under infra/live/_bootstrap/ do not include it: they keep their own state and
-# create the backend this file points at.
+# A unit's account and region come from the account.hcl and region.hcl above it. The bootstrap units
+# under infra/live/_bootstrap/ do not include this file: they keep their own state and create the
+# backend it points at.
 
 locals {
-  cfg = yamldecode(file("${get_repo_root()}/infra/catalog/account.yaml"))
+  account = read_terragrunt_config(find_in_parent_folders("account.hcl")).locals
+  region  = read_terragrunt_config(find_in_parent_folders("region.hcl")).locals
 
-  # account_id ships unset. regex() fails on anything but 12 digits and puts the offending value in its
-  # message, so Terragrunt stops here until infra/catalog/account.yaml names the account.
-  account_id = regex("^[0-9]{12}$", local.cfg.account_id)
+  # aws_account_id ships unset. regex() fails on anything but 12 digits and puts the offending value in
+  # its message, so Terragrunt stops here until account.hcl names the account.
+  aws_account_id = regex("^[0-9]{12}$", local.account.aws_account_id)
 
-  # Path-derived identity: infra/live/<account-alias>/<region>/<unit>/...
-  relative_path = path_relative_to_include()
-  all_parts     = compact(split("/", local.relative_path))
-  path_parts    = local.all_parts[0] == "live" ? slice(local.all_parts, 1, length(local.all_parts)) : local.all_parts
-  region        = local.path_parts[1]
-
-  # The state layout is derived and never hand-written: the bucket from the catalog, the key from the
-  # directory path. The bucket and its key are created by infra/live/_bootstrap/00-tfstate-backend.
-  state_bucket = "${local.cfg.org_name}-tfstate-${local.cfg.account_alias}-${local.cfg.home_region}"
-  state_key    = "${local.cfg.repo}/${join("/", local.path_parts)}/tofu.tfstate"
-  state_key_id = "arn:aws:kms:${local.cfg.home_region}:${local.account_id}:alias/${local.state_bucket}"
-
-  common_tags = {
-    ManagedBy   = "opentofu"
-    Repo        = local.cfg.repo
-    Project     = local.cfg.org_name
-    Environment = local.cfg.account_alias
-  }
+  # The state key is derived from the directory path and never hand-written:
+  # <repo>/<account>/<region>/<unit>/tofu.tfstate.
+  all_parts  = compact(split("/", path_relative_to_include()))
+  path_parts = local.all_parts[0] == "live" ? slice(local.all_parts, 1, length(local.all_parts)) : local.all_parts
+  state_key  = "${local.account.repo}/${join("/", local.path_parts)}/tofu.tfstate"
 }
 
-# S3 with native locking: no DynamoDB table (use_lockfile needs OpenTofu 1.10 or later).
+# S3 with native locking: no DynamoDB table (use_lockfile needs OpenTofu 1.10 or later). The bucket and
+# its key are created by infra/live/_bootstrap/00-tfstate-backend. The key is named by its alias, so a
+# rotated key needs no change here.
 remote_state {
   backend = "s3"
   generate = {
@@ -40,12 +31,12 @@ remote_state {
     if_exists = "overwrite"
   }
   config = {
-    bucket       = local.state_bucket
+    bucket       = local.account.state_bucket
     key          = local.state_key
-    region       = local.cfg.home_region
+    region       = local.account.home_region
     encrypt      = true
     use_lockfile = true
-    kms_key_id   = local.state_key_id
+    kms_key_id   = "arn:aws:kms:${local.account.home_region}:${local.aws_account_id}:alias/${local.account.state_bucket}"
   }
 }
 
@@ -57,11 +48,11 @@ generate "provider" {
   if_exists = "overwrite"
   contents  = <<-EOT
     provider "aws" {
-      region              = "${local.region}"
-      allowed_account_ids = ["${local.account_id}"]
+      region              = "${local.region.aws_region}"
+      allowed_account_ids = ["${local.aws_account_id}"]
 
       default_tags {
-        tags = ${jsonencode(local.common_tags)}
+        tags = ${jsonencode(local.account.common_tags)}
       }
     }
   EOT

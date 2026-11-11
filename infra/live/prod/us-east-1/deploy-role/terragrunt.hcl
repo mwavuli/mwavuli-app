@@ -7,7 +7,7 @@
 include "root" { path = find_in_parent_folders("root.hcl") }
 
 locals {
-  cfg = yamldecode(file("${get_repo_root()}/infra/catalog/account.yaml"))
+  account = read_terragrunt_config(find_in_parent_folders("account.hcl")).locals
 }
 
 terraform {
@@ -15,10 +15,15 @@ terraform {
 }
 
 inputs = {
-  github_org       = local.cfg.github_org
-  repository       = local.cfg.repo
-  github_owner_id  = local.cfg.github_owner_id
-  github_repo_id   = local.cfg.github_repo_id
+  github_org = "nyange-app"
+  repository = local.account.repo
+
+  # Immutable: GitHub puts both ids in the OIDC subject, and they survive a rename or a transfer.
+  #   gh api /users/nyange-app --jq .id
+  #   gh api /repos/nyange-app/mwavuli-site --jq .id
+  github_owner_id = "314008686"
+  github_repo_id  = "1451231111"
+
   environments     = ["production"]
-  site_bucket_name = local.cfg.site_bucket_name
+  site_bucket_name = local.account.site_bucket_name
 }
