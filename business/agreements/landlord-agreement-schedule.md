@@ -1,9 +1,11 @@
 # Schedule to the landlord agreement: the full terms
 
-Draft 0.2 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). This schedule goes
-with the [landlord agreement](landlord-agreement.md) between Mwavuli Holdings Ltd and [landlord's full name],
-dated [day month year]. It says the same things as the agreement, in numbered paragraphs with the words defined.
-The drafting notes at the end are not part of the schedule and are removed before use.
+Draft 0.2 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
+the end are not part of the schedule and are removed before use. This draft is not legal advice.
+
+This schedule goes with the [landlord agreement](landlord-agreement.md) between Mwavuli Holdings Ltd and
+[landlord's full name], dated [day month year]. It says the same things as the agreement, in numbered paragraphs
+with the words defined.
 
 ## The full terms
 

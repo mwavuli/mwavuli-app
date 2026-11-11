@@ -1,11 +1,11 @@
 # Landlord agreement
 
 Draft 0.2 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
-the end say which term each clause takes from. This draft is not legal advice.
+the end say which term each clause takes from, are not part of the agreement and are removed before use. This
+draft is not legal advice.
 
 This is the agreement our officer reads aloud (see the [explanation note](explanation-note.md)). The full legal
-terms are in the [schedule](landlord-agreement-schedule.md). The annexes are lists to fill in. The drafting
-notes at the end are not part of the agreement and are removed before use.
+terms are in the [schedule](landlord-agreement-schedule.md). The annexes are lists to fill in.
 
 ## Who this is between
 
