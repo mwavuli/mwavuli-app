@@ -1,0 +1,22 @@
+---
+import { SITE_NAME } from '../config';
+import Lockup from './Lockup.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="on-inverse bg-brand text-white">
+  <div class="mx-auto max-w-page px-4 py-10 sm:px-6">
+    <Lockup reversed class="h-8" role="img" aria-label={SITE_NAME} />
+    <nav aria-label="Footer" class="mt-6">
+      <ul class="grid gap-1 text-body-sm">
+        <li>
+          <a href="/legal/privacy/" class="inline-flex min-h-11 items-center hover:underline">
+            Privacy policy
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <p class="mt-8 border-t border-white/20 pt-6 text-caption">© {year} {SITE_NAME}</p>
+  </div>
+</footer>

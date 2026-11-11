@@ -1,0 +1,39 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const docs = await getCollection('legal');
+  return docs.map((doc) => ({ params: { slug: doc.id }, props: { doc } }));
+}
+
+interface Props {
+  doc: CollectionEntry<'legal'>;
+}
+
+const { doc } = Astro.props;
+const { Content } = await render(doc);
+const { title, description, version, effectiveDate, draft } = doc.data;
+---
+
+<Layout title={title} description={description}>
+  <article class="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
+    {
+      draft && (
+        <div
+          class="mb-8 rounded-lg border border-gold-300 bg-gold-50 p-4 text-body-sm text-ink"
+          role="note"
+        >
+          <strong>Draft, pending counsel review.</strong> This document is a placeholder and is not
+          in force.
+        </div>
+      )
+    }
+    <h1 class="text-h1">{title}</h1>
+    <p class="mt-2 text-body-sm text-muted">Version {version} · Effective date: {effectiveDate}</p>
+    <div class="prose mt-8 max-w-none">
+      <Content />
+    </div>
+  </article>
+</Layout>

@@ -1,0 +1,61 @@
+---
+import '../styles/global.css';
+import faviconUrl from '../../brand/logo/app-icon.svg?url';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_NAME } from '../config';
+
+interface Props {
+  /** Page name. The document title is "<title> · Mwavuli Property Management" (brand A6). */
+  title: string;
+  description?: string;
+  /** Absolute-path social image, 1200 × 630. Omitted until the brand's social image exists. */
+  ogImage?: string;
+}
+
+const { title, description = SITE_DESCRIPTION, ogImage } = Astro.props;
+
+const fullTitle = `${title} · ${SITE_NAME}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImageUrl = ogImage ? new URL(ogImage, Astro.site) : undefined;
+---
+
+<html lang="en-UG">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <link rel="icon" href={faviconUrl} type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:locale" content="en_UG" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+    <meta name="twitter:card" content={ogImageUrl ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+
+    <slot name="head" />
+  </head>
+  <body class="flex min-h-dvh flex-col bg-page font-sans text-body text-ink antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-brand focus:px-4 focus:py-2 focus:text-white"
+    >
+      Skip to content
+    </a>
+    <Header />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
