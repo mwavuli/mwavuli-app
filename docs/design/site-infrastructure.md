@@ -55,7 +55,20 @@ Adding the domain is two changes, neither written yet because neither can be unt
 
 The backend and the deploy role are `nyange-org`'s to vend ("that repository cannot create the
 credential its own CI must already hold"). Nothing in this repository can apply until that change
-exists. A draft, not applied and not opened as a pull request:
+exists. It is three steps there, and the second is a person's:
+
+1. A catalog entry and a deploy-role unit, as a pull request. `catalog/` is `@nyange-app/platform`'s
+   under `CODEOWNERS`.
+2. **A human-run apply of `live/_bootstrap/10-tfstate-backend`**, committing its updated local state. The
+   backend's per-workload grants are derived from the catalog, so a new entry changes the state bucket's
+   policy, and that is what lets this repository read and write its state prefix. `/live/_bootstrap/` needs
+   `@nyange-app/security` as well, and CI never runs it.
+3. An apply of the new deploy-role unit, which creates the role.
+
+The draft below is not applied and not opened as a pull request. It was checked in a scratch clone of
+`nyange-org` with that repository's own `nyange validate` (which accepts it, and rejects a bad
+`permissions` value and a missing `dns_scope` in the same entry) and with `terragrunt hcl fmt --check`
+and `hcl validate`.
 
 `catalog/workloads.yaml`:
 
@@ -70,9 +83,10 @@ exists. A draft, not applied and not opened as a pull request:
     dns_delegation: false           # true, with a dns_scope, once M12 adds a domain
 ```
 
-A deploy-role unit beside `live/shared-services/global/deploy-role`, with `repo = "mwavuli-site"` and
-this scoped policy. It lets CI publish and invalidate and nothing else, because a person applies
-infrastructure (M7):
+A deploy-role unit, `live/shared-services/global/deploy-role-mwavuli-site`, beside the one for
+`nyange-site` and written from it, with `repo = "mwavuli-site"`, `create_plan_role = false` (there is no
+pull-request plan job, so a read-only plan role would be unused access) and this scoped policy. It lets CI
+publish and invalidate and nothing else, because a person applies infrastructure (M7):
 
 ```json
 {
@@ -182,11 +196,14 @@ an unset variable is a named failure, never a publish that lands somewhere wrong
 ## 3. Before the first deploy
 
 1. **Decide** M3 (where) and M12 (the domain, or deploy on `cloudfront.net` first).
-2. **`nyange-org`**: register the workload and vend the deploy role (M5, M6). Another repository, so it
-   needs the owner's go-ahead and its own review.
-3. **Apply** `infra/live/shared-services/us-east-1/site` (M7). Check the plan first.
-4. **GitHub**: set the repository variables from the apply's outputs, with the `production` environment
-   the role trusts.
+2. **`nyange-org`**: the catalog entry and deploy-role unit as a pull request, then the human-run
+   bootstrap apply that grants this repository its state prefix (M5, M6). Another repository, so it needs
+   the owner's go-ahead and its own review. The prefix grant has to exist before the next step can run.
+3. **Apply** `infra/live/shared-services/us-east-1/site` (M7). Check the plan first. An operator's own
+   credentials do this; the deploy role is not needed until step 4.
+4. **`nyange-org`** again: apply the deploy-role unit, which creates `NyangeDeploy-mwavuli-site`. Then set
+   the repository variables from the first apply's outputs, with the `production` environment the role
+   trusts.
    ```bash
    gh variable set SITE_BUCKET --body "$(terragrunt output -raw bucket_name)"
    gh variable set AWS_DEPLOY_ROLE_ARN --body "<NyangeDeploy-mwavuli-site role arn>"
@@ -202,6 +219,7 @@ stubbed account contract); the workflows (`actionlint`, with `shellcheck` on the
 against every page the site builds; and `scripts/smoke.sh` against a local stand-in for S3 and CloudFront,
 healthy and with four faults injected, each of which it caught.
 
-Not verified, because there is no AWS access from here: `terragrunt plan` against the real account, the
-real distribution's behaviour, the OIDC trust, and the `aws s3 sync` and invalidation steps. The first
-plan and the first deploy are where they are verified.
+Not verified, because nothing was run against AWS: `terragrunt plan` against the real account, the real
+distribution's behaviour, the OIDC trust, and the `aws s3 sync` and invalidation steps. A plan could not
+run yet in any case: it needs the state-prefix grant that registering the workload creates (M5). The first
+plan and the first deploy are where these are verified.
