@@ -1,6 +1,6 @@
 # Schedule to the landlord agreement: the full terms
 
-Draft 0.2 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
+Draft 0.3 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
 the end are not part of the schedule and are removed before use. This draft is not legal advice.
 
 This schedule goes with the [landlord agreement](landlord-agreement.md) between Mwavuli Holdings Ltd and
@@ -11,8 +11,8 @@ with the words defined.
 
 ### S1. Words used
 
-- **1.1** "We", "us" and "our" mean Mwavuli Holdings Ltd. "You" and "your" mean the landlord named in the
-  agreement. If there is more than one owner, "you" means all of them together.
+- **1.1** "We", "us", "our" and "Mwavuli" mean Mwavuli Holdings Ltd. "You" and "your" mean the landlord named in
+  the agreement. If there is more than one owner, "you" means all of them together.
 - **1.2** "The building" is the building named in the agreement. A "unit" is a room, flat, shop or office in it
   that is listed in Annex 1 of the agreement.
 - **1.3** A unit is "occupied" when a tenant is living in it under our tenancy form, with the rent and deposit
@@ -81,7 +81,9 @@ with the words defined.
 - **6.2** You pay the contractor's price plus our coordination fee of 10%. The fee is shown on the quote.
 - **6.3** We wait for your YES before work starts on any job above UGX 200,000 on the quote.
 - **6.4** We may start an urgent safety repair up to UGX 500,000 without your YES. We tell you the same day.
-- **6.5** Electricity, water and garbage bills are paid at cost, with no markup.
+- **6.5** A tenant pays for damage the tenant causes, in full, once the repairs are done. If the tenant does
+  not, it is taken from the tenant's deposit.
+- **6.6** Electricity, water and garbage bills are paid at cost, with no markup.
 
 ### S7. Taking on the building
 
@@ -158,7 +160,7 @@ Not part of the schedule. Remove before use.
 | S3     | BM1, BM5, BM20     | Cap per unit and its reset; assignment; the due-date trigger; timing of later months |
 | S4     | BM5                | Eviction steps; costs; who may act                                                   |
 | S5     | BM6, P13           | Held in trust; refunds                                                               |
-| S6     | BM2, P6            | Agent, not builder; re-billing utilities; consent                                    |
+| S6     | BM2, BM6, P6       | Agent, not builder; re-billing utilities; consent; tenant damage                     |
 | S7     | BM7, P4, P9        | Proof by kind of land; "unsafe"; declining a building                                |
 | S8     | P5                 | Landlord duties and their remedies; align with BM8                                   |
 | S9     | BM8, P8, P13       | Notice; the "not paid" test; final payment; fee on notice exit                       |

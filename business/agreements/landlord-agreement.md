@@ -1,6 +1,6 @@
 # Landlord agreement
 
-Draft 0.2 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
+Draft 0.3 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
 the end say which term each clause takes from, are not part of the agreement and are removed before use. This
 draft is not legal advice.
 
@@ -16,7 +16,7 @@ terms are in the [schedule](landlord-agreement-schedule.md). The annexes are lis
 - **The building:** [name or description], at [address].
 - **Date:** [day month year].
 
-In this agreement "we" means Mwavuli Holdings Ltd and "you" means the landlord.
+In this agreement "we" and "Mwavuli" mean Mwavuli Holdings Ltd, and "you" means the landlord.
 
 ## The agreement in plain words
 
@@ -88,8 +88,9 @@ For example: a room rents for UGX 400,000. Our 15% is UGX 60,000, so you get UGX
 We find a trusted contractor and bring you the price. You pay the contractor's price plus our coordination fee
 of 10%, shown on the quote. Above UGX 200,000 on the quote, we wait for your YES before work starts. You say YES
 by replying to our SMS or WhatsApp message, or on a recorded call that we confirm by text. Urgent safety repairs
-up to UGX 500,000 go ahead first, and we tell you the same day. Electricity, water and garbage bills are paid at
-cost, with no markup.
+up to UGX 500,000 go ahead first, and we tell you the same day. A tenant pays for damage the tenant causes, in
+full, once the repairs are done. If the tenant does not, it is taken from the tenant's deposit. Electricity,
+water and garbage bills are paid at cost, with no markup.
 
 For example: a UGX 100,000 tap repair plus our 10% is UGX 110,000, so we just fix it and list it on your
 statement. A roof repair at UGX 660,000 (UGX 600,000 plus our UGX 60,000) needs your YES first.
@@ -232,34 +233,34 @@ for papers].
 
 Not part of the agreement. Remove before use.
 
-| Clause              | Takes from   | Counsel to confirm                                                   |
-|---------------------|--------------|----------------------------------------------------------------------|
-| Who this is between | The company  | Registration details; registered office; the contracting company     |
-| 1                   | BM2, BM5     | Scope of the agent's authority; legal steps in the landlord's name   |
-| 2                   | BM18, P1, P7 | How utilities and garbage are paid and charged to tenants            |
-| 3                   | BM9, BM10    | Commercial tenancy form; rent currency; VAT and withholding tax      |
-| 4                   | BM7          | Proof by kind of land; mortgage consent; family and estate authority |
-| 5                   | P4, P9       | Define "unsafe" as a short list; keep the signed report              |
-| 6                   | P2, P3       | "Occupied" in the same words as the tenancy form; fee on old arrears |
-| 7                   | BM1, BM20    | Insurance or suretyship; assignment of the covered month; due dates  |
-| 8                   | P1           | Payment-service and anti-money-laundering duties                     |
-| 9                   | BM4          | VAT and withholding tax on the fee; whether 15% is final             |
-| 10                  | BM2, P6      | Agent, not builder; fee disclosure; SMS and WhatsApp as consent      |
-| 11                  | BM5          | Eviction steps; costs; the oldest-month-first wording                |
-| 12                  | BM6          | Deposit amount, holding and return; the register                     |
-| 13                  | P13          | Held in trust; refund of unused months                               |
-| 14                  | P10          | VAT treatment; who issues tax invoices                               |
-| 15                  | P5           | Landlord's tax duties; align with BM8 (see the list below)           |
-| 16                  | BM8, P8, P13 | Notice mechanics; the late-payment test; exit mechanics              |
-| 17                  | P11          | Data protection duties                                               |
-| 18                  | P12          | Governing law; the mediation step; the courts                        |
-| 19                  | BM11         | Which version governs; the explanation note; witnesses               |
-| 20                  | Numbers      | Starting figures, to test with the first landlords                   |
-| Signatures          | BM11         | Who may witness; what Mwavuli records                                |
-| Annex 1             | P2, P3       | Who sets each unit's rent (not decided)                              |
-| Annex 2             | BM7          | What counts as proof for each kind of land                           |
-| Annex 3             | BM6, P3      | Deposit register; proof of the amount                                |
-| Annex 4             | P1, BM4, BM8 | The "reached you" test for a payout                                  |
+| Clause              | Takes from   | Counsel to confirm                                                          |
+|---------------------|--------------|-----------------------------------------------------------------------------|
+| Who this is between | The company  | Registration details; registered office; the contracting company            |
+| 1                   | BM2, BM5     | Scope of the agent's authority; legal steps in the landlord's name          |
+| 2                   | BM18, P1, P7 | How utilities and garbage are paid and charged to tenants                   |
+| 3                   | BM9, BM10    | Commercial tenancy form; rent currency; VAT and withholding tax             |
+| 4                   | BM7          | Proof by kind of land; mortgage consent; family and estate authority        |
+| 5                   | P4, P9       | Define "unsafe" as a short list; keep the signed report                     |
+| 6                   | P2, P3       | "Occupied" in the same words as the schedule; fee on old arrears            |
+| 7                   | BM1, BM20    | Insurance or suretyship; assignment of the covered month; due dates         |
+| 8                   | P1           | Payment-service and anti-money-laundering duties                            |
+| 9                   | BM4          | VAT and withholding tax on the fee; whether 15% is final                    |
+| 10                  | BM2, BM6, P6 | Agent, not builder; fee disclosure; SMS and WhatsApp consent; tenant damage |
+| 11                  | BM5          | Eviction steps; costs; the oldest-month-first wording                       |
+| 12                  | BM6          | Deposit amount, holding and return; the register                            |
+| 13                  | P13          | Held in trust; refund of unused months                                      |
+| 14                  | P10          | VAT treatment; who issues tax invoices                                      |
+| 15                  | P5           | Landlord's tax duties; align with BM8 (see the list below)                  |
+| 16                  | BM8, P8, P13 | Notice mechanics; the late-payment test; exit mechanics                     |
+| 17                  | P11          | Data protection duties                                                      |
+| 18                  | P12          | Governing law; the mediation step; the courts                               |
+| 19                  | BM11         | Which version governs; the explanation note; witnesses                      |
+| 20                  | Numbers      | Starting figures, to test with the first landlords                          |
+| Signatures          | BM11         | Who may witness; what Mwavuli records                                       |
+| Annex 1             | P2, P3       | Who sets each unit's rent (not decided)                                     |
+| Annex 2             | BM7          | What counts as proof for each kind of land                                  |
+| Annex 3             | BM6, P3      | Deposit register; proof of the amount                                       |
+| Annex 4             | P1, BM4, BM8 | The "reached you" test for a payout                                         |
 
 The clauses re-voice the model's plain statements to "we" and "you" and tighten the wording. The meaning is
 unchanged. Clauses 1 and 2 are drawn from the model's notes on BM2 and BM5 and from the approved pitch (BM18).
@@ -272,6 +273,8 @@ The model does not settle these. The owner and counsel decide them before the ag
 - Who sets the rent for each unit and any increase, and who chooses tenants.
 - The tenant's notice period, and the conditions for refunding unused prepaid rent.
 - How electricity, water and garbage costs are charged to tenants.
+- Who pays the contractor first for damage a tenant causes, and whether our coordination fee is charged to the
+  tenant.
 - When rent collected after a covered month is paid to the landlord.
 - After the end date, who collects tenants' rent.
 - A deposit the landlord holds cannot be used against a covered month: proposed in the model, not approved.

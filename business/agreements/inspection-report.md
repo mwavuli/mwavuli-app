@@ -1,6 +1,6 @@
 # Inspection report
 
-Draft 0.2 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
+Draft 0.3 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
 the end say which term each part takes from. This draft is not legal advice.
 
 We fill this in when we walk the building with the landlord, before we start. We keep it, and the landlord gets

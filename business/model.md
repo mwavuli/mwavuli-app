@@ -1,6 +1,6 @@
 # Mwavuli business model
 
-Status: version 0.3, for owner sign-off and counsel review. Ticket SNT-25. Interview started on 2026-11-10.
+Status: version 0.4, for owner sign-off and counsel review. Ticket SNT-25. Interview started on 2026-11-10.
 Interview transcript: [grill-me session](../.scratch/grill-me/1794346863-mwavuli-business-model.md).
 
 What Mwavuli Property Management offers a landlord, what it charges and what each side does. It is the single
@@ -74,7 +74,7 @@ settled, we chase, and if it goes to court you say YES first.
 |---------------------------|----------|----------------------------------------|
 | Landlord agreement        | Landlord | BM1, BM2, BM4 to BM12, BM20, Numbers   |
 | Schedule to the agreement | Landlord | The same terms, with the words defined |
-| Tenancy form              | Tenant   | P2, P3, P7, P13, BM5, BM6, BM20        |
+| Tenancy form              | Tenant   | P3, P7, P13, BM5, BM6, BM20            |
 | Inspection report         | Landlord | P4, P9                                 |
 | Explanation note          | Landlord | BM11                                   |
 | Landlord pitch            | Landlord | BM18 and the plain statements          |
@@ -202,7 +202,9 @@ glance.
 
 **Plain statement** When something needs fixing or building, we find a trusted contractor and bring you the price.
 You pay the contractor's price plus our coordination fee of 10%, shown on the quote. Above UGX 200,000 on the quote
-we wait for your YES before work starts. Electricity, water and garbage bills are paid at cost, with no markup.
+we wait for your YES before work starts. A tenant pays for damage the tenant causes, in full, once the repairs are
+done. If the tenant does not pay, it is taken from the tenant's deposit. Electricity, water and garbage bills are
+paid at cost, with no markup.
 
 **Example** A plumber quotes UGX 100,000 to fix a tap. Our 10% is UGX 10,000, so the quote is UGX 110,000. That is
 below UGX 200,000, so we fix it and list it on your statement. A roof repair at UGX 600,000 plus our UGX 60,000 is
@@ -218,7 +220,10 @@ and building liability stay with the contractor, and Mwavuli earns from a fee th
 - The coordination fee is a benefit to the agent. Disclose it and get the landlord's agreement in writing so it
   is not a secret profit.
 - Utilities and garbage at cost: confirm what the electricity regulator and the water utility allow when a
-  landlord re-bills tenants.
+  landlord re-bills tenants, and how a share is set for a unit with no meter (a fair share or a fixed amount).
+- Damage a tenant causes: the tenant pays once the repairs are done, with the deposit as the fallback (BM6).
+  Confirm what the Landlord and Tenant Act 2022 allows, who pays the contractor first, and whether the
+  coordination fee is charged to the tenant. Open.
 - Construction scope is not settled: new buildings and extensions may need a separate works agreement. Open.
 
 ### BM5 · When a tenant still has not paid
@@ -467,7 +472,7 @@ landlord's own language, with a witness the landlord chose.
 - P1: confirm whether collecting and holding rent for landlords needs a payment-service approval, and whether
   Mwavuli is an accountable person under the Anti-Money Laundering Act, with customer checks and records to
   match.
-- P2, P3: write "occupied" in the tenancy form and the agreement in the same words. Old arrears Mwavuli collects
+- P2, P3: write "occupied" in the agreement and the schedule in the same words. Old arrears Mwavuli collects
   carry the same 15%; confirm the wording.
 - P4: define "unsafe" as a short list (roof, wiring, water, stairs) and keep the signed inspection report.
 - P5: breach of a landlord duty lets Mwavuli end the agreement at once (BM8). Confirm the landlord's tax duties

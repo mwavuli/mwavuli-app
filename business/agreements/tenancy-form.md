@@ -1,31 +1,29 @@
 # Tenancy form
 
-Draft 0.2 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
+Draft 0.3 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
 the end say which term each clause takes from. This draft is not legal advice.
 
-The landlord and the tenant sign this form, and Mwavuli Holdings Ltd signs for the landlord. A unit counts as
-occupied, and the first-month cover in the [landlord agreement](landlord-agreement.md) starts, once a tenant is
-living in it under this form with the rent and deposit written down.
+The landlord and the tenant sign this form, and Mwavuli Holdings Ltd signs for the landlord.
 
 ## About this tenancy
 
-| Detail                          | Fill in                                                                         |
-|---------------------------------|---------------------------------------------------------------------------------|
-| Landlord                        | [full name]                                                                     |
-| Tenant                          | [full name], national ID number [to fill], phone [to fill]                      |
-| We act for the landlord         | Mwavuli Holdings Ltd, P.O. Box 170886, Kampala, Uganda                          |
-| The unit                        | [room, flat, shop or office, and the address]                                   |
-| The tenancy starts on           | [day month year]                                                                |
-| Rent each month                 | UGX [to fill]                                                                   |
-| Rent is due on                  | day [to fill] of each month                                                     |
-| Deposit                         | UGX [to fill]                                                                   |
-| Who holds the deposit           | [ ] we hold it (new tenant) [ ] the landlord holds it (already in the building) |
-| Rent paid ahead                 | [to fill] months, UGX [to fill]                                                 |
-| Rent owed from before this form | UGX [to fill] (only for a tenant already in the building)                       |
+| Detail                  | Fill in                                                    |
+|-------------------------|------------------------------------------------------------|
+| Landlord                | [full name]                                                |
+| Tenant                  | [full name], national ID number [to fill], phone [to fill] |
+| We act for the landlord | Mwavuli Holdings Ltd, P.O. Box 170886, Kampala, Uganda     |
+| The unit                | [room, flat, shop or office, and the address]              |
+| The tenancy starts on   | [day month year]                                           |
+| Rent each month         | UGX [to fill]                                              |
+| Rent is due on          | day [to fill] of each month                                |
+| Deposit                 | UGX [to fill]                                              |
+| Who holds the deposit   | [ ] Mwavuli (new tenant) [ ] the landlord (old tenant)     |
+| Rent paid ahead         | [to fill] months, UGX [to fill]                            |
+| Rent owed               | UGX [to fill]                                              |
 
 ## The tenancy in plain words
 
-In this form "we" means Mwavuli Holdings Ltd, acting for the landlord, and "you" means the tenant.
+In this form "we" and "Mwavuli" mean Mwavuli Holdings Ltd, acting for the landlord, and "you" means the tenant.
 
 ### 1. Who we are
 
@@ -54,17 +52,20 @@ not use go back to you, [to fill: the notice you give and any other condition].
 ### 5. If you do not pay
 
 If you have not paid by your due date, we remind you, call you and visit you, then send a written notice. If it
-must go to court, the landlord says YES first and the case is in the landlord's name. We never lock you out or
-remove your belongings. Late fee: [to fill: the amount and when it applies]. It goes to us.
+must go to court, the landlord says YES first and the case is in the landlord's name. Late fee: [to fill: the
+amount and when it applies]. It goes to us.
 
 ### 6. Repairs
 
-Tell us at [phone or WhatsApp number] if something is broken or unsafe, and we arrange a trusted contractor.
-Damage you cause can be taken from your deposit (clause 3).
+Tell us at [phone or WhatsApp number] if something is broken or unsafe, and we arrange a trusted contractor. You
+pay in full for damage you cause, as soon as the repairs are done. If you do not, it is taken from your deposit
+(clause 3).
 
 ### 7. Electricity, water and garbage
 
-Your share is charged at cost, with no markup. How your share is worked out: [to fill].
+Your share is charged at cost, with no markup. We use the meter reading. If your unit has no meter, we agree a
+fair share or a fixed amount with you. We write it here: [to fill: the meter number, or the share or amount
+agreed].
 
 ### 8. Privacy
 
@@ -100,30 +101,32 @@ Explained aloud to the tenant in [language] by [name]: [yes / no].
 
 Not part of the form. Remove before use.
 
-| Clause             | Takes from   | Counsel to confirm                                                    |
-|--------------------|--------------|-----------------------------------------------------------------------|
-| About this tenancy | P2, P3, BM20 | "Occupied" test; the due date is set per tenancy                      |
-| 1                  | BM2, BM5     | The agent's authority; telling the tenant who the landlord is         |
-| 2                  | P1, BM20     | Payment-service duties; the due date is set per tenancy               |
-| 3                  | BM6          | Deposit rules: amount, holding, return                                |
-| 4                  | P13          | Held in trust; refund conditions (not decided)                        |
-| 5                  | BM5, P7      | Eviction steps; late fees allowed; the late fee itself (not decided)  |
-| 6                  | BM2, BM6     | Who pays for damage; response times (not decided)                     |
-| 7                  | BM2          | Re-billing rules; how shares are worked out (not decided)             |
-| 8                  | P11          | Data protection duties                                                |
-| 9                  | P12          | Governing law; mediation; the courts                                  |
-| 10                 | BM6, P13     | Tenant's notice (not decided); return of deposit and prepaid rent     |
-| 11                 | P8, P13      | Notes to tenants; handing over deposits                               |
-| Signatures         | P2           | Whether tenancy forms are bilingual and explained aloud (not decided) |
+| Clause             | Takes from | Counsel to confirm                                                        |
+|--------------------|------------|---------------------------------------------------------------------------|
+| About this tenancy | P3, BM20   | The due date is set per tenancy; rent owed from before sign-up            |
+| 1                  | BM2, BM5   | The agent's authority; telling the tenant who the landlord is             |
+| 2                  | P1, BM20   | Payment-service duties; the due date is set per tenancy                   |
+| 3                  | BM6        | Deposit rules: amount, holding, return                                    |
+| 4                  | P13        | Held in trust; refund conditions (not decided)                            |
+| 5                  | BM5, P7    | Eviction steps; late fees allowed; the late fee itself (not decided)      |
+| 6                  | BM2, BM6   | Tenant pays for damage, deposit as fallback; response times (not decided) |
+| 7                  | BM2        | Re-billing rules; shares for a unit with no meter (not decided)           |
+| 8                  | P11        | Data protection duties                                                    |
+| 9                  | P12        | Governing law; mediation; the courts                                      |
+| 10                 | BM6, P13   | Tenant's notice (not decided); return of deposit and prepaid rent         |
+| 11                 | P8, P13    | Notes to tenants; handing over deposits                                   |
+| Signatures         | P2         | Whether tenancy forms are bilingual and explained aloud (not decided)     |
 
 The form re-voices the model's plain statements to "we" and "you" and tightens the wording. The meaning is
-unchanged.
+unchanged, except that the form does not repeat the promise never to lock a tenant out, which the landlord
+agreement keeps.
 
 ### Not decided in the model
 
 - Whether a tenant's due date can change during a tenancy, and who may change it.
 - The late fee, and what the Landlord and Tenant Act allows.
 - The tenant's notice period, and the conditions for refunding unused prepaid rent.
-- How electricity, water and garbage shares are worked out.
-- Who pays for damage a tenant causes, beyond the deposit.
+- How electricity, water and garbage shares are worked out for a unit with no meter.
+- Who pays the contractor first for damage a tenant causes, and whether our coordination fee is charged to the
+  tenant.
 - Whether the tenancy form is in English and Luganda and explained aloud, as the landlord agreement is.

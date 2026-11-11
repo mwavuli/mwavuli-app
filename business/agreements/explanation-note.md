@@ -1,6 +1,6 @@
 # Explanation note
 
-Draft 0.2 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
+Draft 0.3 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
 the end say which term each part takes from. This draft is not legal advice.
 
 This note is signed with the [landlord agreement](landlord-agreement.md). It is a short record that the
