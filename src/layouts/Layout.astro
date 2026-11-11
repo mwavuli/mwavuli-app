@@ -11,9 +11,11 @@ interface Props {
   description?: string;
   /** Absolute-path social image, 1200 × 630. Omitted until the brand's social image exists. */
   ogImage?: string;
+  /** The ground the header bar floats on: the cream page, or the Green of a hero that starts at the top. */
+  headerGround?: 'page' | 'brand';
 }
 
-const { title, description = SITE_DESCRIPTION, ogImage } = Astro.props;
+const { title, description = SITE_DESCRIPTION, ogImage, headerGround = 'page' } = Astro.props;
 
 const fullTitle = `${title} · ${SITE_NAME}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -43,16 +45,22 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site) : undefined;
     <meta name="twitter:description" content={description} />
     {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
 
+    <!-- Progressive enhancement: set before first paint, so a moving component never flashes
+         its static layout. Without JavaScript the class is never set and the page stays static. -->
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+
     <slot name="head" />
   </head>
   <body class="flex min-h-dvh flex-col bg-page font-sans text-body text-ink antialiased">
     <a
       href="#main"
-      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-brand focus:px-4 focus:py-2 focus:text-white"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-brand focus:px-4 focus:py-2 focus:text-white focus:outline-white"
     >
       Skip to content
     </a>
-    <Header />
+    <Header ground={headerGround} />
     <main id="main" class="flex-1">
       <slot />
     </main>

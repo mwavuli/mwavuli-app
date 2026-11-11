@@ -11,3 +11,9 @@ export const SITE_DESCRIPTION = 'Professional property management for people and
 
 /** The company's postal address (business/model.md, "The company"). */
 export const POSTAL_ADDRESS = 'P.O. Box 170886, Kampala, Uganda';
+
+/** The model's numbers (business/model.md, "Numbers"), written once and used in every sentence. */
+export const FEE = '15%';
+export const COORDINATION_FEE = '10%';
+export const APPROVAL_LIMIT = 'UGX 200,000';
+export const EMERGENCY_LIMIT = 'UGX 500,000';

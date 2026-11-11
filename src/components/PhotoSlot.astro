@@ -1,0 +1,103 @@
+---
+import Icon from './Icon.astro';
+
+// The one photograph slot (open decision D14), art-directed to the shot it will hold: a managed
+// block seen at eye level. It keeps the final frame: the S3 card radius, a flat Mist Cream
+// field and, because it sits on a light ground, the M2 roof pattern behind three flat tonal
+// roof planes with the mark's window grid. The caption sits on a solid chip, so no text is
+// ever set over the pattern or the planes.
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const SLOPE = 0.92; // about 43 degrees (L2)
+const W = 800;
+const H = 600;
+const BOTTOM = H + 40;
+const n = (value: number) => Number(value.toFixed(1));
+
+// One outlined roof with a small window, its peak at (cx, y0): the M2 pattern tile.
+const roof = (cx: number, y0: number) => {
+  const half = 22;
+  const eave = n(y0 + SLOPE * half);
+  const base = y0 + 34;
+  return `M${cx - half} ${base} V${eave} L${cx} ${y0} L${cx + half} ${eave} V${base} Z M${cx - 3} ${n(eave + 6)} h6 v6 h-6 Z`;
+};
+// A 64 px roof pitch; the second row is half a roof across, so the tile repeats cleanly.
+const tile = [roof(32, 4), roof(0, 46), roof(64, 46)].join(' ');
+
+const house = (cx: number, cy: number, left: number, right: number) => {
+  const rise = (x: number) => n(cy + SLOPE * Math.abs(x - cx));
+  return `M${left} ${BOTTOM} L${left} ${rise(left)} L${cx} ${cy} L${right} ${rise(right)} L${right} ${BOTTOM} Z`;
+};
+
+// A grid of equal square windows, like the four-square window of the mark.
+const windows = (x: number, y: number, cols: number, rows: number, size: number, gap: number) =>
+  Array.from({ length: rows }, (_, row) =>
+    Array.from(
+      { length: cols },
+      (_, col) => `M${x + col * (size + gap)} ${y + row * (size + gap)} h${size} v${size} h-${size} Z`,
+    ).join(' '),
+  ).join(' ');
+
+const far = house(300, 150, 40, 560);
+const near = house(610, 250, 480, 740);
+const farWindows = windows(214, 360, 4, 3, 34, 16);
+const nearWindows = windows(566, 410, 2, 3, 28, 14);
+---
+
+<figure
+  class:list={[
+    'relative isolate aspect-[4/3] overflow-hidden rounded-lg border border-line bg-page',
+    className,
+  ]}
+>
+  <svg
+    aria-hidden="true"
+    focusable="false"
+    class="absolute inset-0 -z-10 h-full w-full text-[color-mix(in_srgb,var(--mw-color-core-green)_5%,var(--mw-color-core-cream))]"
+  >
+    <defs>
+      <pattern id="roof-pattern" width="64" height="84" patternUnits="userSpaceOnUse">
+        <path
+          d={tile}
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linejoin="round"></path>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#roof-pattern)"></rect>
+  </svg>
+
+  <svg
+    viewBox={`0 0 ${W} ${H}`}
+    preserveAspectRatio="xMidYMax slice"
+    aria-hidden="true"
+    focusable="false"
+    class="absolute inset-0 h-full w-full"
+  >
+    <path class="fill-green-100" d={far}></path>
+    <path class="fill-page" d={farWindows}></path>
+    <path class="fill-green-300" d={near}></path>
+    <path class="fill-green-50" d={nearWindows}></path>
+    <rect class="fill-brand" x="0" y="520" width={W} height="120"></rect>
+  </svg>
+
+  <!-- Crop marks: the frame the photograph will fill. -->
+  <span
+    aria-hidden="true"
+    class="absolute left-3 top-3 size-5 border-l-[1.5px] border-t-[1.5px] border-green-300"></span>
+  <span
+    aria-hidden="true"
+    class="absolute right-3 top-3 size-5 border-r-[1.5px] border-t-[1.5px] border-green-300"></span>
+
+  <figcaption
+    class="absolute bottom-5 left-5 inline-flex items-center gap-2 rounded-md bg-surface px-3 py-2 text-caption text-ink shadow-sm"
+  >
+    <Icon name="properties" class="size-4 text-brand" />
+    Photograph to come (D14)
+  </figcaption>
+</figure>

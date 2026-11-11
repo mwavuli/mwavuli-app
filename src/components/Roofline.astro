@@ -1,0 +1,24 @@
+---
+// Two roofs side by side: the letter "M" of Mwavuli read as a skyline (brand M1). It stands on
+// the top edge of the Green band below it and is the same flat Green, at the logo's slope.
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const SLOPE = 0.92; // about 43 degrees (L2)
+const half = 100;
+const rise = Math.round(SLOPE * half);
+const width = half * 4;
+const peaks = `M0 ${rise} L${half} 0 L${half * 2} ${rise} L${half * 3} 0 L${width} ${rise} Z`;
+---
+
+<svg
+  viewBox={`0 0 ${width} ${rise}`}
+  aria-hidden="true"
+  focusable="false"
+  class:list={['block h-auto fill-brand', className]}
+>
+  <path d={peaks}></path>
+</svg>

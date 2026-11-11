@@ -1,0 +1,76 @@
+---
+// Hero art for a Green ground: two overlapping roof planes and one gold roof band, flat, cut off
+// by the edges of the section (brand M1 and M3). The front plane carries the four-square window
+// of the mark, tone on tone. Built from the logo's slope, not from the logo itself. Gold is the
+// one thin band: well under a fifth of the motif.
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const SLOPE = 0.92; // about 43 degrees: the rise is 0.92 of the run (L2)
+const W = 760;
+const H = 1200;
+const REACH = 2400; // shapes run far past the right edge, so no edge of theirs is ever seen
+const BOTTOM = H + 40;
+
+const n = (value: number) => Number(value.toFixed(1));
+const rise = (x: number, apexX: number, apexY: number) => n(apexY + SLOPE * Math.abs(x - apexX));
+
+// A solid house: apex, eaves at `left` and `right`, body running off the bottom edge.
+const house = (cx: number, cy: number, left: number, right: number) =>
+  [
+    `M${left} ${BOTTOM}`,
+    `L${left} ${rise(left, cx, cy)}`,
+    `L${cx} ${cy}`,
+    `L${right} ${rise(right, cx, cy)}`,
+    `L${right} ${BOTTOM}`,
+    'Z',
+  ].join(' ');
+
+// A band that follows a roof one `gap` above it and overhangs the eaves.
+const band = (cx: number, cy: number, from: number, to: number, gap: number, thickness: number) => {
+  const top = cy - gap - thickness;
+  return [
+    `M${from} ${rise(from, cx, top)}`,
+    `L${cx} ${top}`,
+    `L${to} ${rise(to, cx, top)}`,
+    `L${to} ${n(rise(to, cx, top) + thickness)}`,
+    `L${cx} ${top + thickness}`,
+    `L${from} ${n(rise(from, cx, top) + thickness)}`,
+    'Z',
+  ].join(' ');
+};
+
+const back = house(500, 150, 140, REACH);
+const front = house(250, 430, 30, 480);
+const gold = band(500, 150, 100, REACH, 24, 30);
+
+// The mark's window: four equal squares with a small gap, centred on the front plane's axis.
+const square = 40;
+const gap = 14;
+const windowX = 250 - square - gap / 2;
+const windowY = 520;
+const windows = [0, 1]
+  .flatMap((row) =>
+    [0, 1].map(
+      (col) =>
+        `M${windowX + col * (square + gap)} ${windowY + row * (square + gap)} h${square} v${square} h-${square} Z`,
+    ),
+  )
+  .join(' ');
+---
+
+<svg
+  viewBox={`0 0 ${W} ${H}`}
+  preserveAspectRatio="xMaxYMin slice"
+  aria-hidden="true"
+  focusable="false"
+  class:list={['block overflow-visible', className]}
+>
+  <path class="fill-green-700" d={back}></path>
+  <path class="fill-accent" d={gold}></path>
+  <path class="fill-green-900" d={front}></path>
+  <path class="fill-green-700" d={windows}></path>
+</svg>

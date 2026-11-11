@@ -1,0 +1,75 @@
+---
+import Icon from './Icon.astro';
+
+// The strip under the hero. There are no testimonials, so each card is a worry and the model's
+// own plain statement that answers it. It sits on the hero's Green and its cards straddle the
+// edge into the cream below. A static grid by default; a slow marquee with a Pause control only
+// when JavaScript is on and the visitor has not asked for reduced motion (styles in global.css).
+// The copies after the first are for the loop and hidden from readers.
+interface Props {
+  items: { icon: string; question: string; answer: string }[];
+}
+
+const { items } = Astro.props;
+const copies = 3;
+---
+
+<section
+  class="strip on-inverse relative z-10 text-white"
+  aria-labelledby="plain-words"
+  data-strip
+  data-paused="false"
+>
+  <div class="mx-auto flex max-w-page items-center justify-between gap-4 px-4 md:px-6 lg:px-8">
+    <h2 id="plain-words" class="font-display text-overline uppercase text-cream">In plain words</h2>
+    <button
+      type="button"
+      data-strip-toggle
+      aria-label="Pause the moving statements"
+      class="strip-pause min-h-11 items-center rounded-md border-[1.5px] border-white px-4 font-display text-label font-semibold text-white transition-[color,background-color,border-color] duration-(--mw-motion-duration-base) ease-(--mw-motion-easing-standard) hover:bg-white hover:text-brand active:bg-green-100 active:text-brand motion-reduce:transition-none"
+    >
+      Pause
+    </button>
+  </div>
+
+  <div class="strip-viewport mt-6">
+    <div class="strip-frame mx-auto max-w-page px-4 md:px-6 lg:px-8">
+      <div class="strip-lists">
+        {
+          Array.from({ length: copies }, (_, copy) => (
+            <ul
+              role="list"
+              class:list={['strip-list', copy > 0 && 'strip-list--clone']}
+              aria-hidden={copy > 0 ? 'true' : undefined}
+            >
+              {items.map((item) => (
+                <li class="strip-item rounded-lg bg-surface p-6 text-ink shadow-md transition-shadow duration-(--mw-motion-duration-base) ease-(--mw-motion-easing-standard) hover:shadow-lg motion-reduce:transition-none">
+                  <div class="flex items-center gap-3">
+                    <span class="flex size-11 shrink-0 items-center justify-center rounded-[var(--mw-radius-badge)] bg-green-50 text-brand">
+                      <Icon name={item.icon} class="size-6" />
+                    </span>
+                    <p class="text-label text-muted">{item.question}</p>
+                  </div>
+                  <p class="mt-4 font-display text-h4 text-heading">{item.answer}</p>
+                </li>
+              ))}
+            </ul>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const strip = document.querySelector<HTMLElement>('[data-strip]');
+  const toggle = strip?.querySelector<HTMLButtonElement>('[data-strip-toggle]');
+
+  toggle?.addEventListener('click', () => {
+    if (!strip) return;
+    const paused = strip.dataset.paused !== 'true';
+    strip.dataset.paused = String(paused);
+    toggle.textContent = paused ? 'Play' : 'Pause';
+    toggle.setAttribute('aria-label', `${paused ? 'Play' : 'Pause'} the moving statements`);
+  });
+</script>

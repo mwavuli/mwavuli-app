@@ -1,32 +1,54 @@
 ---
 import { SITE_NAME } from '../config';
+import Button from './Button.astro';
 import Lockup from './Lockup.astro';
+
+interface Props {
+  /** The ground the bar floats on: the cream page, or the Green of a hero that starts at the top. */
+  ground?: 'page' | 'brand';
+}
+
+const { ground = 'page' } = Astro.props;
+
+// The page is one long answer, so the links are its sections. One action: Talk to us.
+const links = [
+  { href: '/#goals', label: 'What we do' },
+  { href: '/#repairs', label: 'Repairs' },
+  { href: '/#questions', label: 'Questions' },
+];
 ---
 
-<header class="border-b border-line bg-page">
-  <div class="mx-auto flex max-w-page items-center justify-between gap-4 px-4 py-4 sm:px-6">
-    <a href="/" class="flex shrink-0 items-center" aria-label={`${SITE_NAME}: home`}>
-      <Lockup class="h-8" aria-hidden="true" />
-    </a>
-    <nav aria-label="Main">
-      <ul class="flex items-center gap-2 sm:gap-4">
-        <li>
-          <a
-            href="/legal/privacy/"
-            class="inline-flex min-h-11 items-center px-3 font-display text-label font-semibold text-ink hover:text-brand"
-          >
-            Privacy
-          </a>
-        </li>
-        <li>
-          <a
-            href="/#contact"
-            class="inline-flex min-h-11 items-center rounded-full bg-brand px-5 font-display text-label font-semibold text-white hover:bg-brand-deep"
-          >
-            Contact
-          </a>
-        </li>
-      </ul>
-    </nav>
+<header class:list={[ground === 'brand' ? 'bg-brand' : 'bg-page']}>
+  <div class="mx-auto max-w-page px-2 py-2 md:px-6 md:py-4 lg:px-8">
+    <!-- A white raised bar (S4). The horizontal lockup is 195 px wide (L5) with 24 px clear
+         space on every side (L4): the bar's padding and the gap before the navigation. -->
+    <div
+      class="flex items-center justify-between gap-6 rounded-lg bg-surface py-6 pl-6 pr-3 shadow-md md:pr-6"
+    >
+      <a href="/" class="flex shrink-0 items-center" aria-label={`${SITE_NAME}: home`}>
+        <Lockup class="h-12" aria-hidden="true" />
+      </a>
+      <nav aria-label="Main" class="flex items-center gap-2">
+        <ul class="hidden items-center gap-1 lg:flex">
+          {
+            links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="inline-flex min-h-12 items-center rounded-md px-4 font-display text-label font-semibold text-ink transition-[color,background-color,border-color] duration-(--mw-motion-duration-base) ease-(--mw-motion-easing-standard) hover:bg-green-50 hover:text-brand active:bg-green-100 motion-reduce:transition-none"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <!-- Below about 400 px the lockup (195 px, L5) and this button cannot both keep the 24 px of
+             clear space (L4); the hero carries the same action there. -->
+        <div class="hidden min-[400px]:block">
+          <Button href="/#contact">Talk to us</Button>
+        </div>
+      </nav>
+    </div>
   </div>
 </header>

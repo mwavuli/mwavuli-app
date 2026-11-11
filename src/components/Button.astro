@@ -1,0 +1,39 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import Icon from './Icon.astro';
+
+interface Props extends HTMLAttributes<'a'> {
+  /** `primary` is Green with white text; `inverse` is white with Green text, for Green grounds. */
+  tone?: 'primary' | 'inverse';
+  /** Adds the `arrow-right` line icon after the label. */
+  arrow?: boolean;
+}
+
+const { tone = 'primary', arrow = false, class: className, ...attrs } = Astro.props;
+
+// Brand A5: 48 px high, `radius.md`, Montserrat 600 at 16 px. Hover one ramp step off the fill,
+// pressed one step further. S3 allows a pill only for chips and toggles, so a button is never one.
+const tones = {
+  primary: 'bg-brand text-white hover:bg-brand-deep active:bg-green-900',
+  inverse: 'bg-white text-brand hover:bg-green-50 active:bg-green-100',
+};
+---
+
+<a
+  {...attrs}
+  class:list={[
+    'group inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-md px-4 font-display text-body font-semibold transition-[color,background-color,border-color] duration-(--mw-motion-duration-base) ease-(--mw-motion-easing-standard) motion-reduce:transition-none sm:px-6',
+    tones[tone],
+    className,
+  ]}
+>
+  <slot />
+  {
+    arrow && (
+      <Icon
+        name="arrow-right"
+        class="size-5 transition-transform duration-(--mw-motion-duration-base) ease-(--mw-motion-easing-standard) group-hover:translate-x-0.5 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"
+      />
+    )
+  }
+</a>

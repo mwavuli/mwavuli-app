@@ -1,0 +1,37 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+// Every brand icon, inlined as text so `currentColor` works (brand I11). Nothing else is drawn.
+const files = import.meta.glob<string>('../../brand/icons/*/*.svg', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+
+interface Props extends HTMLAttributes<'span'> {
+  /** File name without extension, e.g. `arrow-right` or `rental-income`. */
+  name: string;
+  /** `line` for the interface (I3), `pictogram` for the six services (I7). */
+  kind?: 'line' | 'pictogram';
+  /** Text alternative for a meaning-bearing icon. Leave out for a decorative one (I10). */
+  label?: string;
+}
+
+const { name, kind = 'line', label, class: className, ...attrs } = Astro.props;
+
+const raw = files[`../../brand/icons/${kind}/${name}.svg`];
+if (!raw) throw new Error(`Unknown brand icon: ${kind}/${name}`);
+
+// The files carry fixed width and height attributes; the viewBox alone keeps the ratio, so a
+// height class on the component sizes the icon.
+const svg = raw.replace(/ width="[\d.]+" height="[\d.]+"/, '');
+---
+
+<span
+  {...attrs}
+  class:list={['inline-block shrink-0 [&>svg]:h-full [&>svg]:w-auto', className]}
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  aria-hidden={label ? undefined : 'true'}
+  set:html={svg}
+/>

@@ -1,28 +1,393 @@
 ---
-import { POSTAL_ADDRESS, SITE_NAME } from '../config';
+import Button from '../components/Button.astro';
+import HeroArt from '../components/HeroArt.astro';
+import Icon from '../components/Icon.astro';
+import PhotoSlot from '../components/PhotoSlot.astro';
+import PlainWords from '../components/PlainWords.astro';
+import Roofline from '../components/Roofline.astro';
+import {
+  APPROVAL_LIMIT,
+  COORDINATION_FEE,
+  EMERGENCY_LIMIT,
+  FEE,
+  POSTAL_ADDRESS,
+  SITE_NAME,
+} from '../config';
 import Layout from '../layouts/Layout.astro';
+
+// Every statement is the model's own wording (business/model.md: BM1, BM2, BM4, BM5, BM8, BM9,
+// BM18, P6, P7). Only the worries that introduce them are new copy.
+const words = [
+  {
+    icon: 'tenants',
+    question: "What if a tenant doesn't pay?",
+    answer: 'We do the chasing: we remind, call and visit, then send a written notice.',
+  },
+  {
+    icon: 'payments',
+    question: 'Will I get a bill?',
+    answer: 'Costs you have approved are taken off the same payment and listed on the statement.',
+  },
+  {
+    icon: 'reports',
+    question: 'How will I know?',
+    answer: 'One payment and one statement a month, by SMS or WhatsApp.',
+  },
+  {
+    icon: 'trusted',
+    question: 'What if you pay late?',
+    answer: 'If we have not paid you by the 3rd, you can leave straight away, with no fee.',
+  },
+  {
+    icon: 'properties',
+    question: 'What if a room is empty?',
+    answer: 'The empty room earns no rent and costs no fee, and we look for a tenant.',
+  },
+  {
+    icon: 'maintenance',
+    question: 'What about repairs?',
+    answer: `We ask you before any repair above ${APPROVAL_LIMIT}.`,
+  },
+];
+
+// The three lines of the pitch, each with the one number a landlord needs to remember (BM18).
+const numbers = [
+  { figure: '1', unit: 'st', small: true, text: 'We pay you on the 1st, for every room with a tenant.' },
+  { figure: '15', unit: '%', small: false, text: `We take ${FEE} of the rent. No rent, no fee.` },
+  { figure: '30', unit: 'days', small: true, text: "Leave any time with 30 days' notice." },
+];
+
+const goals = [
+  {
+    icon: 'rental-income',
+    title: 'Be paid on the 1st',
+    text: 'If a tenant has not paid, we cover that first month.',
+    services: ['Guaranteed rental income on the 1st'],
+  },
+  {
+    icon: 'tenant-management',
+    title: 'Keep your rooms let',
+    text: 'We find tenants for your empty rooms and collect the rent.',
+    services: ['Tenant management and sourcing'],
+  },
+  {
+    icon: 'construction-repairs',
+    title: 'Keep the building in good repair',
+    text: 'We arrange trusted contractors for repairs, and look after electricity, water and garbage.',
+    services: ['Construction and repairs', 'Electrical and plumbing', 'Utilities', 'Garbage disposal'],
+  },
+];
+
+const steps = [
+  {
+    title: 'We bring you the price',
+    text: 'Something needs fixing or building. We find a trusted contractor and bring you the price.',
+  },
+  {
+    title: 'We wait for your YES',
+    text: `Above ${APPROVAL_LIMIT} on the quote, work starts only after you reply YES, by SMS or WhatsApp.`,
+  },
+  {
+    title: 'We tell you the same day',
+    text: `Urgent safety repairs go ahead first, up to ${EMERGENCY_LIMIT}. We tell you the same day.`,
+  },
+];
+
+const questions = [
+  {
+    icon: 'payments',
+    question: 'When do I get my rent?',
+    answer: `On the 1st of every month, for every room with a tenant, minus our ${FEE}. You get one payment and one statement, by SMS or WhatsApp.`,
+  },
+  {
+    icon: 'tenants',
+    question: 'What if a tenant has not paid?',
+    answer:
+      'We cover that first month, so you are not left waiting. We do the chasing: we remind, call and visit, then send a written notice. If it is still unpaid on the next 1st, we pause that room until it is settled. If it must go to court, you say YES first.',
+  },
+  {
+    icon: 'leases',
+    question: 'What do I pay?',
+    answer: `We take ${FEE} of the rent. No rent, no fee. There is no sign-up fee and no letting fee. For repairs you pay the contractor's price plus our ${COORDINATION_FEE} coordination fee, shown on the quote.`,
+  },
+  {
+    icon: 'bookings',
+    question: 'What if I want to leave?',
+    answer:
+      "You can leave any time with 30 days' written notice, and so can we. If we have not paid you by the 3rd, you can leave straight away, with no fee.",
+  },
+];
+
+const contacts = [
+  { icon: 'location', label: 'Post', lines: [SITE_NAME, POSTAL_ADDRESS] },
+  { icon: 'phone', label: 'Phone', lines: ['Phone number to be added'] },
+  { icon: 'mail', label: 'Email', lines: ['Email address to be added'] },
+];
 ---
 
-<Layout title="Home">
-  <!-- Brand A6: a green band with a two-beat headline and a gold rule. The photograph
-       waits on the open photography decision (D14). -->
-  <section class="on-inverse bg-brand text-white">
-    <div class="mx-auto max-w-page px-4 py-20 sm:px-6 sm:py-28">
-      <h1 class="font-display text-h1 text-white sm:text-display">
-        Managed Properties. <span class="text-accent">Better Living.</span>
-      </h1>
-      <div class="mt-6 h-1 w-16 bg-accent" aria-hidden="true"></div>
-      <p class="mt-6 max-w-xl text-body-lg">Rent paid to you on the 1st, every month.</p>
+<Layout title="Home" headerGround="brand">
+  <!-- The hero and the strip share one Green field (C2, reversed layout) with layered roof planes
+       bleeding off its edges (M3). The strip's cards straddle the edge into the cream below. -->
+  <div class="on-inverse relative isolate overflow-hidden bg-brand text-white">
+    <HeroArt
+      class="pointer-events-none absolute hidden lg:right-0 lg:top-0 lg:block lg:h-[52rem] lg:w-[52%]"
+    />
+
+    <section class="relative z-10 lg:min-h-[35rem]" aria-labelledby="hero-title">
+      <div class="mx-auto max-w-page px-4 pb-12 pt-10 md:px-6 md:pt-12 lg:px-8 lg:pb-16">
+        <div class="relative z-10 lg:max-w-[min(46rem,64%)]">
+          <h1 id="hero-title" class="text-hero text-balance font-display text-white">
+            Want your rent on the 1st, <span class="text-accent">without the chasing?</span>
+          </h1>
+          <div class="mt-8 h-1 w-24 bg-accent" aria-hidden="true"></div>
+          <div class="mt-8 md:mt-10">
+            <Button href="#contact" tone="inverse" arrow>Talk to us</Button>
+          </div>
+          <p class="mt-4 text-body text-cream">No sign-up fee and no letting fee.</p>
+        </div>
+
+        <!-- The proof line, set as a poster: the 1st is the biggest thing on the screen. -->
+        <div
+          class="relative mt-12 w-[19rem] lg:absolute lg:right-[max(2rem,calc((100%-1200px)/2+2rem))] lg:top-[10.5rem] lg:mt-0"
+        >
+          <HeroArt
+            class="pointer-events-none absolute left-[1.25rem] top-[-8.25rem] h-[46.5rem] w-[29.4rem] lg:hidden"
+          />
+          <div class="relative rounded-lg bg-surface p-6 text-ink">
+          <span
+            class="flex size-16 items-center justify-center rounded-[var(--mw-radius-badge)] bg-green-50 text-brand"
+          >
+            <Icon kind="pictogram" name="rental-income" class="h-9" />
+          </span>
+          <p class="mt-5 text-body text-ink">
+            <span class="block">Rent paid to you on the</span>
+            <span
+              class="my-1 block font-display text-[10rem] font-extrabold leading-[0.8] tracking-tight text-brand tabular-nums"
+              >1<span class="text-[5rem]">st</span></span
+            ><span class="sr-only">,</span>
+            <span class="block">every month.</span>
+          </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <PlainWords items={words} />
+  </div>
+
+  <!-- Three numbers: the whole pitch in the three figures a landlord needs to remember (BM18). -->
+  <section class="bg-sage-100 py-12" aria-labelledby="numbers-title">
+    <div class="mx-auto max-w-page px-4 md:px-6 lg:px-8">
+      <h2 id="numbers-title" class="font-display text-overline uppercase text-brand">
+        Three things to remember
+      </h2>
+      <ul role="list" class="mt-5 grid gap-8 md:mt-6 md:grid-cols-3 md:gap-8 lg:gap-16">
+        {
+          numbers.map((item) => (
+            <li>
+              <p class="whitespace-nowrap font-display text-[clamp(4.5rem,8.5vw,7rem)] font-extrabold leading-[0.9] tracking-tight text-brand tabular-nums">
+                {item.figure}<span class:list={['tracking-normal', item.small && 'ml-[0.08em] text-[0.4em]']}>{item.unit}</span>
+              </p>
+              <p class="mt-3 max-w-[17rem] text-body-lg text-ink">{item.text}</p>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </section>
 
-  <section id="contact" class="bg-surface">
-    <div class="mx-auto max-w-page px-4 py-16 sm:px-6">
-      <h2 class="text-h2">Contact</h2>
-      <p class="mt-4 text-body-lg">
-        {SITE_NAME}<br />
-        {POSTAL_ADDRESS}
-      </p>
+  <!-- Goals: what an owner wants and the six services that deliver it. The one photo slot (D14)
+       bleeds off the left edge of the page. -->
+  <section id="goals" class="overflow-hidden bg-surface py-12 md:py-16" aria-labelledby="goals-title">
+    <div
+      class="mx-auto grid max-w-page items-center gap-10 px-4 md:px-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16 lg:px-8"
+    >
+      <div>
+        <h2 id="goals-title" class="text-balance text-h2 md:text-h1">
+          What do you want from your building?
+        </h2>
+        <p class="mt-5 max-w-xl text-body-lg text-ink">
+          We manage homes and business premises in Kampala and its surroundings: rooms, flats, small
+          blocks, shops and offices. There is no minimum number of units.
+        </p>
+        <ul role="list" class="mt-6 divide-y divide-line border-y border-line">
+          {
+            goals.map((goal) => (
+              <li class="flex gap-5 py-4">
+                <span class="flex size-20 shrink-0 items-center justify-center rounded-[var(--mw-radius-badge)] bg-green-50 text-brand">
+                  <Icon kind="pictogram" name={goal.icon} class="h-11" />
+                </span>
+                <div>
+                  <h3 class="text-h4">{goal.title}</h3>
+                  <p class="mt-1 text-body text-ink">{goal.text}</p>
+                  <p class="mt-1 text-balance text-body-sm text-muted">{goal.services.join(' · ')}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <PhotoSlot
+        class="lg:order-first lg:-ml-[max(2rem,calc((100vw-1200px)/2+2rem))] lg:aspect-auto lg:h-[30rem] lg:rounded-l-none lg:border-l-0"
+      />
+    </div>
+  </section>
+
+  <!-- The concierge block, rebuilt from the repair flow (BM2, P6): three steps on dark Green.
+       The steps climb to the right at the pace of a roof. -->
+  <section
+    id="repairs"
+    class="on-inverse bg-green-900 py-12 text-white md:py-16"
+    aria-labelledby="repairs-title"
+  >
+    <div class="mx-auto max-w-page px-4 md:px-6 lg:px-8">
+      <div class="grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
+        <div>
+          <p class="flex items-center gap-3 font-display text-label font-semibold text-cream">
+            <span
+              class="flex size-10 items-center justify-center rounded-[var(--mw-radius-badge)] bg-cream text-brand"
+            >
+              <Icon name="maintenance" class="size-6" />
+            </span>
+            Worried about repair bills?
+          </p>
+          <h2 id="repairs-title" class="mt-5 text-balance text-h2 text-white md:text-h1">
+            We ask you before any big repair.
+          </h2>
+        </div>
+        <div class="space-y-4 text-body-lg text-cream">
+          <p>
+            You pay the contractor's price plus our coordination fee of {COORDINATION_FEE}, shown on
+            the quote.
+          </p>
+          <p>Electricity, water and garbage bills are paid at cost, with no markup.</p>
+        </div>
+      </div>
+
+      <ol role="list" class="mt-8 grid gap-6 lg:grid-cols-3 lg:gap-8">
+        {
+          steps.map((step, index) => (
+            <li
+              class:list={[
+                'flex gap-5 rounded-lg bg-brand p-6',
+                index === 0 && 'lg:mt-12',
+                index === 1 && 'lg:mt-6',
+              ]}
+            >
+              <span
+                aria-hidden="true"
+                class="font-display text-[5rem] font-extrabold leading-[0.85] text-white tabular-nums"
+              >
+                {index + 1}
+              </span>
+              <div>
+                <h3 class="text-h4 text-white">{step.title}</h3>
+                <p class="mt-2 text-body text-cream">{step.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div
+        class="mt-6 grid gap-4 rounded-lg bg-page p-6 text-body text-ink lg:grid-cols-[auto_1fr_1fr] lg:items-start lg:gap-10"
+      >
+        <p class="font-display text-overline uppercase text-brand lg:pt-1">Example, not a quote</p>
+        <p>
+          A plumber quotes <span class="tabular-nums">UGX 100,000</span> to fix a tap. Our {COORDINATION_FEE}
+          is <span class="tabular-nums">UGX 10,000</span>, so the quote is
+          <strong class="font-semibold tabular-nums">UGX 110,000</strong>. That is below
+          <span class="tabular-nums">{APPROVAL_LIMIT}</span>, so we fix it and list it on your statement.
+        </p>
+        <p>
+          A roof repair at <span class="tabular-nums">UGX 600,000</span> plus our
+          <span class="tabular-nums">UGX 60,000</span> is
+          <strong class="font-semibold tabular-nums">UGX 660,000</strong>, so we ask you first and you
+          reply YES.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="questions" class="bg-page pb-24 pt-12 md:pt-16" aria-labelledby="questions-title">
+    <div
+      class="mx-auto grid max-w-page gap-10 px-4 md:px-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16 lg:px-8"
+    >
+      <div class="lg:sticky lg:top-8 lg:self-start">
+        <h2 id="questions-title" class="text-balance text-h2">
+          Before you choose a property manager.
+        </h2>
+        <p class="mt-4 text-body-lg text-muted">Four questions, answered in plain words.</p>
+        <div class="mt-8">
+          <Button href="#contact" arrow>Talk to us</Button>
+        </div>
+      </div>
+      <div class="grid gap-6 md:grid-cols-2">
+        {
+          questions.map((item) => (
+            <div class="rounded-lg bg-surface p-6 shadow-md">
+              <div class="flex items-center gap-3">
+                <span class="flex size-11 shrink-0 items-center justify-center rounded-[var(--mw-radius-badge)] bg-green-50 text-brand">
+                  <Icon name={item.icon} class="size-6" />
+                </span>
+                <h3 class="text-h4">{item.question}</h3>
+              </div>
+              <p class="mt-4 text-body text-ink">{item.answer}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- The closing band (A6): the primary tagline, the offer in one sentence, and where to reach
+       us. Only the postal address is a fact; the rest are labelled placeholders. -->
+  <section
+    id="contact"
+    class="on-inverse relative bg-brand py-12 text-white md:py-16"
+    aria-labelledby="contact-title"
+  >
+    <Roofline
+      class="absolute bottom-full left-4 w-40 md:left-6 md:w-56 lg:left-[max(2rem,calc((100%-1200px)/2+2rem))] lg:w-[25rem]"
+    />
+    <div class="mx-auto grid max-w-page gap-12 px-4 md:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
+      <div>
+        <p class="font-display text-overline uppercase text-cream">Talk to us</p>
+        <h2 id="contact-title" class="mt-4 text-[clamp(1.625rem,7.2vw,2.5rem)] font-bold leading-[1.2] tracking-[-0.01em] text-white md:text-h1">
+          <span class="block">Your Property.</span>
+          <span class="block text-accent">Our Responsibility.</span>
+        </h2>
+        <div class="mt-6 h-1 w-24 bg-accent" aria-hidden="true"></div>
+        <p class="mt-6 max-w-xl text-body-lg text-white">
+          Give us your building and we pay you the rent on the 1st of every month, for every room
+          with a tenant, minus our {FEE}.
+        </p>
+      </div>
+      <div>
+        <h3 class="font-display text-overline uppercase text-cream">Reach us</h3>
+        <ul role="list" class="mt-4 divide-y divide-white/20 border-y border-white/20">
+          {
+            contacts.map((contact) => (
+              <li class="flex items-start gap-4 py-5">
+                <span class="flex size-12 shrink-0 items-center justify-center rounded-[var(--mw-radius-badge)] bg-cream text-brand">
+                  <Icon name={contact.icon} class="size-6" />
+                </span>
+                <div>
+                  <p class="text-label text-cream">{contact.label}</p>
+                  <p class="mt-1 text-body-lg text-white">
+                    {contact.lines.map((line, index) => (
+                      <>
+                        {index > 0 && <br />}
+                        {line}
+                      </>
+                    ))}
+                  </p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
   </section>
 </Layout>
