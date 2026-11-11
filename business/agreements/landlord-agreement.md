@@ -1,18 +1,18 @@
 # Landlord agreement
 
-Draft 0.3 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
+Draft 0.4 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
 the end say which term each clause takes from, are not part of the agreement and are removed before use. This
 draft is not legal advice.
 
-This is the agreement our officer reads aloud (see the [explanation note](explanation-note.md)). The full legal
-terms are in the [schedule](landlord-agreement-schedule.md). The annexes are lists to fill in.
+An officer hands you this agreement and sits down with you to explain it, in your language. That is all that is
+needed (see the [explanation note](explanation-note.md)). The full legal terms are in the
+[schedule](landlord-agreement-schedule.md). The annexes are lists to fill in.
 
 ## Who this is between
 
-- **We:** Mwavuli Holdings Ltd, registration number [to fill], TIN [to fill], registered office [to fill],
-  postal address P.O. Box 170886, Kampala, Uganda.
-- **You:** [landlord's full name], national ID number [to fill], address [to fill], phone [to fill]. If the
-  building has more than one owner, every owner is named here and signs: [names and ID numbers].
+- **We:** Mwavuli Holdings Ltd, P.O. Box 170886, Kampala, Uganda.
+- **You:** [landlord's full name], NIN [to fill], address [to fill], phone [to fill]. If the building has more
+  than one owner, every owner is named here and signs: [names and NINs].
 - **The building:** [name or description], at [address].
 - **Date:** [day month year].
 
@@ -66,8 +66,9 @@ we still pay you for that month. If it is still unpaid by the next 1st, we stop 
 tenant pays up or a new tenant moves in. Each tenant's rent is due on a day set in the tenancy form, but we
 always pay you on the 1st.
 
-For example: a room rents for UGX 400,000 and the tenant does not pay in March. On 1 Mar you get UGX 340,000 for
-it (the rent minus our 15%). On 1 Apr it is still unpaid, so we send nothing for that room until it is settled.
+For example: a room rents for UGX 400,000 and the tenant does not pay in March. On 1st March you get UGX 340,000
+for it (the rent minus our 15%). On 1st April it is still unpaid, so we send nothing for that room until it is
+settled.
 
 ### 8. How tenants pay, and your statement
 
@@ -103,9 +104,9 @@ A lawyer, the court and a bailiff are paid at cost, from the tenant's deposit fi
 we covered is ours to collect. When a tenant pays what is owed, the oldest month is paid first, so the month we
 covered is repaid before later months reach you.
 
-For example: a room rents for UGX 400,000 and the tenant misses March. We pay you UGX 340,000 on 1 Mar, and
-nothing for that room on 1 Apr. If the tenant then pays UGX 400,000, it repays March to us, so April is still
-owed. When April is paid, we send you UGX 340,000 of it.
+For example: a room rents for UGX 400,000 and the tenant misses March. We pay you UGX 340,000 on 1st March, and
+nothing for that room on 1st April. If the tenant then pays UGX 400,000, it repays March to us, so April is
+still owed. When April is paid, we send you UGX 340,000 of it.
 
 ### 12. Deposits
 
@@ -159,9 +160,10 @@ We talk first, then a mediator we both accept, and only then the courts of Ugand
 
 ### 19. Languages and signing
 
-The agreement comes in English and Luganda, and you sign both. One of our officers reads the main points to you
-out loud, in your language, and answers your questions. You sign, or give your thumbprint, in front of a witness
-you choose. A short signed note says who explained it to you and that you understood. You keep a copy.
+The agreement comes in English and Luganda. You choose one, and you and we sign that version. One of our
+officers sits down with you, explains the agreement in your language and answers your questions. You sign, or
+give your thumbprint, in front of a witness you choose. A short signed note says who explained it to you and
+that you understood. You keep a copy.
 
 ### 20. The figures
 
@@ -235,7 +237,7 @@ Not part of the agreement. Remove before use.
 
 | Clause              | Takes from   | Counsel to confirm                                                          |
 |---------------------|--------------|-----------------------------------------------------------------------------|
-| Who this is between | The company  | Registration details; registered office; the contracting company            |
+| Who this is between | The company  | The contracting company                                                     |
 | 1                   | BM2, BM5     | Scope of the agent's authority; legal steps in the landlord's name          |
 | 2                   | BM18, P1, P7 | How utilities and garbage are paid and charged to tenants                   |
 | 3                   | BM9, BM10    | Commercial tenancy form; rent currency; VAT and withholding tax             |
@@ -254,7 +256,7 @@ Not part of the agreement. Remove before use.
 | 16                  | BM8, P8, P13 | Notice mechanics; the late-payment test; exit mechanics                     |
 | 17                  | P11          | Data protection duties                                                      |
 | 18                  | P12          | Governing law; the mediation step; the courts                               |
-| 19                  | BM11         | Which version governs; the explanation note; witnesses                      |
+| 19                  | BM11         | That the signed version governs; the explanation note; witnesses            |
 | 20                  | Numbers      | Starting figures, to test with the first landlords                          |
 | Signatures          | BM11         | Who may witness; what Mwavuli records                                       |
 | Annex 1             | P2, P3       | Who sets each unit's rent (not decided)                                     |

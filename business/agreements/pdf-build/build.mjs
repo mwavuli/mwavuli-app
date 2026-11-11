@@ -16,8 +16,11 @@ const outDir = join(root, 'pdf');
 const css = readFileSync(join(here, 'print.css'), 'utf8');
 
 const ORG = 'Mwavuli Holdings Ltd';
+const ADDRESS = 'P.O. Box 170886, Kampala, Uganda';
+const logo = readFileSync(join(here, 'logo-horizontal-slate.svg'), 'utf8')
+  .replace('<svg ', '<svg style="display:block;width:38mm;height:auto" ');
 const ALL = ['landlord-agreement', 'landlord-agreement-schedule', 'tenancy-form', 'inspection-report', 'explanation-note'];
-const MONTHS = 'Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec';
+const MONTHS = 'January|February|March|April|May|June|July|August|September|October|November|December';
 
 async function loadChromium() {
   try {
@@ -51,7 +54,7 @@ function fieldsAndSpaces(text) {
       return `<span class="${hint.length > 26 ? 'fill long' : 'fill'}"><span class="h">${hint}</span></span>`;
     })
     .replace(/\bUGX \d[\d,.]*/g, '<span class="nb">$&</span>')
-    .replace(new RegExp(`\\b\\d{1,2} (?:${MONTHS})\\b`, 'g'), '<span class="nb">$&</span>')
+    .replace(new RegExp(`\\b\\d{1,2}(?:st|nd|rd|th)? (?:${MONTHS})\\b`, 'g'), '<span class="nb">$&</span>')
     .replace(/P\.O\. Box/g, '<span class="nb">$&</span>');
 }
 
@@ -80,13 +83,23 @@ function render(name, title, body) {
   const sub = rest.join(':').trim();
   const subtitle = sub ? `<p class="sub">${sub[0].toUpperCase()}${sub.slice(1)}</p>` : '';
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${title}</title><style>${css}</style></head>`
-    + `<body class="${name}"><header class="titleblock"><div class="org">${ORG}</div><h1>${main}</h1>${subtitle}</header>${body}</body></html>`;
+    + `<body class="${name}"><header class="titleblock"><h1>${main}</h1>${subtitle}</header>${body}</body></html>`;
+}
+
+// Every page is headed: the one-color lockup on the left, the company on the right. The Slate values repeat
+// print.css because a header and footer template is its own page.
+function header() {
+  return `<div style="position:absolute;top:8.5mm;left:22mm;right:22mm;display:flex;justify-content:space-between;`
+    + `align-items:flex-end;font-family:Montserrat,Helvetica,Arial,sans-serif;color:#2F3437;-webkit-print-color-adjust:exact">`
+    + logo
+    + `<div style="text-align:right;font-size:6.8pt;line-height:1.5"><div style="font-weight:600">${ORG}</div>`
+    + `<div style="font-weight:500;color:#4E5255">${ADDRESS}</div></div></div>`;
 }
 
 function footer(label, version) {
-  return `<div style="width:100%;padding:0 22mm;font-family:Montserrat,Helvetica,Arial,sans-serif;font-size:6.8pt;font-weight:500;color:#4d4d4d">`
-    + `<div style="display:flex;justify-content:space-between;border-top:0.5pt solid #8a8a8a;padding-top:2.2mm">`
-    + `<span>${ORG} &nbsp;·&nbsp; ${label} &nbsp;·&nbsp; ${version}</span>`
+  return `<div style="width:100%;padding:0 22mm;font-family:Montserrat,Helvetica,Arial,sans-serif;font-size:6.8pt;font-weight:500;color:#4E5255">`
+    + `<div style="display:flex;justify-content:space-between;border-top:0.5pt solid #828587;padding-top:2.2mm">`
+    + `<span>${label} &nbsp;·&nbsp; ${version}</span>`
     + `<span>Page <span class="pageNumber"></span> of <span class="totalPages"></span></span></div></div>`;
 }
 
@@ -106,7 +119,7 @@ try {
       preferCSSPageSize: true,
       printBackground: true,
       displayHeaderFooter: true,
-      headerTemplate: '<span></span>',
+      headerTemplate: header(),
       footerTemplate: footer(title.split(':')[0], version),
       tagged: true,
       outline: true,

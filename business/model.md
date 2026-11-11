@@ -1,6 +1,6 @@
 # Mwavuli business model
 
-Status: version 0.4, for owner sign-off and counsel review. Ticket SNT-25. Interview started on 2026-11-10.
+Status: version 0.5, for owner sign-off and counsel review. Ticket SNT-25. Interview started on 2026-11-10.
 Interview transcript: [grill-me session](../.scratch/grill-me/1794346863-mwavuli-business-model.md).
 
 What Mwavuli Property Management offers a landlord, what it charges and what each side does. It is the single
@@ -43,7 +43,7 @@ and look after electricity, water and garbage. You get one payment and one state
 WhatsApp. We ask you before any repair above UGX 200,000. There is no sign-up fee and no letting fee. If it
 isn't working, leave with 30 days' notice.
 
-**Worked example** 10 rooms at UGX 400,000, 9 with tenants. Your statement for 1 Apr:
+**Worked example** 10 rooms at UGX 400,000, 9 with tenants. Your statement for 1st April:
 
 | Item                                          | UGX       |
 |-----------------------------------------------|-----------|
@@ -53,8 +53,8 @@ isn't working, leave with 30 days' notice.
 | Paid to you on the 1st                        | 2,950,000 |
 
 The empty room earns no rent and costs no fee, and we look for a tenant. If a tenant misses March, we still pay
-you for that room on 1 Mar (UGX 340,000). If it is still unpaid on 1 Apr, we pause that room until it is
-settled, we chase, and if it goes to court you say YES first.
+you for that room on 1st March (UGX 340,000). If it is still unpaid on 1st April, we pause that room until it
+is settled, we chase, and if it goes to court you say YES first.
 
 **Rules for using it**
 
@@ -90,8 +90,8 @@ BM3 sets how every document is written.
 | Registered name | Mwavuli Holdings Ltd             |
 | Postal address  | P.O. Box 170886, Kampala, Uganda |
 
-Still to supply: the registration number, TIN, VAT status, the registered office (a physical address) and the
-signatory. The brand name on the card and the site is Mwavuli Property Management (brand F7). Confirm how it
+Still to supply: the VAT status and the signatory. The agreements name the company by its registered name and
+P.O. Box only. The brand name on the card and the site is Mwavuli Property Management (brand F7). Confirm how it
 relates to the registered name, for example as a registered business name.
 
 ## Audience
@@ -134,9 +134,9 @@ did not understand is the first one to be disputed. Plain terms are also what ma
 tenant has not paid, we still pay you for that month. If the tenant has still not paid by the next 1st, we stop
 paying for that unit until the tenant has paid up or a new tenant moves in.
 
-**Example** A room rents for UGX 400,000 and the tenant does not pay in March. On 1 Mar you receive UGX 340,000 for
-it (the rent minus our 15%). On 1 Apr the rent is still unpaid, so we send nothing for that room until it is
-settled.
+**Example** A room rents for UGX 400,000 and the tenant does not pay in March. On 1st March you receive
+UGX 340,000 for it (the rent minus our 15%). On 1st April the rent is still unpaid, so we send nothing for that
+room until it is settled.
 
 **Why** A cap turns an open-ended liability into one month per unit that Mwavuli can fund and a lawyer can write,
 and the promise stays true for every month inside it.
@@ -157,8 +157,8 @@ and the promise stays true for every month inside it.
 **Plain statement** Each tenant's rent is due on a day of the month written in the tenancy form. The day can differ
 from tenant to tenant. We always pay you on the 1st.
 
-**Example** One tenant's rent is due on the 5th and another's on the 20th. On 1 Mar we pay you for both rooms.
-If the tenant due on the 20th has not paid by 20 Mar, March is that room's covered month.
+**Example** One tenant's rent is due on the 5th and another's on the 20th. On 1st March we pay you for both rooms.
+If the tenant due on the 20th has not paid by 20th March, March is that room's covered month.
 
 **Why** Tenants move in and are paid on different days. The payout date stays on the 1st, so the landlord's day
 never moves.
@@ -237,10 +237,11 @@ cost: from the tenant's deposit first, then by you. The month we covered is ours
 pays what is owed, the oldest month is paid first, so the month we covered is repaid before later months
 reach you.
 
-**Example** A room rents for UGX 400,000. The tenant does not pay in March, so we pay you UGX 340,000 on 1 Mar.
-On 1 Apr it is still unpaid: we send nothing for that room and give the tenant a written notice. On 20 Apr the
-tenant pays UGX 400,000. It repays March, so we keep it (UGX 340,000 we advanced and UGX 60,000 fee). April is
-still owed, so we still send nothing on 1 May. When April is paid, we send you UGX 340,000 of it.
+**Example** A room rents for UGX 400,000. The tenant does not pay in March, so we pay you UGX 340,000 on
+1st March. On 1st April it is still unpaid: we send nothing for that room and give the tenant a written notice.
+On 20th April the tenant pays UGX 400,000. It repays March, so we keep it (UGX 340,000 we advanced and
+UGX 60,000 fee). April is still owed, so we still send nothing on 1st May. When April is paid, we send you
+UGX 340,000 of it.
 
 **Why** The landlord gets real help when a tenant stops paying. Mwavuli's own time is part of the 15%, and its
 loss on one room stops at one month's net rent. The landlord carries the outside legal costs because the claim
@@ -345,8 +346,8 @@ can let the building. A tiered list keeps the market wide while the check stays 
 the 3rd, you can leave straight away, with no fee. We can end the agreement straight away if you collect rent from
 tenants yourself, interfere with tenants, or refuse a repair that is urgent for safety.
 
-**Example** The rent was due to you on 1 May and we have not paid it. On 4 May you tell us in writing that you are
-leaving. The agreement ends that day and you owe no fee.
+**Example** The rent was due to you on 1st May and we have not paid it. On 4th May you tell us in writing that you
+are leaving. The agreement ends that day and you owe no fee.
 
 **Why** A landlord who has never met Mwavuli will fear being stuck with it. No lock-in is the strongest trust
 signal, and the right to leave at once makes missing the 1st costly for Mwavuli.
@@ -391,8 +392,8 @@ Mwavuli decline a building it cannot fund.
 **Plain statement** Every unit we take on gets the same terms, whatever its rent, shops and offices included: we
 take 15% of its rent, we cover its first missed month, and we pay you on the 1st.
 
-**Example** A shop rents for UGX 3,000,000 and the tenant does not pay in March. On 1 Mar you receive UGX 2,550,000
-(the rent minus our 15%), and we collect March from the tenant.
+**Example** A shop rents for UGX 3,000,000 and the tenant does not pay in March. On 1st March you receive
+UGX 2,550,000 (the rent minus our 15%), and we collect March from the tenant.
 
 **Why** One set of terms is the simplest pitch and one agreement to explain.
 
@@ -408,14 +409,14 @@ take 15% of its rent, we cover its first missed month, and we pay you on the 1st
 
 *Source: Owner*
 
-**Plain statement** The agreement comes in English and Luganda, and you sign both. One of our officers reads
-the main points to you out loud, in your language, and answers your questions. You sign, or give your
-thumbprint, in front of a witness you choose. A short signed note says who explained it to you and that you
-understood. You keep a copy.
+**Plain statement** The agreement comes in English and Luganda. You choose one, and you and we sign that version.
+One of our officers sits down with you, explains the agreement in your language and answers your questions. You
+sign, or give your thumbprint, in front of a witness you choose. A short signed note says who explained it to
+you and that you understood. You keep a copy.
 
-**Example** A landlord reads Luganda but not English. Our officer reads the Luganda version aloud at the
-building. The landlord signs both versions with a sister as witness, and the officer signs the note. The
-landlord leaves with both copies.
+**Example** A landlord reads Luganda but not English. Our officer sits down with the landlord at the building and
+explains the Luganda version. The landlord signs that version with a sister as witness, and the officer signs the
+note. The landlord leaves with both copies.
 
 **Why** If a landlord later says "I did not understand", Mwavuli can show that the terms were explained in the
 landlord's own language, with a witness the landlord chose.
@@ -424,8 +425,9 @@ landlord's own language, with a witness the landlord chose.
 
 - The Luganda text is a complete translation, reviewed by a qualified person, and reviewed again whenever the
   terms change (brand F8).
-- Decide which version governs if the two differ, and how the agreement says so. A landlord who signed after an
-  explanation in Luganda should not lose on an English technicality.
+- Only one version is signed. Decide how the agreement says that the signed version governs and what the other
+  version is for. A landlord who signed after an explanation in Luganda should not lose on an English
+  technicality.
 - The Illiterates Protection Act may require the signed explanation note. Confirm what it requires and what the
   note must say.
 - Decide who may witness and what Mwavuli records about the witness.
@@ -523,8 +525,7 @@ Each term's counsel note lists what to confirm. Start with these:
 - **Tax:** VAT and withholding tax on the 15% and on commercial rent, and the landlord's own duties (BM4, BM9, P5,
   P10).
 - **Data and disputes:** the Data Protection and Privacy Act, governing law, mediation and the courts (P11, P12).
-- **Details to supply for the agreements:** the registration number, TIN, VAT status, the registered office and the
-  signatory (see "The company").
+- **Details to supply for the agreements:** the VAT status and the signatory (see "The company").
 - **Contracting company:** the agreements are with Mwavuli Holdings Ltd. Counsel advises whether it should contract
   and hold client money directly or through an operating company, and how the brand name relates to it.
 

@@ -1,6 +1,6 @@
 # Schedule to the landlord agreement: the full terms
 
-Draft 0.3 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
+Draft 0.4 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
 the end are not part of the schedule and are removed before use. This draft is not legal advice.
 
 This schedule goes with the [landlord agreement](landlord-agreement.md) between Mwavuli Holdings Ltd and
@@ -133,8 +133,8 @@ with the words defined.
 
 ### S11. Languages and signing
 
-- **11.1** The agreement comes in English and Luganda. You sign both.
-- **11.2** An officer of ours reads the main points to you out loud, in your language, and answers your
+- **11.1** The agreement comes in English and Luganda. You choose one, and you and we sign that version.
+- **11.2** An officer of ours sits down with you, explains the agreement in your language and answers your
   questions.
 - **11.3** You sign, or give your thumbprint, in front of a witness you choose.
 - **11.4** A short signed note, the explanation note, says who explained the agreement to you and that you
@@ -165,7 +165,7 @@ Not part of the schedule. Remove before use.
 | S8     | P5                 | Landlord duties and their remedies; align with BM8                                   |
 | S9     | BM8, P8, P13       | Notice; the "not paid" test; final payment; fee on notice exit                       |
 | S10    | P10, P11, P12      | VAT; data protection; governing law and mediation                                    |
-| S11    | BM11               | Which version governs; the explanation note                                          |
+| S11    | BM11               | That the signed version governs; the explanation note                                |
 | S12    | BM9, BM10          | Commercial tenancy form; rent currency                                               |
 
 S3.1 is the one place the schedule goes beyond the model's wording. Because due dates vary (BM20), the covered

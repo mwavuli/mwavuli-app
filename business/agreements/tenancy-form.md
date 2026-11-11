@@ -1,25 +1,25 @@
 # Tenancy form
 
-Draft 0.3 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
+Draft 0.4 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
 the end say which term each clause takes from. This draft is not legal advice.
 
 The landlord and the tenant sign this form, and Mwavuli Holdings Ltd signs for the landlord.
 
 ## About this tenancy
 
-| Detail                  | Fill in                                                    |
-|-------------------------|------------------------------------------------------------|
-| Landlord                | [full name]                                                |
-| Tenant                  | [full name], national ID number [to fill], phone [to fill] |
-| We act for the landlord | Mwavuli Holdings Ltd, P.O. Box 170886, Kampala, Uganda     |
-| The unit                | [room, flat, shop or office, and the address]              |
-| The tenancy starts on   | [day month year]                                           |
-| Rent each month         | UGX [to fill]                                              |
-| Rent is due on          | day [to fill] of each month                                |
-| Deposit                 | UGX [to fill]                                              |
-| Who holds the deposit   | [ ] Mwavuli (new tenant) [ ] the landlord (old tenant)     |
-| Rent paid ahead         | [to fill] months, UGX [to fill]                            |
-| Rent owed               | UGX [to fill]                                              |
+| Detail                  | Fill in                                                |
+|-------------------------|--------------------------------------------------------|
+| Landlord                | [full name]                                            |
+| Tenant                  | [full name], NIN [to fill], phone [to fill]            |
+| We act for the landlord | Mwavuli Holdings Ltd, P.O. Box 170886, Kampala, Uganda |
+| The unit                | [room, flat, shop or office, and the address]          |
+| The tenancy starts on   | [day month year]                                       |
+| Rent each month         | UGX [to fill]                                          |
+| Rent is due on          | day [to fill] of each month                            |
+| Deposit                 | UGX [to fill]                                          |
+| Who holds the deposit   | [ ] Mwavuli (new tenant) [ ] the landlord (old tenant) |
+| Rent paid ahead         | [to fill] months, UGX [to fill]                        |
+| Rent owed               | UGX [to fill]                                          |
 
 ## The tenancy in plain words
 

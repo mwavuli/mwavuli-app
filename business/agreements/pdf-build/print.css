@@ -1,14 +1,14 @@
-/* Print stylesheet for the agreement documents. Black, white and gray only. */
+/* Print stylesheet for the agreement documents. One ink: the Slate ramp of the Mwavuli brand, plus white. */
 
-@page { size: A4; margin: 20mm 22mm 22mm; }
+@page { size: A4; margin: 23mm 22mm 21mm; }
 
 :root {
-  --ink: #111;
-  --mid: #4d4d4d;
-  --soft: #8a8a8a;
-  --rule: #c4c4c4;
-  --tint: #f3f3f3;
-  --tint-2: #e6e6e6;
+  --ink: #2F3437;
+  --mid: #4E5255;
+  --soft: #828587;
+  --rule: #B6B8B9;
+  --tint: #F3F3F3;
+  --tint-2: #E6E7E7;
   --sans: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
   --serif: Charter, Georgia, "Times New Roman", serif;
 }
@@ -17,7 +17,7 @@
 html { font-size: 10.5pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 body {
   margin: 0; color: var(--ink); background: #fff;
-  font-family: var(--serif); line-height: 1.5; orphans: 3; widows: 3;
+  font-family: var(--serif); line-height: 1.5; orphans: 2; widows: 2;
 }
 p { margin: 0 0 2.4mm; }
 p:has(+ table), p:has(+ ul) { break-after: avoid; }
@@ -26,10 +26,6 @@ strong { font-weight: 700; }
 
 /* Title block */
 .titleblock { padding-bottom: 4.5mm; margin-bottom: 5.5mm; border-bottom: 2.4pt solid var(--ink); }
-.titleblock .org {
-  margin-bottom: 3.2mm; font: 600 7.6pt var(--sans); letter-spacing: .16em;
-  text-transform: uppercase; color: var(--mid);
-}
 .titleblock h1 { margin: 0; font: 700 24pt/1.12 var(--sans); letter-spacing: -.01em; }
 body.landlord-agreement-schedule .titleblock h1 { font-size: 21pt; }
 .titleblock .sub { margin: 2.2mm 0 0; font: 500 11pt var(--sans); color: var(--mid); }
@@ -53,7 +49,7 @@ section[id^="annex-1"] > h2 { margin-top: 0; }
 #signatures, #who-explained-it, #what-the-landlord-says, #witness { break-inside: avoid; }
 
 /* Clauses: the number sits in a left gutter, the text is indented under the heading */
-section.level3 { margin: 0 0 5mm; }
+section.level3 { margin: 0 0 4.6mm; }
 section.level3 > h3 {
   display: grid; grid-template-columns: 11mm 1fr; align-items: center; margin: 0 0 1.8mm;
   font: 600 11pt/1.25 var(--sans); break-after: avoid;
@@ -112,7 +108,7 @@ th {
   font: 700 7.2pt var(--sans); letter-spacing: .1em; text-transform: uppercase;
 }
 td { padding: 2.3mm 3mm; border-bottom: .5pt solid var(--rule); vertical-align: top; }
-tbody tr:nth-child(even) td { background: #f7f7f7; }
+tbody tr:nth-child(even) td { background: var(--tint); }
 td:first-child { font-weight: 600; }
 table.form td:first-child { width: 44mm; color: var(--mid); }
 table.figures td:first-child { width: 62mm; }
