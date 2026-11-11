@@ -1,7 +1,7 @@
 # Tenancy form
 
-Draft 0.4 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
-the end say which term each clause takes from. This draft is not legal advice.
+Version 1.0. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at the end say
+which term each clause takes from.
 
 The landlord and the tenant sign this form, and Mwavuli Holdings Ltd signs for the landlord.
 
@@ -10,16 +10,20 @@ The landlord and the tenant sign this form, and Mwavuli Holdings Ltd signs for t
 | Detail                  | Fill in                                                |
 |-------------------------|--------------------------------------------------------|
 | Landlord                | [full name]                                            |
-| Tenant                  | [full name], NIN [to fill], phone [to fill]            |
+| Tenant                  | [full name]                                            |
+| Tenant's NIN            | [NIN]                                                  |
+| Tenant's phone          | [phone number]                                         |
 | We act for the landlord | Mwavuli Holdings Ltd, P.O. Box 170886, Kampala, Uganda |
-| The unit                | [room, flat, shop or office, and the address]          |
+| The unit                | [room, flat, shop or office]                           |
+| The unit's address      | [plot, street and area]                                |
 | The tenancy starts on   | [day month year]                                       |
-| Rent each month         | UGX [to fill]                                          |
-| Rent is due on          | day [to fill] of each month                            |
-| Deposit                 | UGX [to fill]                                          |
+| Rent each month (UGX)   | [amount]                                               |
+| Rent due each month on  | [day]                                                  |
+| Deposit (UGX)           | [amount]                                               |
 | Who holds the deposit   | [ ] Mwavuli (new tenant) [ ] the landlord (old tenant) |
-| Rent paid ahead         | [to fill] months, UGX [to fill]                        |
-| Rent owed               | UGX [to fill]                                          |
+| Months paid ahead       | [number]                                               |
+| Rent paid ahead (UGX)   | [amount]                                               |
+| Rent owed (UGX)         | [amount]                                               |
 
 ## The tenancy in plain words
 
@@ -32,8 +36,13 @@ building.
 
 ### 2. Paying your rent
 
-Pay your rent to us only, by mobile money or bank, never cash to our staff. Pay to: mobile money number [to
-fill] or bank account [bank, account name and number]. Your rent is due on the day written above, each month.
+Pay your rent to us only, by mobile money or bank, never cash to our staff. Your rent is due on the day written
+above, each month. Pay to the mobile money number or the bank account below.
+
+- **Mobile money number:** [mobile money number]
+- **Bank:** [bank]
+- **Account name:** [account name]
+- **Account number:** [account number]
 
 ### 3. Your deposit
 
@@ -47,25 +56,35 @@ above) and gives it back to you.
 
 If you pay rent ahead, we hold it in a separate account, like deposits, and pay it to the landlord month by
 month on the 1st. Months that have not started stay there. If you leave early, the months you paid for and did
-not use go back to you, [to fill: the notice you give and any other condition].
+not use go back to you, on these terms.
+
+- **Notice you give:** [notice]
+- **Other conditions:** [other conditions; 2 lines]
 
 ### 5. If you do not pay
 
 If you have not paid by your due date, we remind you, call you and visit you, then send a written notice. If it
-must go to court, the landlord says YES first and the case is in the landlord's name. Late fee: [to fill: the
-amount and when it applies]. It goes to us.
+must go to court, the landlord says YES first and the case is in the landlord's name. Any late fee goes to us.
+
+- **Late fee:** [amount]
+- **When it applies:** [when it applies; 2 lines]
 
 ### 6. Repairs
 
-Tell us at [phone or WhatsApp number] if something is broken or unsafe, and we arrange a trusted contractor. You
-pay in full for damage you cause, as soon as the repairs are done. If you do not, it is taken from your deposit
-(clause 3).
+Tell us by phone or WhatsApp if something is broken or unsafe, and we arrange a trusted contractor.
+
+- **Phone or WhatsApp:** [phone or WhatsApp number]
+
+You pay in full for damage you cause, as soon as the repairs are done. If you do not, it is taken from your
+deposit (clause 3).
 
 ### 7. Electricity, water and garbage
 
 Your share is charged at cost, with no markup. We use the meter reading. If your unit has no meter, we agree a
-fair share or a fixed amount with you. We write it here: [to fill: the meter number, or the share or amount
-agreed].
+fair share or a fixed amount with you.
+
+- **Meter number:** [meter number]
+- **Or share or amount agreed:** [share or amount agreed]
 
 ### 8. Privacy
 
@@ -77,25 +96,29 @@ We talk first, then a mediator we both accept, and only then the courts of Ugand
 
 ### 10. When the tenancy ends
 
-The notice you give and the notice the landlord gives: [to fill]. Your deposit goes back to you after any rent
-you still owe and the cost of any damage are taken from it. Rent you paid ahead for months you did not use goes
-back to you (clause 4).
+- **Notice you give:** [notice]
+- **Notice the landlord gives:** [notice]
+
+Your deposit goes back to you after any rent you still owe and the cost of any damage are taken from it. Rent
+you paid ahead for months you did not use goes back to you (clause 4).
 
 ### 11. If we stop acting for the landlord
 
 We tell you. Rent you paid ahead for months after we stop goes to the landlord, who honors it, and you get a
-note: "rent paid up to [month]". A deposit we hold goes to the landlord after any rent you still owe is taken
-from it, and the landlord gives it back to you when the tenancy ends.
+note saying the month your rent is paid up to. A deposit we hold goes to the landlord after any rent you still
+owe is taken from it, and the landlord gives it back to you when the tenancy ends.
 
 ## Signatures
 
-|                                            | Name                              | Signature or thumbprint | Date |
-|--------------------------------------------|-----------------------------------|-------------------------|------|
-| The tenant                                 | [full name]                       |                         |      |
-| For Mwavuli Holdings Ltd, for the landlord | [name and title of the signatory] |                         |      |
-| The landlord, if present                   | [full name]                       |                         |      |
+|                                                             | Name | Signature or thumbprint | Date |
+|-------------------------------------------------------------|------|-------------------------|------|
+| The tenant                                                  |      |                         |      |
+| For Mwavuli Holdings Ltd, for the landlord (name and title) |      |                         |      |
+| The landlord, if present                                    |      |                         |      |
 
-Explained aloud to the tenant in [language] by [name]: [yes / no].
+- **Explained aloud:** [ ] yes [ ] no
+- **Language used:** [language]
+- **Explained by:** [name]
 
 ## Drafting notes
 

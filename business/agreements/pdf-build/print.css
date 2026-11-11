@@ -20,7 +20,7 @@ body {
   font-family: var(--serif); line-height: 1.5; orphans: 2; widows: 2;
 }
 p { margin: 0 0 2.4mm; }
-p:has(+ table), p:has(+ ul) { break-after: avoid; }
+p:has(+ table), p:has(+ ul) { break-inside: avoid; break-after: avoid; }
 strong { font-weight: 700; }
 .nb { white-space: nowrap; }
 
@@ -46,7 +46,7 @@ section[id^="annex"] > h2 .kick {
 section[id^="annex"] { break-inside: avoid; }
 section[id^="annex-1"] { break-before: page; }
 section[id^="annex-1"] > h2 { margin-top: 0; }
-#signatures, #who-explained-it, #what-the-landlord-says, #witness { break-inside: avoid; }
+#signatures { break-inside: avoid; }
 
 /* Clauses: the number sits in a left gutter, the text is indented under the heading */
 section.level3 { margin: 0 0 4.6mm; }
@@ -81,7 +81,13 @@ ul.task-list > li::before { display: none; }
 li.lead { display: grid; grid-template-columns: 13mm 1fr; column-gap: 1mm; padding-left: 0; margin-bottom: 1.7mm; }
 li.lead::before { display: none; }
 li.lead .n { font: 700 8.2pt/1.85 var(--sans); color: var(--mid); }
-#who-this-is-between li.lead { grid-template-columns: 27mm 1fr; }
+
+/* Labelled fields: one per row, the labels in one column and the lines in the next */
+.lead.field {
+  display: grid; grid-template-columns: 50mm 1fr; column-gap: 3mm; align-items: baseline;
+  margin: 0 0 2.2mm; padding-left: 0; break-inside: avoid;
+}
+.lead.field .n { font: 600 8.6pt/1.4 var(--sans); color: var(--mid); }
 
 /* Fields and checkboxes */
 .box {
@@ -89,13 +95,13 @@ li.lead .n { font: 700 8.2pt/1.85 var(--sans); color: var(--mid); }
   border: .6pt solid var(--ink); background: #fff; text-indent: 0;
 }
 .fill {
-  display: inline-block; min-width: 27mm; margin: 0 .8mm; padding: 0 1.6mm .1mm; text-align: center;
+  display: inline-block; min-width: 40mm; padding: 0 1.6mm .1mm; text-align: center;
   border-bottom: .5pt solid var(--ink); line-height: 1.15; text-indent: 0;
 }
-.fill.long { min-width: 56mm; white-space: nowrap; }
-.fill.blank { min-width: 32mm; }
-.fill .h { font: 500 6.8pt var(--sans); letter-spacing: .04em; color: var(--soft); }
-td.solo > .fill { display: block; width: 100%; min-width: 0; margin: 0; text-align: left; white-space: normal; }
+.fill.short { min-width: 16mm; }
+.fill.long { min-width: 64mm; }
+.solo > .fill { display: block; width: 100%; min-width: 0; text-align: left; }
+.solo > .fill + .fill { margin-top: 2.8mm; }
 
 /* Tables */
 table {
@@ -107,12 +113,13 @@ th {
   padding: 2.1mm 3mm; background: var(--ink); color: #fff; text-align: left; vertical-align: bottom;
   font: 700 7.2pt var(--sans); letter-spacing: .1em; text-transform: uppercase;
 }
-td { padding: 2.3mm 3mm; border-bottom: .5pt solid var(--rule); vertical-align: top; }
+td { padding: 2.1mm 3mm; border-bottom: .5pt solid var(--rule); vertical-align: top; }
 tbody tr:nth-child(even) td { background: var(--tint); }
 td:first-child { font-weight: 600; }
-table.form td:first-child { width: 44mm; color: var(--mid); }
+table.form td:first-child { width: 50mm; color: var(--mid); }
 table.figures td:first-child { width: 62mm; }
 table.figures td:nth-child(2) { font-weight: 700; }
+table.checks th:first-child { width: 42mm; }
 table.checks th:nth-child(n+2):nth-child(-n+4) { width: 24mm; text-align: center; }
 td:has(> .box:only-child) { text-align: center; }
 
@@ -122,6 +129,6 @@ td:has(> .box:only-child) { text-align: center; }
 #signatures th:nth-child(1) { width: 46mm; }
 #signatures th:nth-child(2) { width: 44mm; }
 #signatures th:nth-child(4) { width: 26mm; }
-#signatures td { height: 16mm; border: .6pt solid var(--ink); background: #fff !important; vertical-align: bottom; }
+#signatures td { height: 15mm; border: .6pt solid var(--ink); background: #fff !important; vertical-align: bottom; }
 section[id^="annex"] td, body.inspection-report td { height: 8mm; border: .5pt solid var(--rule); background: #fff !important; }
 body.inspection-report table.form td { height: auto; }

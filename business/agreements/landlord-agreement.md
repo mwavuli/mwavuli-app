@@ -1,20 +1,26 @@
 # Landlord agreement
 
-Draft 0.4 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
-the end say which term each clause takes from, are not part of the agreement and are removed before use. This
-draft is not legal advice.
+Version 1.0. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at the end say
+which term each clause takes from, are not part of the agreement and are removed before use.
 
 An officer hands you this agreement and sits down with you to explain it, in your language. That is all that is
-needed (see the [explanation note](explanation-note.md)). The full legal terms are in the
-[schedule](landlord-agreement-schedule.md). The annexes are lists to fill in.
+needed. The full legal terms are in the [schedule](landlord-agreement-schedule.md). The annexes are lists to
+fill in.
 
 ## Who this is between
 
-- **We:** Mwavuli Holdings Ltd, P.O. Box 170886, Kampala, Uganda.
-- **You:** [landlord's full name], NIN [to fill], address [to fill], phone [to fill]. If the building has more
-  than one owner, every owner is named here and signs: [names and NINs].
-- **The building:** [name or description], at [address].
-- **Date:** [day month year].
+| Detail                 | Fill in                                                |
+|------------------------|--------------------------------------------------------|
+| We                     | Mwavuli Holdings Ltd, P.O. Box 170886, Kampala, Uganda |
+| You, the landlord      | [full name]                                            |
+| Your NIN               | [NIN]                                                  |
+| Your phone             | [phone number]                                         |
+| Other owners and NINs  | [names and NINs of any other owners; 2 lines]          |
+| The building           | [name or description]                                  |
+| The building's address | [plot, street and area]                                |
+| Date of this agreement | [day month year]                                       |
+
+If the building has more than one owner, every owner is named here and signs.
 
 In this agreement "we" and "Mwavuli" mean Mwavuli Holdings Ltd, and "you" means the landlord.
 
@@ -147,8 +153,8 @@ yourself, interfere with tenants, or refuse a repair that is urgent for safety.
 When the agreement ends, we send you a final statement and pay you within 14 days of the end date: the rent we
 collected and have not paid out, plus prepaid rent for months after the end date in full with no 15%, less costs
 you approved and any covered month a tenant still owes us. Tenant files go to you. A deposit we hold goes to you
-after any rent the tenant still owes is taken from it, and tenants are told. Each tenant gets a note, "rent paid
-up to [month]", and you honor it.
+after any rent the tenant still owes is taken from it, and tenants are told. Each tenant gets a note saying the
+month their rent is paid up to, and you honor it.
 
 ### 17. Privacy
 
@@ -162,8 +168,7 @@ We talk first, then a mediator we both accept, and only then the courts of Ugand
 
 The agreement comes in English and Luganda. You choose one, and you and we sign that version. One of our
 officers sits down with you, explains the agreement in your language and answers your questions. You sign, or
-give your thumbprint, in front of a witness you choose. A short signed note says who explained it to you and
-that you understood. You keep a copy.
+give your thumbprint, in front of a witness you choose. You keep a copy.
 
 ### 20. The figures
 
@@ -182,14 +187,12 @@ that you understood. You keep a copy.
 
 ## Signatures
 
-|                          | Name                              | Signature or thumbprint | Date |
-|--------------------------|-----------------------------------|-------------------------|------|
-| You, the landlord        | [full name]                       |                         |      |
-| Another owner, if any    | [full name]                       |                         |      |
-| The witness you chose    | [full name]                       |                         |      |
-| For Mwavuli Holdings Ltd | [name and title of the signatory] |                         |      |
-
-The explanation note is signed separately.
+|                                           | Name | Signature or thumbprint | Date |
+|-------------------------------------------|------|-------------------------|------|
+| You, the landlord                         |      |                         |      |
+| Another owner, if any                     |      |                         |      |
+| The witness you chose                     |      |                         |      |
+| For Mwavuli Holdings Ltd (name and title) |      |                         |      |
 
 ## Annex 1. The units
 
@@ -213,8 +216,12 @@ Tick what you bring. We always need the national ID of every owner.
 - [ ] National ID of every owner.
 - [ ] If there is more than one owner: the written agreement of every owner.
 
-Title search: [done / no title]. Checked by [name] on [day month year]. Result: [passed / not passed / waiting
-for papers].
+We fill in the title search.
+
+- **Title search:** [ ] done [ ] no title
+- **Checked by:** [name]
+- **Checked on:** [day month year]
+- **Result:** [ ] passed [ ] not passed [ ] waiting for papers
 
 ## Annex 3. Deposits you hold for tenants already in the building
 
@@ -226,10 +233,16 @@ for papers].
 
 ## Annex 4. How we reach and pay you
 
-- Phone for SMS and WhatsApp: [to fill].
-- Language for your statements: [Luganda / English / other].
-- Paper copy of each statement: [yes / no].
-- Pay my rent to: mobile money number [to fill] or bank account [bank, account name and number].
+- **Phone for SMS and WhatsApp:** [phone number]
+- **Language for statements:** [ ] Luganda [ ] English [ ] other [language]
+- **Paper copy of statements:** [ ] yes [ ] no
+
+Pay my rent to the mobile money number or the bank account below.
+
+- **Mobile money number:** [mobile money number]
+- **Bank:** [bank]
+- **Account name:** [account name]
+- **Account number:** [account number]
 
 ## Drafting notes
 
@@ -256,7 +269,7 @@ Not part of the agreement. Remove before use.
 | 16                  | BM8, P8, P13 | Notice mechanics; the late-payment test; exit mechanics                     |
 | 17                  | P11          | Data protection duties                                                      |
 | 18                  | P12          | Governing law; the mediation step; the courts                               |
-| 19                  | BM11         | That the signed version governs; the explanation note; witnesses            |
+| 19                  | BM11         | That the signed version governs; the Illiterates Protection Act; witnesses  |
 | 20                  | Numbers      | Starting figures, to test with the first landlords                          |
 | Signatures          | BM11         | Who may witness; what Mwavuli records                                       |
 | Annex 1             | P2, P3       | Who sets each unit's rent (not decided)                                     |

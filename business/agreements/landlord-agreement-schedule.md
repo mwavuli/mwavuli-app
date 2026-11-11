@@ -1,11 +1,13 @@
 # Schedule to the landlord agreement: the full terms
 
-Draft 0.4 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
-the end are not part of the schedule and are removed before use. This draft is not legal advice.
+Version 1.0. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at the end are not
+part of the schedule and are removed before use.
 
-This schedule goes with the [landlord agreement](landlord-agreement.md) between Mwavuli Holdings Ltd and
-[landlord's full name], dated [day month year]. It says the same things as the agreement, in numbered paragraphs
-with the words defined.
+This schedule goes with the [landlord agreement](landlord-agreement.md) between Mwavuli Holdings Ltd and the
+landlord named below. It says the same things as the agreement, in numbered paragraphs with the words defined.
+
+- **Landlord:** [landlord's full name]
+- **Agreement dated:** [day month year]
 
 ## The full terms
 
@@ -120,7 +122,8 @@ with the words defined.
   less costs you approved, and less any covered month a tenant still owes us.
 - **9.5** Tenant files go to you. A deposit we hold goes to you after any rent the tenant still owes is taken
   from it. We tell the tenants.
-- **9.6** We give each tenant with prepaid rent a note that says "rent paid up to [month]", and you honor it.
+- **9.6** We give each tenant with prepaid rent a note saying the month their rent is paid up to, and you honor
+  it.
 
 ### S10. VAT, privacy and disagreements
 
@@ -137,9 +140,7 @@ with the words defined.
 - **11.2** An officer of ours sits down with you, explains the agreement in your language and answers your
   questions.
 - **11.3** You sign, or give your thumbprint, in front of a witness you choose.
-- **11.4** A short signed note, the explanation note, says who explained the agreement to you and that you
-  understood.
-- **11.5** You keep a copy.
+- **11.4** You keep a copy.
 
 ### S12. The building and the units
 
@@ -165,7 +166,7 @@ Not part of the schedule. Remove before use.
 | S8     | P5                 | Landlord duties and their remedies; align with BM8                                   |
 | S9     | BM8, P8, P13       | Notice; the "not paid" test; final payment; fee on notice exit                       |
 | S10    | P10, P11, P12      | VAT; data protection; governing law and mediation                                    |
-| S11    | BM11               | That the signed version governs; the explanation note                                |
+| S11    | BM11               | That the signed version governs; the Illiterates Protection Act                      |
 | S12    | BM9, BM10          | Commercial tenancy form; rent currency                                               |
 
 S3.1 is the one place the schedule goes beyond the model's wording. Because due dates vary (BM20), the covered

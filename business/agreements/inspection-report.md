@@ -1,34 +1,35 @@
 # Inspection report
 
-Draft 0.4 for counsel review. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at
-the end say which term each part takes from. This draft is not legal advice.
+Version 1.0. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at the end say
+which term each part takes from.
 
 We fill this in when we walk the building with the landlord, before we start. We keep it, and the landlord gets
 a copy. It goes with the [landlord agreement](landlord-agreement.md).
 
 ## About the inspection
 
-| Detail              | Fill in                                           |
-|---------------------|---------------------------------------------------|
-| Building            | [name or description]                             |
-| Address             | [to fill]                                         |
-| Landlord            | [full name]                                       |
-| Date                | [day month year]                                  |
-| Walked the building | [officer's name] for Mwavuli Holdings Ltd         |
-| Also there          | the landlord; others: [to fill]                   |
-| Photos              | [to fill] photos, numbered [to fill] to [to fill] |
+| Detail              | Fill in                |
+|---------------------|------------------------|
+| Building            | [name or description]  |
+| Address             | [address]              |
+| Landlord            | [full name]            |
+| Date                | [day month year]       |
+| Officer for Mwavuli | [officer's name]       |
+| Others present      | [names]                |
+| Photos taken        | [number]               |
+| Photo numbers       | from [first] to [last] |
 
 ## What we looked at
 
-Mark each part: OK, needs fixing, or unsafe.
+Mark each part: OK, needs fixing, or unsafe. Write any other safety item on the last line.
 
-| Part                          | OK  | Needs fixing | Unsafe | Notes and photo numbers |
-|-------------------------------|-----|--------------|--------|-------------------------|
-| Roof                          | [ ] | [ ]          | [ ]    |                         |
-| Wiring                        | [ ] | [ ]          | [ ]    |                         |
-| Water                         | [ ] | [ ]          | [ ]    |                         |
-| Stairs                        | [ ] | [ ]          | [ ]    |                         |
-| Other safety item: [write in] | [ ] | [ ]          | [ ]    |                         |
+| Part                | OK  | Needs fixing | Unsafe | Notes and photo numbers |
+|---------------------|-----|--------------|--------|-------------------------|
+| Roof                | [ ] | [ ]          | [ ]    |                         |
+| Wiring              | [ ] | [ ]          | [ ]    |                         |
+| Water               | [ ] | [ ]          | [ ]    |                         |
+| Stairs              | [ ] | [ ]          | [ ]    |                         |
+| [other safety item] | [ ] | [ ]          | [ ]    |                         |
 
 ## What must be fixed before we start
 
@@ -45,26 +46,28 @@ Unsafe items must be fixed within 30 days, before we start.
 Mark one.
 
 - [ ] We accept the building.
-- [ ] We accept the building once the items above are fixed by [day month year, within 30 days of this report].
+- [ ] We accept the building once the items above are fixed by [day month year], within 30 days of this report.
 - [ ] We decline the building.
 
-Units we decline, if it is only some of them: [to fill].
+**Units declined, if not all:** [unit numbers]
 
 If we decline, mark every reason that applies.
 
 - [ ] An unsafe item stays unsafe.
 - [ ] The building did not pass the ownership check (Annex 2 of the landlord agreement).
 - [ ] We cannot fund it.
-- [ ] It did not pass the inspection, because: [to fill].
+- [ ] It did not pass the inspection, for the reason below.
+
+**Reason:** [what did not pass, and why; 2 lines]
 
 Once we accept a building, the promise in the landlord agreement applies.
 
 ## Signatures
 
-|                          | Name        | Signature | Date |
-|--------------------------|-------------|-----------|------|
-| For Mwavuli Holdings Ltd | [full name] |           |      |
-| The landlord             | [full name] |           |      |
+|                          | Name | Signature | Date |
+|--------------------------|------|-----------|------|
+| For Mwavuli Holdings Ltd |      |           |      |
+| The landlord             |      |           |      |
 
 ## Drafting notes
 

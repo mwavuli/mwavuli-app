@@ -76,7 +76,7 @@ is settled, we chase, and if it goes to court you say YES first.
 | Schedule to the agreement | Landlord | The same terms, with the words defined |
 | Tenancy form              | Tenant   | P3, P7, P13, BM5, BM6, BM20            |
 | Inspection report         | Landlord | P4, P9                                 |
-| Explanation note          | Landlord | BM11                                   |
+
 | Landlord pitch            | Landlord | BM18 and the plain statements          |
 
 BM3 sets how every document is written.
@@ -411,12 +411,11 @@ UGX 2,550,000 (the rent minus our 15%), and we collect March from the tenant.
 
 **Plain statement** The agreement comes in English and Luganda. You choose one, and you and we sign that version.
 One of our officers sits down with you, explains the agreement in your language and answers your questions. You
-sign, or give your thumbprint, in front of a witness you choose. A short signed note says who explained it to
-you and that you understood. You keep a copy.
+sign, or give your thumbprint, in front of a witness you choose. You keep a copy.
 
 **Example** A landlord reads Luganda but not English. Our officer sits down with the landlord at the building and
-explains the Luganda version. The landlord signs that version with a sister as witness, and the officer signs the
-note. The landlord leaves with both copies.
+explains the Luganda version. The landlord signs that version with a sister as witness and
+leaves with a copy.
 
 **Why** If a landlord later says "I did not understand", Mwavuli can show that the terms were explained in the
 landlord's own language, with a witness the landlord chose.
@@ -428,8 +427,9 @@ landlord's own language, with a witness the landlord chose.
 - Only one version is signed. Decide how the agreement says that the signed version governs and what the other
   version is for. A landlord who signed after an explanation in Luganda should not lose on an English
   technicality.
-- The Illiterates Protection Act may require the signed explanation note. Confirm what it requires and what the
-  note must say.
+- The Illiterates Protection Act may require whoever writes a document for a landlord who cannot read it to put
+  their full name and address on it, as a statement that it was read over and explained. The set has no
+  explanation note: confirm whether the agreement needs that statement and what it must say.
 - Decide who may witness and what Mwavuli records about the witness.
 
 ## Defaults
@@ -517,7 +517,7 @@ Each term's counsel note lists what to confirm. Start with these:
 - **Licensing and regulation:** whether the paid first-month cover counts as insurance or suretyship (BM1), and the
   payment-service and anti-money-laundering duties of collecting and holding rent (P1).
 - **Client money:** deposits, prepaid rent and the payout account (BM6, P13, BM17).
-- **Language and signing:** which version governs, the signed explanation note and witnesses (BM11, BM3).
+- **Language and signing:** which version governs, the Illiterates Protection Act and witnesses (BM11, BM3).
 - **Land and authority:** proof of title by tenure, mortgages, co-owners and estates (BM7).
 - **Tenancy and recovery:** the covered-month claim, eviction steps, deposits and late fees under the Landlord and
   Tenant Act 2022 (BM5, BM6, P7, P8).
