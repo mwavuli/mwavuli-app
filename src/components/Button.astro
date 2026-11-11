@@ -1,0 +1,13 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { buttonClass, type ButtonVariant } from './button-styles';
+
+interface Props extends HTMLAttributes<'a'> {
+  /** `primary` on light grounds, `inverse` on Green. */
+  variant?: ButtonVariant;
+}
+
+const { variant = 'primary', class: className, ...attrs } = Astro.props;
+---
+
+<a {...attrs} class:list={[buttonClass(variant), className]}><slot /></a>

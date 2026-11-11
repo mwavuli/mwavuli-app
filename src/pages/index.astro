@@ -1,28 +1,269 @@
 ---
-import { POSTAL_ADDRESS, SITE_NAME } from '../config';
+import arrowRight from '../../brand/icons/line/arrow-right.svg?raw';
+import Button from '../components/Button.astro';
+import { buttonClass } from '../components/button-styles';
+import RoofBands from '../components/RoofBands.astro';
+import { POSTAL_ADDRESS } from '../config';
 import Layout from '../layouts/Layout.astro';
+
+// The three audiences (brand F3). The chip picks the proof line; the first is the default.
+const AUDIENCES = [
+  { id: 'owners', label: 'Owners', proof: 'Rent paid to you on the 1st, every month.' },
+  {
+    id: 'tenants',
+    label: 'Tenants',
+    proof: 'Tell us what is broken. We arrange a trusted contractor.',
+  },
+  { id: 'businesses', label: 'Businesses', proof: 'We manage shops and offices as well as homes.' },
+] as const;
+
+// The six services on the card (brand F1, I7), each with one line taken from the business model.
+const SERVICES = [
+  {
+    name: 'Guaranteed rental income on the 1st',
+    line: 'If a tenant doesn’t pay, we cover that first month and do the chasing.',
+  },
+  {
+    name: 'Tenant management and sourcing',
+    line: 'We find tenants for your empty rooms and collect the rent.',
+  },
+  {
+    name: 'Construction and repairs',
+    line: 'We find a trusted contractor and bring you the price. Above UGX 200,000, we wait for your YES.',
+  },
+  {
+    name: 'Electrical and plumbing',
+    line: 'Trusted contractors do the work. Smaller jobs go on your monthly statement.',
+  },
+  {
+    name: 'Utilities',
+    line: 'We look after electricity and water. Bills are paid at cost, with no markup.',
+  },
+  {
+    name: 'Garbage disposal',
+    line: 'We look after garbage disposal. It is paid at cost, with no markup.',
+  },
+] as const;
 ---
 
-<Layout title="Home">
-  <!-- Brand A6: a green band with a two-beat headline and a gold rule. The photograph
-       waits on the open photography decision (D14). -->
-  <section class="on-inverse bg-brand text-white">
-    <div class="mx-auto max-w-page px-4 py-20 sm:px-6 sm:py-28">
-      <h1 class="font-display text-h1 text-white sm:text-display">
-        Managed Properties. <span class="text-accent">Better Living.</span>
-      </h1>
-      <div class="mt-6 h-1 w-16 bg-accent" aria-hidden="true"></div>
-      <p class="mt-6 max-w-xl text-body-lg">Rent paid to you on the 1st, every month.</p>
+<Layout title="Home" headerTone="brand">
+  <!-- 1. First screen. BXP: one enormous headline at the foot of a flat first screen, small chips above
+       it. AppFolio: stacked statements, a small paragraph and one button beside them. Northpoint: the
+       second phrase in the accent. Brand A6 and F6: white first beat, gold second beat, on Green. -->
+  <section
+    aria-labelledby="hero-title"
+    class="audience on-inverse relative isolate overflow-hidden bg-brand text-white"
+  >
+    <div
+      class="mx-auto flex min-h-[calc(100svh-6rem)] max-w-page flex-col justify-end gap-6 px-6 pb-10 pt-2 lg:px-8 lg:pb-16"
+    >
+      <fieldset class="audience-chips flex-wrap gap-2">
+        <legend class="sr-only">Who is this for?</legend>
+        {
+          AUDIENCES.map((audience, index) => (
+            <span>
+              <input
+                type="radio"
+                name="audience"
+                id={`audience-${audience.id}`}
+                class="peer sr-only"
+                checked={index === 0}
+              />
+              <label
+                for={`audience-${audience.id}`}
+                class="inline-flex min-h-11 cursor-pointer items-center rounded-full border-[1.5px] border-white px-4 font-display text-body font-semibold text-white transition-[background-color,color] hover:bg-white/10 sm:px-5 peer-checked:bg-white peer-checked:text-brand peer-checked:hover:bg-green-50 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent"
+              >
+                {audience.label}
+              </label>
+            </span>
+          ))
+        }
+      </fieldset>
+
+      <div class="relative">
+        <h1 id="hero-title" class="t-giant-hero font-display text-white">
+          <span class="block">Managed</span>
+          <span class="block">Properties.</span>
+          <span class="block text-accent">Better</span>
+          <span class="block text-accent">Living.</span>
+        </h1>
+
+        <RoofBands
+          class="mt-6 ml-auto aspect-[600/310] w-full max-w-xl lg:hidden xl:absolute xl:-right-93 xl:-bottom-26 xl:mt-0 xl:block xl:aspect-auto xl:w-160 xl:max-w-none"
+        />
+        <div
+          class="hero-card relative z-10 ml-auto w-full max-w-xl rounded-xl bg-white p-6 lg:absolute lg:right-0 lg:bottom-3 lg:ml-0 lg:w-88"
+        >
+          <div class="audience-proof grid gap-5">
+            {
+              AUDIENCES.map((audience) => (
+                <div data-audience={audience.id}>
+                  <p class="font-display text-overline uppercase text-muted">{audience.label}</p>
+                  <p class="mt-2 font-display text-h3 text-brand">{audience.proof}</p>
+                </div>
+              ))
+            }
+          </div>
+          <Button href="#contact" class="mt-6">Contact us</Button>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="contact" class="bg-surface">
-    <div class="mx-auto max-w-page px-4 py-16 sm:px-6">
-      <h2 class="text-h2">Contact</h2>
-      <p class="mt-4 text-body-lg">
-        {SITE_NAME}<br />
-        {POSTAL_ADDRESS}
+  <!-- 2. The pitch (BM18) as three full-bleed bands on three grounds, each led by an oversize figure
+       (AppFolio's stacked statements; Northpoint's accent phrase). The figures repeat the words of
+       the statement, so they are hidden from screen readers. -->
+  <section id="offer" aria-labelledby="offer-title">
+    <div class="bg-page">
+      <div class="mx-auto max-w-page px-6 pt-16 lg:px-8 lg:pt-20">
+        <h2 id="offer-title" class="font-display text-overline uppercase text-brand">
+          The offer in three lines
+        </h2>
+      </div>
+    </div>
+    <ol role="list">
+      <li class="bg-page">
+        <div class="mx-auto max-w-page px-6 py-10 lg:px-8 lg:py-14">
+          <div class="grid items-center gap-x-8 gap-y-6 lg:grid-cols-12">
+            <p aria-hidden="true" class="t-numeral font-display text-gold-700 lg:col-span-4">1st</p>
+            <div class="lg:col-span-8">
+              <p class="t-statement font-display text-brand">We pay you on the 1st.</p>
+              <p class="mt-4 font-display text-h4 text-ink">For every room with a tenant.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="on-inverse bg-brand text-white">
+        <div class="mx-auto max-w-page px-6 py-10 lg:px-8 lg:py-14">
+          <div class="grid items-center gap-x-8 gap-y-6 lg:grid-cols-12">
+            <p
+              aria-hidden="true"
+              class="t-numeral font-display text-accent lg:order-last lg:col-span-4 lg:text-right"
+            >
+              15%
+            </p>
+            <div class="lg:col-span-8">
+              <p class="t-statement font-display text-white">We take 15% of the rent.</p>
+              <p class="mt-4 font-display text-h4 text-green-100">No rent, no fee.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="bg-sage-100">
+        <div class="mx-auto max-w-page px-6 py-10 lg:px-8 lg:py-14">
+          <div class="grid items-center gap-x-8 gap-y-6 lg:grid-cols-12">
+            <p aria-hidden="true" class="t-numeral font-display text-gold-700 lg:col-span-4">
+              30<span class="ml-3 font-display text-h3 font-semibold tracking-normal">days</span>
+            </p>
+            <div class="lg:col-span-8">
+              <p class="t-statement font-display text-brand">
+                Leave any time with 30 days’ notice.
+              </p>
+              <a
+                href="#contact"
+                class="mt-6 inline-flex min-h-12 items-center gap-2 font-display text-h4 text-brand hover:underline"
+              >
+                Contact us
+                <span
+                  aria-hidden="true"
+                  class="block size-6 [&>svg]:size-full"
+                  set:html={arrowRight}
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 3. The six services as one ruled typographic list (Northpoint's title-and-line rows, scaled up;
+       BXP's title-left, text-right rows). Quiet hover: a tint, the figure and a small nudge. -->
+  <section id="services" aria-labelledby="services-title" class="bg-surface">
+    <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-20">
+      <h2 id="services-title" class="t-statement font-display text-brand">What we look after for you.</h2>
+      <div class="mt-4 h-1 w-16 bg-accent" aria-hidden="true"></div>
+      <ol role="list" class="-mx-6 mt-10 border-t border-line lg:-mx-8">
+        {
+          SERVICES.map((service, index) => (
+            <li class="group/row border-b border-line px-6 transition-colors hover:bg-green-50 lg:px-8">
+              <div class="grid gap-x-8 gap-y-2 py-6 lg:grid-cols-12 lg:items-center lg:py-7">
+                <span
+                  aria-hidden="true"
+                  class="t-giant-row font-display font-semibold text-gold-700 tabular-nums transition-colors group-hover/row:text-brand lg:col-span-1"
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <h3 class="t-giant-row font-display text-brand transition-transform motion-safe:group-hover/row:translate-x-2 lg:col-span-6">
+                  {service.name}
+                </h3>
+                <p class="text-body-lg text-ink lg:col-span-5 lg:max-w-md">{service.line}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- 4. Contact on the cream page. The closing statement is the primary tagline (brand F6), green
+       then gold on a light ground. The form is design only, on a raised white card (brand S4). -->
+  <section id="contact" aria-labelledby="contact-title" class="bg-page">
+    <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-24">
+      <h2 id="contact-title" class="font-display text-overline uppercase text-brand">Contact</h2>
+      <p class="t-closing mt-6 font-display text-brand">
+        <span class="block">Your Property.</span>
+        <span class="block text-gold-700">Our Responsibility.</span>
       </p>
+
+      <div class="mt-12 grid gap-10 lg:mt-16 lg:grid-cols-12 lg:gap-8">
+        <dl class="grid content-start gap-8 lg:col-span-5">
+          <div>
+            <dt class="font-display text-overline uppercase text-muted">Post</dt>
+            <dd class="mt-2 font-display text-h4 text-brand">{POSTAL_ADDRESS}</dd>
+          </div>
+          <div>
+            <dt class="font-display text-overline uppercase text-muted">Phone</dt>
+            <dd class="mt-2 font-display text-h4 text-muted">Phone number to be added</dd>
+          </div>
+          <div>
+            <dt class="font-display text-overline uppercase text-muted">Email</dt>
+            <dd class="mt-2 font-display text-h4 text-muted">Email address to be added</dd>
+          </div>
+        </dl>
+
+        <!-- Design only: the button is type="button", so nothing is sent. -->
+        <form
+          class="grid content-start gap-6 rounded-xl bg-white p-6 shadow-md lg:col-span-6 lg:col-start-7 lg:p-8"
+          aria-label="Contact form"
+        >
+          <div>
+            <label for="contact-name" class="font-display text-body font-semibold text-ink">Your name</label>
+            <input
+              id="contact-name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              class="mt-2 block min-h-12 w-full rounded-sm border-[1.5px] border-slate-500 bg-white px-4 text-body text-ink"
+            />
+          </div>
+          <div>
+            <label for="contact-phone" class="font-display text-body font-semibold text-ink">Your phone number</label>
+            <input
+              id="contact-phone"
+              name="phone"
+              type="tel"
+              autocomplete="tel"
+              class="mt-2 block min-h-12 w-full rounded-sm border-[1.5px] border-slate-500 bg-white px-4 text-body text-ink"
+            />
+          </div>
+          <div>
+            <button type="button" class:list={[buttonClass('primary'), 'w-full sm:w-auto']}>
+              Send your details
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   </section>
 </Layout>

@@ -159,3 +159,117 @@
   --tw-prose-th-borders: var(--mw-color-role-border-strong);
   --tw-prose-td-borders: var(--mw-color-role-border-default);
 }
+
+/* ==========================================================================
+   Prototype 03, GIANT TYPE (SNT-38). Appended below the brand blocks.
+   ========================================================================== */
+
+/* Brand motion tokens (S9) drive every Tailwind transition on the page. */
+:root {
+  --default-transition-duration: var(--mw-motion-duration-base);
+  --default-transition-timing-function: var(--mw-motion-easing-standard);
+}
+
+/* Giant display sizes. The concept scales the display step up (brand T3 bend, listed in the
+   prototype README); Montserrat 750 matches the wordmark (T2) and tracking tightens with size. */
+.t-giant-hero {
+  font-size: clamp(2.75rem, 15vw, 10rem);
+  font-weight: 750;
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+}
+.t-numeral {
+  font-size: clamp(5.5rem, 13vw, 12rem);
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+}
+.t-statement {
+  font-size: clamp(2rem, 4.3vw, 4rem);
+  font-weight: 750;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.t-closing {
+  font-size: clamp(2.25rem, 8.2vw, 7.4rem);
+  font-weight: 750;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+.t-giant-row {
+  font-size: clamp(1.625rem, 3.1vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* Audience switch: three radios and :has(), no script. Without :has() support the chips are
+   hidden and all three proof lines show, each with its audience label. */
+.audience-chips {
+  display: none;
+}
+@supports selector(:has(*)) {
+  .audience-chips {
+    display: flex;
+  }
+  .audience-proof [data-audience] {
+    display: none;
+  }
+  .audience:has(#audience-owners:checked) [data-audience='owners'],
+  .audience:has(#audience-tenants:checked) [data-audience='tenants'],
+  .audience:has(#audience-businesses:checked) [data-audience='businesses'] {
+    display: block;
+  }
+}
+@keyframes proof-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  @supports selector(:has(*)) {
+    .audience-proof [data-audience] {
+      animation: proof-in var(--mw-motion-duration-slow) var(--mw-motion-easing-standard) both;
+    }
+  }
+}
+
+/* Without :has() all three proof lines show, so the roof art steps out of the way. */
+@supports not selector(:has(*)) {
+  .hero-card {
+    position: static;
+    width: auto;
+    margin-top: 2rem;
+  }
+  .hero-roof-art {
+    display: none;
+  }
+}
+
+/* A focus ring appears at once, never fading in from the text colour (S8). */
+:focus-visible {
+  transition-property: none;
+}
+/* The proof card is a white surface inside a Green section: its ring is Green (S8, contrast). */
+.hero-card :focus-visible {
+  outline-color: var(--mw-color-role-focus-ring);
+}
+
+/* Reduced motion (S9): no movement, no animation. Colour changes still apply, instantly. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
