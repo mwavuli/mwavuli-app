@@ -1,29 +1,65 @@
 ---
-import { SITE_NAME } from '../config';
+import { POSTAL_ADDRESS, SITE_NAME } from '../config';
+import Icon from './Icon.astro';
 import Lockup from './Lockup.astro';
+
+// Role routes: where each kind of visitor lands first. Residents and shops and offices are both
+// tenants, so they share an answer (business/agreements/tenancy-form.md covers every unit type).
+const roles = [
+  { href: '/#paid', short: 'Owners', long: 'Owners and investors' },
+  { href: '/#rent', short: 'Residents', long: 'Residents' },
+  { href: '/#rent', short: 'Shops and offices', long: 'Shops and offices' },
+];
 ---
 
-<header class="border-b border-line bg-page">
-  <div class="mx-auto flex max-w-page items-center justify-between gap-4 px-4 py-4 sm:px-6">
+<header class="relative z-20 bg-page">
+  <!-- The strip is the role navigation. Its links are at least 44 px tall with 8 px between them (S8). -->
+  <div class="on-inverse bg-brand-deep text-white">
+    <div class="mx-auto flex max-w-page items-center justify-between gap-6 px-6 lg:px-8">
+      <nav aria-label="Quick links by role">
+        <ul class="-ml-3 flex items-center gap-2">
+          {
+            roles.map((role) => (
+              <li>
+                <a
+                  href={role.href}
+                  class="inline-flex min-h-11 items-center rounded-sm px-3 text-label text-white transition-colors duration-[var(--mw-motion-duration-fast)] hover:bg-brand hover:underline hover:underline-offset-4 active:bg-green-900"
+                >
+                  <span class="md:hidden">{role.short}</span>
+                  <span class="hidden md:inline">{role.long}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <p class="hidden items-center gap-2 text-label text-cream md:flex">
+        <Icon name="location" class="size-5" />
+        {POSTAL_ADDRESS}
+      </p>
+    </div>
+  </div>
+
+  <div class="mx-auto flex max-w-page items-center justify-between gap-4 px-6 py-6 lg:px-8">
     <a href="/" class="flex shrink-0 items-center" aria-label={`${SITE_NAME}: home`}>
-      <Lockup class="h-8" aria-hidden="true" />
+      <Lockup class="h-12" aria-hidden="true" />
     </a>
     <nav aria-label="Main">
-      <ul class="flex items-center gap-2 sm:gap-4">
-        <li>
+      <ul class="flex items-center gap-3">
+        <li class="hidden sm:block">
           <a
-            href="/legal/privacy/"
-            class="inline-flex min-h-11 items-center px-3 font-display text-label font-semibold text-ink hover:text-brand"
+            href="/#rent"
+            class="inline-flex min-h-12 items-center justify-center rounded-md border-[1.5px] border-brand px-5 font-display text-body font-semibold text-brand transition-colors duration-[var(--mw-motion-duration-fast)] hover:bg-green-50 active:bg-green-100"
           >
-            Privacy
+            Pay your rent
           </a>
         </li>
         <li>
           <a
             href="/#contact"
-            class="inline-flex min-h-11 items-center rounded-full bg-brand px-5 font-display text-label font-semibold text-white hover:bg-brand-deep"
+            class="inline-flex min-h-12 items-center justify-center rounded-md border-[1.5px] border-brand bg-brand px-5 font-display text-body font-semibold text-white transition-colors duration-[var(--mw-motion-duration-fast)] hover:border-brand-deep hover:bg-brand-deep active:border-green-900 active:bg-green-900"
           >
-            Contact
+            Talk to us
           </a>
         </li>
       </ul>

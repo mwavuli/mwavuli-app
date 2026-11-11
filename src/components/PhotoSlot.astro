@@ -1,0 +1,136 @@
+---
+// The hero photograph's slot (open decision D14): a frame cut to the final crop, with the planes a
+// daylight photograph of a managed block would have (sky, far roofs, near roofs, the building) drawn
+// as flat tones in the roof form (brand M1) and the mark's window grid (L2). The roof pattern (M2)
+// sits on the cream sky only: a light ground, and never behind text. The caption is on a solid chip.
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+/** The logo's roof slope, about 43 degrees (brand L2). */
+const K = Math.tan((43 * Math.PI) / 180);
+
+const pts = (list: number[][]) => list.map((p) => p.map((n) => n.toFixed(1)).join(',')).join(' ');
+
+/** A roof silhouette: apex at (x, y), both slopes at 43 degrees, cut flat `drop` below the apex. */
+const roof = (x: number, y: number, drop: number) => {
+  const run = drop / K;
+  return pts([
+    [x - run, y + drop],
+    [x, y],
+    [x + run, y + drop],
+  ]);
+};
+
+/** A house: walls up to the eave, then the roof. Width `w`, apex at (cx, apexY), flat at `bottom`. */
+const house = (cx: number, apexY: number, w: number, bottom: number) => {
+  const eave = apexY + (w / 2) * K;
+  return pts([
+    [cx - w / 2, bottom],
+    [cx - w / 2, eave],
+    [cx, apexY],
+    [cx + w / 2, eave],
+    [cx + w / 2, bottom],
+  ]);
+};
+
+/** The window of four equal squares (brand L2): each a tenth of the house width, gaps 4 percent. */
+const windowGrid = (cx: number, top: number, w: number) => {
+  const side = w / 10;
+  const gap = w * 0.04;
+  const left = cx - side - gap / 2;
+  return [0, 1].flatMap((row) =>
+    [0, 1].map((col) => ({
+      x: left + col * (side + gap),
+      y: top + row * (side + gap),
+      side,
+    })),
+  );
+};
+
+const desktopWindow = windowGrid(290, 232, 240);
+const bandWindow = windowGrid(236, 92, 120);
+---
+
+<figure class:list={['relative isolate overflow-hidden bg-cream', className]}>
+  <!-- Phones: a wide crop, cut from the same planes. -->
+  <svg
+    class="absolute inset-0 size-full md:hidden"
+    viewBox="0 0 393 160"
+    preserveAspectRatio="xMidYMax slice"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <defs>
+      <pattern id="slot-roofs-band" width="96" height="112" patternUnits="userSpaceOnUse">
+        <g class="roof-tone" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+          <g transform="translate(16 6)">
+            <path d="M0 44V30L32 0L64 30V44Z" />
+            <rect x="28" y="26" width="8" height="8" />
+          </g>
+          <g transform="translate(-32 62)">
+            <path d="M0 44V30L32 0L64 30V44Z" />
+            <rect x="28" y="26" width="8" height="8" />
+          </g>
+          <g transform="translate(64 62)">
+            <path d="M0 44V30L32 0L64 30V44Z" />
+            <rect x="28" y="26" width="8" height="8" />
+          </g>
+        </g>
+      </pattern>
+    </defs>
+    <rect width="393" height="160" class="fill-cream" />
+    <rect width="393" height="160" fill="url(#slot-roofs-band)" />
+    <polygon class="fill-sage-300" points={roof(70, 34, 126)} />
+    <polygon class="fill-sage-300" points={roof(330, 22, 138)} />
+    <polygon class="fill-sage-500" points={roof(130, 70, 90)} />
+    <polygon class="fill-sage-500" points={roof(380, 66, 94)} />
+    <polygon class="fill-brand" points={house(236, 32, 120, 160)} />
+    {bandWindow.map((w) => <rect class="fill-accent" x={w.x} y={w.y} width={w.side} height={w.side} />)}
+  </svg>
+
+  <!-- Tablets and desktops: the 4:3 crop. -->
+  <svg
+    class="absolute inset-0 hidden size-full md:block"
+    viewBox="0 0 480 360"
+    preserveAspectRatio="xMidYMax slice"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <defs>
+      <pattern id="slot-roofs" width="96" height="112" patternUnits="userSpaceOnUse">
+        <g class="roof-tone" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+          <g transform="translate(16 6)">
+            <path d="M0 44V30L32 0L64 30V44Z" />
+            <rect x="28" y="26" width="8" height="8" />
+          </g>
+          <g transform="translate(-32 62)">
+            <path d="M0 44V30L32 0L64 30V44Z" />
+            <rect x="28" y="26" width="8" height="8" />
+          </g>
+          <g transform="translate(64 62)">
+            <path d="M0 44V30L32 0L64 30V44Z" />
+            <rect x="28" y="26" width="8" height="8" />
+          </g>
+        </g>
+      </pattern>
+    </defs>
+    <rect width="480" height="360" class="fill-cream" />
+    <rect width="480" height="360" fill="url(#slot-roofs)" />
+    <polygon class="fill-sage-300" points={roof(40, 176, 184)} />
+    <polygon class="fill-sage-300" points={roof(250, 150, 210)} />
+    <polygon class="fill-sage-300" points={roof(440, 190, 170)} />
+    <polygon class="fill-sage-500" points={roof(96, 214, 146)} />
+    <polygon class="fill-sage-500" points={roof(446, 232, 128)} />
+    <polygon class="fill-brand" points={house(290, 132, 240, 360)} />
+    {desktopWindow.map((w) => <rect class="fill-accent" x={w.x} y={w.y} width={w.side} height={w.side} />)}
+  </svg>
+
+  <figcaption
+    class="absolute bottom-3 left-3 rounded-full bg-white px-3 py-1 text-label text-ink md:bottom-4 md:left-4"
+  >
+    Photograph to come (D14)
+  </figcaption>
+</figure>

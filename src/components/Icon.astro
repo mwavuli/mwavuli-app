@@ -1,0 +1,44 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+// Brand icons are read from brand/icons in place and inlined, so `currentColor` works (brand I11).
+const line = import.meta.glob<string>('../../brand/icons/line/*.svg', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+const pictogram = import.meta.glob<string>('../../brand/icons/pictogram/*.svg', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+
+interface Props extends HTMLAttributes<'span'> {
+  /** File name without the extension, for example "arrow-right" or "rental-income". */
+  name: string;
+  /** `line` for interface icons, `pictogram` for service pictograms and contact badges (brand I1). */
+  family?: 'line' | 'pictogram';
+  /** Accessible name for an icon that carries meaning (brand I10). Omit it for a decorative icon. */
+  label?: string;
+}
+
+const { name, family = 'line', label, class: className, ...attrs } = Astro.props;
+
+const source = (family === 'line' ? line : pictogram)[`../../brand/icons/${family}/${name}.svg`];
+if (!source) {
+  throw new Error(`Icon "${name}" does not exist in brand/icons/${family}.`);
+}
+
+// The files declare a fixed width and height. They are dropped so the size comes from a class on
+// the component (a height for a pictogram, a size for a line icon) and the viewBox keeps the ratio.
+const svg = source.replace(/ width="[\d.]+" height="[\d.]+"/, '');
+---
+
+<span
+  {...attrs}
+  class:list={['inline-flex shrink-0 [&>svg]:h-full [&>svg]:w-auto', className]}
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  aria-hidden={label ? undefined : 'true'}
+  set:html={svg}
+/>

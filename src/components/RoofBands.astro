@@ -1,0 +1,113 @@
+---
+// Layered flat roof bands for large Green grounds (brand M1, M3). Every edge runs at the logo's
+// slope, every shape is one flat tone (no gradient, shadow or transparency), and the shapes bleed
+// off the edges of the ground. Gold stays a single thin band, far under a fifth of the motif.
+interface Props {
+  /** `slot` is anchored to the photo slot (place it inside the slot's wrapper); the rest fill their ground. */
+  variant: 'hero' | 'slot' | 'services' | 'footer';
+}
+
+const { variant } = Astro.props;
+
+/** The logo's roof slope, about 43 degrees (brand L2). */
+const K = Math.tan((43 * Math.PI) / 180);
+
+const pts = (list: number[][]) => list.map((p) => p.map((n) => n.toFixed(1)).join(',')).join(' ');
+
+/** A roof silhouette: apex at (x, y), both slopes at 43 degrees, cut flat `drop` below the apex. */
+const roof = (x: number, y: number, drop: number) => {
+  const run = drop / K;
+  return pts([
+    [x - run, y + drop],
+    [x, y],
+    [x + run, y + drop],
+  ]);
+};
+
+/** A thin band that follows the right-hand slope of a roof, lifted `lift` above it. */
+const ridge = (x: number, y: number, drop: number, lift: number, thickness: number) => {
+  const run = drop / K;
+  const top = y - lift;
+  return pts([
+    [x, top],
+    [x + run, top + drop],
+    [x + run, top + drop + thickness],
+    [x, top + thickness],
+  ]);
+};
+---
+
+{
+  variant === 'hero' && (
+    <>
+      <svg
+        class="pointer-events-none absolute inset-0 hidden size-full md:block"
+        viewBox="0 0 1440 800"
+        preserveAspectRatio="xMaxYMax slice"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <polygon class="fill-green-700" points={roof(170, 590, 300)} />
+        <polygon class="fill-green-900" points={roof(1300, 470, 330)} />
+      </svg>
+      <svg
+        class="pointer-events-none absolute inset-0 size-full md:hidden"
+        viewBox="0 0 393 900"
+        preserveAspectRatio="xMidYMin slice"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <polygon class="fill-green-700" points={roof(300, 300, 640)} />
+        <polygon class="fill-accent" points={ridge(300, 300, 120, 30, 10)} />
+        <polygon class="fill-green-900" points={roof(400, 620, 320)} />
+      </svg>
+    </>
+  )
+}
+
+{
+  variant === 'slot' && (
+    // The big back roof and its gold ridge are drawn from an apex that sits 17.8 percent down the
+    // slot (a 4:3 frame), so the apex is always behind the photograph and both slopes emerge from
+    // its lower corners, at every width. Sizes are in pixels so the slope stays at 43 degrees. The svg
+    // is 1 px square, not 0: the spec switches an svg off when its width or height is zero.
+    <svg
+      class="pointer-events-none absolute left-1/2 top-[17.8%] hidden size-px overflow-visible md:block"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <polygon class="fill-green-700" points={roof(0, 0, 2400)} />
+      <polygon class="fill-accent" points={ridge(0, 0, 1400, 24, 12)} />
+    </svg>
+  )
+}
+
+{
+  variant === 'services' && (
+    <svg
+      class="pointer-events-none absolute inset-0 size-full"
+      viewBox="0 0 1440 640"
+      preserveAspectRatio="xMidYMid slice"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <polygon class="fill-green-900" points={roof(-70, 380, 300)} />
+      <polygon class="fill-green-900" points={roof(1540, 150, 500)} />
+    </svg>
+  )
+}
+
+{
+  variant === 'footer' && (
+    <svg
+      class="pointer-events-none absolute inset-0 size-full"
+      viewBox="0 0 1440 520"
+      preserveAspectRatio="xMaxYMax slice"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <polygon class="fill-green-700" points={roof(1190, 90, 440)} />
+      <polygon class="fill-green-900" points={roof(1470, 300, 230)} />
+    </svg>
+  )
+}

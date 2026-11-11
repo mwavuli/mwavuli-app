@@ -1,22 +1,37 @@
 ---
-import { SITE_NAME } from '../config';
+import { POSTAL_ADDRESS, SITE_NAME } from '../config';
 import Lockup from './Lockup.astro';
+import RoofBands from './RoofBands.astro';
 
 const year = new Date().getFullYear();
 ---
 
-<footer class="on-inverse bg-brand text-white">
-  <div class="mx-auto max-w-page px-4 py-10 sm:px-6">
-    <Lockup reversed class="h-8" role="img" aria-label={SITE_NAME} />
-    <nav aria-label="Footer" class="mt-6">
-      <ul class="grid gap-1 text-body-sm">
-        <li>
-          <a href="/legal/privacy/" class="inline-flex min-h-11 items-center hover:underline">
-            Privacy policy
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <p class="mt-8 border-t border-white/20 pt-6 text-caption">© {year} {SITE_NAME}</p>
+<footer class="on-inverse relative isolate overflow-hidden bg-brand text-white">
+  <RoofBands variant="footer" />
+  <div class="relative mx-auto max-w-page px-6 py-16 md:py-24 lg:px-8">
+    <!-- The tagline's two beats stay together, white then gold (brand F6). -->
+    <p class="font-display text-h2 md:text-display">
+      <span class="block text-white">Your Property.</span>
+      <span class="block text-accent">Our Responsibility.</span>
+    </p>
+    <div class="mt-14 flex flex-col gap-8 border-t border-white/20 pt-8 md:flex-row md:items-end md:justify-between">
+      <div>
+        <Lockup reversed class="h-12" role="img" aria-label={SITE_NAME} />
+        <p class="mt-6 text-body-sm text-cream">{POSTAL_ADDRESS}</p>
+      </div>
+      <nav aria-label="Footer">
+        <ul class="grid gap-1 text-body-sm">
+          <li>
+            <a
+              href="/legal/privacy/"
+              class="-ml-3 inline-flex min-h-11 items-center rounded-sm px-3 underline-offset-4 hover:underline md:ml-0 md:-mr-3"
+            >
+              Privacy policy
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <p class="mt-8 text-caption text-cream">© {year} {SITE_NAME}</p>
   </div>
 </footer>

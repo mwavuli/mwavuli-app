@@ -1,0 +1,23 @@
+---
+interface Props {
+  /** `light` for white and cream grounds, `inverse` for a Green ground. */
+  tone?: 'light' | 'inverse';
+}
+
+const { tone = 'light' } = Astro.props;
+
+const tones = {
+  light: 'border-slate-500 text-ink',
+  inverse: 'border-green-300 text-cream',
+};
+---
+
+<!-- A contact detail the business has not supplied yet: plainly labelled, never a realistic value. -->
+<span
+  class:list={[
+    'inline-flex items-center rounded-sm border border-dashed px-3 py-2 text-label',
+    tones[tone],
+  ]}
+>
+  <slot />
+</span>
