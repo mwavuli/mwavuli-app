@@ -24,11 +24,17 @@ pnpm build      # astro check + astro build → dist/
 pnpm preview    # serve dist/ locally
 ```
 
+The social image is committed, like the agreement PDFs. After changing `scripts/social-image/card.html` or the brand,
+rebuild it with `node scripts/social-image/build.mjs`. It needs Playwright with Chromium (`npm install playwright`, or
+point `PLAYWRIGHT_DIR` at an existing install).
+
 ## Layout
 
 ```
 brand/               brand and design language: spec, tokens, logos, icons
 business/            business model and agreements
+public/              files served as they are: social.png
+scripts/social-image/ card.html, the source of public/social.png, and build.mjs, which renders it
 src/
   components/        Header, Footer, Hero, AudienceHero, AudienceChips, RuledList, ContactBlock, Button,
                      Lockup (the horizontal lockup, inlined), RoofBands
@@ -54,6 +60,13 @@ figures come from the model's worked example (BM18). Tenants follows the tenancy
 short because the model has little beyond BM9, BM10 and P10. The header carries the audience links from 768 px; below
 that the chips and the footer do.
 
+The social image (`public/social.png`, 1200 × 630, brand A6) is the reversed lockup on Green with the campaign
+headline "Managed Properties. Better Living." in white and gold (F6 sets that line for social) and the roof bands cut
+off by the edge. Every page's `og:image` and large Twitter card point at it through `Layout.astro` and `SOCIAL_IMAGE`
+in `src/config.ts`. The card reads the brand tokens and the site's Montserrat, so it follows the brand. The lockup is
+400 px wide, so it stays above the 180 px screen minimum (L5) when a feed shows the card at 45 percent, and the text
+stays 40 px inside the top and bottom edges for the 1.91:1 and 2:1 crops.
+
 Deliberate brand deviations, recorded as brand 09-governance asks:
 
 - **T3** (Default): display sizes above the scale's top step (hero up to 160 px, figures 192 px on the home page and
@@ -66,11 +79,12 @@ Deliberate brand deviations, recorded as brand 09-governance asks:
 
 Open, and not for the code to decide:
 
-- **Domain (brand D4).** `site` in `astro.config.mjs` is the reserved `.example` placeholder.
+- **Domain (brand D4).** `site` in `astro.config.mjs` is the reserved `.example` placeholder. Canonical URLs and the
+  `og:image` address follow it, so link previews work only once the domain is set.
 - **Contact.** Phone and email read "to be added". There is no contact form: it needs a destination that can receive it.
 - **Photography (D14).** The design uses none.
 - **Legal text.** `src/content/legal/privacy.mdx` is a placeholder pending counsel.
-- **Social image** (1200 × 630) and PNG favicon fallbacks.
+- **PNG favicon fallbacks.** The favicon is the brand's SVG app icon only.
 - **Deploy, infrastructure and analytics.**
 - **Commercial tenancies.** The model has no commercial tenancy form yet (BM9 counsel note), so the Businesses page
   describes the landlord's side and points to the Owners and Tenants pages instead of describing a shop tenant's terms.

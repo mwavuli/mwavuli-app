@@ -1,0 +1,96 @@
+<!doctype html>
+<!-- The source of public/social.png (brand A6): the reversed lockup on Green with the campaign headline
+     in white and gold (brand F6), the roof bands cut off by the edge (brand M1, M3). Colours come from the
+     brand tokens and the face from the site's Montserrat package, so the card cannot drift from the brand.
+     Render it with build.mjs; do not edit the PNG. -->
+<html lang="en-UG">
+  <head>
+    <meta charset="utf-8" />
+    <title>Social image · Mwavuli Property Management</title>
+    <link rel="stylesheet" href="../../brand/tokens/mwavuli.tokens.css" />
+    <link rel="stylesheet" href="../../node_modules/@fontsource-variable/montserrat/index.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+      }
+
+      .card {
+        position: relative;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: var(--mw-color-role-brand-primary);
+      }
+
+      /* Brand L4 and L5: the horizontal lockup is 400 px wide, so it is still 180 px wide (the screen
+         minimum) when a feed shows the card at 45 percent, with at least 50 px of clear space. The
+         file's own width and height (52 by 128) do not match its viewBox, so the box takes the
+         viewBox's ratio, 519.92 by 127.68. */
+      .lockup {
+        position: absolute;
+        top: 56px;
+        left: 64px;
+        display: block;
+        width: 400px;
+        height: auto;
+        aspect-ratio: 519.92 / 127.68;
+      }
+
+      /* The site's giant hero style: Montserrat 750, 0.9 line height, tight tracking. Platforms crop
+         the card to 1.91:1 or 2:1, so everything stays 40 px or more inside the top and bottom edges. */
+      .headline {
+        position: absolute;
+        bottom: 52px;
+        left: 64px;
+        margin: 0;
+        font-family: 'Montserrat Variable', var(--mw-font-family-display);
+        font-size: 104px;
+        font-weight: 750;
+        line-height: 0.9;
+        letter-spacing: -0.035em;
+        color: var(--mw-color-core-white);
+      }
+      .headline span {
+        display: block;
+      }
+      .headline .second {
+        color: var(--mw-color-role-brand-accent);
+      }
+
+      /* Same construction as src/components/RoofBands.astro: flat bands at the logo's slope. */
+      .roof {
+        position: absolute;
+        right: -190px;
+        bottom: -150px;
+        width: 700px;
+        height: auto;
+      }
+      .roof .band {
+        fill: var(--mw-color-ramp-green-700);
+      }
+      .roof .gold {
+        fill: var(--mw-color-role-brand-accent);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <svg class="roof" viewBox="0 0 600 640" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+        <path class="band" d="M38 640V285L300 44L562 285V640H482V323.4L300 156L118 323.4V640Z" />
+        <path class="gold" d="M0 640V276L300 0L600 276V640H586V285.1L300 22L14 285.1V640Z" />
+        <rect class="gold" x="265" y="206" width="30" height="30" />
+        <rect class="gold" x="305" y="206" width="30" height="30" />
+        <rect class="gold" x="265" y="246" width="30" height="30" />
+        <rect class="gold" x="305" y="246" width="30" height="30" />
+      </svg>
+      <img class="lockup" src="../../brand/logo/logo-horizontal-reversed.svg" alt="Mwavuli Property Management" />
+      <h1 class="headline">
+        <span>Managed</span>
+        <span>Properties.</span>
+        <span class="second">Better</span>
+        <span class="second">Living.</span>
+      </h1>
+    </main>
+  </body>
+</html>
