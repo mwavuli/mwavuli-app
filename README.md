@@ -14,6 +14,8 @@ design language ([`brand/`](brand/README.md)) and the business documents (`busin
 | Content  | Pages in `.astro`; legal documents as an MDX content collection in `src/content/legal/`             |
 | Fonts    | Montserrat Variable and Inter Variable, self-hosted through Fontsource (brand T8)                   |
 | Icons    | The tab icon is the brand's SVG app icon; `favicon.ico` and the iOS icon are rendered from it at build time with `sharp` (brand G3) |
+| Infra    | OpenTofu through Terragrunt in `infra/`, state in nyange-org's backend; written and not applied |
+| Deploy   | GitHub Actions over OIDC: staged S3 sync, CloudFront invalidation, smoke checks                     |
 | Node/PM  | Node 22, pnpm (pinned in `packageManager`; `vite@^6` pinned so `@tailwindcss/vite` binds to Astro's Vite) |
 
 ## Local development
@@ -34,8 +36,11 @@ point `PLAYWRIGHT_DIR` at an existing install).
 ```
 brand/               brand and design language: spec, tokens, logos, icons
 business/            business model and agreements
+docs/design/         infrastructure decisions (site-infrastructure.md)
+infra/               OpenTofu through Terragrunt: modules/static-site, live/<account>/<region>/site, catalog/, root.hcl
 public/              files served as they are: social.png
-scripts/social-image/ card.html, the source of public/social.png, and build.mjs, which renders it
+scripts/             smoke.sh, which checks a deployed copy; social-image/, card.html and build.mjs for public/social.png
+.github/workflows/   ci.yml (pull requests: astro check and build) and deploy.yml (publish)
 src/
   components/        Header, Footer, Hero, AudienceHero, AudienceChips, RuledList, ContactBlock, Button,
                      Lockup (the horizontal lockup, inlined), RoofBands
@@ -86,6 +91,32 @@ Deliberate brand deviations, recorded as brand 09-governance asks:
   the card in the site's Montserrat needs Chromium, which the build does not have. Its source is
   `scripts/social-image/card.html`; the favicon files, which `sharp` can render, are generated in the build.
 
+## Deploy
+
+The site is static files in a private S3 bucket behind CloudFront. The infrastructure is declared in `infra/`
+(OpenTofu through Terragrunt: one unit and one local module, `static-site`) and applied by a person, and
+`.github/workflows/deploy.yml` publishes `dist/` on a push to `main` or by hand. The decisions, and what must be
+decided and done before the first apply, are in [`docs/design/site-infrastructure.md`](docs/design/site-infrastructure.md).
+**Nothing is applied yet.**
+
+| Files | `Cache-Control` |
+|---|---|
+| `_astro/*` (hashed) | `public, max-age=31536000, immutable` |
+| `*.html` | `public, max-age=300, s-maxage=86400` |
+| other statics | `public, max-age=86400` |
+
+The upload is staged (hashed assets, other statics, then HTML) with no `--delete`. Every deploy invalidates `/*` and
+then runs `scripts/smoke.sh` against the distribution. It needs two repository variables, `AWS_DEPLOY_ROLE_ARN` and
+`SITE_BUCKET`, and fails before it builds if either is missing. `gh variable set DEPLOY_ENABLED --body false` freezes it.
+
+Checks that need no AWS credentials:
+
+```bash
+cd infra/modules/static-site && tofu init -backend=false && tofu validate && tofu test
+terragrunt hcl fmt --check --working-dir infra
+scripts/smoke.sh https://<domain>    # after `pnpm build`, against a deployed copy
+```
+
 ## Before launch
 
 Open, and not for the code to decide:
@@ -96,7 +127,9 @@ Open, and not for the code to decide:
 - **Photography (D14).** The design uses none.
 - **Legal text.** `src/content/legal/privacy.mdx` is a placeholder pending counsel.
 - **Web manifest** with 192 and 512 px icons, only if the site should be installable.
-- **Deploy, infrastructure and analytics.**
+- **Deploy.** The infrastructure and the workflow are written and not applied. The owner decides where the resources
+  live and the domain, and `nyange-org` registers the workload first: see `docs/design/site-infrastructure.md`, section 3.
+- **Analytics.**
 - **Commercial tenancies.** The model has no commercial tenancy form yet (BM9 counsel note), so the Businesses page
   describes the landlord's side and points to the Owners and Tenants pages instead of describing a shop tenant's terms.
 - **Luganda.** The Owners page repeats the agreement's English-and-Luganda promise (BM11); the Luganda text is not in

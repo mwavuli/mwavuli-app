@@ -1,0 +1,20 @@
+# Constants this repository needs at Terragrunt PARSE time, before any AWS call and so before the
+# /nyange/platform/* account contract can be read. A backend cannot be configured from a value fetched
+# by the thing it configures. They are stable identifiers, copied from nyange-site/infra/catalog/org.yaml
+# and changed by coordinated estate work.
+
+org_name: nyange
+repo: mwavuli-site
+
+home_region: us-east-1
+
+# Where state lives. The bucket belongs to nyange-org's bootstrap unit. This repository gets a
+# prefix-scoped grant on it, keyed by `repo` above, once nyange-org registers the repository as a
+# workload (docs/design/site-infrastructure.md).
+state_account_alias: automation
+state_kms_key_arn: "arn:aws:kms:us-east-1:342572234297:key/6767d26a-b35d-4fa3-a548-3028914e7976"
+
+# Guard values for the generated provider, not lookups: a unit that somehow resolved the wrong account
+# fails at plan and creates nothing in it. The key is the account directory under infra/live/.
+account_ids:
+  shared-services: "947247293289"

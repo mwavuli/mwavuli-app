@@ -1,5 +1,6 @@
-# PR check for the site: `astro check` (types and content collections) and `astro build`.
-# Pull requests only; there is no deploy workflow yet.
+# PR checks for the site: `astro check` (types and content collections) and `astro build`, and the
+# infrastructure that hosts it, validated without AWS credentials. Pull requests only; deploy.yml
+# publishes.
 #
 # CI_ENABLED guards CI-type jobs. Freeze and resume with no code change:
 #     freeze:  gh variable set CI_ENABLED --body false
@@ -34,3 +35,28 @@ jobs:
       - run: pnpm install --frozen-lockfile
       # `pnpm build` is `astro check && astro build`: the typecheck and the bundle.
       - run: pnpm build
+
+  infra:
+    name: opentofu validate · test
+    runs-on: ubuntu-latest
+    if: vars.CI_ENABLED != 'false' # CI kill-switch (see header)
+    defaults:
+      run:
+        working-directory: infra/modules/static-site
+    steps:
+      - uses: actions/checkout@v5
+      # The version nyange-org pins in .tool-versions.
+      - uses: opentofu/setup-opentofu@v1
+        with:
+          tofu_version: 1.12.6
+          tofu_wrapper: false
+      # -lockfile=readonly fails if the committed lock does not cover this runner's platform, so the
+      # provider pin cannot quietly stop applying.
+      - run: tofu init -backend=false -input=false -lockfile=readonly
+      - run: tofu fmt -check -recursive
+      - run: tofu validate
+      # Against a mocked provider: no credentials, nothing created.
+      - run: tofu test
+      - name: Shell scripts
+        working-directory: .
+        run: shellcheck scripts/*.sh

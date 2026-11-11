@@ -1,0 +1,123 @@
+# Deploy the built site: publish dist/ to S3, invalidate CloudFront, then smoke-check the result.
+#
+# Auth: GitHub OIDC to the deploy role nyange-org vends for this repository. The role reaches this
+# site's bucket and invalidates its distribution; it cannot change infrastructure, which a person
+# applies from infra/ (see docs/design/site-infrastructure.md).
+#
+# Repo variables (Settings → Secrets and variables → Actions → Variables):
+#   AWS_DEPLOY_ROLE_ARN — required. No default: a default that silently redirects a publish is not a
+#                         convenience.
+#   SITE_BUCKET         — required. The `bucket_name` output of infra/live/*/*/site.
+#
+# Cache strategy: staged upload, hashed assets first and HTML last, with no --delete, so HTML held at
+# the edge never references an asset that is gone. Old hashes linger in the bucket, and so does a page
+# that has been removed from the site: prune by hand now and then.
+#
+# Kill switch (a repository variable). Freeze and resume with no code change:
+#     freeze:  gh variable set DEPLOY_ENABLED --body false
+#     resume:  gh variable set DEPLOY_ENABLED --body true    (or: gh variable delete DEPLOY_ENABLED)
+# Unset, or anything other than the exact string "false", means enabled. A frozen job reports
+# "skipped", which satisfies required status checks. CI_ENABLED guards ci.yml the same way.
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: site-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: build · publish · invalidate · smoke
+    runs-on: ubuntu-latest
+    if: vars.DEPLOY_ENABLED != 'false' # deploy kill-switch (see header)
+    timeout-minutes: 20
+    environment: production
+    env:
+      SITE_BUCKET: ${{ vars.SITE_BUCKET }}
+      AWS_DEPLOY_ROLE_ARN: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+    steps:
+      - uses: actions/checkout@v5
+
+      # Fail before the build, with a name for what is missing, rather than publish somewhere wrong.
+      - name: Required configuration is present
+        run: |
+          set -euo pipefail
+          missing=0
+          for v in SITE_BUCKET AWS_DEPLOY_ROLE_ARN; do
+            if [ -z "${!v:-}" ]; then echo "::error::$v is not set"; missing=1; fi
+          done
+          exit "$missing"
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # `pnpm build` is `astro check && astro build`: the typecheck and the bundle.
+      - name: Build
+        run: pnpm build
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: us-east-1
+
+      - name: Upload hashed assets (immutable, 1 year)
+        run: |
+          aws s3 sync dist/ "s3://$SITE_BUCKET/" --no-progress \
+            --exclude "*" --include "_astro/*" \
+            --cache-control "public, max-age=31536000, immutable"
+
+      - name: Upload other static files (24 hours)
+        run: |
+          aws s3 sync dist/ "s3://$SITE_BUCKET/" --no-progress \
+            --exclude "_astro/*" --exclude "*.html" \
+            --cache-control "public, max-age=86400"
+
+      - name: Upload HTML last (5 minutes in the browser, 24 hours at the edge)
+        run: |
+          aws s3 sync dist/ "s3://$SITE_BUCKET/" --no-progress \
+            --exclude "*" --include "*.html" \
+            --cache-control "public, max-age=300, s-maxage=86400"
+
+      # The edge holds HTML for a day, so this invalidation is what makes a publish visible. The
+      # distribution is found by its origin, this bucket, rather than pinned by id: recreating a
+      # distribution mints a new id, and a pinned one would turn that into a silent failure here.
+      # Waiting for the invalidation means the smoke checks see the new site, not the old one.
+      - name: Invalidate the CDN
+        id: cdn
+        run: |
+          set -euo pipefail
+          origin="${SITE_BUCKET}.s3.${AWS_REGION}.amazonaws.com"
+          id=$(aws cloudfront list-distributions \
+            --query "DistributionList.Items[?Origins.Items[?DomainName=='${origin}']].Id | [0]" \
+            --output text)
+          if [ -z "$id" ] || [ "$id" = "None" ]; then
+            echo "::error::No distribution has ${origin} as an origin. The content is published but nothing serves it."
+            exit 1
+          fi
+          invalidation=$(aws cloudfront create-invalidation --distribution-id "$id" --paths "/*" \
+            --query Invalidation.Id --output text)
+          aws cloudfront wait invalidation-completed --distribution-id "$id" --id "$invalidation"
+          domain=$(aws cloudfront get-distribution --id "$id" --query Distribution.DomainName --output text)
+          echo "domain=$domain" >> "$GITHUB_OUTPUT"
+          echo "::notice::invalidated $id, serving on $domain"
+
+      # Against the distribution's own *.cloudfront.net name, which answers before the site has a domain.
+      - name: Smoke checks
+        env:
+          DOMAIN: ${{ steps.cdn.outputs.domain }}
+        run: scripts/smoke.sh "https://${DOMAIN}"
