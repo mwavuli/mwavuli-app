@@ -1,0 +1,30 @@
+---
+interface Props {
+  /** `outline`: Green roof and walls around a light room. `solid`: a Green house around a darker room. */
+  variant?: 'outline' | 'solid';
+  class?: string;
+}
+
+const { variant = 'outline', class: className } = Astro.props;
+---
+
+<!--
+  A roof over a space (brand M1). The roof is three flat planes at the logo's slope, cut with
+  clip-path from a box whose aspect ratio fixes the angle at every width: the Green band, a thin
+  gold band at the roof slope (M3), and the room under it. The walls are borders of the same width.
+-->
+<div class:list={['house', `house--${variant}`, className]}>
+  <div class="house__roof" data-light>
+    <i class="house__plane house__plane--outer" aria-hidden="true"></i>
+    <i class="house__plane house__plane--band" aria-hidden="true"></i>
+    <i class="house__plane house__plane--room" aria-hidden="true"></i>
+    <div class="house__attic">
+      <slot name="attic" />
+    </div>
+  </div>
+  <div class="house__walls">
+    <div class="house__room">
+      <slot />
+    </div>
+  </div>
+</div>

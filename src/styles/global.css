@@ -159,3 +159,327 @@
   --tw-prose-th-borders: var(--mw-color-role-border-strong);
   --tw-prose-td-borders: var(--mw-color-role-border-default);
 }
+
+/* ---------------------------------------------------------------------------------------------
+   Shelter character (SNT-38). Everything below is built from the roof form (brand M1) and the
+   mark's window grid (L2). Colour, radius and motion come from the `--mw-*` tokens.
+   --------------------------------------------------------------------------------------------- */
+
+/* Lights. The four squares of the mark's window are gold when lit. Lit is the resting state, so
+   the page is complete without JavaScript and under reduced motion. With motion allowed, a roof
+   that has not yet scrolled into view starts dim, then lights one square after another. */
+:root {
+  --win-on: var(--mw-color-core-gold);
+  --win-off: var(--mw-color-ramp-green-900);
+}
+
+.win {
+  fill: var(--win-on);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .win {
+    transition: fill var(--mw-motion-duration-slow) var(--mw-motion-easing-standard);
+    transition-delay: calc(var(--i, 0) * 90ms);
+  }
+  .js-light [data-light]:not(.is-lit) .win {
+    fill: var(--win-off);
+  }
+}
+
+/* A focus ring on a white card that sits on a Green ground goes back to Green (brand S8). */
+.on-light :focus-visible {
+  outline-color: var(--mw-color-role-focus-ring);
+}
+
+/* Type that the scale has no step for. The hero and the closing line are set larger than the
+   `display` token and keep its ratio of line to size (about 1.14), its tracking and its colour roles. */
+.hero-title {
+  font-size: clamp(2.5rem, 1.15rem + 4.5vw, 4.75rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  font-weight: 720;
+}
+
+.hero-lead {
+  font-size: clamp(1.25rem, 1rem + 0.9vw, 1.75rem);
+  line-height: 1.35;
+  font-weight: 500;
+}
+
+.pull {
+  font-size: clamp(2rem, 1.1rem + 2.7vw, 3.75rem);
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+
+/* Oversize numerals: tabular lining figures, a small unit set on the baseline. */
+.num {
+  font-family: var(--mw-font-family-display);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.num small {
+  font-size: 0.34em;
+  font-weight: 700;
+  letter-spacing: 0;
+  margin-left: 0.08em;
+}
+.num--xl {
+  font-size: clamp(7.5rem, 4rem + 11vw, 13rem);
+}
+.num--lg {
+  font-size: clamp(5.5rem, 3rem + 6vw, 8.5rem);
+}
+
+/* The roof-shaped container (brand M1: a roof over a space as shelter). The roof box has a fixed
+   aspect ratio, so the two slopes stay at the logo's angle at every width. Percentages in the
+   polygons are of that box; the walls are borders of the same width in container units. */
+.house {
+  container-type: inline-size;
+  width: 100%;
+  max-width: var(--house-max, 62.5rem);
+  margin-inline: auto;
+  --wall: 4.43cqw;
+  --line: 1.03cqw;
+  --house-outer: var(--mw-color-core-green);
+  --house-band: var(--mw-color-core-gold);
+}
+.house--outline {
+  --house-room: var(--mw-color-ramp-green-50);
+  --win-off: var(--mw-color-ramp-green-100);
+}
+.house--solid {
+  --house-room: var(--mw-color-ramp-green-700);
+  --win-off: var(--mw-color-ramp-green-900);
+}
+
+.house__roof {
+  position: relative;
+  aspect-ratio: 1 / 0.4598;
+}
+.house__plane {
+  position: absolute;
+  inset: 0;
+}
+.house__plane--outer {
+  background: var(--house-outer);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+.house__plane--band {
+  inset: 0;
+  background: var(--house-band);
+  clip-path: polygon(50% 8.87%, 95.57% 100%, 4.43% 100%);
+}
+.house__plane--room {
+  inset: 0 0 -2px;
+  background: var(--house-room);
+  clip-path: polygon(50% 10.93%, 94.54% 100%, 5.46% 100%);
+}
+.house__attic {
+  position: absolute;
+  inset: 0;
+}
+.house__walls {
+  margin-top: -1px;
+  padding-inline: var(--wall);
+  padding-bottom: max(0.625rem, 1.6cqw);
+  background: var(--house-outer);
+}
+.house--solid .house__walls {
+  padding-bottom: 0;
+}
+.house__room {
+  background: var(--house-room);
+  border-inline: var(--line) solid var(--house-band);
+  border-bottom: var(--line) solid var(--house-band);
+}
+
+/* The window in the attic, and the headline that sits under the peak once the roof is wide enough
+   for it. Below that width the headline moves into the room and the attic keeps only the window. */
+.house__window {
+  position: absolute;
+  left: 50%;
+  bottom: 8cqw;
+  width: 12cqw;
+  translate: -50% 0;
+}
+.house__lede {
+  display: none;
+}
+@container (min-width: 40rem) {
+  .house__window {
+    top: 17cqw;
+    bottom: auto;
+    width: 8cqw;
+  }
+  .house__lede {
+    display: block;
+    position: absolute;
+    inset-inline: 0;
+    bottom: 2.4cqw;
+    text-align: center;
+  }
+  .house__lede-flow {
+    display: none;
+  }
+}
+
+/* A room under the roof: a white tile whose badge is lit, a gold pictogram on Green, the solid
+   pairing the card uses (brand I7). Before it scrolls into view, with motion allowed, the badge
+   waits unlit (Green on pale Green) and then lights. Hovering warms the tile to a gold tint. */
+.room {
+  position: relative;
+  background: var(--mw-color-core-white);
+  border-radius: var(--mw-radius-lg);
+  box-shadow: var(--mw-shadow-sm);
+  transition:
+    background-color var(--mw-motion-duration-base) var(--mw-motion-easing-standard),
+    box-shadow var(--mw-motion-duration-base) var(--mw-motion-easing-standard),
+    transform var(--mw-motion-duration-base) var(--mw-motion-easing-standard);
+}
+.room__badge {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 5rem;
+  height: 5rem;
+  border-radius: var(--mw-radius-lg);
+  background: var(--mw-color-core-green);
+  color: var(--mw-color-core-gold);
+}
+@media (min-width: 40rem) {
+  .room__badge {
+    width: 6rem;
+    height: 6rem;
+  }
+}
+@media (hover: hover) {
+  .room:hover {
+    background: var(--mw-color-ramp-gold-50);
+    box-shadow: var(--mw-shadow-md);
+    transform: translateY(-2px);
+  }
+}
+@keyframes room-on {
+  from {
+    background-color: var(--mw-color-ramp-green-50);
+    color: var(--mw-color-core-green);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .js-light .room:not(.is-lit) .room__badge {
+    background-color: var(--mw-color-ramp-green-50);
+    color: var(--mw-color-core-green);
+  }
+  .js-light .room.is-lit .room__badge {
+    animation: room-on var(--mw-motion-duration-slow) var(--mw-motion-easing-standard)
+      calc(var(--i, 0) * 110ms) backwards;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .room {
+    transition: none;
+  }
+  .room:hover {
+    transform: none;
+  }
+}
+
+/* The photo slot (decision D14): the final aspect and crop, the large-panel radius, a flat field
+   with the M2 roof pattern (on the light field only), layered tonal planes standing in for the
+   photograph, and the caption on a solid Green band (brand M6). */
+.slot {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--mw-radius-xl);
+  background: var(--mw-color-ramp-green-100);
+  --m2: color-mix(in srgb, var(--mw-color-ramp-green-100) 92%, var(--mw-color-core-green));
+  --win-off: var(--mw-color-ramp-green-900);
+}
+@media (min-width: 48rem) and (max-width: 63.99rem) {
+  .slot {
+    aspect-ratio: 4 / 3;
+  }
+}
+.slot__pattern,
+.slot__art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.slot__tone {
+  fill: var(--m2);
+}
+.slot__caption {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  height: 10.38%;
+  padding-inline: 1.5rem;
+  background: var(--mw-color-core-green);
+  color: var(--mw-color-core-cream);
+  font-size: var(--mw-type-caption-size);
+  line-height: var(--mw-type-caption-line);
+  font-weight: var(--mw-type-caption-weight);
+  letter-spacing: var(--mw-type-caption-tracking);
+}
+
+/* Form fields (brand A5): label above, 1 px border, radius.sm, 48 px high, a 2 px focus ring. */
+.field {
+  display: block;
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.625rem 1rem;
+  border: 1px solid var(--mw-color-role-border-strong);
+  border-radius: var(--mw-radius-sm);
+  background: var(--mw-color-core-white);
+  color: var(--mw-color-role-text-primary);
+  font-family: var(--mw-font-family-text);
+  font-size: var(--mw-type-body-size);
+  line-height: var(--mw-type-body-line);
+  transition: border-color var(--mw-motion-duration-fast) var(--mw-motion-easing-standard);
+}
+.field:hover {
+  border-color: var(--mw-color-core-green);
+}
+@media (prefers-reduced-motion: reduce) {
+  .field {
+    transition: none;
+  }
+}
+
+/* Headline sizes inside a house are fractions of the house's own width, so they keep their place
+   against the two slopes at every size. */
+.house__title {
+  font-size: 4.4cqw;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.house__sub {
+  margin-top: 0.8cqw;
+  font-size: max(0.875rem, 1.6cqw);
+  line-height: 1.4;
+}
+.house__tagline {
+  font-size: 5.2cqw;
+  line-height: 1.12;
+  font-weight: 720;
+  letter-spacing: -0.01em;
+}
+
+/* On a phone the closing line is sized to the house, so the longer beat fits between the walls. */
+.house__tagline-flow {
+  font-size: 8.6cqw;
+  line-height: 1.12;
+  font-weight: 720;
+  letter-spacing: -0.01em;
+}

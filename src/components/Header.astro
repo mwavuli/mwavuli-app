@@ -1,32 +1,38 @@
 ---
 import { SITE_NAME } from '../config';
+import Button from './Button.astro';
 import Lockup from './Lockup.astro';
+
+const links = [
+  { href: '/#promise', label: 'Our promise' },
+  { href: '/#services', label: 'Services' },
+  { href: '/#terms', label: 'Who we serve' },
+];
 ---
 
+<!-- Brand L5: the horizontal lockup is 180 px wide or more (h-12 is 195 px). L4: one eighth of its
+     width, 24 px, stays clear on every side. -->
 <header class="border-b border-line bg-page">
-  <div class="mx-auto flex max-w-page items-center justify-between gap-4 px-4 py-4 sm:px-6">
-    <a href="/" class="flex shrink-0 items-center" aria-label={`${SITE_NAME}: home`}>
-      <Lockup class="h-8" aria-hidden="true" />
+  <div class="mx-auto flex max-w-page items-center justify-between gap-4 px-6 py-6 lg:px-8">
+    <a href="/" class="flex shrink-0 items-center rounded-sm" aria-label={`${SITE_NAME}: home`}>
+      <Lockup class="h-12" aria-hidden="true" />
     </a>
-    <nav aria-label="Main">
-      <ul class="flex items-center gap-2 sm:gap-4">
-        <li>
-          <a
-            href="/legal/privacy/"
-            class="inline-flex min-h-11 items-center px-3 font-display text-label font-semibold text-ink hover:text-brand"
-          >
-            Privacy
-          </a>
-        </li>
-        <li>
-          <a
-            href="/#contact"
-            class="inline-flex min-h-11 items-center rounded-full bg-brand px-5 font-display text-label font-semibold text-white hover:bg-brand-deep"
-          >
-            Contact
-          </a>
-        </li>
+    <nav aria-label="Main" class="flex items-center gap-2 md:gap-4">
+      <ul class="hidden items-center gap-1 md:flex">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="inline-flex min-h-12 items-center rounded-md px-4 font-display text-label font-semibold text-ink transition-[background-color,border-color,color] duration-(--mw-motion-duration-base) ease-(--mw-motion-easing-standard) hover:bg-green-50 hover:text-brand active:bg-green-100 motion-reduce:transition-none"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
+      <Button href="/#contact" compact>Contact</Button>
     </nav>
   </div>
 </header>

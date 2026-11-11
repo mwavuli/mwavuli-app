@@ -1,22 +1,43 @@
 ---
-import { SITE_NAME } from '../config';
+import { POSTAL_ADDRESS, SITE_DESCRIPTION, SITE_NAME } from '../config';
 import Lockup from './Lockup.astro';
 
 const year = new Date().getFullYear();
+const links = [
+  { href: '/#promise', label: 'Our promise' },
+  { href: '/#services', label: 'Services' },
+  { href: '/#terms', label: 'Who we serve' },
+  { href: '/#contact', label: 'Contact' },
+  { href: '/legal/privacy/', label: 'Privacy policy' },
+];
 ---
 
+<!-- The reversed lockup is 195 px wide (L5) with 48 px clear on every side (L4). The closing house
+     above stands on this footer, so the two share one Green. -->
 <footer class="on-inverse bg-brand text-white">
-  <div class="mx-auto max-w-page px-4 py-10 sm:px-6">
-    <Lockup reversed class="h-8" role="img" aria-label={SITE_NAME} />
-    <nav aria-label="Footer" class="mt-6">
-      <ul class="grid gap-1 text-body-sm">
-        <li>
-          <a href="/legal/privacy/" class="inline-flex min-h-11 items-center hover:underline">
-            Privacy policy
-          </a>
-        </li>
+  <div class="mx-auto grid max-w-page gap-8 px-6 py-10 lg:grid-cols-12 lg:gap-8 lg:px-8 lg:py-12">
+    <div class="lg:col-span-6">
+      <Lockup reversed class="h-12" role="img" aria-label={SITE_NAME} />
+      <p class="mt-6 max-w-md text-body text-cream">{SITE_DESCRIPTION}</p>
+    </div>
+    <nav aria-label="Footer" class="lg:col-span-6 lg:justify-self-end">
+      <ul class="grid gap-1 sm:grid-cols-2 sm:gap-x-12 lg:flex lg:flex-wrap lg:justify-end lg:gap-x-6">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="inline-flex min-h-12 items-center font-display text-label font-semibold text-white underline-offset-4 hover:underline"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </nav>
-    <p class="mt-8 border-t border-white/20 pt-6 text-caption">© {year} {SITE_NAME}</p>
+    <p class="border-t border-white/20 pt-6 text-caption text-cream lg:col-span-12">
+      © {year} {SITE_NAME} · {POSTAL_ADDRESS}
+    </p>
   </div>
 </footer>

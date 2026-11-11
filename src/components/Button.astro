@@ -1,0 +1,49 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  /** Green fill, Green outline, or white fill for Green grounds (brand A5). */
+  variant?: 'primary' | 'secondary' | 'inverse';
+  href?: string;
+  arrow?: boolean;
+  /** Tighter side padding below 640 px, where the header has to hold a lockup and a button. */
+  compact?: boolean;
+  type?: 'button' | 'submit';
+  class?: string;
+}
+
+const {
+  variant = 'primary',
+  href,
+  arrow = false,
+  compact = false,
+  type = 'button',
+  class: className,
+} = Astro.props;
+
+// Brand A5: 48 px high, radius.md, Montserrat 600. A pill is for chips and toggles only (S3).
+const base = [
+  'group inline-flex min-h-12 items-center justify-center gap-2 rounded-md font-display text-body font-semibold transition-[background-color,border-color,color] duration-(--mw-motion-duration-base) ease-(--mw-motion-easing-standard) motion-reduce:transition-none',
+  compact ? 'px-4 sm:px-6' : 'px-6',
+];
+const tone = {
+  primary: 'bg-brand text-white hover:bg-brand-deep active:bg-green-900',
+  secondary:
+    'border-[1.5px] border-brand text-brand hover:bg-green-50 active:bg-green-100',
+  inverse: 'bg-white text-brand hover:bg-green-50 active:bg-green-100',
+};
+---
+
+{
+  href ? (
+    <a href={href} class:list={[base, tone[variant], className]}>
+      <slot />
+      {arrow && <Icon name="arrow-right" class="size-5 transition-transform duration-(--mw-motion-duration-base) ease-(--mw-motion-easing-standard) group-hover:translate-x-0.5 motion-reduce:transition-none" />}
+    </a>
+  ) : (
+    <button type={type} class:list={[base, tone[variant], className]}>
+      <slot />
+      {arrow && <Icon name="arrow-right" class="size-5" />}
+    </button>
+  )
+}

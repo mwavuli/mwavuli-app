@@ -1,0 +1,49 @@
+---
+import { HOLLOW, HOUSE_W, SQUARE, WINDOW_CELLS } from '../geometry/roof';
+import { slotArt } from '../geometry/scenes';
+import RoofScene from './RoofScene.astro';
+
+interface Props {
+  class?: string;
+  caption?: string;
+}
+
+const { class: className, caption = 'Photograph to come (D14)' } = Astro.props;
+
+// The tone-on-tone pattern of brand M2: staggered outlined roofs, each with a small window,
+// 64 px wide. It sits on the light field only, behind the planes, and never behind text.
+const tile = 64 / HOUSE_W;
+const roofHeight = 126.5 * tile;
+---
+
+<figure
+  class:list={['slot', className]}
+  data-light
+  role="img"
+  aria-label="Placeholder for a photograph of a building Mwavuli manages. Photograph to come, decision D14."
+>
+  <svg class="slot__pattern" aria-hidden="true" focusable="false">
+    <defs>
+      <pattern
+        id="m2-roofs"
+        width="128"
+        height={roofHeight * 2}
+        patternUnits="userSpaceOnUse"
+      >
+        {
+          [0, 1].map((row) => (
+            <g transform={`translate(${row * 64} ${row * roofHeight}) scale(${tile})`} class="slot__tone">
+              <path d={HOLLOW} />
+              {WINDOW_CELLS.map(([x, y]) => (
+                <rect x={x} y={y} width={SQUARE} height={SQUARE} />
+              ))}
+            </g>
+          ))
+        }
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#m2-roofs)"></rect>
+  </svg>
+  <RoofScene scene={slotArt} align="xMidYMax slice" class="slot__art" />
+  <figcaption class="slot__caption">{caption}</figcaption>
+</figure>

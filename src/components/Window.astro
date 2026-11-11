@@ -1,0 +1,25 @@
+---
+interface Props {
+  class?: string;
+  /** Position in a cascade: the squares light up one after another. */
+  start?: number;
+}
+
+const { class: className, start = 0 } = Astro.props;
+
+// The mark's window (brand L2): four equal squares, each one tenth of the house, with a small gap.
+const cells = [
+  [0, 0],
+  [22.4, 0],
+  [0, 22.4],
+  [22.4, 22.4],
+] as const;
+---
+
+<svg viewBox="0 0 38 38" class={className} aria-hidden="true" focusable="false">
+  {
+    cells.map(([x, y], i) => (
+      <rect class="win" x={x} y={y} width="15.6" height="15.6" style={`--i:${start + i}`} />
+    ))
+  }
+</svg>

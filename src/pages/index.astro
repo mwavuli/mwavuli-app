@@ -1,28 +1,293 @@
 ---
-import { POSTAL_ADDRESS, SITE_NAME } from '../config';
+import Button from '../components/Button.astro';
+import House from '../components/House.astro';
+import Icon from '../components/Icon.astro';
+import PhotoSlot from '../components/PhotoSlot.astro';
+import RoofScene from '../components/RoofScene.astro';
+import Window from '../components/Window.astro';
 import Layout from '../layouts/Layout.astro';
+import { cardNest, heroNarrow, heroWide, pullPair } from '../geometry/scenes';
+import { POSTAL_ADDRESS, SITE_NAME } from '../config';
+
+// The six services on the card (brand I7, D15), each said plainly from the business model (BM1, BM2, BM18).
+const rooms = [
+  {
+    icon: 'rental-income',
+    title: 'Guaranteed rental income',
+    text: 'We pay you on the 1st. If a tenant doesn’t pay, we cover that first month.',
+  },
+  {
+    icon: 'tenant-management',
+    title: 'Tenant management and sourcing',
+    text: 'We find tenants for your empty rooms, collect the rent and chase what is late.',
+  },
+  {
+    icon: 'construction-repairs',
+    title: 'Construction and repairs',
+    text: 'We find a trusted contractor and bring you the price. Above UGX 200,000, we wait for your YES.',
+  },
+  {
+    icon: 'electrical-plumbing',
+    title: 'Electrical and plumbing',
+    text: 'Under UGX 200,000, we fix it and list it on your statement.',
+  },
+  {
+    icon: 'utilities',
+    title: 'Utilities',
+    text: 'We look after electricity and water bills, paid at cost, with no markup.',
+  },
+  {
+    icon: 'garbage-management',
+    title: 'Garbage disposal',
+    text: 'We arrange garbage collection, paid at cost, with no markup.',
+  },
+];
+
+const units = ['Rooms', 'Flats', 'Small blocks', 'Shops', 'Offices'];
+
+// Brand T5: tracked capitals for short overlines only.
+const overline = 'font-display text-overline font-semibold uppercase';
 ---
 
 <Layout title="Home">
-  <!-- Brand A6: a green band with a two-beat headline and a gold rule. The photograph
-       waits on the open photography decision (D14). -->
-  <section class="on-inverse bg-brand text-white">
-    <div class="mx-auto max-w-page px-4 py-20 sm:px-6 sm:py-28">
-      <h1 class="font-display text-h1 text-white sm:text-display">
-        Managed Properties. <span class="text-accent">Better Living.</span>
+  <!-- 1. Hero. A Green field with nested roofs at the logo's slope bleeding off the right edge, a
+       gold band along the roof (M3) and the mark's window grid lighting up. The roofs stand on the
+       cream section below. -->
+  <section
+    class="on-inverse relative isolate overflow-hidden bg-brand text-white lg:min-h-[max(38rem,calc(100svh-9rem))]"
+    aria-labelledby="hero-title"
+  >
+    <div class="relative z-10 mx-auto max-w-page px-6 pt-8 lg:px-8 lg:pt-20">
+      <p class={`${overline} text-cream`}>For property owners in Kampala</p>
+      <h1 id="hero-title" class="hero-title mt-4 text-white lg:mt-5">
+        <span class="block">Managed Properties.</span>
+        <span class="block text-accent">Better Living.</span>
       </h1>
-      <div class="mt-6 h-1 w-16 bg-accent" aria-hidden="true"></div>
-      <p class="mt-6 max-w-xl text-body-lg">Rent paid to you on the 1st, every month.</p>
+      <div class="mt-5 h-1 w-16 bg-accent lg:mt-6" aria-hidden="true"></div>
+      <p class="hero-lead mt-5 max-w-[17em] text-balance text-cream lg:mt-6">
+        Rent paid to you on the 1st, every month.
+      </p>
+      <Button href="#contact" variant="inverse" arrow compact class="mt-6 lg:mt-8">
+        Talk to us about your building
+      </Button>
+    </div>
+    <div class="-mb-px mt-6 lg:absolute lg:inset-x-0 lg:-bottom-px lg:mb-0 lg:mt-0" data-light>
+      <RoofScene scene={heroNarrow} class="block h-[clamp(14rem,68vw,19rem)] w-full md:hidden" />
+      <RoofScene scene={heroWide} class="hidden h-auto w-full md:block" />
     </div>
   </section>
 
-  <section id="contact" class="bg-surface">
-    <div class="mx-auto max-w-page px-4 py-16 sm:px-6">
-      <h2 class="text-h2">Contact</h2>
-      <p class="mt-4 text-body-lg">
-        {SITE_NAME}<br />
-        {POSTAL_ADDRESS}
-      </p>
+  <!-- 2. Three things to remember: oversize numerals, one Green card and two light ones. -->
+  <section id="promise" class="bg-page" aria-labelledby="promise-title">
+    <div class="mx-auto max-w-page px-6 py-12 lg:px-8 lg:py-16">
+      <p class={`${overline} text-brand`}>Our promise</p>
+      <h2 id="promise-title" class="mt-3 text-h2 sm:text-h1">Three things to remember.</h2>
+      <ul class="mt-8 grid gap-6 md:grid-cols-2 lg:mt-10 lg:grid-cols-12">
+        <li
+          class="on-inverse relative isolate flex flex-col overflow-hidden rounded-xl bg-brand text-white md:col-span-2 lg:col-span-7 lg:row-span-2"
+          data-light
+        >
+          <div class="relative z-10 p-8 lg:p-10">
+            <p class={`${overline} text-cream`}>Rent day</p>
+            <p class="num num--xl mt-5 text-accent">1<small>st</small></p>
+            <p class="mt-6 max-w-[11em] font-display text-h3 text-white lg:mt-8">
+              We pay you on the 1st, for every room with a tenant.
+            </p>
+          </div>
+          <RoofScene
+            scene={cardNest}
+            class="pointer-events-none mt-auto block h-48 w-full lg:absolute lg:bottom-0 lg:right-0 lg:h-auto lg:w-[62%]"
+          />
+        </li>
+        <li class="rounded-xl bg-white p-8 shadow-md lg:col-span-5 lg:p-10">
+          <p class={`${overline} text-brand`}>Our fee</p>
+          <p class="num num--lg mt-4 text-brand">15<small class="text-gold-700">%</small></p>
+          <p class="mt-5 text-body-lg text-ink">We take 15% of the rent. No rent, no fee.</p>
+        </li>
+        <li class="rounded-xl bg-sage-100 p-8 lg:col-span-5 lg:p-10">
+          <p class={`${overline} text-brand`}>Leaving</p>
+          <p class="num num--lg mt-4 text-brand">30<small class="text-gold-700">days</small></p>
+          <p class="mt-5 text-body-lg text-ink">Leave any time with 30 days’ notice.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. The pull statement: the purpose in the board's words, set large, with two roofs that read as an M. -->
+  <section class="relative isolate overflow-hidden bg-sage-100" aria-labelledby="purpose-title">
+    <div class="relative z-10 mx-auto max-w-page px-6 pb-6 pt-12 lg:px-8 lg:pb-20 lg:pt-20">
+      <div class="lg:max-w-[46rem]">
+        <p class={`${overline} text-brand`}>Who we are</p>
+        <h2 id="purpose-title" class="pull mt-4 text-brand">
+          Professional property management
+          <span class="text-ink">for people and businesses in Uganda.</span>
+        </h2>
+      </div>
+    </div>
+    <div class="-mb-px px-6 lg:absolute lg:-bottom-px lg:right-0 lg:mb-0 lg:h-[94%] lg:px-0" data-light>
+      <RoofScene
+        scene={pullPair}
+        class="ml-auto block h-auto w-full max-w-[22rem] lg:h-full lg:w-auto lg:max-w-none"
+      />
+    </div>
+  </section>
+
+  <!-- 4. Six services in a roof-shaped container: six rooms under one roof. -->
+  <section id="services" class="bg-white" aria-label="Services">
+    <div class="mx-auto max-w-page px-6 py-12 lg:px-8 lg:py-16">
+      <House variant="outline">
+        <Fragment slot="attic">
+          <Window class="house__window" />
+          <div class="house__lede">
+            <h2 class="house__title font-display text-brand">Six services. One roof.</h2>
+            <p class="house__sub text-ink">You get one payment and one statement a month.</p>
+          </div>
+        </Fragment>
+        <div class="house__lede-flow px-6 pb-2 pt-6 text-center">
+          <h2 class="text-h2 text-brand">Six services. One roof.</h2>
+          <p class="mt-2 text-body text-ink">You get one payment and one statement a month.</p>
+        </div>
+        <ul class="grid gap-3 p-3 sm:grid-cols-2 sm:gap-4 sm:p-4 lg:grid-cols-3 lg:p-6">
+          {
+            rooms.map((room, n) => (
+              <li class="room flex gap-4 p-4 sm:block sm:p-6" data-light style={`--i:${n % 3}`}>
+                <span class="room__badge">
+                  <Icon family="pictogram" name={room.icon} class="h-12 sm:h-14" />
+                </span>
+                <div class="min-w-0">
+                  <h3 class="font-display text-h4 text-heading sm:mt-5">{room.title}</h3>
+                  <p class="mt-1 text-body text-ink sm:mt-2">{room.text}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </House>
+    </div>
+  </section>
+
+  <!-- 5. The same terms for every roof: a photo slot with a card overlapping it. -->
+  <section id="terms" class="bg-green-50" aria-labelledby="terms-title">
+    <div class="mx-auto grid max-w-page items-center px-6 py-12 lg:grid-cols-12 lg:px-8 lg:py-16">
+      <div class="lg:col-span-5 lg:col-start-1 lg:row-start-1">
+        <PhotoSlot />
+      </div>
+      <div
+        class="relative z-10 -mt-12 ml-4 rounded-xl bg-white p-8 shadow-lg lg:col-span-7 lg:col-start-5 lg:row-start-1 lg:ml-0 lg:mt-0 lg:translate-y-10 lg:p-12"
+      >
+        <p class={`${overline} text-brand`}>Who we serve</p>
+        <h2 id="terms-title" class="mt-3 text-h2 sm:text-h1">
+          <span class="block">Big roof or small.</span>
+          <span class="block">The same terms.</span>
+        </h2>
+        <p class="mt-5 text-body-lg text-ink">
+          We manage homes and business premises in Kampala and its surroundings. There is no minimum
+          number of units.
+        </p>
+        <ul class="mt-6 flex flex-wrap gap-2" aria-label="The kinds of property we manage">
+          {
+            units.map((unit) => (
+              <li class="inline-flex min-h-8 items-center rounded-full bg-green-50 px-4 font-display text-label font-medium text-brand">
+                {unit}
+              </li>
+            ))
+          }
+        </ul>
+        <p class="mt-6 text-body text-ink">
+          Every unit gets the same terms: we take 15% of its rent, we cover its first missed month,
+          and we pay you on the 1st.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. The closing line, under a roof that stands on the footer. -->
+  <section class="on-inverse bg-page pt-12 lg:pt-20" aria-label="Contact">
+    <div class="mx-auto max-w-page px-6 lg:px-8">
+      <House variant="solid" class="[--house-max:56rem]">
+        <Fragment slot="attic">
+          <Window class="house__window" />
+          <div class="house__lede">
+            <h2 class="house__tagline font-display text-white">
+              <span class="block">Your Property.</span>
+              <span class="block text-accent">Our Responsibility.</span>
+            </h2>
+          </div>
+        </Fragment>
+        <div class="house__lede-flow px-4 pb-2 pt-6 text-center">
+          <h2 class="house__tagline-flow font-display text-white">
+            <span class="block">Your Property.</span>
+            <span class="block text-accent">Our Responsibility.</span>
+          </h2>
+        </div>
+        <div class="grid gap-8 p-6 sm:p-8 lg:grid-cols-12 lg:gap-10 lg:p-10">
+          <div class="lg:col-span-5">
+            <h3 class="font-display text-h3 text-white">How to reach us</h3>
+            <ul class="mt-6 grid gap-5">
+              <li class="flex gap-4">
+                <span class="grid size-12 shrink-0 place-items-center rounded-[20%] bg-cream text-brand">
+                  <Icon name="location" class="size-6" />
+                </span>
+                <div>
+                  <p class="font-display text-label font-semibold text-white">Postal address</p>
+                  <p class="mt-1 text-body text-cream">{SITE_NAME}<br />{POSTAL_ADDRESS}</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <span class="grid size-12 shrink-0 place-items-center rounded-[20%] bg-cream text-brand">
+                  <Icon name="phone" class="size-6" />
+                </span>
+                <div>
+                  <p class="font-display text-label font-semibold text-white">Phone</p>
+                  <p class="mt-1 text-body text-cream">Phone number to be added</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <span class="grid size-12 shrink-0 place-items-center rounded-[20%] bg-cream text-brand">
+                  <Icon name="mail" class="size-6" />
+                </span>
+                <div>
+                  <p class="font-display text-label font-semibold text-white">Email</p>
+                  <p class="mt-1 text-body text-cream">Email address to be added</p>
+                </div>
+              </li>
+            </ul>
+            <p class="mt-8 font-display text-h4 text-white">There is no sign-up fee and no letting fee.</p>
+          </div>
+          <form
+            id="contact"
+            class="on-light scroll-mt-8 rounded-lg bg-white p-6 text-ink sm:p-8 lg:col-span-7"
+            aria-labelledby="contact-title"
+          >
+            <h3 id="contact-title" class="font-display text-h3 text-heading">
+              Talk to us about your building
+            </h3>
+            <div class="mt-6 grid gap-5 sm:grid-cols-2">
+              <div>
+                <label for="contact-name" class="mb-2 block text-label text-ink">Your name</label>
+                <input id="contact-name" name="name" type="text" autocomplete="name" class="field" />
+              </div>
+              <div>
+                <label for="contact-phone" class="mb-2 block text-label text-ink">Your phone number</label>
+                <input
+                  id="contact-phone"
+                  name="phone"
+                  type="tel"
+                  inputmode="tel"
+                  autocomplete="tel"
+                  class="field"
+                />
+              </div>
+              <div class="sm:col-span-2">
+                <label for="contact-building" class="mb-2 block text-label text-ink">Where is your building?</label>
+                <input id="contact-building" name="building" type="text" class="field" />
+              </div>
+            </div>
+            <Button type="button" class="mt-6 w-full sm:w-auto">Send</Button>
+            <p class="mt-3 text-caption text-muted">Design only. This form does not send anything yet.</p>
+          </form>
+        </div>
+      </House>
     </div>
   </section>
 </Layout>

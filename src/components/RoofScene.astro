@@ -1,0 +1,96 @@
+---
+import { HOLLOW, INTERIOR, SOLID, SQUARE, WINDOW_CELLS, outline, place } from '../geometry/roof';
+import type { Scene, Tone } from '../geometry/scenes';
+
+interface Props {
+  scene: Scene;
+  /** SVG preserveAspectRatio. Anchored bottom right so the largest roof stays in view. */
+  align?: string;
+  class?: string;
+}
+
+const { scene, align = 'xMaxYMax meet', class: className } = Astro.props;
+
+// Literal class names, so the Tailwind scanner finds them. Every one is a brand colour.
+const fill: Record<Tone, string> = {
+  cream: 'fill-cream',
+  white: 'fill-white',
+  green: 'fill-brand',
+  'green-50': 'fill-green-50',
+  'green-100': 'fill-green-100',
+  'green-300': 'fill-green-300',
+  'green-700': 'fill-green-700',
+  'green-900': 'fill-green-900',
+  'sage-100': 'fill-sage-100',
+  'sage-300': 'fill-sage-300',
+  'sage-700': 'fill-sage-700',
+  gold: 'fill-accent',
+};
+const stroke: Partial<Record<Tone, string>> = { gold: 'stroke-accent', cream: 'stroke-cream' };
+
+// Windows light up from left to right, whatever the order the houses are drawn in.
+const lit = scene.items
+  .flatMap((item, k) => (item.type === 'house' && item.windows ? [{ k, cx: item.cx }] : []))
+  .sort((a, b) => a.cx - b.cx);
+const firstWindow = new Map(lit.map((entry, n) => [entry.k, n * 4]));
+
+const shapes = scene.items.map((item, k) => {
+  if (item.type === 'line') {
+    return {
+      kind: 'line' as const,
+      d: outline(item.cx, item.w, scene.base),
+      cls: stroke[item.stroke] ?? '',
+      width: item.width,
+    };
+  }
+  const start = firstWindow.get(k);
+  return {
+    kind: 'house' as const,
+    transform: place(item.cx, item.w, scene.base),
+    body: item.solid ? SOLID : HOLLOW,
+    bodyCls: fill[item.fill],
+    interiorCls: item.interior ? fill[item.interior] : undefined,
+    windows:
+      start === undefined
+        ? []
+        : WINDOW_CELLS.map(([x, y], i) => ({ x, y, i: start + i })),
+  };
+});
+---
+
+<svg
+  viewBox={`0 0 ${scene.width} ${scene.height}`}
+  preserveAspectRatio={align}
+  class={className}
+  aria-hidden="true"
+  focusable="false"
+>
+  {
+    shapes.map((shape) =>
+      shape.kind === 'line' ? (
+        <path
+          d={shape.d}
+          fill="none"
+          stroke-width={shape.width}
+          stroke-linejoin="miter"
+          class={shape.cls}
+        />
+      ) : (
+        <g transform={shape.transform}>
+          {shape.interiorCls && <path d={INTERIOR} class={shape.interiorCls} />}
+          <path d={shape.body} class={shape.bodyCls} />
+          {shape.windows.map((cell) => (
+            <rect
+              class="win"
+              x={cell.x}
+              y={cell.y}
+              width={SQUARE}
+              height={SQUARE}
+              style={`--i:${cell.i}`}
+            />
+          ))}
+        </g>
+      ),
+    )
+  }
+</svg>

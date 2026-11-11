@@ -43,6 +43,34 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site) : undefined;
     <meta name="twitter:description" content={description} />
     {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
 
+    <!-- Windows light up as roofs scroll into view. Lit is the resting state in CSS, so the page is
+         complete without this script and under reduced motion; the script only adds a dim start
+         state and, one time per roof, the class that lights it. -->
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        root.classList.add('js-light');
+        document.addEventListener('DOMContentLoaded', function () {
+          var io = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('is-lit');
+                  io.unobserve(entry.target);
+                }
+              });
+            },
+            { rootMargin: '0px 0px -8% 0px' },
+          );
+          document.querySelectorAll('[data-light]').forEach(function (el) {
+            io.observe(el);
+          });
+        });
+      })();
+    </script>
+
     <slot name="head" />
   </head>
   <body class="flex min-h-dvh flex-col bg-page font-sans text-body text-ink antialiased">
