@@ -1,0 +1,35 @@
+---
+import { SLOPE } from '../art/roof';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+// Brand M2: a staggered pattern of outlined roofs, each with a small window, in a tone just darker
+// than Mist Cream (Mist Cream with 5 percent Green), on a light ground only. The roofs are 64 wide
+// at the roof slope; alternate rows are offset by half a roof.
+const WIDTH = 64;
+const RUN = WIDTH / 2;
+const RISE = RUN * SLOPE;
+const rowOne = `0,${6 + RISE} ${RUN},6 ${WIDTH},${6 + RISE}`;
+const rowTwoLeft = `${-RUN},${42 + RISE} 0,42 ${RUN},${42 + RISE}`;
+const rowTwoRight = `${RUN},${42 + RISE} ${WIDTH},42 ${WIDTH + RUN},${42 + RISE}`;
+---
+
+<svg class={className} aria-hidden="true" focusable="false" width="100%" height="100%">
+  <defs>
+    <pattern id="mw-roofs" width={WIDTH} height="72" patternUnits="userSpaceOnUse">
+      <g class="roof-pattern" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+        <polyline points={rowOne}></polyline>
+        <polyline points={rowTwoLeft}></polyline>
+        <polyline points={rowTwoRight}></polyline>
+        <rect x="29" y="24" width="6" height="6" fill="currentColor" stroke="none"></rect>
+        <rect x="-3" y="60" width="6" height="6" fill="currentColor" stroke="none"></rect>
+        <rect x="61" y="60" width="6" height="6" fill="currentColor" stroke="none"></rect>
+      </g>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#mw-roofs)"></rect>
+</svg>

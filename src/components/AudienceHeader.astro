@@ -1,0 +1,46 @@
+---
+import { SITE_NAME } from '../config';
+import { AUDIENCES } from '../data/audiences';
+import Lockup from './Lockup.astro';
+
+// The navigation is the audiences. Three radios (one group, so the arrow keys move between them)
+// sit beside their labels; a rule in global.css shows the matching page with `:has()`, so the
+// switch works without script. Each label carries a bold bar: a short stub at rest, the label's
+// full width when chosen. The bars are Green and white, never gold (brand M4).
+---
+
+<header class="on-inverse absolute inset-x-0 top-0 z-20 text-white">
+  <div
+    class="mx-auto flex max-w-page flex-wrap items-center justify-between px-6 pt-6 md:flex-nowrap lg:px-8 md:pb-6"
+  >
+    <a href="/" class="flex shrink-0 rounded-sm" aria-label={`${SITE_NAME}: home`}>
+      <Lockup reversed class="h-12" aria-hidden="true" />
+    </a>
+
+    <nav aria-label="Audience" class="mt-6 w-full md:mt-0 md:w-auto md:pr-36">
+      <fieldset class="m-0 grid min-w-0 grid-cols-3 gap-2 border-0 p-0 md:flex md:gap-3">
+        <legend class="sr-only">Show the page for</legend>
+        {
+          AUDIENCES.map((audience, index) => (
+            <div class="relative">
+              <input
+                type="radio"
+                name="audience"
+                id={`aud-${audience.id}`}
+                value={audience.id}
+                checked={index === 0}
+                class="peer sr-only"
+              />
+              <label
+                for={`aud-${audience.id}`}
+                class="flex min-h-12 cursor-pointer flex-col justify-center rounded-sm px-3 font-display text-body font-semibold text-green-100 transition-colors duration-(--mw-motion-duration-base) after:mt-2 after:block after:h-1 after:w-6 after:bg-green-300 after:transition-[width,background-color] after:duration-(--mw-motion-duration-base) after:ease-(--mw-motion-easing-standard) hover:text-white hover:after:w-12 peer-checked:text-white peer-checked:after:w-full peer-checked:after:bg-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent motion-reduce:transition-none motion-reduce:after:transition-none"
+              >
+                {audience.label}
+              </label>
+            </div>
+          ))
+        }
+      </fieldset>
+    </nav>
+  </div>
+</header>

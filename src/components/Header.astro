@@ -1,27 +1,40 @@
 ---
 import { SITE_NAME } from '../config';
 import Lockup from './Lockup.astro';
+
+// The header for pages without an audience hero (the privacy policy, the 404). The home page uses
+// AudienceHeader. The three audiences link to the home page; script on that page opens the right one.
+const audiences = [
+  { href: '/#owners', label: 'Owners' },
+  { href: '/#tenants', label: 'Tenants' },
+  { href: '/#businesses', label: 'Businesses' },
+];
 ---
 
 <header class="border-b border-line bg-page">
-  <div class="mx-auto flex max-w-page items-center justify-between gap-4 px-4 py-4 sm:px-6">
-    <a href="/" class="flex shrink-0 items-center" aria-label={`${SITE_NAME}: home`}>
-      <Lockup class="h-8" aria-hidden="true" />
+  <!-- Brand L4: clear space of one eighth of the lockup's width (24 px) on every side. -->
+  <div class="mx-auto flex max-w-page flex-wrap items-center justify-between gap-x-6 gap-y-2 px-6 py-6 lg:px-8">
+    <a href="/" class="flex shrink-0 rounded-sm" aria-label={`${SITE_NAME}: home`}>
+      <Lockup class="h-12" aria-hidden="true" />
     </a>
     <nav aria-label="Main">
-      <ul class="flex items-center gap-2 sm:gap-4">
-        <li>
-          <a
-            href="/legal/privacy/"
-            class="inline-flex min-h-11 items-center px-3 font-display text-label font-semibold text-ink hover:text-brand"
-          >
-            Privacy
-          </a>
-        </li>
+      <ul class="flex flex-wrap items-center gap-x-1 gap-y-2 md:gap-x-3">
+        {
+          audiences.map((audience) => (
+            <li>
+              <a
+                href={audience.href}
+                class="inline-flex min-h-12 items-center rounded-sm px-3 font-display text-body font-semibold text-ink transition-colors duration-(--mw-motion-duration-base) hover:text-brand motion-reduce:transition-none"
+              >
+                {audience.label}
+              </a>
+            </li>
+          ))
+        }
         <li>
           <a
             href="/#contact"
-            class="inline-flex min-h-11 items-center rounded-full bg-brand px-5 font-display text-label font-semibold text-white hover:bg-brand-deep"
+            class="inline-flex min-h-12 items-center rounded-md bg-brand px-6 font-display text-body font-semibold text-white transition-colors duration-(--mw-motion-duration-base) hover:bg-brand-deep active:bg-green-900 motion-reduce:transition-none"
           >
             Contact
           </a>

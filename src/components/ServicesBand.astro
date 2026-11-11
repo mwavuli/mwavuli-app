@@ -1,0 +1,49 @@
+---
+import { band, rise } from '../art/roof';
+import { SERVICES } from '../data/audiences';
+import Icon from './Icon.astro';
+
+// The business card's back, as a band: the two-beat tagline (white, then gold), one gold divider,
+// then the six services as gold pictograms on Green with no separators between them (brand A1,
+// S5, I7). The campaign headline sits over the services because they are its proof points (F1).
+const slab = band(560, 150, 120, 140, 1200);
+const slabDeep = band(560, 150 + rise(120 + 26), 70, 140, 1200);
+---
+
+<section id="services" class="on-inverse relative overflow-hidden bg-brand text-white" aria-labelledby="services-title">
+  <svg
+    viewBox="0 0 760 520"
+    preserveAspectRatio="xMaxYMin slice"
+    class="pointer-events-none absolute right-0 top-0 hidden h-[26rem] w-[44%] lg:block"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <polygon points={slab} class="fill-green-700" />
+    <polygon points={slabDeep} class="fill-green-900" />
+  </svg>
+
+  <div class="relative mx-auto max-w-page px-6 py-20 lg:px-8 md:py-24">
+    <p class="font-display text-overline uppercase text-cream">What we look after</p>
+    <h2
+      id="services-title"
+      class="mt-4 max-w-[60rem] text-[length:clamp(2.25rem,5.2vw,4.5rem)] font-[720] leading-[1.04] tracking-(--mw-type-display-tracking) text-white"
+    >
+      <span class="block">Managed Properties.</span>
+      <span class="block text-accent">Better Living.</span>
+    </h2>
+
+    <div class="mt-12 h-0.5 bg-accent md:mt-16" aria-hidden="true"></div>
+
+    <ul class="mt-12 grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-3 xl:grid-cols-6">
+      {
+        SERVICES.map((service) => (
+          <li>
+            <Icon name={service.pictogram} family="pictogram" class="h-28 text-accent" />
+            <h3 class="mt-6 font-display text-body font-semibold text-white">{service.name}</h3>
+            <p class="mt-2 text-body text-cream">{service.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

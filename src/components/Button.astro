@@ -1,0 +1,33 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import Icon from './Icon.astro';
+
+interface Props extends HTMLAttributes<'a'> {
+  /** `light` is the reversed button for Green grounds; `solid` is the primary button (brand A5). */
+  variant?: 'light' | 'solid';
+}
+
+const { variant = 'solid', class: className, ...attrs } = Astro.props;
+
+// Brand A5: Montserrat 600, radius.md, 48 px high. Hover goes one ramp step away from the fill and
+// pressed one more (S8).
+const variants = {
+  light: 'bg-white text-brand hover:bg-green-50 active:bg-green-100',
+  solid: 'bg-brand text-white hover:bg-brand-deep active:bg-green-900',
+};
+---
+
+<a
+  {...attrs}
+  class:list={[
+    'group inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-6 font-display text-body font-semibold transition-colors duration-(--mw-motion-duration-base) motion-reduce:transition-none',
+    variants[variant],
+    className,
+  ]}
+>
+  <slot />
+  <Icon
+    name="arrow-right"
+    class="size-5 transition-transform duration-(--mw-motion-duration-base) ease-(--mw-motion-easing-standard) group-hover:translate-x-1 motion-reduce:transition-none"
+  />
+</a>

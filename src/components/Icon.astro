@@ -1,0 +1,27 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'span'> {
+  /** File name without the extension, from brand/icons/<family>/ (brand I6, I7). */
+  name: string;
+  /** Line icons for the interface; service pictograms and contact badges for marketing. */
+  family?: 'line' | 'pictogram';
+}
+
+// Inlined with ?raw so `currentColor` carries the colour (brand I11).
+const files = import.meta.glob<string>('../../brand/icons/*/*.svg', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+
+const { name, family = 'line', class: className, ...attrs } = Astro.props;
+const raw = files[`../../brand/icons/${family}/${name}.svg`];
+if (!raw) throw new Error(`Unknown brand icon: ${family}/${name}`);
+
+// The files declare a pixel size. Dropped, the viewBox carries the ratio and a height class on the
+// component sets the size, e.g. <Icon name="payments" class="h-8" />.
+const svg = raw.replace(/ width="[\d.]+" height="[\d.]+"/, ' aria-hidden="true" focusable="false"');
+---
+
+<span {...attrs} class:list={['block shrink-0 [&>svg]:h-full [&>svg]:w-auto', className]} set:html={svg} />

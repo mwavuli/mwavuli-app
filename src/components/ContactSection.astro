@@ -1,0 +1,97 @@
+---
+import { SLOPE } from '../art/roof';
+import { POSTAL_ADDRESS } from '../config';
+import Button from './Button.astro';
+import Icon from './Icon.astro';
+import RoofPattern from './RoofPattern.astro';
+
+// The postal address is the only contact fact the documents give. Everything else is a plainly
+// labelled placeholder: no number, no address, no link.
+const lines = [
+  { icon: 'location', label: 'Post', value: POSTAL_ADDRESS, placeholder: false },
+  { icon: 'phone', label: 'Phone', value: 'Phone number to be added', placeholder: true },
+  { icon: 'mail', label: 'Email', value: 'Email address to be added', placeholder: true },
+];
+
+// The pattern panel's top-left corner is cut at the roof slope, an echo of the corner flag.
+const CUT = 8;
+const panelShape = `polygon(${CUT}rem 0, 100% 0, 100% 100%, 0 100%, 0 ${(CUT * SLOPE).toFixed(2)}rem)`;
+
+const field =
+  'mt-2 block min-h-12 w-full rounded-sm border border-slate-500 bg-surface px-4 text-body text-ink';
+---
+
+<section id="contact" class="relative overflow-hidden bg-page" aria-labelledby="contact-title">
+  <!-- The roof pattern (brand M2) fills a large quiet panel on a light ground. The form card
+       covers part of it, and no text sits directly on it. -->
+  <div
+    class="pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 lg:block"
+    style={`clip-path: ${panelShape}`}
+    aria-hidden="true"
+  >
+    <RoofPattern class="h-full w-full text-[color-mix(in_srgb,var(--mw-color-core-green)_5%,var(--mw-color-core-cream))]" />
+  </div>
+
+  <div class="relative mx-auto grid max-w-page gap-12 px-6 py-20 lg:px-8 md:py-24 lg:grid-cols-12 lg:items-center">
+    <div class="lg:col-span-5">
+      <p class="font-display text-overline uppercase text-brand">Contact</p>
+      <h2 id="contact-title" class="mt-4 text-h2">Write to us</h2>
+      <p class="mt-4 max-w-md text-body-lg text-ink">Send us a message, or write to us by post.</p>
+      <ul class="mt-8 grid gap-5">
+        {
+          lines.map((line) => (
+            <li class="flex items-center gap-4">
+              <span class="grid size-12 shrink-0 place-items-center rounded-[20%] bg-brand text-page">
+                <Icon name={line.icon} class="size-6" />
+              </span>
+              <div>
+                <p class="text-label text-muted">{line.label}</p>
+                <p class:list={['text-body', line.placeholder ? 'text-muted' : 'font-medium text-ink']}>
+                  {line.value}
+                </p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- A design-only form: labelled fields, and a button that goes nowhere. There is no <form>
+         element, so nothing can submit and nothing reaches the address bar. -->
+    <div class="lg:col-span-7 lg:pl-8">
+      <div
+        role="group"
+        aria-labelledby="contact-form-title"
+        class="rounded-lg bg-surface p-6 shadow-md md:p-8"
+      >
+        <h3 id="contact-form-title" class="font-display text-h3 text-brand">Send us a message</h3>
+        <div class="mt-6 grid gap-5 sm:grid-cols-2">
+          <div>
+            <label for="contact-name" class="text-label text-ink">Your name</label>
+            <input id="contact-name" type="text" autocomplete="name" class={field} />
+          </div>
+          <div>
+            <label for="contact-phone" class="text-label text-ink">Phone number</label>
+            <input id="contact-phone" type="tel" autocomplete="tel" class={field} />
+          </div>
+          <div class="sm:col-span-2">
+            <label for="contact-who" class="text-label text-ink">I am</label>
+            <select id="contact-who" class={field}>
+              <option>An owner</option>
+              <option>A tenant</option>
+              <option>A business</option>
+            </select>
+          </div>
+          <div class="sm:col-span-2">
+            <label for="contact-message" class="text-label text-ink">Message</label>
+            <textarea id="contact-message" rows="4" class:list={[field, 'py-3']}></textarea>
+          </div>
+        </div>
+        <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <Button href="#contact" variant="solid">Send message</Button>
+          <p class="text-caption text-muted">Design only: this form does not send yet.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

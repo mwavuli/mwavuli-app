@@ -1,0 +1,92 @@
+---
+import { band, box, roof, windowGrid, rise } from '../art/roof';
+
+interface Props {
+  /** Each audience has its own flat composition (brand M1, M3). */
+  kind: 'owners' | 'tenants' | 'businesses';
+  class?: string;
+}
+
+const { kind, class: className } = Astro.props;
+
+// The art is 760 wide and 860 tall and sits against the bottom-right of the hero. It scales to fit
+// (`meet`), so a composition is never cropped into fragments at a narrower width; roofs run past the
+// bottom (900) and the right edge so they still bleed off the hero, and the cards overlap its base.
+const BOTTOM = 900;
+
+// Owners: layers of cover. A tall roof with the mark's window, a cream ridge band above it, and a
+// lower roof in front of it. Two roofs side by side also read as the "M" (brand M1).
+const ownersTall = roof(600, 210, BOTTOM, -300, 1200);
+const ownersRidge = band(600, 210 - rise(22 + 14), 14, 150, 1200);
+const ownersWindow = windowGrid(600, 330, 56, 2, 2, 22);
+const ownersLow = roof(250, 520, BOTTOM, -300, 1200);
+const ownersLowRidge = band(250, 520 - rise(18 + 10), 10, 60, 520);
+
+// Tenants: one roof over one space. A cream roof band, a deep-green house under it, an open
+// doorway cut out of the house, and the window grid in its gable.
+const homeRoof = band(520, 170, 84, 150, 1200);
+const homeBody = (() => {
+  const gap = rise(24);
+  const apexY = 170 + rise(84) + gap;
+  return roof(520, apexY, BOTTOM, 190, 1200);
+})();
+const homeWindow = windowGrid(520, 420, 52, 2, 2, 21);
+const homeDoor = box(480, 590, 80, 400);
+
+// Businesses: the same terms for every unit. A tall block with a grid of identical windows and a
+// lower shop beside it, both under cream roof bands.
+const officeRoof = band(585, 150, 40, 330, 1200);
+const officeBody = (() => {
+  const apexY = 150 + rise(40) + rise(20);
+  return roof(585, apexY, BOTTOM, 330, 1200);
+})();
+const officeWindows = windowGrid(585, 400, 50, 4, 3, 26);
+const shopRoof = band(180, 430, 34, 40, 310);
+const shopBody = (() => {
+  const apexY = 430 + rise(34) + rise(18);
+  return roof(180, apexY, BOTTOM, 40, 310);
+})();
+const shopWindows = windowGrid(180, 600, 56, 2, 1, 26);
+---
+
+<svg
+  viewBox="0 0 760 860"
+  preserveAspectRatio="xMaxYMax meet"
+  class={className}
+  aria-hidden="true"
+  focusable="false"
+>
+  {
+    kind === 'owners' && (
+      <>
+        <polygon points={ownersTall} class="fill-green-900" />
+        <polygon points={ownersRidge} class="fill-cream" />
+        {ownersWindow.map((points) => <polygon points={points} class="fill-cream" />)}
+        <polygon points={ownersLow} class="fill-green-700" />
+        <polygon points={ownersLowRidge} class="fill-green-300" />
+      </>
+    )
+  }
+  {
+    kind === 'tenants' && (
+      <>
+        <polygon points={homeRoof} class="fill-cream" />
+        <polygon points={homeBody} class="fill-green-700" />
+        {homeWindow.map((points) => <polygon points={points} class="fill-cream" />)}
+        <polygon points={homeDoor} class="fill-brand" />
+      </>
+    )
+  }
+  {
+    kind === 'businesses' && (
+      <>
+        <polygon points={officeBody} class="fill-green-700" />
+        <polygon points={officeRoof} class="fill-cream" />
+        {officeWindows.map((points) => <polygon points={points} class="fill-cream" />)}
+        <polygon points={shopBody} class="fill-green-900" />
+        <polygon points={shopRoof} class="fill-green-300" />
+        {shopWindows.map((points) => <polygon points={points} class="fill-cream" />)}
+      </>
+    )
+  }
+</svg>

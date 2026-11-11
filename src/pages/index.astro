@@ -1,28 +1,40 @@
 ---
-import { POSTAL_ADDRESS, SITE_NAME } from '../config';
+import AudienceHeader from '../components/AudienceHeader.astro';
+import AudiencePanel from '../components/AudiencePanel.astro';
+import ContactSection from '../components/ContactSection.astro';
+import ServicesBand from '../components/ServicesBand.astro';
+import { AUDIENCES } from '../data/audiences';
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Home">
-  <!-- Brand A6: a green band with a two-beat headline and a gold rule. The photograph
-       waits on the open photography decision (D14). -->
-  <section class="on-inverse bg-brand text-white">
-    <div class="mx-auto max-w-page px-4 py-20 sm:px-6 sm:py-28">
-      <h1 class="font-display text-h1 text-white sm:text-display">
-        Managed Properties. <span class="text-accent">Better Living.</span>
-      </h1>
-      <div class="mt-6 h-1 w-16 bg-accent" aria-hidden="true"></div>
-      <p class="mt-6 max-w-xl text-body-lg">Rent paid to you on the 1st, every month.</p>
-    </div>
-  </section>
-
-  <section id="contact" class="bg-surface">
-    <div class="mx-auto max-w-page px-4 py-16 sm:px-6">
-      <h2 class="text-h2">Contact</h2>
-      <p class="mt-4 text-body-lg">
-        {SITE_NAME}<br />
-        {POSTAL_ADDRESS}
-      </p>
-    </div>
-  </section>
+  <AudienceHeader slot="header" />
+  {AUDIENCES.map((audience) => <AudiencePanel audience={audience} />)}
+  <ServicesBand />
+  <ContactSection />
 </Layout>
+
+<script>
+  // Progressive enhancement. The radios already switch the page with CSS alone. This makes a link
+  // such as /#tenants open the right page, keeps the address in step with the choice, and lets the
+  // new page fade in.
+  const radios = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="audience"]'));
+
+  function openFromHash() {
+    const radio = radios.find((item) => item.value === location.hash.slice(1));
+    if (radio && !radio.checked) {
+      document.body.dataset.switched = '';
+      radio.checked = true;
+    }
+  }
+
+  for (const radio of radios) {
+    radio.addEventListener('change', () => {
+      document.body.dataset.switched = '';
+      history.replaceState(null, '', `#${radio.value}`);
+    });
+  }
+
+  addEventListener('hashchange', openFromHash);
+  openFromHash();
+</script>

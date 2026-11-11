@@ -1,0 +1,33 @@
+---
+import { flag } from '../art/roof';
+
+interface Props {
+  /**
+   * `hero` and `hero-deep` are the Green hero's flag: a gold edge, a cream band and a deep-green
+   * core. `light` and `sage` are the same flag in tonal steps for light grounds, with no gold.
+   */
+  tone?: 'hero' | 'hero-deep' | 'light' | 'sage';
+  class?: string;
+}
+
+const { tone = 'hero', class: className } = Astro.props;
+
+const tones = {
+  hero: ['fill-accent', 'fill-cream', 'fill-green-700'],
+  'hero-deep': ['fill-accent', 'fill-cream', 'fill-green-900'],
+  light: ['fill-green-300', 'fill-white', 'fill-brand'],
+  sage: ['fill-sage-500', 'fill-white', 'fill-brand'],
+} as const;
+const [edge, band, core] = tones[tone];
+
+// Three nested right triangles share the corner. Their long edges run at the roof slope (brand M3).
+// On the hero the gold is the thin outer edge, about a sixth of the flag's area (M3 allows a fifth);
+// the cream band is the flag's body and the deep core sits in the corner.
+const SIZE = 200;
+---
+
+<svg viewBox="0 0 200 187" class={className} aria-hidden="true" focusable="false">
+  <polygon points={flag(200, SIZE)} class={edge} />
+  <polygon points={flag(182, SIZE)} class={band} />
+  <polygon points={flag(88, SIZE)} class={core} />
+</svg>

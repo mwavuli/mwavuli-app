@@ -159,3 +159,70 @@
   --tw-prose-th-borders: var(--mw-color-role-border-strong);
   --tw-prose-td-borders: var(--mw-color-role-border-default);
 }
+
+/* ---------------------------------------------------------------------------------------------
+   Audience page (SNT-38, prototype 14). Page-specific rules only; the theme, the token import and
+   the base layer above are untouched.
+   --------------------------------------------------------------------------------------------- */
+
+/* The header floats over the hero, so the hero clears it: two rows on phones (lockup, then the
+   audience tabs), one row from md up. Brand L4 keeps 24 px of clear space around the lockup. */
+:root {
+  --hdr-h: 9rem;
+}
+@media (min-width: 48rem) {
+  :root {
+    --hdr-h: 6rem;
+  }
+}
+
+/* One page per audience, chosen by the radios in the header. Without :has() support every page
+   shows, so nothing is ever hidden from a browser that cannot choose. */
+@supports selector(:has(*)) {
+  .aud-panel {
+    display: none;
+  }
+  body:has(#aud-owners:checked) .aud-owners,
+  body:has(#aud-tenants:checked) .aud-tenants,
+  body:has(#aud-businesses:checked) .aud-businesses {
+    display: block;
+  }
+}
+
+/* The hero headline: two beats, one accent word. Montserrat at 750 is the brand's weight for large
+   display type (T2); the size scales the display token up for a giant hero (T3). */
+.hero-h1 {
+  font-family: var(--font-display);
+  font-weight: 750;
+  font-size: clamp(2.75rem, 6.4vw + 0.25rem, 6.5rem);
+  line-height: 1.02;
+  letter-spacing: var(--mw-type-display-tracking);
+  color: var(--mw-color-core-white);
+}
+.hero-h1 > span {
+  display: block;
+  text-wrap: balance;
+}
+.hero-accent {
+  color: var(--mw-color-role-brand-accent);
+}
+
+/* The figures on the fact cards share the headline's size, so the page uses one giant size. */
+.fact-figure {
+  font-size: clamp(3.5rem, 6.4vw + 0.25rem, 6.5rem);
+  letter-spacing: var(--mw-type-display-tracking);
+}
+
+/* Script adds data-switched after a choice, so the new page fades in. Opacity only: a transform would move the fragment target and the
+   browser would scroll to it. A page that loads straight
+   into its first state does not animate. Motion tokens only; none under reduced motion (S9). */
+@media (prefers-reduced-motion: no-preference) {
+  body[data-switched] .aud-panel {
+    animation: aud-in var(--mw-motion-duration-slow) var(--mw-motion-easing-standard) both;
+  }
+}
+@keyframes aud-in {
+  from {
+    opacity: 0;
+  }
+}
