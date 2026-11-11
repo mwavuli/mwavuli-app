@@ -1,0 +1,161 @@
+/* Brand faces (brand T8): Montserrat for display, Inter for text. Self-hosted variable
+   fonts, font-display: swap. */
+@import '@fontsource-variable/montserrat';
+@import '@fontsource-variable/inter';
+
+@import 'tailwindcss';
+@import '../../brand/tokens/mwavuli.tokens.css';
+@plugin '@tailwindcss/typography';
+
+/* The brand's tokens as Tailwind theme values. Every value is a `--mw-*` token from
+   brand/tokens/mwavuli.tokens.css (generated from the JSON; edit the JSON), so the site
+   cannot drift from the design language. Colours, fonts, radii and shadows are reset
+   first: Tailwind's defaults do not exist here, and an off-brand utility such as
+   `bg-blue-500` generates nothing. */
+@theme {
+  --color-*: initial;
+  --font-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+  --breakpoint-2xl: initial;
+
+  /* Palette: 500 is the core colour of each ramp (brand C1). */
+  --color-white: var(--mw-color-core-white);
+  --color-cream: var(--mw-color-core-cream);
+  --color-green-50: var(--mw-color-ramp-green-50);
+  --color-green-100: var(--mw-color-ramp-green-100);
+  --color-green-300: var(--mw-color-ramp-green-300);
+  --color-green-500: var(--mw-color-ramp-green-500);
+  --color-green-700: var(--mw-color-ramp-green-700);
+  --color-green-900: var(--mw-color-ramp-green-900);
+  --color-gold-50: var(--mw-color-ramp-gold-50);
+  --color-gold-100: var(--mw-color-ramp-gold-100);
+  --color-gold-300: var(--mw-color-ramp-gold-300);
+  --color-gold-500: var(--mw-color-ramp-gold-500);
+  --color-gold-700: var(--mw-color-ramp-gold-700);
+  --color-sage-50: var(--mw-color-ramp-sage-50);
+  --color-sage-100: var(--mw-color-ramp-sage-100);
+  --color-sage-300: var(--mw-color-ramp-sage-300);
+  --color-sage-500: var(--mw-color-ramp-sage-500);
+  --color-sage-700: var(--mw-color-ramp-sage-700);
+  --color-slate-50: var(--mw-color-ramp-slate-50);
+  --color-slate-100: var(--mw-color-ramp-slate-100);
+  --color-slate-300: var(--mw-color-ramp-slate-300);
+  --color-slate-500: var(--mw-color-ramp-slate-500);
+  --color-slate-700: var(--mw-color-ramp-slate-700);
+  --color-slate-900: var(--mw-color-ramp-slate-900);
+  --color-brick-50: var(--mw-color-ramp-brick-50);
+  --color-brick-500: var(--mw-color-ramp-brick-500);
+
+  /* Roles (brand C2 and C3): reach for these first, and for a ramp step only for a tint. */
+  --color-brand: var(--mw-color-role-brand-primary);
+  --color-brand-deep: var(--mw-color-ramp-green-700);
+  --color-accent: var(--mw-color-role-brand-accent);
+  --color-page: var(--mw-color-role-bg-page);
+  --color-surface: var(--mw-color-role-bg-surface);
+  --color-subtle: var(--mw-color-role-bg-subtle);
+  --color-ink: var(--mw-color-role-text-primary);
+  --color-heading: var(--mw-color-role-text-heading);
+  --color-muted: var(--mw-color-role-text-muted);
+  --color-line: var(--mw-color-role-border-default);
+  --color-line-strong: var(--mw-color-role-border-strong);
+
+  /* Type (brand T-concerns). Display and heading text is Montserrat; text is Inter. */
+  --font-display: 'Montserrat Variable', var(--mw-font-family-display);
+  --font-sans: 'Inter Variable', var(--mw-font-family-text);
+
+  --text-display: var(--mw-type-display-size);
+  --text-display--line-height: var(--mw-type-display-line);
+  --text-display--letter-spacing: var(--mw-type-display-tracking);
+  --text-display--font-weight: var(--mw-type-display-weight);
+  --text-h1: var(--mw-type-h1-size);
+  --text-h1--line-height: var(--mw-type-h1-line);
+  --text-h1--letter-spacing: var(--mw-type-h1-tracking);
+  --text-h1--font-weight: var(--mw-type-h1-weight);
+  --text-h2: var(--mw-type-h2-size);
+  --text-h2--line-height: var(--mw-type-h2-line);
+  --text-h2--letter-spacing: var(--mw-type-h2-tracking);
+  --text-h2--font-weight: var(--mw-type-h2-weight);
+  --text-h3: var(--mw-type-h3-size);
+  --text-h3--line-height: var(--mw-type-h3-line);
+  --text-h3--letter-spacing: var(--mw-type-h3-tracking);
+  --text-h3--font-weight: var(--mw-type-h3-weight);
+  --text-h4: var(--mw-type-h4-size);
+  --text-h4--line-height: var(--mw-type-h4-line);
+  --text-h4--letter-spacing: var(--mw-type-h4-tracking);
+  --text-h4--font-weight: var(--mw-type-h4-weight);
+  --text-body-lg: var(--mw-type-body-lg-size);
+  --text-body-lg--line-height: var(--mw-type-body-lg-line);
+  --text-body: var(--mw-type-body-size);
+  --text-body--line-height: var(--mw-type-body-line);
+  --text-body-sm: var(--mw-type-body-sm-size);
+  --text-body-sm--line-height: var(--mw-type-body-sm-line);
+  --text-label: var(--mw-type-label-size);
+  --text-label--line-height: var(--mw-type-label-line);
+  --text-label--font-weight: var(--mw-type-label-weight);
+  --text-caption: var(--mw-type-caption-size);
+  --text-caption--line-height: var(--mw-type-caption-line);
+  --text-caption--letter-spacing: var(--mw-type-caption-tracking);
+  --text-caption--font-weight: var(--mw-type-caption-weight);
+  --text-overline: var(--mw-type-overline-size);
+  --text-overline--line-height: var(--mw-type-overline-line);
+  --text-overline--letter-spacing: var(--mw-type-overline-tracking);
+  --text-overline--font-weight: var(--mw-type-overline-weight);
+
+  /* Shape and depth (brand S-concerns). */
+  --radius-sm: var(--mw-radius-sm);
+  --radius-md: var(--mw-radius-md);
+  --radius-lg: var(--mw-radius-lg);
+  --radius-xl: var(--mw-radius-xl);
+  --radius-full: var(--mw-radius-pill);
+  --shadow-sm: var(--mw-shadow-sm);
+  --shadow-md: var(--mw-shadow-md);
+  --shadow-lg: var(--mw-shadow-lg);
+
+  /* Page container, max-w-page (brand S-concerns). */
+  --container-page: var(--mw-size-container-max);
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-heading;
+  }
+
+  /* Brand S8: a visible 2px focus ring with a 2px offset, Gold on Green grounds. */
+  :focus-visible {
+    outline: 2px solid var(--mw-color-role-focus-ring);
+    outline-offset: 2px;
+  }
+  .on-inverse :focus-visible {
+    outline-color: var(--mw-color-role-focus-ring-inverse);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Typography plugin, in the brand's colours. */
+.prose {
+  --tw-prose-body: var(--mw-color-role-text-primary);
+  --tw-prose-headings: var(--mw-color-role-text-heading);
+  --tw-prose-lead: var(--mw-color-role-text-muted);
+  --tw-prose-links: var(--mw-color-role-brand-primary);
+  --tw-prose-bold: var(--mw-color-role-text-primary);
+  --tw-prose-counters: var(--mw-color-role-text-muted);
+  --tw-prose-bullets: var(--mw-color-core-sage);
+  --tw-prose-hr: var(--mw-color-role-border-default);
+  --tw-prose-quotes: var(--mw-color-role-text-primary);
+  --tw-prose-quote-borders: var(--mw-color-role-brand-accent);
+  --tw-prose-captions: var(--mw-color-role-text-muted);
+  --tw-prose-code: var(--mw-color-role-text-primary);
+  --tw-prose-pre-code: var(--mw-color-role-text-inverse);
+  --tw-prose-pre-bg: var(--mw-color-role-bg-inverse);
+  --tw-prose-th-borders: var(--mw-color-role-border-strong);
+  --tw-prose-td-borders: var(--mw-color-role-border-default);
+}
