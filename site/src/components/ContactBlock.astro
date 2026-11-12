@@ -1,10 +1,10 @@
 ---
-import { POSTAL_ADDRESS } from '../config';
+import { EMAIL, EMAIL_HREF, PHONE, PHONE_HREF, POSTAL_ADDRESS } from '../config';
 ---
 
 <!-- Contact on the cream page. The closing statement is the primary tagline (brand F6), green then
-     gold on a light ground. There is no form until a phone, WhatsApp or email destination exists to
-     receive it, so the details are labelled placeholders. -->
+     gold on a light ground. The phone number and the email address are links in Green, each in a
+     44 px tap target (S8). There is no form: the site is static and has nothing to receive one. -->
 <section id="contact" aria-labelledby="contact-title" class="bg-page">
   <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-24">
     <h2 id="contact-title" class="font-display text-overline uppercase text-brand">Contact</h2>
@@ -13,18 +13,22 @@ import { POSTAL_ADDRESS } from '../config';
       <span class="block text-gold-700">Our Responsibility.</span>
     </p>
 
-    <dl class="mt-12 grid gap-8 border-t border-line pt-10 sm:grid-cols-3 lg:mt-16">
+    <dl class="mt-12 grid gap-8 border-t border-line pt-10 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
       <div>
         <dt class="font-display text-overline uppercase text-muted">Post</dt>
         <dd class="mt-2 font-display text-h4 text-brand">{POSTAL_ADDRESS}</dd>
       </div>
       <div>
         <dt class="font-display text-overline uppercase text-muted">Phone</dt>
-        <dd class="mt-2 font-display text-h4 text-muted">Phone number to be added</dd>
+        <dd class="mt-2 font-display text-h4 text-brand">
+          <a href={PHONE_HREF} class="-my-2 inline-block whitespace-nowrap py-2 hover:underline">{PHONE}</a>
+        </dd>
       </div>
       <div>
         <dt class="font-display text-overline uppercase text-muted">Email</dt>
-        <dd class="mt-2 font-display text-h4 text-muted">Email address to be added</dd>
+        <dd class="mt-2 font-display text-h4 text-brand">
+          <a href={EMAIL_HREF} class="-my-2 inline-block py-2 hover:underline">{EMAIL}</a>
+        </dd>
       </div>
     </dl>
   </div>

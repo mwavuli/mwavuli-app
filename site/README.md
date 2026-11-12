@@ -56,7 +56,9 @@ src/
 The home page is type-led: an oversize Montserrat headline on a Green first screen with a layered roof-form
 accent, the offer as three full-bleed bands with oversize figures, the six services as one ruled list, and contact. The
 Owners, Tenants and Businesses chips change the proof line with CSS only (radios and `:has()`); without `:has()` all
-three lines show. It has no photographs and nothing that needs JavaScript.
+three lines show. It has no photographs and nothing that needs JavaScript. Contact is the phone number and the email
+address in `src/config.ts`, as `tel:` and `mailto:` links; there is no form, because a static site has nothing to
+receive one.
 
 The Owners, Tenants and Businesses pages share the home page's first screen (`Hero`): the same giant two-beat
 headline, chips that link between the three pages, a proof card and the roof art. Below it each page is full-bleed
@@ -124,7 +126,6 @@ Open, and not for the code to decide:
 - **Domain (brand D4).** The site is at `https://www.mwavuli.co`, which `site` in `astro.config.mjs` names, and canonical
   URLs and the `og:image` address follow it. D4, the address printed on the applications, is still the owner's to
   confirm in `brand/`.
-- **Contact.** Phone and email read "to be added". There is no contact form: it needs a destination that can receive it.
 - **Photography (D14).** The design uses none.
 - **Legal text.** `src/content/legal/privacy.mdx` is a placeholder pending counsel.
 - **Web manifest** with 192 and 512 px icons, only if the site should be installable.
