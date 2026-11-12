@@ -1,20 +1,24 @@
 # infra
 
-The Mwavuli AWS infrastructure: OpenTofu modules and Terragrunt units. **Nothing is applied**: the account does not
-exist yet, and a person applies everything. Why each piece is the way it is, and what the owner must supply before the
-first apply, is in [`docs/design/site-infrastructure.md`](../docs/design/site-infrastructure.md).
+The Mwavuli AWS infrastructure: OpenTofu modules and Terragrunt units. **Nothing is applied**, and a person applies
+everything. The organization and Identity Center, which exist already and are adopted by import, are in
+[`docs/design/aws-organization.md`](../docs/design/aws-organization.md), with the order to apply them in. The site, the
+state backend and the deploy role are in [`docs/design/site-infrastructure.md`](../docs/design/site-infrastructure.md).
 
 ```
-modules/                      OpenTofu modules: state-backend, static-site, github-deploy-role
-live/_bootstrap/00-tfstate-backend/   the state backend, bootstrapped once by a person, local state committed
-live/prod/account.hcl         the account's settings (its id ships as `unset`)
-live/prod/us-east-1/          region.hcl, then one directory per unit: site, deploy-role
+modules/                      OpenTofu modules: organization, identity-center, state-backend, static-site, github-deploy-role
+live/_bootstrap/              one state backend per account, bootstrapped once by a person, local state committed:
+                              00-tfstate-management, 01-tfstate-prod
+live/management/              the management account (020784398387): account.hcl, then us-east-1/ with region.hcl and the
+                              units organization and identity-center
+live/prod/                    the prod account (Primary, 341026626249): account.hcl, then us-east-1/ with region.hcl and the
+                              units site and deploy-role
 root.hcl                      state backend, provider and tags for every unit under live/<account>/<region>/
 scripts/                      test-modules.sh, check-bootstrap-state.sh
 ```
 
-The infrastructure is standalone: its own AWS account, state backend, OIDC provider and deploy role. Nothing reads from or
-registers with any other account, organization or repository.
+The infrastructure is standalone: its own AWS organization, state backends, Identity Center, OIDC provider and deploy
+role. Nothing reads from or registers with an account, organization or repository outside Mwavuli's.
 
 ## Checks
 
@@ -29,4 +33,5 @@ in readonly-lock mode, `fmt`, `validate` and `tofu test` against mocked provider
 that the only state in git is a bootstrap unit's own and holds nothing secret-bearing; it reads git, not just this
 folder, so Nx never caches it. It needs OpenTofu 1.13, Terragrunt 1.1 and shellcheck.
 
-Applying is not an Nx target and never runs from CI. See section 3 of the design record for the order.
+Applying is not an Nx target and never runs from CI. Section 4 of the organization record gives the order from the
+first apply to Identity Center sign-in, and section 3 of the site record the order after it.

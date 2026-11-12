@@ -1,14 +1,15 @@
 # Site infrastructure
 
-**Intent**: how the Mwavuli site is hosted, published and served, and what the owner must supply before
-the first apply. It is standalone: the site has its own AWS account, its own state backend, and its own
-OIDC provider and deploy role, all created by this repository. Nothing here reads from, registers with
-or depends on any other account, organization or repository.
+**Intent**: how the Mwavuli site is hosted, published and served, and what the owner must do before
+the first apply. It is standalone: the site has its own AWS account (`prod`, in Mwavuli's own organization,
+see [`aws-organization.md`](aws-organization.md)), its own state backend, and its own OIDC provider and
+deploy role, all created by this repository. Nothing here reads from, registers with or depends on any
+account, organization or repository outside Mwavuli's.
 
 | | |
 |---|---|
-| This repository owns | the state backend (a bucket, two KMS keys and a replica), the site (a bucket and a CloudFront distribution), the deploy role, and the workflow that publishes |
-| The owner supplies | an AWS account of Mwavuli's own with an administrator identity, its 12-digit id in `infra/live/prod/account.hcl`, and later the domain |
+| This repository owns | the prod account's state backend (a bucket, two KMS keys and a replica), the site (a bucket and a CloudFront distribution), the deploy role, and the workflow that publishes |
+| The owner supplies | administrator access to the prod account through Identity Center ([`aws-organization.md`](aws-organization.md)), and later the domain |
 | Status | written and validated offline; **nothing is applied** |
 
 Decisions are numbered `M1…` and are the record of *why*. A decision that stops being true is replaced,
@@ -18,16 +19,15 @@ not renumbered.
 
 ## 1. Decisions that need the owner
 
-### M1 — The AWS account (open)
+### M1 — The AWS account (taken)
 
-The infrastructure needs an AWS account that is Mwavuli's own, created by the owner, with an
-administrator identity for whoever applies. The IaC creates no IAM user and no access key, so securing
-the root user and choosing how a person signs in (IAM Identity Center, or a role behind MFA) are the
-owner's.
+The site's account is `prod`: Primary, `341026626249`, a member of Mwavuli's own AWS organization, whose
+structure, Identity Center and sign-in are in [`aws-organization.md`](aws-organization.md). The IaC creates no
+IAM user and no access key: a person applies with an Identity Center session that holds administrator
+access to this account.
 
-The account's 12-digit id goes in `infra/live/prod/account.hcl`, where it ships as `unset`. Terragrunt
-refuses to run until it is replaced, and the generated provider then refuses any other account, so a shell
-logged in somewhere else fails at plan and creates nothing.
+The id is in `infra/live/prod/account.hcl`, and the generated provider refuses any other account, so a
+shell signed in somewhere else fails at plan and creates nothing.
 
 The account is `prod` (the directory under `infra/live/`), the home region is `us-east-1` and the state
 replica's is `us-west-2`; each is one line in `account.hcl` or `region.hcl`. `us-east-1` is where CloudFront
@@ -46,7 +46,7 @@ pointed at it by the owner. A `www` redirect then joins the viewer-request funct
 
 ### M3 — The first apply (open: a live change)
 
-Applying creates, in the owner's account, a state bucket with its replica, two KMS keys, a bucket and a
+Applying creates, in the prod account, a state bucket with its replica, two KMS keys, a bucket and a
 CloudFront distribution for the site, and an OIDC provider with a role. It costs about two dollars a
 month, almost all of it the two KMS keys. It waits for the owner's go-ahead, and a person runs it with
 administrator credentials in that account. Section 3 has the order.
@@ -66,9 +66,10 @@ consumer, and nothing is applied that would justify a package registry.
 
 The conventions are the owner's for any repository that owns remote state, and this one does:
 
-- **Bootstrapped once, in code, with committed local state.** `infra/live/_bootstrap/00-tfstate-backend`
+- **Bootstrapped once, in code, with committed local state.** `infra/live/_bootstrap/01-tfstate-prod`
   creates only the backend and keeps its own state in git (`tfstate/terraform.tfstate`), because a backend
-  cannot hold the state of the thing that creates it. A person runs it, reviewed; CI never does. Its
+  cannot hold the state of the thing that creates it. Each account that holds units has its own, so the
+  management account's is `00-tfstate-management` ([`aws-organization.md`](aws-organization.md)). A person runs it, reviewed; CI never does. Its
   `exclude` block keeps `run --all` away from it. `terragrunt backend bootstrap` is not used, because it
   leaves the bucket's own configuration out of code.
 - **Nothing secret in it.** That state file is public to everyone with the repository, so the unit creates
@@ -144,10 +145,11 @@ an unset variable is a named failure, never a publish that lands somewhere wrong
 
 ## 3. Before the first deploy
 
-1. **Create the AWS account** (M1), and put its id in `infra/live/prod/account.hcl`.
+1. **Sign in to the prod account** (M1) through Identity Center with administrator access, as section 4 of
+   [`aws-organization.md`](aws-organization.md) sets it up.
 2. **Bootstrap the backend** (M5), as an administrator in that account, then commit the state it wrote:
    ```bash
-   cd infra/live/_bootstrap/00-tfstate-backend
+   cd infra/live/_bootstrap/01-tfstate-prod
    terragrunt apply
    git add tfstate/terraform.tfstate
    ```
@@ -168,14 +170,14 @@ an unset variable is a named failure, never a publish that lands somewhere wrong
 
 Verified offline: the three modules (`validate`, `fmt`, `tflint`, and thirteen mocked-provider tests, with
 twelve deliberate breakages that each failed them); the Terragrunt units render the intended state bucket
-and key, KMS alias, account guard and tags, and the bootstrap unit renders its local backend, both
-providers and its `exclude` block (all against a made-up account id in a scratch copy, and the shipped
-`unset` stops Terragrunt); `infra/scripts/check-bootstrap-state.sh` against clean, secret-bearing, stray and
+and key, KMS alias, account guard and tags, and the bootstrap units render their local backends, both
+providers and their `exclude` blocks (checked with `terragrunt render`);
+`infra/scripts/check-bootstrap-state.sh` against clean, secret-bearing, stray and
 backup state; the workflows (`actionlint`, with `shellcheck` on their shell); the URL mapping against
 every page the site builds; and `site/scripts/smoke.sh` against a local stand-in for S3 and CloudFront, healthy
 and with four faults injected, each of which it caught.
 
-Not verified, because nothing was run against AWS and the account does not exist yet: a plan or an apply,
+Not verified, because nothing was run against AWS: a plan or an apply,
 S3 accepting the replication configuration (the role's policy can take a moment to propagate, and the
 first apply may need a retry), the real distribution's behaviour, the OIDC trust, and the `aws s3 sync`
 and invalidation steps. The first apply and the first deploy are where these are verified.

@@ -10,8 +10,8 @@ locals {
   account = read_terragrunt_config(find_in_parent_folders("account.hcl")).locals
   region  = read_terragrunt_config(find_in_parent_folders("region.hcl")).locals
 
-  # aws_account_id ships unset. regex() fails on anything but 12 digits and puts the offending value in
-  # its message, so Terragrunt stops here until account.hcl names the account.
+  # regex() fails on anything but 12 digits and puts the offending value in its message, so an unset or
+  # mistyped id in account.hcl stops Terragrunt here.
   aws_account_id = regex("^[0-9]{12}$", local.account.aws_account_id)
 
   # The state key is derived from the directory path and never hand-written:
@@ -22,8 +22,8 @@ locals {
 }
 
 # S3 with native locking: no DynamoDB table (use_lockfile needs OpenTofu 1.10 or later). The bucket and
-# its key are created by infra/live/_bootstrap/00-tfstate-backend. The key is named by its alias, so a
-# rotated key needs no change here.
+# its key are created by the account's unit under infra/live/_bootstrap/. The key is named by its alias,
+# so a rotated key needs no change here.
 remote_state {
   backend = "s3"
   generate = {

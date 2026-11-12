@@ -2,9 +2,10 @@
 #
 #   read_terragrunt_config(find_in_parent_folders("account.hcl")).locals
 #
-# The account is Mwavuli's own. Nothing here, and nothing in infra/, depends on any other account,
-# organization or repository. Create the account, and an administrator identity for whoever applies,
-# before the first apply (docs/design/site-infrastructure.md).
+# The account is Primary, a member of Mwavuli's own AWS organization (docs/design/aws-organization.md).
+# Nothing here, and nothing in infra/, depends on an account, organization or repository outside
+# Mwavuli's. Whoever applies signs in through Identity Center with administrator access to this account
+# (docs/design/site-infrastructure.md).
 
 locals {
   org_name     = "mwavuli"
@@ -18,9 +19,9 @@ locals {
   # borrow the repository's name.
   site_name = "mwavuli-site"
 
-  # The 12-digit id of the account. It ships unset on purpose: Terragrunt refuses to run until the owner
-  # supplies it, and the generated provider then refuses any other account.
-  aws_account_id = "unset"
+  # The 12-digit id of the account (Primary in the organization). The generated provider refuses any
+  # other account, so a shell signed in somewhere else fails at plan and creates nothing.
+  aws_account_id = "341026626249"
 
   # The state backend lives in the home region, and its bucket is replicated to the second one, so
   # losing the home region does not lose the infrastructure's memory.
