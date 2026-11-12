@@ -127,7 +127,8 @@ Open, and not for the code to decide:
 - **Legal text.** `src/content/legal/privacy.mdx` is a placeholder pending counsel.
 - **Web manifest** with 192 and 512 px icons, only if the site should be installable.
 - **Deploy.** The infrastructure is applied and the first deploy ran: the site answers on its CloudFront name. What is
-  left is the domain (M2 in [`docs/design/site-infrastructure.md`](../docs/design/site-infrastructure.md)) and retiring
+  left is putting the site on the domain, whose DNS is Route 53's already (M2 and M13 in
+  [`docs/design/site-infrastructure.md`](../docs/design/site-infrastructure.md)), and retiring
   the management account's root access keys ([`docs/design/aws-organization.md`](../docs/design/aws-organization.md),
   section 4).
 - **Analytics.**
