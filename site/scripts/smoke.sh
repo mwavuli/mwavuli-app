@@ -59,7 +59,7 @@ expect /apple-touch-icon.png image/png
 expect /social.png image/png
 expect /sitemap-index.xml xml
 
-asset="$(cd "$here/../dist" 2>/dev/null && find _astro -type f -name '*.woff2' | head -n 1 || true)"
+asset="$(cd "$here/../dist" 2>/dev/null && find _astro -type f -name '*.woff2' | head -n 1)" || true
 if [ -n "$asset" ]; then
   expect "/$asset" font/woff2
   [[ "$(header cache-control)" == *immutable* ]] || fail "/$asset is not cached as immutable: '$(header cache-control)'"
