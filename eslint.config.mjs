@@ -8,7 +8,7 @@ import tseslint from 'typescript-eslint';
 
 // Every project's `lint` target runs `eslint .` from its own folder and finds this file above it.
 export default defineConfig([
-  globalIgnores(['**/dist/', '**/.astro/', '**/.nx/', '**/node_modules/', '**/coverage/', 'mobile/*/ios/', 'mobile/*/android/']),
+  globalIgnores(['**/dist/', '**/.astro/', '**/.nx/', '**/node_modules/', '**/coverage/', 'mobile/*/ios/', 'mobile/*/android/', 'mobile/*/vendor/', '**/.bundle/']),
 
   nx.configs['flat/base'],
   js.configs.recommended,
@@ -67,6 +67,19 @@ export default defineConfig([
   {
     files: ['**/*.mjs', '**/scripts/**/*.{js,mjs}'],
     languageOptions: { globals: globals.node },
+  },
+
+  // Tool configs that must be CommonJS: Metro, Babel, Tailwind 3 and Jest read them with `require`.
+  {
+    files: ['**/*.{js,cjs}'],
+    languageOptions: { sourceType: 'commonjs', globals: globals.node },
+    rules: { '@typescript-eslint/no-require-imports': 'off' },
+  },
+
+  // Jest mock factories run before imports exist, so they use require().
+  {
+    files: ['**/*.test.{ts,tsx}'],
+    rules: { '@typescript-eslint/no-require-imports': 'off' },
   },
 
   // Last, so it switches off the formatting rules that Prettier owns.

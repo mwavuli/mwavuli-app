@@ -1,0 +1,82 @@
+# Release lanes for the Mwavuli app. They run on a developer's Mac, by hand: there is no CI job for
+# them, and the signing identities and store keys stay on that machine.
+#
+#   pnpm nx run mobile-shell:release-ios          # TestFlight
+#   pnpm nx run mobile-shell:release-android      # Google Play, internal track
+#   bundle exec fastlane ios build                # a signed .ipa, no upload
+#
+# The native projects are not in git. Each lane first regenerates them from app.config.ts with
+# `expo prebuild`, so what ships is what the config and the installed packages describe.
+#
+# Environment (put it in mobile/shell/fastlane/.env.local, which git ignores, or export it):
+#   MWAVULI_APP_ID          bundle id and package name; permanent once published
+#   APPLE_TEAM_ID           Apple developer team
+#   ASC_KEY_ID, ASC_ISSUER_ID, ASC_KEY_PATH         App Store Connect API key (.p8)
+#   PLAY_JSON_KEY_PATH      Google Play service account key (.json)
+# Android signing is the usual Gradle properties (MWAVULI_UPLOAD_STORE_FILE and its siblings) in
+# ~/.gradle/gradle.properties.
+
+default_platform(:ios)
+
+APP_NAME = "Mwavuli".freeze
+
+def require_env!(*names)
+  missing = names.select { |name| ENV[name].to_s.empty? }
+  UI.user_error!("Set #{missing.join(', ')} before a release (see the header of this Fastfile).") unless missing.empty?
+end
+
+# The app's root, where package.json and app.config.ts are.
+def app_root
+  File.expand_path("..", __dir__)
+end
+
+def generate_native(platform)
+  Dir.chdir(app_root) { sh("pnpm exec expo prebuild --platform #{platform} --no-install --clean") }
+end
+
+platform :ios do
+  desc "Generate the iOS project and build a signed .ipa in build/ (no upload)"
+  lane :build do |options|
+    require_env!("MWAVULI_APP_ID", "APPLE_TEAM_ID")
+    generate_native("ios")
+    if options[:build_number]
+      increment_build_number(build_number: options[:build_number], xcodeproj: File.join(app_root, "ios", "#{APP_NAME}.xcodeproj"))
+    end
+    build_app(
+      workspace: File.join(app_root, "ios", "#{APP_NAME}.xcworkspace"),
+      scheme: APP_NAME,
+      export_method: "app-store",
+      output_directory: File.join(app_root, "build"),
+      xcargs: "-allowProvisioningUpdates DEVELOPMENT_TEAM=#{ENV['APPLE_TEAM_ID']}",
+      export_options: { teamID: ENV["APPLE_TEAM_ID"] }
+    )
+  end
+
+  desc "Build and upload to TestFlight, with the next build number"
+  lane :beta do
+    require_env!("ASC_KEY_ID", "ASC_ISSUER_ID", "ASC_KEY_PATH")
+    app_store_connect_api_key(key_id: ENV["ASC_KEY_ID"], issuer_id: ENV["ASC_ISSUER_ID"], key_filepath: ENV["ASC_KEY_PATH"])
+    build(build_number: latest_testflight_build_number + 1)
+    upload_to_testflight(skip_waiting_for_build_processing: true)
+  end
+end
+
+platform :android do
+  desc "Generate the Android project and build a release bundle (.aab), no upload"
+  lane :build do
+    require_env!("MWAVULI_APP_ID")
+    generate_native("android")
+    gradle(project_dir: File.join(app_root, "android"), task: "bundle", build_type: "Release")
+  end
+
+  desc "Build and upload to the Google Play internal track"
+  lane :beta do
+    require_env!("PLAY_JSON_KEY_PATH")
+    build
+    upload_to_play_store(
+      track: "internal",
+      aab: lane_context[SharedValues::GRADLE_AAB_OUTPUT_PATH],
+      json_key: ENV["PLAY_JSON_KEY_PATH"]
+    )
+  end
+end
