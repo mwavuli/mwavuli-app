@@ -15,8 +15,8 @@ The address names the persona (`/tenant`, `/landlord`, `/ops`). The shell mounts
 to another persona unmounts the first. A portal is a separate chunk behind a dynamic `import()` in
 [`shell/src/registry.ts`](shell/src/registry.ts), so the browser fetches only the one it needs.
 
-Portals are disjoint: a portal imports the shared packages (`@mwavuli/personas`, `@mwavuli/theme` for styling) and
-nothing else, and the shell may not import one statically. The lint rules enforce both, the shell's tests record which
+Portals are disjoint: a portal may use the shared packages (such as `@mwavuli/personas`) and nothing else, and the shell
+may not import one statically. Its Tailwind classes come from the shell's stylesheet, which loads `@mwavuli/theme`. The lint rules enforce both, the shell's tests record which
 portal modules were fetched, and `pnpm nx build web-shell` runs `shell/scripts/check-chunks.mjs`, which fails unless
 every portal is a chunk that only a dynamic import reaches.
 

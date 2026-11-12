@@ -16,7 +16,8 @@ The picker mounts one portal; "Switch portal" unmounts it. A portal is behind a 
 [`shell/src/registry.ts`](shell/src/registry.ts), so its module is evaluated only when that persona is chosen. Portals
 import the shared packages and nothing else, and the shell may not import one statically: the lint rules and the
 shell's test (`shell/App.test.tsx`, which records which portal modules were evaluated) hold this. Portals have no test
-runner of their own; the shell's test renders them.
+runner of their own: `shell/portals.test.tsx` renders each real portal, and `App.test.tsx` checks the loading with
+stand-ins.
 
 ## Styling
 
