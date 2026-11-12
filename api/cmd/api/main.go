@@ -18,8 +18,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/nyange-app/mwavuli-site/api/internal/config"
-	"github.com/nyange-app/mwavuli-site/api/internal/httpapi"
+	"github.com/mwavuli/mwavuli-app/api/internal/config"
+	"github.com/mwavuli/mwavuli-app/api/internal/httpapi"
 )
 
 // version is the build's version, stamped with -ldflags "-X main.version=...".

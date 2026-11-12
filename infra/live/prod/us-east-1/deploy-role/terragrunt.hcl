@@ -15,14 +15,14 @@ terraform {
 }
 
 inputs = {
-  github_org = "nyange-app"
+  github_org = "mwavuli"
   repository = local.account.repo
 
   # Immutable: GitHub puts both ids in the OIDC subject, and they survive a rename or a transfer.
-  #   gh api /users/nyange-app --jq .id
-  #   gh api /repos/nyange-app/mwavuli-site --jq .id
-  github_owner_id = "314008686"
-  github_repo_id  = "1451231111"
+  #   gh api /users/mwavuli --jq .id
+  #   gh api /repos/mwavuli/mwavuli-app --jq .id
+  github_owner_id = "355623083"
+  github_repo_id  = "1454864729"
 
   environments     = ["production"]
   site_bucket_name = local.account.site_bucket_name

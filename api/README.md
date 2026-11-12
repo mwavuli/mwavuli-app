@@ -37,5 +37,5 @@ stops accepting connections and drains the requests in flight (15 s at most). Be
 at least its health-check interval, so the balancer stops sending traffic before connections close; at the default of
 zero it stops at once. A second signal ends the process immediately.
 
-The module path is `github.com/nyange-app/mwavuli-site/api`. If the repository is renamed, change it with
+The module path is `github.com/mwavuli/mwavuli-app/api`. If the repository is renamed, change it with
 `go mod edit -module` and the imports.

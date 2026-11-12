@@ -8,8 +8,15 @@
 
 locals {
   org_name     = "mwavuli"
-  repo         = "mwavuli-site"
   account_name = "prod"
+
+  # The repository's name (github.com/mwavuli/<repo>): the prefix of every state key, the repository the
+  # deploy role trusts, and the Repo tag.
+  repo = "mwavuli-app"
+
+  # What the site's own resources are called. The repository holds more than the site, so the site does not
+  # borrow the repository's name.
+  site_name = "mwavuli-site"
 
   # The 12-digit id of the account. It ships unset on purpose: Terragrunt refuses to run until the owner
   # supplies it, and the generated provider then refuses any other account.
@@ -27,7 +34,7 @@ locals {
 
   # The site's bucket, in the home region. Global, and it outlives the account, so it carries no account
   # id. The site unit creates it and the deploy role's policy names it.
-  site_bucket_name = "${local.repo}-${local.account_name}-${local.home_region}"
+  site_bucket_name = "${local.site_name}-${local.account_name}-${local.home_region}"
 
   common_tags = {
     ManagedBy   = "opentofu"

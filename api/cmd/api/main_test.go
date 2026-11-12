@@ -11,7 +11,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/nyange-app/mwavuli-site/api/internal/httpapi"
+	"github.com/mwavuli/mwavuli-app/api/internal/httpapi"
 )
 
 func quiet() *slog.Logger { return slog.New(slog.NewTextHandler(io.Discard, nil)) }

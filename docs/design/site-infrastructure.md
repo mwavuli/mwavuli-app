@@ -77,7 +77,7 @@ The conventions are the owner's for any repository that owns remote state, and t
 - **S3 with native locking**, `use_lockfile = true`, no DynamoDB table.
 - **Names derived, never hand-written**: the bucket is `<org>-tfstate-<account-alias>-<region>` and a
   unit's key is `<repo>/<account-alias>/<region>/<unit-path>/tofu.tfstate`, from `account.hcl` and the
-  directory path. For this site: `mwavuli-tfstate-prod-us-east-1` and `mwavuli-site/prod/us-east-1/site/tofu.tfstate`.
+  directory path. For this site: `mwavuli-tfstate-prod-us-east-1` and `mwavuli-app/prod/us-east-1/site/tofu.tfstate`.
 - **The bucket**: versioned, encrypted with its own KMS key, public access blocked, plain HTTP denied,
   replicated to a second region. Replaced versions are kept for a year, and the lifecycle rule also clears
   the delete markers that native locking leaves behind. Delete markers are not replicated on purpose: the

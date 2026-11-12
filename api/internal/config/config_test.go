@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/nyange-app/mwavuli-site/api/internal/config"
+	"github.com/mwavuli/mwavuli-app/api/internal/config"
 )
 
 func env(vars map[string]string) func(string) string {
