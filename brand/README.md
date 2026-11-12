@@ -33,7 +33,7 @@ was inferred.
 | Card       | Decided during the business card work and approved by the owner                     |
 | Proposed   | Inferred or added to make the language complete; open until the owner approves it   |
 
-**IDs.** Concerns are a group letter and a number (F1, L4, C3). Open decisions are D1 to D17. Assets have their own IDs:
+**IDs.** Concerns are a group letter and a number (F1, L4, C3). Open decisions are D1 to D18. Assets have their own IDs:
 line icons IC01 and up, service pictograms PG1 to PG6, contact badges BG1 and BG2, logo files LG01 to LG10. To approve,
 name the IDs: "approve D5 to D8".
 

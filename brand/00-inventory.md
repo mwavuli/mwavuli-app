@@ -177,6 +177,10 @@ what the language assumes meanwhile.
 - **D16** Formats: clock, dates, phone forms (F8). Recommended: Adopt the forms in F8.
 - **D17** Print files in the repository (A4). Recommended: Add the 90 by 40 mm PDFs under print/ without personal
   details.
+- **D18** WhatsApp group avatars (L3, L6, L7). Chosen by the owner on 2026-11-12: the app icon on a full-bleed square,
+  one core ground per group. General is Green with the gold mark, Finance Gold with the green mark, Ops Slate with the
+  gold mark and Support Mist Cream with the green mark. The Slate ground bends L6 and the all-green mark on cream bends
+  L3. Recommended: Fold into an applications concern at the next minor version.
 
 ## Trace from the board
 
