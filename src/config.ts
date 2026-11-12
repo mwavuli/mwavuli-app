@@ -11,3 +11,14 @@ export const SITE_DESCRIPTION = 'Professional property management for people and
 
 /** The company's postal address (business/model.md, "The company"). */
 export const POSTAL_ADDRESS = 'P.O. Box 170886, Kampala, Uganda';
+
+/**
+ * The social image (brand A6), 1200 × 630, rendered from scripts/social-image/card.html into public/.
+ * The alt text says what the card shows: the name and the campaign headline.
+ */
+export const SOCIAL_IMAGE = {
+  path: '/social.png',
+  width: 1200,
+  height: 630,
+  alt: `${SITE_NAME}: Managed Properties. Better Living.`,
+} as const;
