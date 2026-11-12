@@ -1,4 +1,5 @@
-# Bootstrap unit 00: the state backend every other unit stores its state in.
+# Bootstrap unit 01: the state backend of the prod account, where the site and the deploy role keep their
+# state. The management account's is unit 00; each account that holds units has its own backend.
 #
 # Local state, COMMITTED (tfstate/terraform.tfstate): a backend cannot hold the state of the thing that
 # creates it. Human-run, once, reviewed. Never from CI, and never with `terragrunt backend bootstrap`,
@@ -8,7 +9,10 @@
 # secret: no IAM user, access key, password or secret version. infra/scripts/check-bootstrap-state.sh fails CI
 # if a committed bootstrap state holds one.
 #
-#   cd infra/live/_bootstrap/00-tfstate-backend && terragrunt apply
+# Run it with administrator credentials in the prod account, after Identity Center sign-in works
+# (docs/design/aws-organization.md, section 4):
+#
+#   cd infra/live/_bootstrap/01-tfstate-prod && terragrunt apply
 #   git add tfstate/terraform.tfstate     # then commit it
 #
 # A direct `terragrunt apply` in this directory runs. `run --all` skips it, because of the block below.

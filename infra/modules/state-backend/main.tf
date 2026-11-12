@@ -1,8 +1,8 @@
 # The remote state backend every other unit stores its state in: a versioned bucket encrypted with its
 # own KMS key, replicated to a second region, with public access blocked and plain HTTP denied.
 #
-# Created by infra/live/_bootstrap/00-tfstate-backend, which keeps its OWN state in git, because a
-# backend cannot hold the state of the thing that creates it. That state file is committed, so nothing
+# Created, once per account, by the units under infra/live/_bootstrap/, which keep their OWN state in
+# git, because a backend cannot hold the state of the thing that creates it. That state file is committed, so nothing
 # here may carry a secret: no IAM user, access key, password or secret version, ever.
 
 data "aws_region" "home" {}
