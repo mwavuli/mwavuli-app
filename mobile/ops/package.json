@@ -23,6 +23,10 @@
   },
   "nx": {
     "name": "mobile-ops",
-    "tags": ["platform:mobile", "type:persona", "persona:ops"]
+    "tags": [
+      "platform:mobile",
+      "type:persona",
+      "persona:ops"
+    ]
   }
 }

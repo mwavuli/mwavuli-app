@@ -29,6 +29,10 @@
   },
   "nx": {
     "name": "web-ops",
-    "tags": ["platform:web", "type:persona", "persona:ops"]
+    "tags": [
+      "platform:web",
+      "type:persona",
+      "persona:ops"
+    ]
   }
 }

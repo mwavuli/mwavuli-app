@@ -18,6 +18,9 @@
   },
   "nx": {
     "name": "personas",
-    "tags": ["scope:shared", "type:contract"]
+    "tags": [
+      "scope:shared",
+      "type:contract"
+    ]
   }
 }

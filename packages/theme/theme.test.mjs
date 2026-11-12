@@ -11,7 +11,9 @@ const themeCss = readFileSync(new URL('./theme.css', import.meta.url), 'utf8');
 const tokensCss = readFileSync(require.resolve('@mwavuli/brand/tokens.css'), 'utf8');
 
 /** `--mw-*: value;` declarations of the token stylesheet. */
-const tokenValue = Object.fromEntries([...tokensCss.matchAll(/^\s*(--mw-[\w-]+):\s*(.+?);/gm)].map(([, name, v]) => [name, v]));
+const tokenValue = Object.fromEntries(
+  [...tokensCss.matchAll(/^\s*(--mw-[\w-]+):\s*(.+?);/gm)].map(([, name, v]) => [name, v]),
+);
 
 /** The `@theme` block's `--prefix-name: var(--mw-*)` declarations, resolved to their token values. */
 function webTheme(prefix, suffix = '') {

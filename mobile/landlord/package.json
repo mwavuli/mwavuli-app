@@ -23,6 +23,10 @@
   },
   "nx": {
     "name": "mobile-landlord",
-    "tags": ["platform:mobile", "type:persona", "persona:landlord"]
+    "tags": [
+      "platform:mobile",
+      "type:persona",
+      "persona:landlord"
+    ]
   }
 }

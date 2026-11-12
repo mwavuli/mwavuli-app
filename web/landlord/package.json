@@ -29,6 +29,10 @@
   },
   "nx": {
     "name": "web-landlord",
-    "tags": ["platform:web", "type:persona", "persona:landlord"]
+    "tags": [
+      "platform:web",
+      "type:persona",
+      "persona:landlord"
+    ]
   }
 }

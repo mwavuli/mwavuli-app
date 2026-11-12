@@ -1,0 +1,30 @@
+{
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "name": "infra",
+  "projectType": "application",
+  "tags": ["platform:infra", "type:infra"],
+  "targets": {
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "infra",
+        "parallel": false,
+        "commands": [
+          "tofu fmt -check -recursive modules",
+          "terragrunt hcl fmt --check --working-dir .",
+          "shellcheck scripts/*.sh"
+        ]
+      },
+      "inputs": ["default", { "runtime": "tofu version" }, { "runtime": "terragrunt --version" }]
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "infra",
+        "parallel": false,
+        "commands": ["scripts/test-modules.sh", "scripts/check-bootstrap-state.sh"]
+      },
+      "inputs": ["default", { "runtime": "tofu version" }]
+    }
+  }
+}

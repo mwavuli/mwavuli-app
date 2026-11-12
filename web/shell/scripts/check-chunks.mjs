@@ -40,7 +40,8 @@ for (const persona of PERSONAS) {
   if (entryKey && !manifest[entryKey].dynamicImports?.includes(key)) {
     failures.push(`${persona}: the shell does not load it with a dynamic import`);
   }
-  if (entryKey && staticClosure(entryKey).has(key)) failures.push(`${persona}: the shell's entry imports it statically`);
+  if (entryKey && staticClosure(entryKey).has(key))
+    failures.push(`${persona}: the shell's entry imports it statically`);
   for (const other of PERSONAS.filter((p) => p !== persona)) {
     const otherKey = portalKey[other];
     if (otherKey && staticClosure(key).has(otherKey)) failures.push(`${persona}: it imports ${other} statically`);
@@ -51,4 +52,6 @@ if (failures.length > 0) {
   console.error(failures.map((failure) => `chunk check failed: ${failure}`).join('\n'));
   process.exit(1);
 }
-console.log(`chunk check: ${PERSONAS.map((p) => `${p} (${manifest[portalKey[p]].file})`).join(', ')} load on demand only`);
+console.log(
+  `chunk check: ${PERSONAS.map((p) => `${p} (${manifest[portalKey[p]].file})`).join(', ')} load on demand only`,
+);

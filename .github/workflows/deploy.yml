@@ -24,6 +24,17 @@ name: deploy
 on:
   push:
     branches: [main]
+    # Only what the built site is made from. A change to the API, the apps or the infrastructure does
+    # not republish it (`workflow_dispatch` still does, by hand).
+    paths:
+      - site/**
+      - brand/**
+      - packages/theme/**
+      - package.json
+      - pnpm-lock.yaml
+      - pnpm-workspace.yaml
+      - nx.json
+      - .github/workflows/deploy.yml
   workflow_dispatch:
 
 permissions:

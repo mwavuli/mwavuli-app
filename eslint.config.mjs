@@ -8,7 +8,17 @@ import tseslint from 'typescript-eslint';
 
 // Every project's `lint` target runs `eslint .` from its own folder and finds this file above it.
 export default defineConfig([
-  globalIgnores(['**/dist/', '**/.astro/', '**/.nx/', '**/node_modules/', '**/coverage/', 'mobile/*/ios/', 'mobile/*/android/', 'mobile/*/vendor/', '**/.bundle/']),
+  globalIgnores([
+    '**/dist/',
+    '**/.astro/',
+    '**/.nx/',
+    '**/node_modules/',
+    '**/coverage/',
+    'mobile/*/ios/',
+    'mobile/*/android/',
+    'mobile/*/vendor/',
+    '**/.bundle/',
+  ]),
 
   nx.configs['flat/base'],
   js.configs.recommended,

@@ -12,6 +12,18 @@
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["nx", "dev", "site", "--port", "4322"],
       "port": 4322
+    },
+    {
+      "name": "web-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["nx", "dev", "web-shell", "--port", "4323"],
+      "port": 4323
+    },
+    {
+      "name": "api",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["nx", "serve", "api"],
+      "port": 8080
     }
   ]
 }

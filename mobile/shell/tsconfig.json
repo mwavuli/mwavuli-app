@@ -4,14 +4,6 @@
     "strict": true,
     "noUncheckedIndexedAccess": true
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "nativewind-env.d.ts"
-  ],
-  "exclude": [
-    "dist",
-    "ios",
-    "android"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", "nativewind-env.d.ts"],
+  "exclude": ["dist", "ios", "android"]
 }

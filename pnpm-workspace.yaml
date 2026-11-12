@@ -17,6 +17,10 @@ allowBuilds:
   nx: true
   sharp: true
 
+# pnpm refuses a version younger than 24 hours instead of quietly exempting it (its default is to add the
+# version to minimumReleaseAgeExclude and carry on). Choose an older version; an exemption is the owner's call.
+minimumReleaseAgeStrict: true
+
 # One version of each shared dependency, named here and referenced as `catalog:` or `catalog:<name>`.
 # The site keeps its own ranges: its build is pinned to Astro's Vite (vite 6).
 catalog:

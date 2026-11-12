@@ -29,6 +29,10 @@
   },
   "nx": {
     "name": "web-tenant",
-    "tags": ["platform:web", "type:persona", "persona:tenant"]
+    "tags": [
+      "platform:web",
+      "type:persona",
+      "persona:tenant"
+    ]
   }
 }

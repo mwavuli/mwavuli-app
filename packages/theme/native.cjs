@@ -25,7 +25,9 @@ const colors = {
   cream: value(core.cream),
   // Every ramp step, named like the web theme: green-500, gold-50, ...
   ...Object.fromEntries(
-    Object.entries(ramp).flatMap(([name, steps]) => Object.entries(steps).map(([step, node]) => [`${name}-${step}`, value(node)])),
+    Object.entries(ramp).flatMap(([name, steps]) =>
+      Object.entries(steps).map(([step, node]) => [`${name}-${step}`, value(node)]),
+    ),
   ),
   // Roles: reach for these first, and for a ramp step only for a tint (brand C2 and C3).
   brand: value(role.brand.primary),
@@ -47,7 +49,10 @@ const fontSize = Object.fromEntries(
   ['display', 'h1', 'h2', 'h3', 'h4', 'body-lg', 'body', 'body-sm', 'label', 'caption', 'overline'].map((name) => {
     const t = value(tokens.type[name]);
     const size = px(t.fontSize);
-    return [name, [`${size}px`, { lineHeight: `${px(t.lineHeight)}px`, letterSpacing: `${tracking(t.letterSpacing, size)}px` }]];
+    return [
+      name,
+      [`${size}px`, { lineHeight: `${px(t.lineHeight)}px`, letterSpacing: `${tracking(t.letterSpacing, size)}px` }],
+    ];
   }),
 );
 

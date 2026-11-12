@@ -40,6 +40,9 @@
   },
   "nx": {
     "name": "web-shell",
-    "tags": ["platform:web", "type:shell"]
+    "tags": [
+      "platform:web",
+      "type:shell"
+    ]
   }
 }

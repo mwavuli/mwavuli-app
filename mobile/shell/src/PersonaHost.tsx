@@ -34,6 +34,10 @@ class LoadFailure extends Component<{ children: ReactNode }, { failed: boolean }
   }
 
   override render() {
-    return this.state.failed ? <Message role="alert">This portal could not be loaded. Restart the app.</Message> : this.props.children;
+    return this.state.failed ? (
+      <Message role="alert">This portal could not be loaded. Restart the app.</Message>
+    ) : (
+      this.props.children
+    );
   }
 }

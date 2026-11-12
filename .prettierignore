@@ -1,0 +1,21 @@
+# Prettier formats the TypeScript, JavaScript and JSON of the web and mobile apps, the shared packages
+# and the root configs. Everything else keeps the style its own tooling or author gave it: the site
+# (Astro), the brand and business documents, the Go and OpenTofu code, the workflows, and generated files.
+/*
+!/web
+!/mobile
+!/packages
+!/eslint.config.mjs
+!/nx.json
+!/package.json
+!/tsconfig.base.json
+
+**/node_modules
+**/dist
+**/.expo
+**/ios
+**/android
+**/vendor
+**/*.css
+**/*.md
+**/Gemfile.lock

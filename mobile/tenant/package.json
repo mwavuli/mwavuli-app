@@ -23,6 +23,10 @@
   },
   "nx": {
     "name": "mobile-tenant",
-    "tags": ["platform:mobile", "type:persona", "persona:tenant"]
+    "tags": [
+      "platform:mobile",
+      "type:persona",
+      "persona:tenant"
+    ]
   }
 }
