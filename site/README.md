@@ -90,13 +90,13 @@ Deliberate brand deviations, recorded as brand 09-governance asks:
 
 ## Deploy
 
-The site is static files in a private S3 bucket behind CloudFront, in an AWS account of Mwavuli's own. The
-infrastructure is standalone: `infra/` creates its own state backend, the site and the deploy role, and depends on no
-other account, organization or repository. It is OpenTofu through Terragrunt, applied by a person, and
-`.github/workflows/deploy.yml` publishes `site/dist/` on a push to `main` that touches the site, the brand or the theme,
-or by hand. The decisions, and what the owner must supply and do before the first apply, are in
-[`docs/design/site-infrastructure.md`](../docs/design/site-infrastructure.md). **Nothing is applied yet**, and
-`infra/live/prod/account.hcl` ships with the account id `unset`, so Terragrunt refuses to run until it names the account.
+The site is static files in a private S3 bucket behind CloudFront, in the prod account of Mwavuli's own AWS
+organization. The infrastructure is standalone: `infra/` holds the organization, Identity Center, the state backends, the
+site and the deploy role, and depends on no account, organization or repository outside Mwavuli's. It is OpenTofu through
+Terragrunt, applied by a person, and `.github/workflows/deploy.yml` publishes `site/dist/` on a push to `main` that
+touches the site, the brand or the theme, or by hand. The decisions, and what the owner must do before the first apply,
+are in [`docs/design/aws-organization.md`](../docs/design/aws-organization.md) and
+[`docs/design/site-infrastructure.md`](../docs/design/site-infrastructure.md). **Nothing is applied yet.**
 
 | Files | `Cache-Control` |
 |---|---|
@@ -125,8 +125,9 @@ Open, and not for the code to decide:
 - **Photography (D14).** The design uses none.
 - **Legal text.** `src/content/legal/privacy.mdx` is a placeholder pending counsel.
 - **Web manifest** with 192 and 512 px icons, only if the site should be installable.
-- **Deploy.** The infrastructure and the workflow are written and not applied. The owner creates the AWS account and
-  supplies its id in `infra/live/prod/account.hcl`, and decides the domain: see
+- **Deploy.** The infrastructure and the workflow are written and not applied. The owner applies the organization and
+  Identity Center code and signs in through it, then bootstraps the prod state backend, and decides the domain: see
+  [`docs/design/aws-organization.md`](../docs/design/aws-organization.md), section 4, then
   [`docs/design/site-infrastructure.md`](../docs/design/site-infrastructure.md), section 3.
 - **Analytics.**
 - **Commercial tenancies.** The model has no commercial tenancy form yet (BM9 counsel note), so the Businesses page
