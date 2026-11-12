@@ -14,6 +14,11 @@ output "distribution_arn" {
 }
 
 output "distribution_domain_name" {
-  description = "The *.cloudfront.net name the site answers on before it has a domain."
+  description = "The *.cloudfront.net name the site always answers on, and the only one before it has a domain."
   value       = aws_cloudfront_distribution.site.domain_name
+}
+
+output "url" {
+  description = "Where the site is: its canonical name when it has a domain, its *.cloudfront.net name when it has none."
+  value       = "https://${var.domain == null ? aws_cloudfront_distribution.site.domain_name : var.domain.canonical}"
 }

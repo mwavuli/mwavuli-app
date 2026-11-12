@@ -23,16 +23,34 @@ variable "price_class" {
   }
 }
 
-variable "aliases" {
-  type        = list(string)
-  default     = []
-  description = "Domain names the distribution answers to. Empty serves the site on its *.cloudfront.net name only, which is how it is reviewed before the domain exists (brand D4)."
-}
-
-variable "certificate_arn" {
-  type        = string
+variable "domain" {
+  type = object({
+    zone_id   = string
+    canonical = string
+    redirects = optional(list(string), [])
+  })
   default     = null
-  description = "ACM certificate covering `aliases`. It must be in us-east-1, whatever region this module runs in. Null uses the default CloudFront certificate."
+  description = <<-EOT
+    The domain the site is served on, or null to serve it on its *.cloudfront.net name only, which is how it is
+    reviewed before it has one. `zone_id` is the Route 53 hosted zone that holds the names. `canonical` is the name
+    the site answers on, and each of `redirects` answers with a permanent redirect to it. The module issues one
+    certificate for all of them, validates it in the zone, and points an alias record at the distribution for each.
+    The certificate is made in the region the module runs in and CloudFront reads certificates only from us-east-1,
+    so the module runs there whenever there is a domain.
+  EOT
+
+  validation {
+    condition = var.domain == null ? true : alltrue([
+      for name in concat([var.domain.canonical], var.domain.redirects) :
+      can(regex("^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$", name))
+    ])
+    error_message = "Every name in domain is a lowercase domain name such as www.example.com, without a trailing dot."
+  }
+
+  validation {
+    condition     = var.domain == null ? true : !contains(var.domain.redirects, var.domain.canonical)
+    error_message = "The canonical name cannot also be one of the names that redirect to it."
+  }
 }
 
 variable "force_destroy" {

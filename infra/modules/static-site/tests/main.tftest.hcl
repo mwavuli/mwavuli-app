@@ -21,7 +21,29 @@ mock_provider "aws" {
 
   mock_resource "aws_cloudfront_distribution" {
     defaults = {
-      arn = "arn:aws:cloudfront::111111111111:distribution/E1EXAMPLE"
+      arn            = "arn:aws:cloudfront::111111111111:distribution/E1EXAMPLE"
+      domain_name    = "d111111abcdef8.cloudfront.net"
+      hosted_zone_id = "Z2FDTNDATAQYW2"
+    }
+  }
+
+  mock_resource "aws_acm_certificate" {
+    defaults = {
+      arn = "arn:aws:acm:us-east-1:111111111111:certificate/00000000-0000-0000-0000-000000000000"
+      domain_validation_options = [
+        {
+          domain_name           = "www.example.test"
+          resource_record_name  = "_aaa.www.example.test."
+          resource_record_type  = "CNAME"
+          resource_record_value = "_bbb.acm-validations.aws."
+        },
+        {
+          domain_name           = "example.test"
+          resource_record_name  = "_ccc.example.test."
+          resource_record_type  = "CNAME"
+          resource_record_value = "_ddd.acm-validations.aws."
+        },
+      ]
     }
   }
 }
@@ -83,31 +105,138 @@ run "bucket_admits_only_this_distribution" {
   }
 }
 
-run "aliases_need_a_certificate" {
-  command = plan
+run "without_a_domain_there_is_no_certificate_and_no_record" {
+  command = apply
 
-  variables {
-    aliases = ["example.test"]
+  assert {
+    condition     = length(aws_acm_certificate.site) == 0 && length(aws_route53_record.alias) == 0 && length(aws_route53_record.validation) == 0
+    error_message = "A site with no domain has no certificate and no DNS records."
   }
 
-  expect_failures = [aws_cloudfront_distribution.site]
+  assert {
+    condition     = length(aws_cloudfront_distribution.site.aliases) == 0
+    error_message = "A site with no domain answers on its *.cloudfront.net name only."
+  }
+
+  assert {
+    condition     = startswith(aws_cloudfront_function.viewer_request.code, "var SITE = {\"canonical\":\"\",\"redirects\":[]};")
+    error_message = "With no domain the function is told there is nothing to redirect."
+  }
+
+  assert {
+    condition     = output.url == "https://d111111abcdef8.cloudfront.net"
+    error_message = "With no domain the site is at its distribution name."
+  }
 }
 
-run "aliases_with_a_certificate" {
+run "a_domain_gets_a_certificate_aliases_and_records" {
+  command = apply
+
+  variables {
+    domain = {
+      zone_id   = "Z00000000000000000000"
+      canonical = "www.example.test"
+      redirects = ["example.test"]
+    }
+  }
+
+  assert {
+    condition = (
+      aws_acm_certificate.site[0].domain_name == "www.example.test"
+      && aws_acm_certificate.site[0].subject_alternative_names == toset(["example.test"])
+      && aws_acm_certificate.site[0].validation_method == "DNS"
+    )
+    error_message = "One certificate covers the canonical name and the names that redirect to it, validated through DNS."
+  }
+
+  assert {
+    condition = (
+      toset(keys(aws_route53_record.validation)) == toset(["www.example.test", "example.test"])
+      && alltrue([for record in aws_route53_record.validation : record.zone_id == "Z00000000000000000000" && record.type == "CNAME"])
+      && aws_route53_record.validation["www.example.test"].name == "_aaa.www.example.test."
+      && aws_route53_record.validation["example.test"].name == "_ccc.example.test."
+    )
+    error_message = "Each name's validation record is made in the zone, with the name and value ACM asked for that name."
+  }
+
+  assert {
+    condition     = aws_cloudfront_distribution.site.aliases == toset(["www.example.test", "example.test"])
+    error_message = "The distribution answers to every name."
+  }
+
+  assert {
+    condition = (
+      aws_cloudfront_distribution.site.viewer_certificate[0].acm_certificate_arn == aws_acm_certificate_validation.site[0].certificate_arn
+      && !aws_cloudfront_distribution.site.viewer_certificate[0].cloudfront_default_certificate
+      && aws_cloudfront_distribution.site.viewer_certificate[0].ssl_support_method == "sni-only"
+      && aws_cloudfront_distribution.site.viewer_certificate[0].minimum_protocol_version == "TLSv1.2_2021"
+    )
+    error_message = "The distribution serves the validated certificate with SNI, and refuses anything older than TLS 1.2."
+  }
+
+  assert {
+    condition = (
+      toset(keys(aws_route53_record.alias)) == toset(["www.example.test/A", "www.example.test/AAAA", "example.test/A", "example.test/AAAA"])
+      && alltrue([
+        for record in aws_route53_record.alias :
+        record.zone_id == "Z00000000000000000000"
+        && record.alias[0].name == "d111111abcdef8.cloudfront.net"
+        && record.alias[0].zone_id == "Z2FDTNDATAQYW2"
+      ])
+    )
+    error_message = "Every name has an A and an AAAA alias record in the zone, pointing at the distribution."
+  }
+
+  assert {
+    condition     = startswith(aws_cloudfront_function.viewer_request.code, "var SITE = {\"canonical\":\"www.example.test\",\"redirects\":[\"example.test\"]};")
+    error_message = "The function is told which host is canonical and which redirect to it."
+  }
+
+  assert {
+    condition     = output.url == "https://www.example.test"
+    error_message = "With a domain the site is at its canonical name."
+  }
+}
+
+run "a_domain_with_no_redirects_is_one_name" {
+  command = apply
+
+  variables {
+    domain = {
+      zone_id   = "Z00000000000000000000"
+      canonical = "example.test"
+    }
+  }
+
+  assert {
+    condition     = aws_cloudfront_distribution.site.aliases == toset(["example.test"]) && length(aws_route53_record.alias) == 2
+    error_message = "A canonical name alone is one alias, with an A and an AAAA record."
+  }
+}
+
+run "the_canonical_name_cannot_redirect_to_itself" {
   command = plan
 
   variables {
-    aliases         = ["example.test"]
-    certificate_arn = "arn:aws:acm:us-east-1:111111111111:certificate/00000000-0000-0000-0000-000000000000"
+    domain = {
+      zone_id   = "Z00000000000000000000"
+      canonical = "www.example.test"
+      redirects = ["www.example.test"]
+    }
   }
 
-  assert {
-    condition     = aws_cloudfront_distribution.site.viewer_certificate[0].ssl_support_method == "sni-only"
-    error_message = "A custom certificate is served with SNI, which costs nothing."
+  expect_failures = [var.domain]
+}
+
+run "names_are_lowercase_without_a_trailing_dot" {
+  command = plan
+
+  variables {
+    domain = {
+      zone_id   = "Z00000000000000000000"
+      canonical = "WWW.example.test."
+    }
   }
 
-  assert {
-    condition     = aws_cloudfront_distribution.site.viewer_certificate[0].minimum_protocol_version == "TLSv1.2_2021"
-    error_message = "A custom certificate must refuse anything older than TLS 1.2."
-  }
+  expect_failures = [var.domain]
 }
