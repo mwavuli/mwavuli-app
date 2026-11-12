@@ -28,7 +28,11 @@ const socialImageUrl = new URL(SOCIAL_IMAGE.path, Astro.site);
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
 
+    <!-- The brand's SVG icon first for browsers that take it; favicon.ico (its sizes keep Chrome from
+         preferring it) and the iOS icon are generated from the same file in the build (brand G3). -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href={faviconUrl} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <meta property="og:type" content="website" />
