@@ -1,0 +1,112 @@
+---
+import { BUSINESSES, OWNERS, TENANTS } from '../audiences';
+import AudienceHero from '../components/AudienceHero.astro';
+import ContactBlock from '../components/ContactBlock.astro';
+import RuledList from '../components/RuledList.astro';
+import Layout from '../layouts/Layout.astro';
+
+// Business premises have no terms of their own yet (a commercial tenancy form is still to be
+// written, BM9), so the page points at the two that apply.
+const MORE = [
+  {
+    title: 'Owners',
+    href: OWNERS.href,
+    text: 'The offer in full: how you are paid, repairs, what we charge and how we start.',
+  },
+  {
+    title: 'Tenants',
+    href: TENANTS.href,
+    text: 'How rent, deposits and repairs work under the tenancy form.',
+  },
+] as const;
+---
+
+<Layout
+  title="Businesses"
+  description="We manage homes and business premises in Kampala and its surroundings: rooms, flats, small blocks, shops and offices."
+  headerTone="brand"
+>
+  <AudienceHero
+    audience={BUSINESSES}
+    beats={[
+      ['Shops and', 'offices.'],
+      ['Same', 'terms.'],
+    ]}
+    proof="We manage homes and business premises in Kampala and its surroundings."
+  />
+
+  <!-- 1. One set of terms for every unit (BM10), on the Green band. -->
+  <section id="terms" aria-labelledby="terms-title" class="on-inverse bg-brand text-white">
+    <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-24">
+      <h2 id="terms-title" class="t-statement max-w-4xl font-display text-white">
+        Every unit we take on gets the same terms, whatever its rent, shops and offices included.
+      </h2>
+      <div class="mt-4 h-1 w-16 bg-accent" aria-hidden="true"></div>
+      <p class="mt-6 max-w-3xl font-display text-h4 text-green-100">
+        We take 15% of its rent, we cover its first missed month, and we pay you on the 1st.
+      </p>
+    </div>
+  </section>
+
+  <!-- 2. BM10's example: a shop that rents for UGX 3,000,000 and does not pay in March. -->
+  <section id="example" aria-labelledby="example-title" class="bg-page">
+    <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-20">
+      <h2 id="example-title" class="sr-only">A shop that does not pay in March</h2>
+      <dl class="border-t border-line">
+        <div class="border-b border-line py-8 lg:py-10">
+          <dt class="font-display text-h4 text-ink">A shop rents for</dt>
+          <dd class="t-figure mt-4 font-display text-brand">UGX 3,000,000</dd>
+        </div>
+        <div class="border-b border-line py-8 lg:py-10">
+          <dt class="font-display text-h4 text-ink">On 1st March you receive</dt>
+          <dd class="t-figure mt-4 font-display text-gold-700">UGX 2,550,000</dd>
+        </div>
+      </dl>
+      <p class="mt-8 max-w-3xl text-body-lg text-ink">
+        The tenant does not pay in March. That is the rent minus our 15%, and we collect March from the
+        tenant.
+      </p>
+    </div>
+  </section>
+
+  <!-- 3. What is managed (BM9): the two beats are the two halves, homes green and business gold. -->
+  <section id="manage" aria-labelledby="manage-title" class="bg-surface">
+    <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-24">
+      <h2 id="manage-title" class="t-closing font-display text-brand">
+        <span class="block">Rooms. Flats.</span>
+        <span class="block">Small blocks.</span>
+        <span class="block text-gold-700">Shops. Offices.</span>
+      </h2>
+      <p class="mt-10 max-w-3xl font-display text-h4 text-ink">
+        There is no minimum number of units.
+      </p>
+      <p class="mt-4 max-w-3xl text-body-lg text-ink">
+        A landlord with six rooms and one shop gives us all seven units. All seven get the same terms.
+      </p>
+    </div>
+  </section>
+
+  <!-- 4. VAT on commercial rent (P10). -->
+  <section id="vat" aria-labelledby="vat-title" class="bg-page">
+    <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-20">
+      <h2 id="vat-title" class="font-display text-overline uppercase text-brand">VAT on commercial rent</h2>
+      <p class="t-statement mt-6 max-w-4xl font-display text-brand">
+        VAT a tenant pays on rent is not part of the rent for the 15%.
+      </p>
+      <p class="mt-6 max-w-3xl text-body-lg text-ink">
+        We pass it to the landlord in the same payment and show it on the statement. Filing it is the
+        landlord’s job.
+      </p>
+    </div>
+  </section>
+
+  <!-- 5. The two pages with the rest. -->
+  <section id="more" aria-labelledby="more-title" class="bg-surface">
+    <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-20">
+      <h2 id="more-title" class="font-display text-overline uppercase text-brand">Read next</h2>
+      <RuledList items={MORE} class="mt-6" />
+    </div>
+  </section>
+
+  <ContactBlock />
+</Layout>

@@ -184,6 +184,14 @@
   line-height: 0.8;
   letter-spacing: -0.05em;
 }
+/* Figures with a currency or a unit, smaller than the numeral so "UGX 2,950,000" fits a phone. */
+.t-figure {
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: -0.045em;
+  font-variant-numeric: tabular-nums;
+}
 .t-statement {
   font-size: clamp(2rem, 4.3vw, 4rem);
   font-weight: 750;

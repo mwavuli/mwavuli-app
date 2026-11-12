@@ -1,0 +1,55 @@
+---
+import Button from './Button.astro';
+import RoofBands from './RoofBands.astro';
+
+interface Props {
+  /**
+   * The headline's two beats (brand F6), one string per line: the first in white, the second in
+   * gold. Both beats stay together. The last two lines run beside the proof card from `lg`, so
+   * keep them to about eight characters each.
+   */
+  beats: readonly [readonly string[], readonly string[]];
+  /** Extra classes on the section. The home page adds `audience` for its chip switch. */
+  class?: string;
+}
+
+const { beats, class: className } = Astro.props;
+---
+
+<!-- First screen: one enormous headline at the foot of a flat Green screen, chips above it, a
+     white proof card beside it. Brand A6 and F6: white first beat, gold second beat. The card's
+     content is the default slot; its Contact button points at #contact on the same page. -->
+<section
+  aria-labelledby="hero-title"
+  class:list={['on-inverse relative isolate overflow-hidden bg-brand text-white', className]}
+>
+  <div
+    class="mx-auto flex min-h-[calc(100svh-6rem)] max-w-page flex-col justify-end gap-6 px-6 pb-10 pt-2 lg:px-8 lg:pb-16"
+  >
+    <slot name="chips" />
+
+    <div class="relative">
+      <h1 id="hero-title" class="t-giant-hero font-display text-white">
+        {
+          beats.map((lines, beat) =>
+            lines.map((line) => (
+              <>
+                <span class:list={['block', beat === 1 && 'text-accent']}>{line}</span>{' '}
+              </>
+            )),
+          )
+        }
+      </h1>
+
+      <RoofBands
+        class="mt-6 ml-auto aspect-[600/310] w-full max-w-xl lg:hidden xl:absolute xl:-right-93 xl:-bottom-26 xl:mt-0 xl:block xl:aspect-auto xl:w-160 xl:max-w-none"
+      />
+      <div
+        class="hero-card relative z-10 ml-auto w-full max-w-xl rounded-xl bg-white p-6 lg:absolute lg:right-0 lg:bottom-3 lg:ml-0 lg:w-88"
+      >
+        <slot />
+        <Button href="#contact" class="mt-6">Contact us</Button>
+      </div>
+    </div>
+  </div>
+</section>

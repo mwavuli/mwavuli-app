@@ -1,0 +1,86 @@
+---
+import { TENANTS } from '../audiences';
+import AudienceHero from '../components/AudienceHero.astro';
+import ContactBlock from '../components/ContactBlock.astro';
+import RuledList from '../components/RuledList.astro';
+import Layout from '../layouts/Layout.astro';
+
+// The tenancy form's other clauses, headed as the form heads them (clauses 2 and 3 have the two
+// bands above). Rent paid ahead follows P13, which fixes what the form leaves open.
+const CLAUSES = [
+  {
+    title: 'Repairs',
+    text: 'Tell us by phone or WhatsApp if something is broken or unsafe, and we arrange a trusted contractor. You pay in full for damage you cause, as soon as the repairs are done. If you do not, it is taken from your deposit.',
+  },
+  {
+    title: 'Electricity, water and garbage',
+    text: 'Your share is charged at cost, with no markup. We use the meter reading. If your unit has no meter, we agree a fair share or a fixed amount with you.',
+  },
+  {
+    title: 'Rent paid ahead',
+    text: 'If you pay rent ahead, we hold it in a separate account, like deposits, and pay it to the landlord month by month on the 1st. Months that have not started stay there. If you leave early, the months you paid for and did not use go back to you under your tenancy form, with no fee on them.',
+  },
+  {
+    title: 'If you do not pay',
+    text: 'We remind you, call you and visit you, then send a written notice. If it must go to court, the landlord says YES first and the case is in the landlord’s name. We never lock a tenant out. Any late fee is written in your tenancy form.',
+  },
+  {
+    title: 'If we disagree',
+    text: 'We talk first, then a mediator we both accept, and only then the courts of Uganda.',
+  },
+] as const;
+---
+
+<Layout
+  title="Tenants"
+  description="Pay your rent to us only, by mobile money or bank. Tell us what is broken and we arrange a trusted contractor."
+  headerTone="brand"
+>
+  <AudienceHero
+    audience={TENANTS}
+    beats={[
+      ['Great', 'spaces,'],
+      ['happy', 'tenants.'],
+    ]}
+    proof={TENANTS.proof}
+  />
+
+  <!-- 1. Clause 2 of the tenancy form, the one thing a tenant does every month. -->
+  <section id="paying" aria-labelledby="paying-title" class="bg-page">
+    <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-24">
+      <h2 id="paying-title" class="t-closing font-display text-brand">Paying your rent.</h2>
+      <div class="mt-6 h-1 w-16 bg-accent" aria-hidden="true"></div>
+      <p class="mt-10 max-w-3xl font-display text-h4 text-ink">
+        Pay your rent to us only, by mobile money or bank, never cash to our staff.
+      </p>
+      <p class="mt-4 max-w-3xl text-body-lg text-ink">
+        Your rent is due on the day written in your tenancy form.
+      </p>
+    </div>
+  </section>
+
+  <!-- 2. Clause 3: the deposit, on the Green band. -->
+  <section id="deposit" aria-labelledby="deposit-title" class="on-inverse bg-brand text-white">
+    <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-24">
+      <h2 id="deposit-title" class="t-closing font-display text-white">Your deposit.</h2>
+      <p class="mt-10 max-w-3xl font-display text-h4 text-green-100">
+        If you are a new tenant, your deposit is paid to us and kept in a separate account. We use it only
+        for what your tenancy allows (unpaid rent, damage, legal costs), and the rest goes back to you.
+      </p>
+      <p class="mt-4 max-w-3xl text-body-lg text-green-100">
+        If you were already living in the building, the landlord keeps the deposit already held and gives
+        it back to you.
+      </p>
+    </div>
+  </section>
+
+  <!-- 3. The rest of the form, in its own order of headings. -->
+  <section id="tenancy" aria-labelledby="tenancy-title" class="bg-surface">
+    <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-20">
+      <h2 id="tenancy-title" class="t-statement font-display text-brand">The tenancy in plain words</h2>
+      <RuledList items={CLAUSES} numbered wide="text" class="mt-10" />
+    </div>
+  </section>
+
+  <ContactBlock />
+</Layout>

@@ -1,0 +1,35 @@
+---
+import type { Audience } from '../audiences';
+import { AUDIENCES } from '../audiences';
+import { chipBase } from './chip-styles';
+
+interface Props {
+  /** The page being shown; its chip is filled. */
+  current: Audience;
+}
+
+const { current } = Astro.props;
+---
+
+<!-- The home page's chips switch a proof line; on an audience page the same chips are links between
+     the three pages. -->
+<nav aria-label="Who is this for?">
+  <ul class="flex flex-wrap gap-2">
+    {
+      AUDIENCES.map((audience) => (
+        <li>
+          <a
+            href={audience.href}
+            aria-current={audience.id === current.id ? 'page' : undefined}
+            class:list={[
+              chipBase,
+              'aria-[current=page]:bg-white aria-[current=page]:text-brand aria-[current=page]:hover:bg-green-50',
+            ]}
+          >
+            {audience.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
