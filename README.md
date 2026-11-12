@@ -30,18 +30,43 @@ pnpm preview    # serve dist/ locally
 brand/               brand and design language: spec, tokens, logos, icons
 business/            business model and agreements
 src/
-  components/        Header, Footer, Lockup (the horizontal lockup, inlined)
+  components/        Header, Footer, Button, Lockup (the horizontal lockup, inlined), RoofBands
   content/legal/     legal documents (MDX); schema in src/content.config.ts
   layouts/Layout.astro
   pages/             home, 404, legal/[slug]
-  styles/global.css  brand tokens bridged to the Tailwind theme
+  styles/global.css  brand tokens bridged to the Tailwind theme, then the site's type and motion
   config.ts          site-wide constants
 ```
 
-## Not here yet
+## Design
 
-- Deploy and infrastructure.
-- Analytics.
-- The production domain (brand decision D4): `site` in `astro.config.mjs` is the reserved `.example` placeholder.
-- The social image and PNG favicon fallbacks.
-- Real content: legal text, photography (D14) and contact details beyond the postal address.
+The home page is type-led: an oversize Montserrat headline on a Green first screen with a layered roof-form
+accent, the offer as three full-bleed bands with oversize figures, the six services as one ruled list, and contact. The
+Owners, Tenants and Businesses chips change the proof line with CSS only (radios and `:has()`); without `:has()` all
+three lines show. It has no photographs and nothing that needs JavaScript.
+
+Deliberate brand deviations, recorded as brand 09-governance asks:
+
+- **T3** (Default): display sizes above the scale's top step (hero up to 160 px, figures 192 px, closing line 118 px)
+  with tighter tracking; four sizes or fewer in each section.
+- **S2** (Default): a 24 px page margin on phones, not 16 px, so the 195 px lockup keeps its L4 clear space.
+- **A6** (Default): the header sits on Green with the reversed lockup to join the first screen. There is no photograph
+  (D14), and the gold roof band stands in for the gold rule under the headline.
+
+## Before launch
+
+Open, and not for the code to decide:
+
+- **Domain (brand D4).** `site` in `astro.config.mjs` is the reserved `.example` placeholder.
+- **Contact.** Phone and email read "to be added". There is no contact form: it needs a destination that can receive it.
+- **Photography (D14).** The design uses none.
+- **Legal text.** `src/content/legal/privacy.mdx` is a placeholder pending counsel.
+- **Social image** (1200 × 630) and PNG favicon fallbacks.
+- **Deploy, infrastructure and analytics.**
+
+Copy the owner has not yet approved, all in `src/pages/index.astro`:
+
+- The Tenants proof line "Tell us what is broken. We arrange a trusted contractor." (tenancy form, clause 6) and the
+  Businesses proof line "We manage shops and offices as well as homes." (BM9).
+- Labels: "The offer in three lines", "What we look after for you.", "Services", "Contact us" and "Contact".
+- The offer statements split BM18 at its commas; the six one-line service descriptions come from BM18 and BM2.

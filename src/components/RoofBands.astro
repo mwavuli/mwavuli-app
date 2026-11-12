@@ -1,0 +1,55 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+// Brand M1 and M3: layered flat roof-form bands at the logo's roof slope (about 43 degrees, a rise
+// of 0.92 per unit of run). Each band is house-shaped like the mark's house (a roof and two walls)
+// and runs off the bottom edge. Green 700 is the thick band; the one gold band is slim (gold stays
+// well under a fifth of the motif). Flat colour only: no gradient, no shadow. Decorative.
+const SLOPE = 0.92;
+const CENTRE = 300;
+const BASE = 640;
+
+const round = (value: number): number => Math.round(value * 10) / 10;
+
+function houseBand(halfWidth: number, wall: number, roof: number, apex: number): string {
+  const left = CENTRE - halfWidth;
+  const right = CENTRE + halfWidth;
+  const eave = round(apex + SLOPE * halfWidth);
+  const innerEave = round(apex + roof + SLOPE * (halfWidth - wall));
+  return [
+    `M${left} ${BASE}V${eave}L${CENTRE} ${apex}L${right} ${eave}V${BASE}`,
+    `H${right - wall}V${innerEave}L${CENTRE} ${apex + roof}L${left + wall} ${innerEave}V${BASE}Z`,
+  ].join('');
+}
+
+const gold = houseBand(300, 14, 22, 0);
+const roof = houseBand(262, 80, 112, 44);
+
+// The mark's window: four equal squares on the roof's axis, kept clear of the inner roof edge.
+const PANE = 30;
+const GAP = 10;
+const WINDOW_TOP = 206;
+const panes = [0, 1].flatMap((row) =>
+  [0, 1].map((column) => ({
+    x: CENTRE - PANE - GAP / 2 + column * (PANE + GAP),
+    y: WINDOW_TOP + row * (PANE + GAP),
+  })),
+);
+---
+
+<div class:list={['hero-roof-art overflow-hidden xl:overflow-visible', className]} aria-hidden="true">
+  <svg
+    class="block h-auto w-full"
+    viewBox={`0 0 600 ${BASE}`}
+    focusable="false"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path class="fill-green-700" d={roof}></path>
+    <path class="fill-accent" d={gold}></path>
+    {panes.map((pane) => <rect class="fill-accent" x={pane.x} y={pane.y} width={PANE} height={PANE} />)}
+  </svg>
+</div>

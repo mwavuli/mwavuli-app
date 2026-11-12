@@ -1,30 +1,39 @@
 ---
 import { SITE_NAME } from '../config';
+import Button from './Button.astro';
 import Lockup from './Lockup.astro';
+
+interface Props {
+  /** `brand` sits the header on Green so it joins a Green first screen; `page` is the cream default. */
+  tone?: 'page' | 'brand';
+}
+
+const { tone = 'page' } = Astro.props;
+const onBrand = tone === 'brand';
 ---
 
-<header class="border-b border-line bg-page">
-  <div class="mx-auto flex max-w-page items-center justify-between gap-4 px-4 py-4 sm:px-6">
+<!-- Brand L4 and L5: the horizontal lockup is 195 px wide (h-12, above the 180 px minimum) with 24 px
+     clear space on every side. -->
+<header class:list={[onBrand ? 'on-inverse bg-brand text-white' : 'border-b border-line bg-page']}>
+  <div class="mx-auto flex max-w-page flex-wrap items-center justify-between gap-4 px-6 py-6 lg:px-8">
     <a href="/" class="flex shrink-0 items-center" aria-label={`${SITE_NAME}: home`}>
-      <Lockup class="h-8" aria-hidden="true" />
+      <Lockup reversed={onBrand} class="h-12" aria-hidden="true" />
     </a>
     <nav aria-label="Main">
       <ul class="flex items-center gap-2 sm:gap-4">
-        <li>
+        <li class="hidden sm:block">
           <a
-            href="/legal/privacy/"
-            class="inline-flex min-h-11 items-center px-3 font-display text-label font-semibold text-ink hover:text-brand"
+            href="/#services"
+            class:list={[
+              'inline-flex min-h-12 items-center rounded-md px-3 font-display text-body font-semibold transition-colors',
+              onBrand ? 'text-white hover:bg-white/10' : 'text-ink hover:bg-green-50 hover:text-brand',
+            ]}
           >
-            Privacy
+            Services
           </a>
         </li>
         <li>
-          <a
-            href="/#contact"
-            class="inline-flex min-h-11 items-center rounded-full bg-brand px-5 font-display text-label font-semibold text-white hover:bg-brand-deep"
-          >
-            Contact
-          </a>
+          <Button href="/#contact" variant={onBrand ? 'inverse' : 'primary'}>Contact</Button>
         </li>
       </ul>
     </nav>
