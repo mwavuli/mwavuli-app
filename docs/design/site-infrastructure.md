@@ -180,6 +180,10 @@ Namecheap's Advanced DNS, which no longer answers for the domain.
 **The zone cannot be destroyed by a plan.** `prevent_destroy` is on: a deleted zone's replacement gets other
 nameservers, and the domain's DNS, email with it, is down until the registrar is told.
 
+**Mail depends on this unit.** The repository is pre-launch, but a record here is something real, so a change to
+the `dns` unit is held to the live rules: read the plan first, keep every record mail uses, and know the way back
+before applying.
+
 **Not done here.** There is no DMARC record: none existed, and its policy and reporting mailbox are the owner's
 to choose, as is DNSSEC. The site is not on the domain (M2).
 
