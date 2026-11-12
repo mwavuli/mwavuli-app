@@ -1,8 +1,7 @@
 # site
 
-The **Mwavuli Property Management** site: a static [Astro](https://astro.build) build on the same stack as
-[nyange-site](https://github.com/nyange-app/nyange-site), and the `site` project of the workspace (see the
-[root README](../README.md)).
+The **Mwavuli Property Management** site: a static [Astro](https://astro.build) build, and the `site` project of the
+workspace (see the [root README](../README.md)).
 
 ## Stack
 

@@ -15,7 +15,7 @@ terraform {
 }
 
 inputs = {
-  name        = local.account.repo
+  name        = local.account.site_name
   bucket_name = local.account.site_bucket_name
 
   # Pre-launch the bucket holds a site that rebuilds from git, but one that empties itself on

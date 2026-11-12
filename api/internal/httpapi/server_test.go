@@ -8,7 +8,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/nyange-app/mwavuli-site/api/internal/httpapi"
+	"github.com/mwavuli/mwavuli-app/api/internal/httpapi"
 )
 
 func get(t *testing.T, s *httpapi.Server, path string) (int, map[string]string) {

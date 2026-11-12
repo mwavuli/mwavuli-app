@@ -1,4 +1,4 @@
-module github.com/nyange-app/mwavuli-site/api
+module github.com/mwavuli/mwavuli-app/api
 
 go 1.27
 
