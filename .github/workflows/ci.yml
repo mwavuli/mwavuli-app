@@ -33,8 +33,8 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      # `pnpm build` is `astro check && astro build`: the typecheck and the bundle.
-      - run: pnpm build
+      # `nx build site` runs `astro check && astro build`: the typecheck and the bundle.
+      - run: pnpm nx build site
 
   infra:
     name: opentofu validate · test
@@ -66,5 +66,5 @@ jobs:
           done
       - name: Scripts and committed state
         run: |
-          shellcheck scripts/*.sh
-          scripts/check-bootstrap-state.sh
+          shellcheck site/scripts/*.sh infra/scripts/*.sh
+          infra/scripts/check-bootstrap-state.sh

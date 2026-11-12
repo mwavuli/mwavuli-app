@@ -7,7 +7,7 @@
 # read it, so it may hold no IAM user, access key, password, secret value or private key. A backend
 # needs none of them, and this is what keeps one from arriving.
 #
-#   scripts/check-bootstrap-state.sh
+#   infra/scripts/check-bootstrap-state.sh
 set -euo pipefail
 
 cd "$(git rev-parse --show-toplevel)"

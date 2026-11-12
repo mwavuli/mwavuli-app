@@ -4,7 +4,7 @@
  * brand/logo/app-icon.svg, so they cannot drift from the brand.
  */
 import sharp from 'sharp';
-import appIcon from '../brand/logo/app-icon.svg?raw';
+import appIcon from '@mwavuli/brand/logo/app-icon.svg?raw';
 
 const source = Buffer.from(appIcon);
 

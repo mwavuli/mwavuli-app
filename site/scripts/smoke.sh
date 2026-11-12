@@ -3,14 +3,15 @@
 # icons and the social image are served as images, a hashed asset is cached for good, a missing page
 # is a 404 carrying the site's own 404 page, and the security headers are on.
 #
-#   scripts/smoke.sh https://d1234abcd.cloudfront.net
+#   site/scripts/smoke.sh https://d1234abcd.cloudfront.net
 #
-# Run it from the repository root after `pnpm build`: a hashed asset is picked from dist/_astro to
+# Run it from anywhere after `pnpm nx build site`: a hashed asset is picked from site/dist/_astro to
 # check its caching. The deploy workflow runs it against the distribution's own *.cloudfront.net
 # name, and it works as well against the real domain once there is one.
 set -euo pipefail
 
-base="${1:?usage: scripts/smoke.sh <base-url>}"
+here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+base="${1:?usage: site/scripts/smoke.sh <base-url>}"
 base="${base%/}"
 
 tmp="$(mktemp -d)"
@@ -58,12 +59,12 @@ expect /apple-touch-icon.png image/png
 expect /social.png image/png
 expect /sitemap-index.xml xml
 
-asset="$(cd dist 2>/dev/null && find _astro -type f -name '*.woff2' | head -n 1 || true)"
+asset="$(cd "$here/../dist" 2>/dev/null && find _astro -type f -name '*.woff2' | head -n 1 || true)"
 if [ -n "$asset" ]; then
   expect "/$asset" font/woff2
   [[ "$(header cache-control)" == *immutable* ]] || fail "/$asset is not cached as immutable: '$(header cache-control)'"
 else
-  echo "skip hashed asset: no dist/_astro here"
+  echo "skip hashed asset: no site/dist/_astro here"
 fi
 
 fetch /a-page-that-does-not-exist

@@ -163,3 +163,6 @@ terragrunt-debug.tfvars.json
 # Agent worktrees. Sibling checkouts of this repository, not content of it —
 # a plain `git add -A` otherwise stages another agent's entire working tree.
 .claude/worktrees/
+
+# --- Nx ---
+.nx/

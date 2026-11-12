@@ -1,11 +1,15 @@
-/* Brand faces (brand T8): Montserrat for display, Inter for text. Self-hosted variable
-   fonts, font-display: swap. */
-@import '@fontsource-variable/montserrat';
-@import '@fontsource-variable/inter';
-
-@import 'tailwindcss';
-@import '../../brand/tokens/mwavuli.tokens.css';
-@plugin '@tailwindcss/typography';
+/* The Mwavuli brand as a Tailwind CSS v4 theme, shared by the site and the web apps.
+ *
+ * Import it after Tailwind in an app's entry stylesheet:
+ *
+ *   @import 'tailwindcss';
+ *   @import '@mwavuli/theme/theme.css';
+ *
+ * The app loads the brand faces itself (Montserrat Variable and Inter Variable, brand T8) and, with
+ * Tailwind 4's automatic source detection stopping at the app's own folder, adds an `@source` line for
+ * each workspace package whose classes it uses.
+ */
+@import '@mwavuli/brand/tokens.css';
 
 /* The brand's tokens as Tailwind theme values. Every value is a `--mw-*` token from
    brand/tokens/mwavuli.tokens.css (generated from the JSON; edit the JSON), so the site
@@ -131,153 +135,5 @@
   }
   .on-inverse :focus-visible {
     outline-color: var(--mw-color-role-focus-ring-inverse);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
-}
-
-/* Typography plugin, in the brand's colours. */
-.prose {
-  --tw-prose-body: var(--mw-color-role-text-primary);
-  --tw-prose-headings: var(--mw-color-role-text-heading);
-  --tw-prose-lead: var(--mw-color-role-text-muted);
-  --tw-prose-links: var(--mw-color-role-brand-primary);
-  --tw-prose-bold: var(--mw-color-role-text-primary);
-  --tw-prose-counters: var(--mw-color-role-text-muted);
-  --tw-prose-bullets: var(--mw-color-core-sage);
-  --tw-prose-hr: var(--mw-color-role-border-default);
-  --tw-prose-quotes: var(--mw-color-role-text-primary);
-  --tw-prose-quote-borders: var(--mw-color-role-brand-accent);
-  --tw-prose-captions: var(--mw-color-role-text-muted);
-  --tw-prose-code: var(--mw-color-role-text-primary);
-  --tw-prose-pre-code: var(--mw-color-role-text-inverse);
-  --tw-prose-pre-bg: var(--mw-color-role-bg-inverse);
-  --tw-prose-th-borders: var(--mw-color-role-border-strong);
-  --tw-prose-td-borders: var(--mw-color-role-border-default);
-}
-
-/* ==========================================================================
-   Site styles, appended below the brand blocks: giant type, the audience switch, motion.
-   ========================================================================== */
-
-/* Brand motion tokens (S9) drive every Tailwind transition on the page. */
-:root {
-  --default-transition-duration: var(--mw-motion-duration-base);
-  --default-transition-timing-function: var(--mw-motion-easing-standard);
-}
-
-/* Giant display sizes. The display step is scaled up (brand T3 bend, recorded in the README);
-   Montserrat 750 matches the wordmark (T2) and tracking tightens with size. */
-.t-giant-hero {
-  font-size: clamp(2.75rem, 15vw, 10rem);
-  font-weight: 750;
-  line-height: 0.9;
-  letter-spacing: -0.035em;
-}
-.t-numeral {
-  font-size: clamp(5.5rem, 13vw, 12rem);
-  font-weight: 800;
-  line-height: 0.8;
-  letter-spacing: -0.05em;
-}
-/* Figures with a currency or a unit, smaller than the numeral so "UGX 2,950,000" fits a phone. */
-.t-figure {
-  font-size: clamp(2.5rem, 8vw, 6rem);
-  font-weight: 800;
-  line-height: 0.85;
-  letter-spacing: -0.045em;
-  font-variant-numeric: tabular-nums;
-}
-.t-statement {
-  font-size: clamp(2rem, 4.3vw, 4rem);
-  font-weight: 750;
-  line-height: 1.04;
-  letter-spacing: -0.025em;
-  text-wrap: balance;
-}
-.t-closing {
-  font-size: clamp(2.25rem, 8.2vw, 7.4rem);
-  font-weight: 750;
-  line-height: 0.98;
-  letter-spacing: -0.035em;
-}
-.t-giant-row {
-  font-size: clamp(1.625rem, 3.1vw, 2.75rem);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  text-wrap: balance;
-}
-
-/* Audience switch: three radios and :has(), no script. Without :has() support the chips are
-   hidden and all three proof lines show, each with its audience label. */
-.audience-chips {
-  display: none;
-}
-@supports selector(:has(*)) {
-  .audience-chips {
-    display: flex;
-  }
-  .audience-proof [data-audience] {
-    display: none;
-  }
-  .audience:has(#audience-owners:checked) [data-audience='owners'],
-  .audience:has(#audience-tenants:checked) [data-audience='tenants'],
-  .audience:has(#audience-businesses:checked) [data-audience='businesses'] {
-    display: block;
-  }
-}
-@keyframes proof-in {
-  from {
-    opacity: 0;
-    transform: translateY(0.5rem);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-@media (prefers-reduced-motion: no-preference) {
-  @supports selector(:has(*)) {
-    .audience-proof [data-audience] {
-      animation: proof-in var(--mw-motion-duration-slow) var(--mw-motion-easing-standard) both;
-    }
-  }
-}
-
-/* Without :has() all three proof lines show, so the roof art steps out of the way. */
-@supports not selector(:has(*)) {
-  .hero-card {
-    position: static;
-    width: auto;
-    margin-top: 2rem;
-  }
-  .hero-roof-art {
-    display: none;
-  }
-}
-
-/* A focus ring appears at once, never fading in from the text colour (S8). */
-:focus-visible {
-  transition-property: none;
-}
-/* The proof card is a white surface inside a Green section: its ring is Green (S8, contrast). */
-.hero-card :focus-visible {
-  outline-color: var(--mw-color-role-focus-ring);
-}
-
-/* Reduced motion (S9): no movement, no animation. Colour changes still apply, instantly. */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 }

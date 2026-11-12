@@ -1,0 +1,17 @@
+{
+  "name": "@mwavuli/theme",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The Mwavuli brand tokens as a Tailwind CSS v4 theme, shared by the site and the web apps.",
+  "type": "module",
+  "exports": {
+    "./theme.css": "./theme.css"
+  },
+  "dependencies": {
+    "@mwavuli/brand": "workspace:*"
+  },
+  "nx": {
+    "name": "theme",
+    "tags": ["scope:shared", "type:theme"]
+  }
+}

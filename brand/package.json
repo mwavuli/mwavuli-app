@@ -1,0 +1,31 @@
+{
+  "name": "@mwavuli/brand",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The Mwavuli brand and design language: spec, tokens, logos and icons.",
+  "type": "module",
+  "exports": {
+    "./tokens.css": "./tokens/mwavuli.tokens.css",
+    "./tokens.json": "./tokens/mwavuli.tokens.json",
+    "./logo/*": "./logo/*",
+    "./icons/*": "./icons/*"
+  },
+  "scripts": {
+    "check": "python3 tools/check_docs.py"
+  },
+  "nx": {
+    "name": "brand",
+    "tags": [
+      "scope:shared",
+      "type:brand"
+    ],
+    "namedInputs": {
+      "production": [
+        "{projectRoot}/package.json",
+        "{projectRoot}/tokens/**",
+        "{projectRoot}/logo/**",
+        "{projectRoot}/icons/**"
+      ]
+    }
+  }
+}

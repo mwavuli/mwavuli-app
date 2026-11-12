@@ -1,33 +1,17 @@
 {
-  "name": "mwavuli-site",
-  "version": "0.1.0",
+  "name": "mwavuli",
+  "version": "0.0.0",
   "private": true,
-  "description": "Mwavuli Property Management site: a static Astro build.",
+  "description": "Mwavuli Property Management: api, site, web, mobile and infra in one Nx and pnpm workspace.",
   "type": "module",
-  "packageManager": "pnpm@8.15.9",
+  "packageManager": "pnpm@12.18.0",
   "engines": {
     "node": ">=22"
   },
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/mdx": "^4.0.0",
-    "@astrojs/sitemap": "^3.2.0",
-    "@fontsource-variable/inter": "^5.1.0",
-    "@fontsource-variable/montserrat": "^5.1.0",
-    "@tailwindcss/typography": "^0.5.15",
-    "@tailwindcss/vite": "^4.0.0",
-    "astro": "^5.0.0",
-    "sharp": "^0.34.5",
-    "tailwindcss": "^4.0.0",
-    "typescript": "^5.7.0"
+    "nx": "nx"
   },
   "devDependencies": {
-    "vite": "^6"
+    "nx": "24.0.6"
   }
 }

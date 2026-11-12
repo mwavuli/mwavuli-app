@@ -1,0 +1,10 @@
+packages:
+  - brand
+  - packages/*
+  - site
+  - web/*
+  - mobile/*
+allowBuilds:
+  esbuild: true
+  nx: true
+  sharp: true

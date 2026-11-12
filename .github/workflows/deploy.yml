@@ -1,4 +1,4 @@
-# Deploy the built site: publish dist/ to S3, invalidate CloudFront, then smoke-check the result.
+# Deploy the built site: publish site/dist/ to S3, invalidate CloudFront, then smoke-check the result.
 #
 # Auth: GitHub OIDC to the deploy role that infra/live/prod/us-east-1/deploy-role creates in this
 # repository's own AWS account. The role reaches this site's bucket and invalidates its distribution;
@@ -66,9 +66,9 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      # `pnpm build` is `astro check && astro build`: the typecheck and the bundle.
+      # `nx build site` runs `astro check && astro build`: the typecheck and the bundle.
       - name: Build
-        run: pnpm build
+        run: pnpm nx build site
 
       - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v6
@@ -78,19 +78,19 @@ jobs:
 
       - name: Upload hashed assets (immutable, 1 year)
         run: |
-          aws s3 sync dist/ "s3://$SITE_BUCKET/" --no-progress \
+          aws s3 sync site/dist/ "s3://$SITE_BUCKET/" --no-progress \
             --exclude "*" --include "_astro/*" \
             --cache-control "public, max-age=31536000, immutable"
 
       - name: Upload other static files (24 hours)
         run: |
-          aws s3 sync dist/ "s3://$SITE_BUCKET/" --no-progress \
+          aws s3 sync site/dist/ "s3://$SITE_BUCKET/" --no-progress \
             --exclude "_astro/*" --exclude "*.html" \
             --cache-control "public, max-age=86400"
 
       - name: Upload HTML last (5 minutes in the browser, 24 hours at the edge)
         run: |
-          aws s3 sync dist/ "s3://$SITE_BUCKET/" --no-progress \
+          aws s3 sync site/dist/ "s3://$SITE_BUCKET/" --no-progress \
             --exclude "*" --include "*.html" \
             --cache-control "public, max-age=300, s-maxage=86400"
 
@@ -121,4 +121,4 @@ jobs:
       - name: Smoke checks
         env:
           DOMAIN: ${{ steps.cdn.outputs.domain }}
-        run: scripts/smoke.sh "https://${DOMAIN}"
+        run: site/scripts/smoke.sh "https://${DOMAIN}"
