@@ -8,9 +8,9 @@ account, organization or repository outside Mwavuli's.
 
 | | |
 |---|---|
-| This repository owns | the prod account's state backend (a bucket, two KMS keys and a replica), the site (a bucket and a CloudFront distribution), the deploy role, and the workflow that publishes |
-| The owner supplies | administrator access to the prod account through Identity Center ([`aws-organization.md`](aws-organization.md)), and later the domain |
-| Status | **applied** on 2026-11-12: the prod state backend, the site and the deploy role. The first deploy ran green and the site answers on its CloudFront name. |
+| This repository owns | the prod account's state backend (a bucket, two KMS keys and a replica), the site (a bucket and a CloudFront distribution), the deploy role, the workflow that publishes, and the DNS of `mwavuli.co` (a Route 53 hosted zone) |
+| The owner supplies | administrator access to the prod account through Identity Center ([`aws-organization.md`](aws-organization.md)), and the domain, registered at Namecheap |
+| Status | **applied** on 2026-11-12: the prod state backend, the site, the deploy role and the domain's DNS zone. The first deploy ran green and the site answers on its CloudFront name. The domain's nameservers are the zone's (M13); the site is not on the domain yet (M2). |
 
 Decisions are numbered `M1…` and are the record of *why*. A decision that stops being true is replaced,
 not renumbered.
@@ -33,16 +33,18 @@ The account is `prod` (the directory under `infra/live/`), the home region is `u
 replica's is `us-west-2`; each is one line in `account.hcl` or `region.hcl`. `us-east-1` is where CloudFront
 wants its certificates.
 
-### M2 — The domain (open, brand D4)
+### M2 — The domain (taken; the site is not on it yet)
 
-The site serves on the distribution's own `*.cloudfront.net` name until the domain exists. That is enough
-to review the real site, and it is where the deploy workflow checks it. Canonical URLs and the `og:image`
-address follow `site` in `site/astro.config.mjs`, which stays the reserved `.example` placeholder until then.
+The domain is `mwavuli.co`, registered at Namecheap, and its public DNS, email included, is Route 53's in this
+account (M13). The site still serves on the distribution's own `*.cloudfront.net` name. That is enough to review
+the real site, and it is where the deploy workflow checks it. Canonical URLs and the `og:image` address follow
+`site` in `site/astro.config.mjs`, which stays the reserved `.example` placeholder until the site is on the
+domain. Brand decision D4, the address printed on the applications, is the owner's to close in `brand/`.
 
-Adding the domain is three changes in this repository, none written yet because none can be until the
-name is known: `aliases` and `certificate_arn` on the `site` unit; an ACM certificate in `us-east-1`
-validated through DNS; and a Route 53 hosted zone in this account, with the registrar's nameservers
-pointed at it by the owner. A `www` redirect then joins the viewer-request function.
+Putting the site on the domain is three changes in this repository, none written yet: `aliases` and
+`certificate_arn` on the `site` unit; an ACM certificate in `us-east-1`, validated by a record in the zone; and
+alias records in the `dns` unit that take the place of the apex redirect and the `www` parking record. A `www`
+redirect then joins the viewer-request function.
 
 ### M3 — The first apply (taken)
 
@@ -142,6 +144,49 @@ CI does not apply, and this repository adds no plan or apply workflow.
 an unset variable is a named failure, never a publish that lands somewhere wrong and reports success.
 `DEPLOY_ENABLED=false` freezes the job without a code change.
 
+### M13 — Route 53 serves the domain's DNS, email included
+
+The `dns` unit (`infra/live/prod/us-east-1/dns`, on the `dns-zone` module) creates the public hosted zone for
+`mwavuli.co` and holds every record in code. Namecheap stays the registrar: it keeps the registration and the
+privacy on its contacts, and it still runs the redirect and the parking page that two of the records point at.
+Only the nameservers moved. The domain's page at Namecheap names, under Custom DNS, the zone's four, which the
+unit outputs as `name_servers`: `ns-1248.awsdns-28.org`, `ns-1617.awsdns-10.co.uk`, `ns-209.awsdns-26.com` and
+`ns-715.awsdns-25.net`.
+
+| Record | Type | Value | What it is |
+|---|---|---|---|
+| `mwavuli.co` | A | `162.255.119.218` | Namecheap's URL forwarder: `http://mwavuli.co/` answers 302 to `http://www.mwavuli.co/` |
+| `www` | CNAME | `parkingpage.namecheap.com.` | Namecheap's parking page, until the site is on the domain (M2) |
+| `mwavuli.co` | MX | `1 mx1.`, `5 mx2.`, `10 mx3.larksuite.com.` | the domain's mail, which is Lark Suite's |
+| `mwavuli.co` | TXT | Lark's domain-verification code, and `v=spf1 +include:spf.onlarksuite.com -all` | proof of the domain to Lark, and who may send as it |
+| `lark2611112352._domainkey` | TXT | Lark's DKIM key | signs outgoing mail |
+
+**Email is the constraint.** Mail already runs on Lark, and nothing here may interrupt it, so the zone had to
+answer exactly as Namecheap's DNS did before any nameserver moved. The records were read from Namecheap's
+Advanced DNS page, which is the only place a DKIM selector can be found, and the zone was compared with what the
+domain answered publicly: A, MX, both TXT values, the CNAME and the DKIM key, five record sets and eight values,
+each matching (the zone's side read with `aws route53 test-dns-answer`, which needs no DNS port). The module
+cuts a TXT value longer than 255 characters into the strings Route 53 takes, which the 410-character DKIM key
+needs, and a test proves the strings join back into the key.
+
+**The cutover and the way back.** The move is one change at Namecheap: the domain's page, Nameservers, Custom
+DNS, the four above. A resolver that cached Namecheap's
+nameservers keeps asking them until its cache expires (Namecheap says up to 48 hours). Both sides answer the
+same, so a sender or a visitor gets the same answer from either, and nothing waits on the cache. The way back is
+choosing Namecheap BasicDNS on the same page: Namecheap keeps its own copy of the records, and nothing in this
+repository edits it. Once the nameservers are the zone's, a change to a record is a change to the unit, never to
+Namecheap's Advanced DNS, which no longer answers for the domain.
+
+**The zone cannot be destroyed by a plan.** `prevent_destroy` is on: a deleted zone's replacement gets other
+nameservers, and the domain's DNS, email with it, is down until the registrar is told.
+
+**Mail depends on this unit.** The repository is pre-launch, but a record here is something real, so a change to
+the `dns` unit is held to the live rules: read the plan first, keep every record mail uses, and know the way back
+before applying.
+
+**Not done here.** There is no DMARC record: none existed, and its policy and reporting mailbox are the owner's
+to choose, as is DNSSEC. The site is not on the domain (M2).
+
 ---
 
 ## 3. The order, and where it stands
@@ -170,10 +215,16 @@ All of it ran on 2026-11-12.
 5. **Deploy**: run the `deploy` workflow. It publishes, invalidates, and runs `site/scripts/smoke.sh` against
    the distribution's own name. The first run was green, and the live site answers on the distribution's
    name (`d3g3tcova33n6t.cloudfront.net`).
+6. **Apply the domain's zone and move the nameservers** (M13), reading the plan first (6 resources: the zone
+   and its five record sets). Then give Namecheap the four nameservers the unit outputs:
+   ```bash
+   cd infra/live/prod/us-east-1/dns && terragrunt plan && terragrunt apply
+   terragrunt output name_servers
+   ```
 
 ## 4. What is verified, and what is not
 
-Verified offline: the three modules (`validate`, `fmt`, `tflint`, and their mocked-provider tests, with
+Verified offline: the four modules (`validate`, `fmt`, `tflint`, and their mocked-provider tests, with
 deliberate breakages that each failed them); the Terragrunt units render the intended state bucket
 and key, KMS alias, account guard and tags, and the bootstrap units render their local backends, both
 providers and their `exclude` blocks (checked with `terragrunt render`);
@@ -187,11 +238,21 @@ The first deploy worked end to end: the OIDC trust, `aws s3 sync`, the invalidat
 distribution serves the home page, the three audience pages, the icons, the social image and the sitemap with
 HSTS and `nosniff`, and answers a missing page with the site's own 404.
 
+The domain's zone answered as Namecheap's DNS did before any nameserver moved: A, MX, both TXT values, the CNAME and
+the DKIM key (five record sets, eight values), each read from the zone with `test-dns-answer` and from a public
+resolver, matched, and the unit re-plans with no changes. The first apply stopped at the TXT records, because the
+provider adds a TXT value's quotation marks itself and Route 53 refuses a second pair. The module now takes plain
+text, and a test guards it. After the nameservers moved, Cloudflare and Google answered the zone's SOA from Route 53
+and every record set matched again, `http://mwavuli.co/` still answered 302 to `http://www.mwavuli.co/`, and
+`www` still answered 200.
+
 State replication did not work at first, and the offline tests could not show it: every object failed, because
 both buckets use an S3 Bucket Key, so KMS sees the bucket's own ARN as the encryption context, and the
 replication role's condition admitted only the bucket's objects. The module now admits both, a test guards it,
 and the four state objects then replicated (`COMPLETED`, each encrypted with its own key, and again in the
 replica with the replica's).
 
-Not verified: the domain and its certificate (M2), and the deploy role's refusal of anything outside the site
-(its policy was read, and no request outside it was tried).
+Not verified: the site on the domain and its certificate (M2); a message delivered to the domain after the move
+(the mail records were compared, no mail was sent); resolvers that still held Namecheap's nameservers, which keep
+answering from Namecheap's copy until their cache expires; and the deploy role's refusal of anything outside the
+site (its policy was read, and no request outside it was tried).

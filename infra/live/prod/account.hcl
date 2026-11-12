@@ -33,6 +33,9 @@ locals {
   state_bucket         = "${local.org_name}-tfstate-${local.account_name}-${local.home_region}"
   state_replica_bucket = "${local.org_name}-tfstate-${local.account_name}-${local.replica_region}"
 
+  # The domain the account serves, registered at Namecheap. Its public DNS is the `dns` unit's hosted zone.
+  domain_name = "mwavuli.co"
+
   # The site's bucket, in the home region. Global, and it outlives the account, so it carries no account
   # id. The site unit creates it and the deploy role's policy names it.
   site_bucket_name = "${local.site_name}-${local.account_name}-${local.home_region}"

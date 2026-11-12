@@ -4,16 +4,16 @@ The Mwavuli AWS infrastructure: OpenTofu modules and Terragrunt units, **applied
 go-ahead. CI only validates them, and applying is never a CI step. The organization and Identity Center, which
 existed already and were adopted by import, are in
 [`docs/design/aws-organization.md`](../docs/design/aws-organization.md), with the order to apply them in. The site, the
-state backend and the deploy role are in [`docs/design/site-infrastructure.md`](../docs/design/site-infrastructure.md).
+state backend, the deploy role and the domain's DNS are in [`docs/design/site-infrastructure.md`](../docs/design/site-infrastructure.md).
 
 ```
-modules/                      OpenTofu modules: organization, identity-center, state-backend, static-site, github-deploy-role
+modules/                      OpenTofu modules: organization, identity-center, state-backend, static-site, github-deploy-role, dns-zone
 live/_bootstrap/              one state backend per account, bootstrapped once by a person, local state committed:
                               00-tfstate-management, 01-tfstate-prod
 live/management/              the management account (020784398387): account.hcl, then us-east-1/ with region.hcl and the
                               units organization and identity-center
 live/prod/                    the prod account (Primary, 341026626249): account.hcl, then us-east-1/ with region.hcl and the
-                              units site and deploy-role
+                              units site, deploy-role and dns
 root.hcl                      state backend, provider and tags for every unit under live/<account>/<region>/
 scripts/                      test-modules.sh, check-bootstrap-state.sh
 ```
