@@ -5,10 +5,10 @@ import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
 
 // Static output (default), extensionless directory URLs (build.format 'directory',
-// default). The production domain is an open brand decision (D4, brand/00-inventory.md),
-// so `site` is the reserved .example placeholder until it is confirmed.
+// default). `site` is the address the site answers on: canonical links, the sitemap and the
+// social image follow it. The bare domain redirects to it (M14 in docs/design/site-infrastructure.md).
 export default defineConfig({
-  site: 'https://mwavuli.example',
+  site: 'https://www.mwavuli.co',
   trailingSlash: 'ignore',
   integrations: [mdx(), sitemap()],
   vite: {

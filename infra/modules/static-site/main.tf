@@ -7,9 +7,22 @@
 # Versioning is off on purpose. A build is reproducible from git, so rollback is deploying a previous
 # ref rather than restoring an object version, and versions of a whole site written on every deploy
 # pile up for a recovery path nobody uses.
+#
+# With a `domain` the site is also served on it: a certificate for its names, validated in the domain's
+# hosted zone, an alias record for each name, and a redirect from every name but the canonical one.
 
 locals {
   origin_id = "site"
+
+  # The names the site answers on, its canonical one first.
+  names = var.domain == null ? [] : concat([var.domain.canonical], var.domain.redirects)
+
+  # Which hosts the viewer-request function redirects, and to what: it reads this ahead of its own code, so
+  # the hosts live in this module's input alone, and the function stays a file that can be tested as it is.
+  site = {
+    canonical = var.domain == null ? "" : var.domain.canonical
+    redirects = var.domain == null ? [] : var.domain.redirects
+  }
 }
 
 resource "aws_s3_bucket" "site" {
@@ -57,9 +70,9 @@ resource "aws_cloudfront_origin_access_control" "site" {
 resource "aws_cloudfront_function" "viewer_request" {
   name    = "${var.name}-viewer-request"
   runtime = "cloudfront-js-2.0"
-  comment = "Directory-style URIs onto their index.html object."
+  comment = "Redirects to the canonical host, and maps directory-style URIs onto their index.html object."
   publish = true
-  code    = file("${path.module}/functions/viewer-request.js")
+  code    = "var SITE = ${jsonencode(local.site)};\n\n${file("${path.module}/functions/viewer-request.js")}"
 }
 
 data "aws_cloudfront_cache_policy" "caching_optimized" {
@@ -78,7 +91,7 @@ resource "aws_cloudfront_distribution" "site" {
   price_class     = var.price_class
   http_version    = "http2and3"
   is_ipv6_enabled = true
-  aliases         = var.aliases
+  aliases         = local.names
 
   # The regional endpoint: a new bucket's global endpoint answers with redirects until DNS catches up.
   origin {
@@ -121,20 +134,67 @@ resource "aws_cloudfront_distribution" "site" {
     }
   }
 
+  # The certificate is the validated one: the distribution is not changed until ACM has issued it.
   viewer_certificate {
-    cloudfront_default_certificate = var.certificate_arn == null
-    acm_certificate_arn            = var.certificate_arn
-    ssl_support_method             = var.certificate_arn == null ? null : "sni-only"
-    minimum_protocol_version       = var.certificate_arn == null ? null : "TLSv1.2_2021"
+    cloudfront_default_certificate = var.domain == null
+    acm_certificate_arn            = var.domain == null ? null : aws_acm_certificate_validation.site[0].certificate_arn
+    ssl_support_method             = var.domain == null ? null : "sni-only"
+    minimum_protocol_version       = var.domain == null ? null : "TLSv1.2_2021"
   }
 
   tags = var.tags
+}
+
+# The certificate for every name the site answers on. A new one is issued before the old one goes, so
+# changing the names never leaves the distribution holding a certificate that is being deleted.
+resource "aws_acm_certificate" "site" {
+  count = var.domain == null ? 0 : 1
+
+  domain_name               = var.domain.canonical
+  subject_alternative_names = var.domain.redirects
+  validation_method         = "DNS"
+  tags                      = var.tags
 
   lifecycle {
-    precondition {
-      condition     = length(var.aliases) == 0 || var.certificate_arn != null
-      error_message = "A distribution with aliases needs an ACM certificate in us-east-1 that covers them: set certificate_arn."
-    }
+    create_before_destroy = true
+  }
+}
+
+# ACM asks for one CNAME per name. The records are looked up by name, so which ones there are is known when
+# the plan is made, and what they hold when the certificate exists. ACM gives a name the same record on every
+# request, so allow_overwrite adopts one an earlier certificate for the name left behind.
+resource "aws_route53_record" "validation" {
+  for_each = toset(local.names)
+
+  zone_id         = var.domain.zone_id
+  name            = one([for option in aws_acm_certificate.site[0].domain_validation_options : option.resource_record_name if option.domain_name == each.key])
+  type            = one([for option in aws_acm_certificate.site[0].domain_validation_options : option.resource_record_type if option.domain_name == each.key])
+  records         = [one([for option in aws_acm_certificate.site[0].domain_validation_options : option.resource_record_value if option.domain_name == each.key])]
+  ttl             = 60
+  allow_overwrite = true
+}
+
+# Waits until ACM has issued the certificate, which it does once it can read the records above.
+resource "aws_acm_certificate_validation" "site" {
+  count = var.domain == null ? 0 : 1
+
+  certificate_arn         = aws_acm_certificate.site[0].arn
+  validation_record_fqdns = [for record in aws_route53_record.validation : record.fqdn]
+}
+
+# Every name answers over IPv4 and IPv6. The records refer to the distribution, so they are made once it
+# serves the names: a name that resolved before that would answer with an error.
+resource "aws_route53_record" "alias" {
+  for_each = { for pair in setproduct(local.names, ["A", "AAAA"]) : "${pair[0]}/${pair[1]}" => { name = pair[0], type = pair[1] } }
+
+  zone_id = var.domain.zone_id
+  name    = each.value.name
+  type    = each.value.type
+
+  alias {
+    name                   = aws_cloudfront_distribution.site.domain_name
+    zone_id                = aws_cloudfront_distribution.site.hosted_zone_id
+    evaluate_target_health = false
   }
 }
 

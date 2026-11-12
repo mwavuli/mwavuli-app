@@ -1,8 +1,8 @@
-# Public DNS for the domain, in Route 53: the hosted zone and every record the domain had at Namecheap when its DNS
-# moved here. Namecheap's Advanced DNS page was the authoritative list, and each record below is one of its entries.
+# Public DNS for the domain, in Route 53: the hosted zone and the records of its email, which is Lark's. The records
+# that point at the site are the `site` unit's, made with the certificate they serve.
 #
-# The zone answers nothing the world asks until the registrar's nameservers are this zone's own (the `name_servers`
-# output). Namecheap keeps its own copy of the records, so switching its nameservers back restores the old DNS.
+# The zone answers for the domain because the registrar's nameservers are this zone's own (the `name_servers`
+# output). Namecheap keeps the copy of the records it had, so switching its nameservers back restores the old DNS.
 # docs/design/site-infrastructure.md (M13) has the cutover and the rollback.
 
 include "root" { path = find_in_parent_folders("root.hcl") }
@@ -20,11 +20,6 @@ inputs = {
   tags      = local.account.common_tags
 
   records = {
-    # What the site answers with until it is on the domain. Namecheap's "URL Redirect Record" is this A record, served
-    # by Namecheap's redirect servers (the apex to http://www.mwavuli.co/), and the www CNAME is its parking page.
-    apex-redirect = { name = "@", type = "A", values = ["162.255.119.218"] }
-    www-parking   = { name = "www", type = "CNAME", values = ["parkingpage.namecheap.com."] }
-
     # Email is Lark's. The MX priorities are Lark's (lowest is tried first), the first TXT value proves the domain to
     # Lark, the second is the SPF policy, and the DKIM key signs outgoing mail under Lark's selector.
     mail = {

@@ -30,9 +30,10 @@ pnpm nx run-many -t lint test check --projects=infra
 ```
 
 `lint` is `tofu fmt`, `terragrunt hcl fmt --check` and `shellcheck`. `test` runs, for each module, `tofu init -backend=false`
-in readonly-lock mode, `fmt`, `validate` and `tofu test` against mocked providers. `check` (`nx run-many -t check`) confirms
+in readonly-lock mode, `fmt`, `validate` and `tofu test` against mocked providers, then `node --test` on any function the
+module ships (`functions/*.test.mjs`). `check` (`nx run-many -t check`) confirms
 that the only state in git is a bootstrap unit's own and holds nothing secret-bearing; it reads git, not just this
-folder, so Nx never caches it. It needs OpenTofu 1.13, Terragrunt 1.1 and shellcheck.
+folder, so Nx never caches it. It needs OpenTofu 1.13, Terragrunt 1.1, shellcheck and Node.
 
 Applying is not an Nx target and never runs from CI. Section 4 of the organization record gives the order from the
 first apply to Identity Center sign-in, and section 3 of the site record the order after it.
