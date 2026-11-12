@@ -10,7 +10,12 @@ same — stage and commit `.scratch/` like any other path (e.g. under "commit
 all"); never add it to `.gitignore` or exclude it from a commit.
 
 Nothing under `.scratch/` is authoritative. A decision belongs in `brand/` or
-`business/`, where it can be found.
+`business/`, or for infrastructure in `docs/design/`, where it can be found.
+
+## Release phase
+
+Pre-launch: no real user, no real data, no deployed site. The change that lets the first real user in
+flips this to live.
 
 ## Brand
 

@@ -135,6 +135,10 @@ cython_debug/
 **/.terraform/*
 *.tfstate
 *.tfstate.*
+# The bootstrap units keep their own state in git: a backend cannot hold the state of what creates it.
+# These are the only state files allowed in version control, which is why a bootstrap unit may not
+# create a resource with a secret attribute (scripts/check-bootstrap-state.sh).
+!infra/live/_bootstrap/*/tfstate/terraform.tfstate
 crash.log
 crash.*.log
 *.tfvars
