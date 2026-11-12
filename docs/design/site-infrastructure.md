@@ -10,7 +10,7 @@ account, organization or repository outside Mwavuli's.
 |---|---|
 | This repository owns | the prod account's state backend (a bucket, two KMS keys and a replica), the site (a bucket and a CloudFront distribution), the deploy role, and the workflow that publishes |
 | The owner supplies | administrator access to the prod account through Identity Center ([`aws-organization.md`](aws-organization.md)), and later the domain |
-| Status | written and validated offline; **nothing is applied** |
+| Status | **applied** on 2026-11-12: the prod state backend, the site and the deploy role. The first deploy ran green and the site answers on its CloudFront name. |
 
 Decisions are numbered `M1…` and are the record of *why*. A decision that stops being true is replaced,
 not renumbered.
@@ -44,12 +44,13 @@ name is known: `aliases` and `certificate_arn` on the `site` unit; an ACM certif
 validated through DNS; and a Route 53 hosted zone in this account, with the registrar's nameservers
 pointed at it by the owner. A `www` redirect then joins the viewer-request function.
 
-### M3 — The first apply (open: a live change)
+### M3 — The first apply (taken)
 
-Applying creates, in the prod account, a state bucket with its replica, two KMS keys, a bucket and a
+The first apply created, in the prod account, a state bucket with its replica, two KMS keys, a bucket and a
 CloudFront distribution for the site, and an OIDC provider with a role. It costs about two dollars a
-month, almost all of it the two KMS keys. It waits for the owner's go-ahead, and a person runs it with
-administrator credentials in that account. Section 3 has the order.
+month, almost all of it the two KMS keys. It ran on 2026-11-12 with the owner's go-ahead and an Identity
+Center administrator session in that account, each plan read first. Section 3 has the order, and
+[`aws-organization.md`](aws-organization.md) (O10) the organization policy that refused the first attempt.
 
 ---
 
@@ -143,17 +144,20 @@ an unset variable is a named failure, never a publish that lands somewhere wrong
 
 ---
 
-## 3. Before the first deploy
+## 3. The order, and where it stands
+
+All of it ran on 2026-11-12.
 
 1. **Sign in to the prod account** (M1) through Identity Center with administrator access, as section 4 of
    [`aws-organization.md`](aws-organization.md) sets it up.
-2. **Bootstrap the backend** (M5), as an administrator in that account, then commit the state it wrote:
+2. **Bootstrap the backend** (M5), as an administrator in that account, then commit the state it wrote
+   (21 resources):
    ```bash
    cd infra/live/_bootstrap/01-tfstate-prod
    terragrunt apply
    git add tfstate/terraform.tfstate
    ```
-3. **Apply the site and the deploy role**, reading each plan first:
+3. **Apply the site and the deploy role**, reading each plan first (8 and 3 resources):
    ```bash
    cd infra/live/prod/us-east-1/site && terragrunt plan && terragrunt apply
    cd ../deploy-role && terragrunt plan && terragrunt apply
@@ -164,12 +168,13 @@ an unset variable is a named failure, never a publish that lands somewhere wrong
    gh variable set SITE_BUCKET --body "$(terragrunt output -raw bucket_name)"          # in site/
    ```
 5. **Deploy**: run the `deploy` workflow. It publishes, invalidates, and runs `site/scripts/smoke.sh` against
-   the distribution's own name. The ticket is done when that is green and the live site has been looked at.
+   the distribution's own name. The first run was green, and the live site answers on the distribution's
+   name (`d3g3tcova33n6t.cloudfront.net`).
 
 ## 4. What is verified, and what is not
 
-Verified offline: the three modules (`validate`, `fmt`, `tflint`, and thirteen mocked-provider tests, with
-twelve deliberate breakages that each failed them); the Terragrunt units render the intended state bucket
+Verified offline: the three modules (`validate`, `fmt`, `tflint`, and their mocked-provider tests, with
+deliberate breakages that each failed them); the Terragrunt units render the intended state bucket
 and key, KMS alias, account guard and tags, and the bootstrap units render their local backends, both
 providers and their `exclude` blocks (checked with `terragrunt render`);
 `infra/scripts/check-bootstrap-state.sh` against clean, secret-bearing, stray and
@@ -177,7 +182,16 @@ backup state; the workflows (`actionlint`, with `shellcheck` on their shell); th
 every page the site builds; and `site/scripts/smoke.sh` against a local stand-in for S3 and CloudFront, healthy
 and with four faults injected, each of which it caught.
 
-Not verified, because nothing was run against AWS: a plan or an apply,
-S3 accepting the replication configuration (the role's policy can take a moment to propagate, and the
-first apply may need a retry), the real distribution's behaviour, the OIDC trust, and the `aws s3 sync`
-and invalidation steps. The first apply and the first deploy are where these are verified.
+Verified against AWS: every plan was read before its apply, and the applied units re-plan with no changes.
+The first deploy worked end to end: the OIDC trust, `aws s3 sync`, the invalidation and the smoke checks. The
+distribution serves the home page, the three audience pages, the icons, the social image and the sitemap with
+HSTS and `nosniff`, and answers a missing page with the site's own 404.
+
+State replication did not work at first, and the offline tests could not show it: every object failed, because
+both buckets use an S3 Bucket Key, so KMS sees the bucket's own ARN as the encryption context, and the
+replication role's condition admitted only the bucket's objects. The module now admits both, a test guards it,
+and the four state objects then replicated (`COMPLETED`, each encrypted with its own key, and again in the
+replica with the replica's).
+
+Not verified: the domain and its certificate (M2), and the deploy role's refusal of anything outside the site
+(its policy was read, and no request outside it was tried).

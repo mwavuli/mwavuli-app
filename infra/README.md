@@ -1,7 +1,8 @@
 # infra
 
-The Mwavuli AWS infrastructure: OpenTofu modules and Terragrunt units. **Nothing is applied**, and a person applies
-everything. The organization and Identity Center, which exist already and are adopted by import, are in
+The Mwavuli AWS infrastructure: OpenTofu modules and Terragrunt units, **applied** on 2026-11-12 with the owner's
+go-ahead. CI only validates them, and applying is never a CI step. The organization and Identity Center, which
+existed already and were adopted by import, are in
 [`docs/design/aws-organization.md`](../docs/design/aws-organization.md), with the order to apply them in. The site, the
 state backend and the deploy role are in [`docs/design/site-infrastructure.md`](../docs/design/site-infrastructure.md).
 
