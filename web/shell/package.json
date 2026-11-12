@@ -1,0 +1,48 @@
+{
+  "name": "@mwavuli/web-shell",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The Mwavuli web app's shell: it picks a persona and loads that portal, one at a time.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "catalog:web",
+    "@fontsource-variable/montserrat": "catalog:web",
+    "@mwavuli/brand": "workspace:*",
+    "@mwavuli/personas": "workspace:*",
+    "@mwavuli/theme": "workspace:*",
+    "@mwavuli/web-landlord": "workspace:*",
+    "@mwavuli/web-ops": "workspace:*",
+    "@mwavuli/web-tenant": "workspace:*",
+    "react": "catalog:web",
+    "react-dom": "catalog:web",
+    "react-router": "catalog:web"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "catalog:web",
+    "@testing-library/react": "catalog:web",
+    "@testing-library/user-event": "catalog:web",
+    "@types/react": "catalog:web",
+    "@types/react-dom": "catalog:web",
+    "@vitejs/plugin-react": "catalog:web",
+    "jsdom": "catalog:web",
+    "tailwindcss": "catalog:web",
+    "typescript": "catalog:",
+    "vite": "catalog:web",
+    "vitest": "catalog:"
+  },
+  "nx": {
+    "name": "web-shell",
+    "tags": [
+      "platform:web",
+      "type:shell"
+    ]
+  }
+}

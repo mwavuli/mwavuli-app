@@ -1,0 +1,75 @@
+packages:
+  - brand
+  - packages/*
+  - site
+  - web/*
+  - mobile/*
+
+# NativeWind's Babel preset rewrites every className file to import `react-native-css-interop/jsx-runtime`,
+# a dependency of nativewind that pnpm keeps out of the way of the app and of each portal package. Hoisting
+# it to the root lets Metro find it from all of them.
+publicHoistPattern:
+  - react-native-css-interop
+
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  nx: true
+  sharp: true
+
+# pnpm refuses a version younger than 24 hours (1440 minutes) instead of quietly exempting it (its default is to add the
+# version to minimumReleaseAgeExclude and carry on). Choose an older version; an exemption is the owner's call.
+minimumReleaseAge: 1440
+minimumReleaseAgeStrict: true
+
+# One version of each shared dependency, named here and referenced as `catalog:` or `catalog:<name>`.
+# The site keeps its own ranges: its build is pinned to Astro's Vite (vite 6).
+catalog:
+  typescript: ^5.9.3
+  vitest: ^5.1.0
+
+catalogs:
+  web:
+    react: ^19.3.1
+    react-dom: ^19.3.1
+    react-router: ^8.5.1
+    '@types/react': ^19.3.0
+    '@types/react-dom': ^19.3.0
+    vite: ^8.3.8
+    '@vitejs/plugin-react': ^6.3.0
+    jsdom: ^31.0.0
+    tailwindcss: ^4.3.2
+    '@tailwindcss/vite': ^4.3.2
+    '@testing-library/react': ^16.3.3
+    '@testing-library/user-event': ^14.6.9
+    '@fontsource-variable/inter': ^5.3.0
+    '@fontsource-variable/montserrat': ^5.3.0
+  # Expo SDK 58: these follow what `expo install` pins. Expo's own packages use `~58.0.0`, not the newest patch,
+  # so pnpm can pick a release old enough for the release-age check.
+  native:
+    expo: ~58.0.0
+    expo-font: ~58.0.0
+    expo-status-bar: ~58.0.0
+    expo-system-ui: ~58.0.0
+    react: 19.3.0
+    react-dom: 19.3.0
+    react-native: 0.88.1
+    react-native-reanimated: 4.7.1
+    react-native-safe-area-context: ~5.11.1
+    react-native-worklets: 0.13.0
+    '@types/react': ~19.3.0
+    '@expo-google-fonts/inter': ^0.4.2
+    '@expo-google-fonts/montserrat': ^0.4.2
+    # NativeWind 4 is the stable line and wants Tailwind 3. Version 5 (Tailwind 4, one theme with the web)
+    # is a release candidate the authors mark as not for production.
+    nativewind: ^4.2.7
+    tailwindcss: ^3.4.19
+    '@babel/core': ^7.29.0
+    babel-plugin-dynamic-import-node: ^2.3.3
+    '@react-native/jest-preset': ^0.88.1
+    '@testing-library/react-native': ^14.1.0
+    '@jest/globals': ^30.0.0
+    jest: ^30.5.2
+    jest-expo: ~58.0.14
+    react-server-dom-webpack: 19.3.0
+    test-renderer: ^1.3.1

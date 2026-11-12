@@ -1,165 +1,83 @@
-# mwavuli-site
+# mwavuli
 
-The **Mwavuli Property Management** site: a static [Astro](https://astro.build) build on the same stack and
-structure as [nyange-site](https://github.com/nyange-app/nyange-site). The repository also holds the brand and
-design language ([`brand/`](brand/README.md)) and the business documents (`business/`).
-
-## Stack
-
-| Concern  | Choice                                                                                              |
-|----------|-----------------------------------------------------------------------------------------------------|
-| Framework | Astro 5, static output, TypeScript strict                                                          |
-| Styling  | Tailwind CSS v4 through `@tailwindcss/vite` and `@tailwindcss/typography`                           |
-| Brand    | Tokens, logos and icons are read from `brand/` in place; `src/styles/global.css` bridges the tokens to the Tailwind theme and resets Tailwind's default palette, fonts, radii and shadows |
-| Content  | Pages in `.astro`; legal documents as an MDX content collection in `src/content/legal/`             |
-| Fonts    | Montserrat Variable and Inter Variable, self-hosted through Fontsource (brand T8)                   |
-| Icons    | The tab icon is the brand's SVG app icon; `favicon.ico` and the iOS icon are rendered from it at build time with `sharp` (brand G3) |
-| Infra    | OpenTofu through Terragrunt in `infra/`: the account's own state backend, the site and its deploy role; standalone, written and not applied |
-| Deploy   | GitHub Actions over OIDC: staged S3 sync, CloudFront invalidation, smoke checks                     |
-| Node/PM  | Node 22, pnpm (pinned in `packageManager`; `vite@^6` pinned so `@tailwindcss/vite` binds to Astro's Vite) |
-
-## Local development
-
-```bash
-pnpm install
-pnpm dev        # dev server on :4321
-pnpm build      # astro check + astro build → dist/
-pnpm preview    # serve dist/ locally
-```
-
-The social image is committed, like the agreement PDFs. After changing `scripts/social-image/card.html` or the brand,
-rebuild it with `node scripts/social-image/build.mjs`. It needs Playwright with Chromium (`npm install playwright`, or
-point `PLAYWRIGHT_DIR` at an existing install).
+**Mwavuli Property Management** in one Nx and pnpm workspace: the Go API, the marketing site, the web and mobile
+apps, and the infrastructure. The repository also holds the brand and design language ([`brand/`](brand/README.md))
+and the business documents (`business/`).
 
 ## Layout
 
-```
-brand/               brand and design language: spec, tokens, logos, icons
-business/            business model and agreements
-docs/design/         infrastructure decisions (site-infrastructure.md)
-infra/               OpenTofu through Terragrunt: modules/ (state-backend, static-site, github-deploy-role), live/_bootstrap/ and
-                     live/prod/ (account.hcl, then us-east-1/ with region.hcl and the units), root.hcl
-public/              files served as they are: social.png
-scripts/             smoke.sh (checks a deployed copy), check-bootstrap-state.sh (what state may be committed), and
-                     social-image/ (card.html and build.mjs for public/social.png)
-.github/workflows/   ci.yml (pull requests: astro check and build) and deploy.yml (publish)
-src/
-  components/        Header, Footer, Hero, AudienceHero, AudienceChips, RuledList, ContactBlock, Button,
-                     Lockup (the horizontal lockup, inlined), RoofBands
-  content/legal/     legal documents (MDX); schema in src/content.config.ts
-  layouts/Layout.astro
-  pages/             home, owners, tenants, businesses, 404, legal/[slug], and the generated
-                     favicon.ico and apple-touch-icon.png
-  styles/global.css  brand tokens bridged to the Tailwind theme, then the site's type and motion
-  audiences.ts       the three audiences: labels, paths, and the home page's proof lines
-  config.ts          site-wide constants
-  icons.ts           renders favicon.ico and apple-touch-icon.png from brand/logo/app-icon.svg
-```
+| Path                            | What                                                                                  | Stack                                       | Nx project                                    |
+| ------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------- | --------------------------------------------- |
+| [`api/`](api)                   | The HTTP API                                                                          | Go 1.27, Echo v5                            | `api`                                         |
+| [`site/`](site)                 | The marketing site, a static build                                                    | Astro 5, Tailwind 4                         | `site`                                        |
+| [`web/shell/`](web)             | The web app's shell: picks a persona and loads that portal                            | Vite 8, React 19, React Router, Tailwind 4  | `web-shell`                                   |
+| `web/{tenant,landlord,ops}/`    | The three web portals, one package each                                               | React                                       | `web-tenant`, `web-landlord`, `web-ops`       |
+| [`mobile/shell/`](mobile)       | The mobile app's shell: picks a persona and mounts that portal                        | Expo SDK 58, React Native 0.88, NativeWind  | `mobile-shell`                                |
+| `mobile/{tenant,landlord,ops}/` | The three mobile portals, one package each                                            | React Native                                | `mobile-tenant`, `mobile-landlord`, `mobile-ops` |
+| [`infra/`](infra)               | The AWS infrastructure, applied by a person                                           | OpenTofu through Terragrunt                 | `infra`                                       |
+| `packages/personas/`            | The three personas (tenant, landlord, operations), named once for web and mobile      | TypeScript                                  | `personas`                                    |
+| `packages/theme/`               | The brand tokens as a Tailwind theme: CSS for Tailwind 4, a preset for Tailwind 3     | CSS, CommonJS                               | `theme`                                       |
+| [`brand/`](brand/README.md)     | The brand and design language: spec, tokens, logos, icons                             |                                             | `brand`                                       |
+| `business/`, `docs/`            | The business model and agreements; design records                                     |                                             |                                               |
 
-## Design
+## Getting started
 
-The home page is type-led: an oversize Montserrat headline on a Green first screen with a layered roof-form
-accent, the offer as three full-bleed bands with oversize figures, the six services as one ruled list, and contact. The
-Owners, Tenants and Businesses chips change the proof line with CSS only (radios and `:has()`); without `:has()` all
-three lines show. It has no photographs and nothing that needs JavaScript.
-
-The Owners, Tenants and Businesses pages share the home page's first screen (`Hero`): the same giant two-beat
-headline, chips that link between the three pages, a proof card and the roof art. Below it each page is full-bleed
-bands, ruled lists and oversize figures, with a gold rule under the first content heading. Owners is the longest: its
-figures come from the model's worked example (BM18). Tenants follows the tenancy form's own headings. Businesses is
-short because the model has little beyond BM9, BM10 and P10. The header carries the audience links from 768 px; below
-that the chips and the footer do.
-
-The social image (`public/social.png`, 1200 × 630, brand A6) is the reversed lockup on Green with the campaign
-headline "Managed Properties. Better Living." in white and gold (F6 sets that line for social) and the roof bands cut
-off by the edge. Every page's `og:image` and large Twitter card point at it through `Layout.astro` and `SOCIAL_IMAGE`
-in `src/config.ts`. The card reads the brand tokens and the site's Montserrat, so it follows the brand. The lockup is
-400 px wide, so it stays above the 180 px screen minimum (L5) when a feed shows the card at 45 percent, and the text
-stays 40 px inside the top and bottom edges for the 1.91:1 and 2:1 crops.
-
-The tab icon is the brand's SVG app icon. `favicon.ico` (the tile at 32 and 48 px) and `apple-touch-icon.png` (180 px)
-are generated from the same file when the site is built, because a platform that needs a fixed filename gets a
-generated file, not a copy (G3). iOS rounds its icon and paints transparency black, so the iOS icon puts the tile on a
-full-bleed square of its own gold, with the mark unchanged at 59 percent of the width (L7, "Bend when").
-
-Deliberate brand deviations, recorded as brand 09-governance asks:
-
-- **T3** (Default): display sizes above the scale's top step (hero up to 160 px, figures 192 px on the home page and
-  96 px on the audience pages, closing line 118 px) with tighter tracking; four sizes or fewer in each section.
-- **S2** (Default): a 24 px page margin on phones, not 16 px, so the 195 px lockup keeps its L4 clear space.
-- **A6** (Default): the header sits on Green with the reversed lockup to join the first screen. There is no photograph
-  (D14), and the gold roof band stands in for the gold rule under the headline.
-- **G3** (Default): `public/social.png` is a committed PNG export of artwork that can be regenerated, because rendering
-  the card in the site's Montserrat needs Chromium, which the build does not have. Its source is
-  `scripts/social-image/card.html`; the favicon files, which `sharp` can render, are generated in the build.
-
-## Deploy
-
-The site is static files in a private S3 bucket behind CloudFront, in an AWS account of Mwavuli's own. The
-infrastructure is standalone: `infra/` creates its own state backend, the site and the deploy role, and depends on no
-other account, organization or repository. It is OpenTofu through Terragrunt, applied by a person, and
-`.github/workflows/deploy.yml` publishes `dist/` on a push to `main` or by hand. The decisions, and what the owner must
-supply and do before the first apply, are in [`docs/design/site-infrastructure.md`](docs/design/site-infrastructure.md).
-**Nothing is applied yet**, and `infra/live/prod/account.hcl` ships with the account id `unset`, so Terragrunt refuses
-to run until it names the account.
-
-| Files | `Cache-Control` |
-|---|---|
-| `_astro/*` (hashed) | `public, max-age=31536000, immutable` |
-| `*.html` | `public, max-age=300, s-maxage=86400` |
-| other statics | `public, max-age=86400` |
-
-The upload is staged (hashed assets, other statics, then HTML) with no `--delete`. Every deploy invalidates `/*` and
-then runs `scripts/smoke.sh` against the distribution. It needs two repository variables, `AWS_DEPLOY_ROLE_ARN` and
-`SITE_BUCKET`, and fails before it builds if either is missing. `gh variable set DEPLOY_ENABLED --body false` freezes it.
-
-Checks that need no AWS credentials:
+You need Node 22 (`.nvmrc`), pnpm through Corepack, Python 3 (the brand document check), and for the parts you touch:
+Go 1.27 (api), OpenTofu 1.13, Terragrunt 1.1 and shellcheck (infra, the site's scripts), Ruby with Bundler and Xcode or
+the Android SDK (mobile releases).
 
 ```bash
-for m in infra/modules/*/; do (cd "$m" && tofu init -backend=false && tofu validate && tofu test); done
-terragrunt hcl fmt --check --working-dir infra
-scripts/check-bootstrap-state.sh
-scripts/smoke.sh https://<domain>    # after `pnpm build`, against a deployed copy
+corepack enable
+pnpm install
+
+pnpm nx dev site             # Astro, :4321
+pnpm nx dev web-shell        # Vite, :5173
+pnpm nx start mobile-shell   # Expo; press i for the iOS simulator
+pnpm nx serve api            # Go, :8080
 ```
 
-## Before launch
+Everything goes through Nx, which runs a project's targets in dependency order and caches the results:
 
-Open, and not for the code to decide:
+```bash
+pnpm nx run-many -t lint typecheck test build check   # everything, as CI does
+pnpm nx affected -t lint typecheck test build         # only what your change touches
+pnpm nx graph                                         # the project graph
+pnpm format                                           # Prettier (web, mobile, packages, root configs)
+```
 
-- **Domain (brand D4).** `site` in `astro.config.mjs` is the reserved `.example` placeholder. Canonical URLs and the
-  `og:image` address follow it, so link previews work only once the domain is set.
-- **Contact.** Phone and email read "to be added". There is no contact form: it needs a destination that can receive it.
-- **Photography (D14).** The design uses none.
-- **Legal text.** `src/content/legal/privacy.mdx` is a placeholder pending counsel.
-- **Web manifest** with 192 and 512 px icons, only if the site should be installable.
-- **Deploy.** The infrastructure and the workflow are written and not applied. The owner creates the AWS account and
-  supplies its id in `infra/live/prod/account.hcl`, and decides the domain: see `docs/design/site-infrastructure.md`,
-  section 3.
-- **Analytics.**
-- **Commercial tenancies.** The model has no commercial tenancy form yet (BM9 counsel note), so the Businesses page
-  describes the landlord's side and points to the Owners and Tenants pages instead of describing a shop tenant's terms.
-- **Luganda.** The Owners page repeats the agreement's English-and-Luganda promise (BM11); the Luganda text is not in
-  the repository yet.
+Targets come from each package's `scripts` (and `project.json` for the Go API and the infrastructure). The ones that
+are cacheable, and what they depend on, are named once in [`nx.json`](nx.json).
 
-Copy the owner has not yet approved. On the home page (`src/pages/index.astro`):
+## How it fits together
 
-- The Tenants proof line "Tell us what is broken. We arrange a trusted contractor." (tenancy form, clause 6) and the
-  Businesses proof line "We manage shops and offices as well as homes." (BM9).
-- Labels: "The offer in three lines", "What we look after for you.", "Services", "Contact us", "Contact" and the card
-  links "More for owners", "More for tenants" and "More for businesses".
-- The offer statements split BM18 at its commas; the six one-line service descriptions come from BM18 and BM2.
+**One brand, three outputs.** The tokens in `brand/tokens/mwavuli.tokens.json` are the source. `packages/theme/theme.css`
+is the Tailwind 4 theme the site and the web app import; `packages/theme/native.cjs` is the Tailwind 3 preset the mobile
+app uses with NativeWind. Both read the same tokens, and `theme.test.mjs` fails when they disagree on a colour, a type
+step, a radius or a shadow. Colours, fonts, radii and shadows are reset first, so an off-brand utility such as
+`bg-blue-500` generates nothing.
 
-On the audience pages (`owners.astro`, `tenants.astro`, `businesses.astro`), where a sentence is not word for word
-from the model or the tenancy form:
+**Personas are disjoint, and one is loaded at a time.** A persona's portal is a package that may use the shared
+packages and nothing else, so the tenant portal cannot reach into the landlord's. A shell reaches a portal only through
+a dynamic `import()` in its `registry.ts`, so only the chosen portal is fetched on the web and evaluated on mobile.
+Three layers hold this: the lint rules in [`eslint.config.mjs`](eslint.config.mjs) (by Nx tag, and for how a shell may
+name a portal), the shells' tests (which record what was loaded), and, for the web build, a plugin that fails the build
+if a portal's code lands in what loads up front or two portals' code load together
+([`isolate-portals.ts`](web/shell/plugins/isolate-portals.ts)).
 
-- New labels: "How we start.", "Your papers.", "What we ask of you.", "10% on repair quotes.", "Utilities at cost." and
-  "Read next", with one-line summaries of the Owners and Tenants pages.
-- Owners: the ledger shows BM18's statement with a "UGX" prefix and a true minus; "It is charged on rent only…" is BM4
-  with "The 15%" as "It"; "There is no sign-up fee, no letting fee and no yearly fee." joins BM18 and P7; the
-  chasing and court rows combine BM18's example with BM5.
-- Tenants: the headline "Great spaces, happy tenants." is the People-Centric pillar (F2), backed by the repair line;
-  "Your rent is due on the day written in your tenancy form.", "Any late fee is written in your tenancy form." and the
-  early-leaver line (P13, "with no fee on them") adapt clauses 2, 4 and 5 where the form leaves a term open; "this
-  tenancy" is "your tenancy" in the deposit text.
-- Businesses: the headline "Shops and offices. Same terms." compresses BM9 and BM10 (the hero's last two lines must
-  stay short, or they run under the card); "That is the rent minus our 15%…" is BM10's example reworded.
+**Dependency versions are named once.** Shared versions live in the pnpm catalogs in
+[`pnpm-workspace.yaml`](pnpm-workspace.yaml) and are referenced as `catalog:`. The site keeps its own ranges: its build is
+pinned to Astro's Vite 6. pnpm 12 stops on install scripts nobody approved (`allowBuilds`) and, in strict mode, on a
+version younger than 24 hours (`minimumReleaseAge`): pick an older version rather than exempting it.
+
+## CI and deploy
+
+[`ci.yml`](.github/workflows/ci.yml) runs `nx affected` on pull requests and on pushes to `main`. It starts with Nx's
+local cache. A remote cache needs the workspace connected to [Nx Cloud](https://nx.dev/nx-cloud) (`pnpm nx connect`,
+then a read-write token for runs on `main` and a read-only one for pull requests, as secrets; see the header of
+`ci.yml`). `@nx/s3-cache` is not used: it is deprecated, carries an
+unpatchable cache-poisoning flaw (CVE-2025-36852) and does not support the current Nx.
+
+[`deploy.yml`](.github/workflows/deploy.yml) publishes the site over OIDC when the site, the brand or the theme changes
+(see [`site/README.md`](site/README.md#deploy)). Mobile apps are released locally through Fastlane, never from CI, which
+type-checks, tests and bundles the mobile code ([`mobile/README.md`](mobile/README.md)). Infrastructure is applied by a person; CI only validates it
+([`infra/README.md`](infra/README.md)).

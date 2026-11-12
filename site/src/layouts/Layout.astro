@@ -1,0 +1,69 @@
+---
+import '../styles/global.css';
+import faviconUrl from '@mwavuli/brand/logo/app-icon.svg?url';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_NAME, SOCIAL_IMAGE } from '../config';
+
+interface Props {
+  /** Page name. The document title is "<title> · Mwavuli Property Management" (brand A6). */
+  title: string;
+  description?: string;
+  /** `brand` puts the header on Green, for a page whose first screen is Green. */
+  headerTone?: 'page' | 'brand';
+}
+
+const { title, description = SITE_DESCRIPTION, headerTone = 'page' } = Astro.props;
+
+const fullTitle = `${title} · ${SITE_NAME}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const socialImageUrl = new URL(SOCIAL_IMAGE.path, Astro.site);
+---
+
+<html lang="en-UG">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- The brand's SVG icon first for browsers that take it; favicon.ico (its sizes keep Chrome from
+         preferring it) and the iOS icon are generated from the same file in the build (brand G3). -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href={faviconUrl} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:locale" content="en_UG" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:width" content={String(SOCIAL_IMAGE.width)} />
+    <meta property="og:image:height" content={String(SOCIAL_IMAGE.height)} />
+    <meta property="og:image:alt" content={SOCIAL_IMAGE.alt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
+    <meta name="twitter:image:alt" content={SOCIAL_IMAGE.alt} />
+
+    <slot name="head" />
+  </head>
+  <body class="flex min-h-dvh flex-col bg-page font-sans text-body text-ink antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-6 focus:top-6 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-3 focus:font-display focus:font-semibold focus:text-brand focus:shadow-md"
+    >
+      Skip to content
+    </a>
+    <Header tone={headerTone} />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

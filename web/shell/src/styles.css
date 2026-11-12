@@ -1,0 +1,18 @@
+/* Brand faces (brand T8): Montserrat for display, Inter for text. */
+@import '@fontsource-variable/montserrat';
+@import '@fontsource-variable/inter';
+
+@import 'tailwindcss';
+@import '@mwavuli/theme/theme.css';
+
+/* Tailwind looks for classes under this app only. The portals are separate packages the shell loads,
+   so each one is named here. */
+@source '../../tenant/src';
+@source '../../landlord/src';
+@source '../../ops/src';
+
+/* Test files hold class names too, but Nx leaves them out of what a build is cached on, so Tailwind must
+   leave them out of what it generates: a class used only in a test would otherwise change the CSS and not
+   the cache key. */
+@source not './**/*.test.tsx';
+@source not '../../*/src/**/*.test.tsx';

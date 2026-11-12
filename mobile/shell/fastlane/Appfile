@@ -1,0 +1,5 @@
+# The identifiers come from the environment: MWAVULI_APP_ID (the iOS bundle id and the Android package
+# name, one value for both) and APPLE_TEAM_ID. The Fastfile refuses to release without them.
+app_identifier(ENV.fetch("MWAVULI_APP_ID", "unset"))
+package_name(ENV.fetch("MWAVULI_APP_ID", "unset"))
+team_id(ENV["APPLE_TEAM_ID"]) if ENV["APPLE_TEAM_ID"]

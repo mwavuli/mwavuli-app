@@ -1,0 +1,6 @@
+source "https://rubygems.org"
+
+gem "fastlane", "~> 2.240"
+# Fastlane's `cocoapods` action runs through Bundler and needs it here: `expo prebuild --no-install` writes
+# the Podfile, and installing the pods is what creates the .xcworkspace.
+gem "cocoapods", "~> 1.16"

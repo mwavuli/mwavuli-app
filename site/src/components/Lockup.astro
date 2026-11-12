@@ -1,0 +1,23 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import horizontalRaw from '@mwavuli/brand/logo/logo-horizontal.svg?raw';
+import horizontalReversedRaw from '@mwavuli/brand/logo/logo-horizontal-reversed.svg?raw';
+
+interface Props extends HTMLAttributes<'span'> {
+  /** The reversed lockup, for Green grounds. */
+  reversed?: boolean;
+}
+
+const { reversed = false, class: className, ...attrs } = Astro.props;
+
+// The horizontal lockup files declare width="52" height="128" against a 520 × 128
+// viewBox. Left in, a CSS `width: auto` resolves to that 52:128 ratio and the lockup
+// collapses to a speck, so the attributes are dropped and the viewBox carries the ratio.
+// Set the size with a height class on the component, e.g. <Lockup class="h-8" />.
+const svg = (reversed ? horizontalReversedRaw : horizontalRaw).replace(
+  / width="\d+" height="\d+"/,
+  '',
+);
+---
+
+<span {...attrs} class:list={['block [&>svg]:h-full [&>svg]:w-auto', className]} set:html={svg} />

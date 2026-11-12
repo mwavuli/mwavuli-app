@@ -1,0 +1,32 @@
+{
+  "name": "@mwavuli/mobile-ops",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The ops portal of the Mwavuli mobile app. The shell mounts it on demand; it depends on shared packages only.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint ."
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:native",
+    "nativewind": "catalog:native",
+    "react": "catalog:native",
+    "react-native": "catalog:native",
+    "typescript": "catalog:"
+  },
+  "nx": {
+    "name": "mobile-ops",
+    "tags": [
+      "platform:mobile",
+      "type:persona",
+      "persona:ops"
+    ]
+  }
+}

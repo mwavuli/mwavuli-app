@@ -1,6 +1,17 @@
-# PR checks for the site: `astro check` (types and content collections) and `astro build`, and the
-# infrastructure that hosts it, validated without AWS credentials. Pull requests only; deploy.yml
-# publishes.
+# Checks for the whole repository. `nx affected` runs lint, typecheck, test, build and check for the
+# projects a change touches, and whatever depends on them: the Go API, the site, the web and mobile apps,
+# the shared packages, and the infrastructure (OpenTofu validated and tested against mocked providers, no
+# AWS credentials). Pull requests, and pushes to main; deploy.yml publishes the site.
+#
+# Remote cache: none until the workspace is connected to Nx Cloud. Run `pnpm nx connect` once and commit the
+# `nxCloudId` it writes to nx.json. Then create two access tokens in Nx Cloud and add them as repository
+# secrets: a read-write one, NX_CLOUD_ACCESS_TOKEN, which runs on main use, and a read-only one,
+# NX_CLOUD_READ_ONLY_TOKEN, for pull requests and other branches. That way a pull request, whose workflow is
+# its own to edit, cannot write the cache that main reads. Without the secrets (and in forks) the job runs on
+# Nx's local cache alone.
+#
+# Mobile releases are not built here: they run on a developer's Mac through Fastlane (mobile/shell). The
+# job checks the mobile code and bundles it with Expo's Metro, which is what CI can do without signing keys.
 #
 # CI_ENABLED guards CI-type jobs. Freeze and resume with no code change:
 #     freeze:  gh variable set CI_ENABLED --body false
@@ -11,6 +22,8 @@ name: CI
 
 on:
   pull_request:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -20,51 +33,54 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  # The versions the infrastructure was developed against.
+  TOFU_VERSION: 1.13.1
+  TERRAGRUNT_VERSION: 1.1.6
+  # SHA-256 of terragrunt_linux_amd64 in that release's SHA256SUMS.
+  TERRAGRUNT_SHA256: d75a80bb264758ba00dabcb17f4b507fcdab4ca90d9e41f96750df036bf69b04
+
 jobs:
-  build:
-    name: astro check · astro build
+  check:
+    name: nx affected · lint typecheck test build check
     runs-on: ubuntu-latest
     if: vars.CI_ENABLED != 'false' # CI kill-switch (see header)
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      actions: read # nx-set-shas looks up the last successful run on main
+    env:
+      EXPO_NO_TELEMETRY: '1'
     steps:
+      # Nx finds what a change affects by comparing against the base, so it needs the history.
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
       - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v5
         with:
-          node-version: 22
+          node-version-file: .nvmrc
           cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      # `pnpm build` is `astro check && astro build`: the typecheck and the bundle.
-      - run: pnpm build
-
-  infra:
-    name: opentofu validate · test
-    runs-on: ubuntu-latest
-    if: vars.CI_ENABLED != 'false' # CI kill-switch (see header)
-    steps:
-      - uses: actions/checkout@v5
-      # The version the modules were developed against.
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: api/go.mod
+          cache-dependency-path: api/go.sum
       - uses: opentofu/setup-opentofu@v1
         with:
-          tofu_version: 1.13.1
+          tofu_version: ${{ env.TOFU_VERSION }}
           tofu_wrapper: false
-      # -lockfile=readonly fails if a committed lock does not cover this runner's platform, so a provider
-      # pin cannot quietly stop applying. `tofu test` runs against mocked providers: no credentials,
-      # nothing created.
-      - name: Modules
+      - name: Terragrunt
         run: |
           set -euo pipefail
-          for module in infra/modules/*/; do
-            echo "::group::$module"
-            (
-              cd "$module"
-              tofu init -backend=false -input=false -lockfile=readonly
-              tofu fmt -check -recursive
-              tofu validate
-              tofu test
-            )
-            echo "::endgroup::"
-          done
-      - name: Scripts and committed state
-        run: |
-          shellcheck scripts/*.sh
-          scripts/check-bootstrap-state.sh
+          curl -fsSL -o terragrunt "https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64"
+          echo "${TERRAGRUNT_SHA256}  terragrunt" | sha256sum -c -
+          sudo install -m 0755 terragrunt /usr/local/bin/terragrunt
+      - run: pnpm install --frozen-lockfile
+      # Sets NX_BASE and NX_HEAD: a pull request against its base, a push to main against the last
+      # commit whose CI passed.
+      - uses: nrwl/nx-set-shas@v5
+      - run: pnpm format:check
+      - run: pnpm nx affected -t lint typecheck test build check
+        env:
+          # Only this step sees a token, and only runs on main may write the cache.
+          NX_CLOUD_ACCESS_TOKEN: ${{ github.ref == 'refs/heads/main' && secrets.NX_CLOUD_ACCESS_TOKEN || secrets.NX_CLOUD_READ_ONLY_TOKEN }}

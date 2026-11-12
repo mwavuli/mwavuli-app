@@ -37,7 +37,7 @@ wants its certificates.
 
 The site serves on the distribution's own `*.cloudfront.net` name until the domain exists. That is enough
 to review the real site, and it is where the deploy workflow checks it. Canonical URLs and the `og:image`
-address follow `site` in `astro.config.mjs`, which stays the reserved `.example` placeholder until then.
+address follow `site` in `site/astro.config.mjs`, which stays the reserved `.example` placeholder until then.
 
 Adding the domain is three changes in this repository, none written yet because none can be until the
 name is known: `aliases` and `certificate_arn` on the `site` unit; an ACM certificate in `us-east-1`
@@ -72,7 +72,7 @@ The conventions are the owner's for any repository that owns remote state, and t
   `exclude` block keeps `run --all` away from it. `terragrunt backend bootstrap` is not used, because it
   leaves the bucket's own configuration out of code.
 - **Nothing secret in it.** That state file is public to everyone with the repository, so the unit creates
-  no IAM user, access key, password, secret value or private key. `scripts/check-bootstrap-state.sh` fails
+  no IAM user, access key, password, secret value or private key. `infra/scripts/check-bootstrap-state.sh` fails
   CI if a committed bootstrap state holds one, or if any other state file is committed.
 - **S3 with native locking**, `use_lockfile = true`, no DynamoDB table.
 - **Names derived, never hand-written**: the bucket is `<org>-tfstate-<account-alias>-<region>` and a
@@ -161,7 +161,7 @@ an unset variable is a named failure, never a publish that lands somewhere wrong
    gh variable set AWS_DEPLOY_ROLE_ARN --body "$(terragrunt output -raw role_arn)"     # in deploy-role/
    gh variable set SITE_BUCKET --body "$(terragrunt output -raw bucket_name)"          # in site/
    ```
-5. **Deploy**: run the `deploy` workflow. It publishes, invalidates, and runs `scripts/smoke.sh` against
+5. **Deploy**: run the `deploy` workflow. It publishes, invalidates, and runs `site/scripts/smoke.sh` against
    the distribution's own name. The ticket is done when that is green and the live site has been looked at.
 
 ## 4. What is verified, and what is not
@@ -170,9 +170,9 @@ Verified offline: the three modules (`validate`, `fmt`, `tflint`, and thirteen m
 twelve deliberate breakages that each failed them); the Terragrunt units render the intended state bucket
 and key, KMS alias, account guard and tags, and the bootstrap unit renders its local backend, both
 providers and its `exclude` block (all against a made-up account id in a scratch copy, and the shipped
-`unset` stops Terragrunt); `scripts/check-bootstrap-state.sh` against clean, secret-bearing, stray and
+`unset` stops Terragrunt); `infra/scripts/check-bootstrap-state.sh` against clean, secret-bearing, stray and
 backup state; the workflows (`actionlint`, with `shellcheck` on their shell); the URL mapping against
-every page the site builds; and `scripts/smoke.sh` against a local stand-in for S3 and CloudFront, healthy
+every page the site builds; and `site/scripts/smoke.sh` against a local stand-in for S3 and CloudFront, healthy
 and with four faults injected, each of which it caught.
 
 Not verified, because nothing was run against AWS and the account does not exist yet: a plan or an apply,

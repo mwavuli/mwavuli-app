@@ -1,0 +1,104 @@
+# Release lanes for the Mwavuli app. They run on a developer's Mac, by hand: there is no CI job for
+# them, and the signing identities and store keys stay on that machine.
+#
+#   pnpm nx run mobile-shell:release-ios          # TestFlight
+#   pnpm nx run mobile-shell:release-android      # Google Play, internal track
+#   bundle exec fastlane ios build                # a signed .ipa in build/, no upload
+#   bundle exec fastlane android build            # a signed .aab, no upload
+#
+# The native projects are not in git. Each lane first regenerates them from app.config.ts with
+# `expo prebuild`, so what ships is what the config and the installed packages describe. The build number
+# is the store's next one (TestFlight and Google Play are asked) and reaches the build through
+# MWAVULI_BUILD_NUMBER, which app.config.ts reads.
+#
+# Settings come from the environment. Fastlane loads fastlane/.env (git ignores it; .env.example lists
+# the names) or whatever you export. It does not load .env.local.
+#   MWAVULI_APP_ID          bundle id and package name; permanent once published
+#   APPLE_TEAM_ID           Apple developer team
+#   ASC_KEY_ID, ASC_ISSUER_ID, ASC_KEY_PATH         App Store Connect API key (.p8)
+#   PLAY_JSON_KEY_PATH      Google Play service account key (.json)
+#   MWAVULI_UPLOAD_STORE_FILE, MWAVULI_UPLOAD_STORE_PASSWORD, MWAVULI_UPLOAD_KEY_ALIAS,
+#   MWAVULI_UPLOAD_KEY_PASSWORD                     the Android upload key (see plugins/android-release-signing.js)
+
+require "shellwords"
+
+default_platform(:ios)
+
+APP_NAME = "Mwavuli".freeze
+ANDROID_SIGNING_ENV = %w[MWAVULI_UPLOAD_STORE_FILE MWAVULI_UPLOAD_STORE_PASSWORD MWAVULI_UPLOAD_KEY_ALIAS MWAVULI_UPLOAD_KEY_PASSWORD].freeze
+
+def require_env!(*names)
+  missing = names.select { |name| ENV[name].to_s.empty? }
+  UI.user_error!("Set #{missing.join(', ')} before a release (see the header of this Fastfile).") unless missing.empty?
+end
+
+# The app's root, where package.json and app.config.ts are.
+def app_root
+  File.expand_path("..", __dir__)
+end
+
+def generate_native(platform, build_number)
+  ENV["MWAVULI_BUILD_NUMBER"] = build_number.to_s if build_number
+  Dir.chdir(app_root) { sh("pnpm exec expo prebuild --platform #{platform} --no-install --clean") }
+end
+
+# xcodebuild's flags for signing with an App Store Connect API key instead of an Apple ID signed in to Xcode.
+def asc_auth_flags
+  return "" if ENV["ASC_KEY_PATH"].to_s.empty?
+  "-authenticationKeyPath #{Shellwords.escape(ENV['ASC_KEY_PATH'])} -authenticationKeyID #{ENV['ASC_KEY_ID']} -authenticationKeyIssuerID #{ENV['ASC_ISSUER_ID']}"
+end
+
+platform :ios do
+  desc "Generate the iOS project and build a signed .ipa in build/ (no upload)"
+  lane :build do |options|
+    require_env!("MWAVULI_APP_ID", "APPLE_TEAM_ID")
+    generate_native("ios", options[:build_number])
+    # `expo prebuild --no-install` writes the Podfile and stops there: installing the pods is what
+    # creates the .xcworkspace.
+    cocoapods(podfile: File.join(app_root, "ios", "Podfile"))
+    build_app(
+      workspace: File.join(app_root, "ios", "#{APP_NAME}.xcworkspace"),
+      scheme: APP_NAME,
+      export_method: "app-store",
+      output_directory: File.join(app_root, "build"),
+      xcargs: "-allowProvisioningUpdates DEVELOPMENT_TEAM=#{ENV['APPLE_TEAM_ID']} #{asc_auth_flags}".strip,
+      export_xcargs: "-allowProvisioningUpdates #{asc_auth_flags}".strip,
+      export_options: { teamID: ENV["APPLE_TEAM_ID"] }
+    )
+  end
+
+  desc "Build and upload to TestFlight, with the next build number"
+  lane :beta do
+    require_env!("MWAVULI_APP_ID", "APPLE_TEAM_ID", "ASC_KEY_ID", "ASC_ISSUER_ID", "ASC_KEY_PATH")
+    app_store_connect_api_key(key_id: ENV["ASC_KEY_ID"], issuer_id: ENV["ASC_ISSUER_ID"], key_filepath: ENV["ASC_KEY_PATH"])
+    # initial_build_number is what the first upload counts up from: without it, an app TestFlight has
+    # never seen is an error.
+    build(build_number: latest_testflight_build_number(initial_build_number: 0) + 1)
+    upload_to_testflight(skip_waiting_for_build_processing: true)
+  end
+end
+
+platform :android do
+  desc "Generate the Android project and build a signed release bundle (.aab), no upload"
+  lane :build do |options|
+    require_env!("MWAVULI_APP_ID", *ANDROID_SIGNING_ENV)
+    # Gradle reads ORG_GRADLE_PROJECT_<name> from the environment as the project property <name>, so the
+    # key's passwords never appear on a command line.
+    ANDROID_SIGNING_ENV.each { |name| ENV["ORG_GRADLE_PROJECT_#{name}"] = ENV[name] }
+    generate_native("android", options[:build_number])
+    gradle(project_dir: File.join(app_root, "android"), task: "bundle", build_type: "Release")
+  end
+
+  desc "Build and upload to the Google Play internal track, with the next version code"
+  lane :beta do
+    require_env!("MWAVULI_APP_ID", "PLAY_JSON_KEY_PATH", *ANDROID_SIGNING_ENV)
+    codes = google_play_track_version_codes(package_name: ENV["MWAVULI_APP_ID"], track: "internal", json_key: ENV["PLAY_JSON_KEY_PATH"])
+    build(build_number: (codes.max || 0) + 1)
+    upload_to_play_store(
+      package_name: ENV["MWAVULI_APP_ID"],
+      track: "internal",
+      aab: lane_context[SharedValues::GRADLE_AAB_OUTPUT_PATH],
+      json_key: ENV["PLAY_JSON_KEY_PATH"]
+    )
+  end
+end

@@ -1,0 +1,170 @@
+---
+import arrowRight from '@mwavuli/brand/icons/line/arrow-right.svg?raw';
+import { AUDIENCES } from '../audiences';
+import { chipBase } from '../components/chip-styles';
+import ContactBlock from '../components/ContactBlock.astro';
+import Hero from '../components/Hero.astro';
+import RuledList from '../components/RuledList.astro';
+import Layout from '../layouts/Layout.astro';
+
+// The six services on the card (brand F1, I7), each with one line taken from the business model.
+const SERVICES = [
+  {
+    title: 'Guaranteed rental income on the 1st',
+    text: 'If a tenant doesn’t pay, we cover that first month and do the chasing.',
+  },
+  {
+    title: 'Tenant management and sourcing',
+    text: 'We find tenants for your empty rooms and collect the rent.',
+  },
+  {
+    title: 'Construction and repairs',
+    text: 'We find a trusted contractor and bring you the price. Above UGX 200,000, we wait for your YES.',
+  },
+  {
+    title: 'Electrical and plumbing',
+    text: 'Trusted contractors do the work. Smaller jobs go on your monthly statement.',
+  },
+  {
+    title: 'Utilities',
+    text: 'We look after electricity and water. Bills are paid at cost, with no markup.',
+  },
+  {
+    title: 'Garbage disposal',
+    text: 'We look after garbage disposal. It is paid at cost, with no markup.',
+  },
+] as const;
+---
+
+<Layout title="Home" headerTone="brand">
+  <!-- 1. First screen. The three chips pick the proof line on the card (CSS only: radios and :has()),
+       and each line links to its audience's page. -->
+  <Hero
+    class="audience"
+    beats={[
+      ['Managed', 'Properties.'],
+      ['Better', 'Living.'],
+    ]}
+  >
+    <fieldset slot="chips" class="audience-chips flex-wrap gap-2">
+      <legend class="sr-only">Who is this for?</legend>
+      {
+        AUDIENCES.map((audience, index) => (
+          <span>
+            <input
+              type="radio"
+              name="audience"
+              id={`audience-${audience.id}`}
+              class="peer sr-only"
+              checked={index === 0}
+            />
+            <label
+              for={`audience-${audience.id}`}
+              class:list={[
+                chipBase,
+                'cursor-pointer peer-checked:bg-white peer-checked:text-brand peer-checked:hover:bg-green-50 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent',
+              ]}
+            >
+              {audience.label}
+            </label>
+          </span>
+        ))
+      }
+    </fieldset>
+
+    <div class="audience-proof grid gap-5">
+      {
+        AUDIENCES.map((audience) => (
+          <div data-audience={audience.id}>
+            <p class="font-display text-overline uppercase text-muted">{audience.label}</p>
+            <p class="mt-2 font-display text-h3 text-brand">{audience.proof}</p>
+            <a
+              href={audience.href}
+              class="mt-2 inline-flex min-h-12 items-center gap-2 font-display text-body font-semibold text-brand hover:underline"
+            >
+              More for {audience.label.toLowerCase()}
+              <span aria-hidden="true" class="block size-5 [&>svg]:size-full" set:html={arrowRight} />
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </Hero>
+
+  <!-- 2. The pitch (BM18) as three full-bleed bands on three grounds, each led by an oversize figure.
+       The figures repeat the words of the statement, so they are hidden from screen readers. -->
+  <section id="offer" aria-labelledby="offer-title">
+    <div class="bg-page">
+      <div class="mx-auto max-w-page px-6 pt-16 lg:px-8 lg:pt-20">
+        <h2 id="offer-title" class="font-display text-overline uppercase text-brand">
+          The offer in three lines
+        </h2>
+      </div>
+    </div>
+    <ol role="list">
+      <li class="bg-page">
+        <div class="mx-auto max-w-page px-6 py-10 lg:px-8 lg:py-14">
+          <div class="grid items-center gap-x-8 gap-y-6 lg:grid-cols-12">
+            <p aria-hidden="true" class="t-numeral font-display text-gold-700 lg:col-span-4">1st</p>
+            <div class="lg:col-span-8">
+              <p class="t-statement font-display text-brand">We pay you on the 1st.</p>
+              <p class="mt-4 font-display text-h4 text-ink">For every room with a tenant.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="on-inverse bg-brand text-white">
+        <div class="mx-auto max-w-page px-6 py-10 lg:px-8 lg:py-14">
+          <div class="grid items-center gap-x-8 gap-y-6 lg:grid-cols-12">
+            <p
+              aria-hidden="true"
+              class="t-numeral font-display text-accent lg:order-last lg:col-span-4 lg:text-right"
+            >
+              15%
+            </p>
+            <div class="lg:col-span-8">
+              <p class="t-statement font-display text-white">We take 15% of the rent.</p>
+              <p class="mt-4 font-display text-h4 text-green-100">No rent, no fee.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="bg-sage-100">
+        <div class="mx-auto max-w-page px-6 py-10 lg:px-8 lg:py-14">
+          <div class="grid items-center gap-x-8 gap-y-6 lg:grid-cols-12">
+            <p aria-hidden="true" class="t-numeral font-display text-gold-700 lg:col-span-4">
+              30<span class="ml-3 font-display text-h3 font-semibold tracking-normal">days</span>
+            </p>
+            <div class="lg:col-span-8">
+              <p class="t-statement font-display text-brand">
+                Leave any time with 30 days’ notice.
+              </p>
+              <a
+                href="#contact"
+                class="mt-6 inline-flex min-h-12 items-center gap-2 font-display text-h4 text-brand hover:underline"
+              >
+                Contact us
+                <span
+                  aria-hidden="true"
+                  class="block size-6 [&>svg]:size-full"
+                  set:html={arrowRight}
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 3. The six services as one ruled typographic list. -->
+  <section id="services" aria-labelledby="services-title" class="bg-surface">
+    <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-20">
+      <h2 id="services-title" class="t-statement font-display text-brand">What we look after for you.</h2>
+      <div class="mt-4 h-1 w-16 bg-accent" aria-hidden="true"></div>
+      <RuledList items={SERVICES} numbered class="mt-10" />
+    </div>
+  </section>
+
+  <ContactBlock />
+</Layout>
