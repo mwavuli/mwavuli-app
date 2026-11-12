@@ -35,6 +35,16 @@
     "tags": [
       "platform:site",
       "type:app"
-    ]
+    ],
+    "targets": {
+      "lint": {
+        "inputs": [
+          "default",
+          {
+            "runtime": "shellcheck --version"
+          }
+        ]
+      }
+    }
   }
 }

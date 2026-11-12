@@ -2,17 +2,46 @@
   "$schema": "../node_modules/nx/schemas/project-schema.json",
   "name": "api",
   "projectType": "application",
-  "tags": ["platform:api", "type:app"],
+  "tags": [
+    "platform:api",
+    "type:app"
+  ],
   "targets": {
     "build": {
       "command": "go build -trimpath -ldflags \"-s -w -X main.version=${API_VERSION:-dev}\" -o dist/api ./cmd/api",
-      "options": { "cwd": "api" },
-      "inputs": ["production", { "runtime": "go version" }, { "env": "API_VERSION" }],
-      "outputs": ["{projectRoot}/dist"]
+      "options": {
+        "cwd": "api"
+      },
+      "inputs": [
+        "production",
+        {
+          "runtime": "go version"
+        },
+        {
+          "env": "API_VERSION"
+        },
+        {
+          "env": "GOOS"
+        },
+        {
+          "env": "GOARCH"
+        },
+        {
+          "env": "CGO_ENABLED"
+        },
+        {
+          "env": "GOFLAGS"
+        }
+      ],
+      "outputs": [
+        "{projectRoot}/dist"
+      ]
     },
     "serve": {
       "command": "go run ./cmd/api",
-      "options": { "cwd": "api" },
+      "options": {
+        "cwd": "api"
+      },
       "continuous": true
     },
     "lint": {
@@ -26,12 +55,24 @@
           "go mod tidy -diff"
         ]
       },
-      "inputs": ["default", { "runtime": "go version" }]
+      "inputs": [
+        "default",
+        {
+          "runtime": "go version"
+        }
+      ]
     },
     "test": {
       "command": "go test -race -count=1 ./...",
-      "options": { "cwd": "api" },
-      "inputs": ["default", { "runtime": "go version" }]
+      "options": {
+        "cwd": "api"
+      },
+      "inputs": [
+        "default",
+        {
+          "runtime": "go version"
+        }
+      ]
     }
   }
 }

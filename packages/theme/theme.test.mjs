@@ -32,6 +32,15 @@ const toPx = (v) => (v.endsWith('rem') ? Number.parseFloat(v) * 16 : Number.pars
 const upper = (map) => Object.fromEntries(Object.entries(map).map(([k, v]) => [k, v.toUpperCase()]));
 
 describe('the mobile preset follows the web theme', () => {
+  it('takes every web colour, type step, radius and shadow from a token', () => {
+    // A value written in the web theme itself would be one the preset cannot be compared against.
+    const block = themeCss.match(/@theme \{([\s\S]*?)\n\}/)[1];
+    const literals = [...block.matchAll(/^\s*(--(?:color|text|radius|shadow)-[\w-]+):\s*(.+?);/gm)]
+      .filter(([, , value]) => value !== 'initial' && !/^var\(--mw-[\w-]+\)$/.test(value))
+      .map(([, name]) => name);
+    expect(literals).toEqual([]);
+  });
+
   it('has the same colours with the same values', () => {
     expect(upper(preset.theme.colors)).toEqual(upper(webTheme('color')));
   });

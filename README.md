@@ -22,9 +22,9 @@ and the business documents (`business/`).
 
 ## Getting started
 
-You need Node 22 (`.nvmrc`), pnpm through Corepack, and for the parts you touch: Go 1.27 (api), OpenTofu 1.13,
-Terragrunt 1.1 and shellcheck (infra, the site's scripts), Ruby with Bundler and Xcode or the Android SDK (mobile
-releases).
+You need Node 22 (`.nvmrc`), pnpm through Corepack, Python 3 (the brand document check), and for the parts you touch:
+Go 1.27 (api), OpenTofu 1.13, Terragrunt 1.1 and shellcheck (infra, the site's scripts), Ruby with Bundler and Xcode or
+the Android SDK (mobile releases).
 
 ```bash
 corepack enable
@@ -59,8 +59,10 @@ step, a radius or a shadow. Colours, fonts, radii and shadows are reset first, s
 **Personas are disjoint, and one is loaded at a time.** A persona's portal is a package that may use the shared
 packages and nothing else, so the tenant portal cannot reach into the landlord's. A shell reaches a portal only through
 a dynamic `import()` in its `registry.ts`, so only the chosen portal is fetched on the web and evaluated on mobile.
-Three layers hold this: the lint rules in [`eslint.config.mjs`](eslint.config.mjs) (by Nx tag), the shells' tests (which
-record what was loaded), and, for the web build, `web/shell/scripts/check-chunks.mjs` (which reads the built chunks).
+Three layers hold this: the lint rules in [`eslint.config.mjs`](eslint.config.mjs) (by Nx tag, and for how a shell may
+name a portal), the shells' tests (which record what was loaded), and, for the web build, a plugin that fails the build
+if a portal's code lands in what loads up front or two portals' code load together
+([`isolate-portals.ts`](web/shell/plugins/isolate-portals.ts)).
 
 **Dependency versions are named once.** Shared versions live in the pnpm catalogs in
 [`pnpm-workspace.yaml`](pnpm-workspace.yaml) and are referenced as `catalog:`. The site keeps its own ranges: its build is
@@ -71,10 +73,11 @@ version younger than 24 hours (`minimumReleaseAge`): pick an older version rathe
 
 [`ci.yml`](.github/workflows/ci.yml) runs `nx affected` on pull requests and on pushes to `main`. It starts with Nx's
 local cache. A remote cache needs the workspace connected to [Nx Cloud](https://nx.dev/nx-cloud) (`pnpm nx connect`,
-then the `NX_CLOUD_ACCESS_TOKEN` secret); nothing else changes. `@nx/s3-cache` is not used: it is deprecated, carries an
+then a read-write token for runs on `main` and a read-only one for pull requests, as secrets; see the header of
+`ci.yml`). `@nx/s3-cache` is not used: it is deprecated, carries an
 unpatchable cache-poisoning flaw (CVE-2025-36852) and does not support the current Nx.
 
 [`deploy.yml`](.github/workflows/deploy.yml) publishes the site over OIDC when the site, the brand or the theme changes
-(see [`site/README.md`](site/README.md#deploy)). Mobile apps are built and released locally through Fastlane, never in
-CI ([`mobile/README.md`](mobile/README.md)). Infrastructure is applied by a person; CI only validates it
+(see [`site/README.md`](site/README.md#deploy)). Mobile apps are released locally through Fastlane, never from CI, which
+type-checks, tests and bundles the mobile code ([`mobile/README.md`](mobile/README.md)). Infrastructure is applied by a person; CI only validates it
 ([`infra/README.md`](infra/README.md)).

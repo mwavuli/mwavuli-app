@@ -6,9 +6,10 @@ because `project.json` runs the Go toolchain directly.
 It serves `GET /healthz` (liveness, with the build's version) and `GET /readyz` (readiness), and nothing else yet.
 Configuration is from the environment:
 
-| Variable            | Default | Meaning                           |
-| ------------------- | ------- | --------------------------------- |
-| `MWAVULI_HTTP_ADDR` | `:8080` | The host:port the server listens on |
+| Variable                 | Default | Meaning                                                                          |
+| ------------------------ | ------- | -------------------------------------------------------------------------------- |
+| `MWAVULI_HTTP_ADDR`      | `:8080` | The host:port the server listens on                                              |
+| `MWAVULI_SHUTDOWN_DELAY` | `0s`    | How long to keep answering, reporting not ready, after a stop signal (see below) |
 
 ## Commands
 
@@ -31,8 +32,10 @@ internal/config/     settings from the environment
 internal/httpapi/    the Echo router, its middleware and the probes
 ```
 
-On SIGINT or SIGTERM the server reports not ready on `/readyz` first, then drains in-flight requests (15 s at most), so a
-load balancer stops sending traffic before connections close.
+On SIGINT or SIGTERM the server reports not ready on `/readyz`, keeps answering for `MWAVULI_SHUTDOWN_DELAY`, then
+stops accepting connections and drains the requests in flight (15 s at most). Behind a load balancer set the delay to
+at least its health-check interval, so the balancer stops sending traffic before connections close; at the default of
+zero it stops at once. A second signal ends the process immediately.
 
 The module path is `github.com/nyange-app/mwavuli-site/api`. If the repository is renamed, change it with
 `go mod edit -module` and the imports.

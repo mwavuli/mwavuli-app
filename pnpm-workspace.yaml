@@ -17,8 +17,9 @@ allowBuilds:
   nx: true
   sharp: true
 
-# pnpm refuses a version younger than 24 hours instead of quietly exempting it (its default is to add the
+# pnpm refuses a version younger than 24 hours (1440 minutes) instead of quietly exempting it (its default is to add the
 # version to minimumReleaseAgeExclude and carry on). Choose an older version; an exemption is the owner's call.
+minimumReleaseAge: 1440
 minimumReleaseAgeStrict: true
 
 # One version of each shared dependency, named here and referenced as `catalog:` or `catalog:<name>`.
@@ -43,7 +44,8 @@ catalogs:
     '@testing-library/user-event': ^14.6.9
     '@fontsource-variable/inter': ^5.3.0
     '@fontsource-variable/montserrat': ^5.3.0
-  # Expo SDK 58: these follow what `expo install` pins, so a bump is one `expo install --fix` away.
+  # Expo SDK 58: these follow what `expo install` pins. Expo's own packages use `~58.0.0`, not the newest patch,
+  # so pnpm can pick a release old enough for the release-age check.
   native:
     expo: ~58.0.0
     expo-font: ~58.0.0

@@ -21,11 +21,12 @@ registers with any other account, organization or repository.
 CI and a laptop run the same things, without AWS credentials:
 
 ```bash
-pnpm nx run-many -t lint test --projects=infra
+pnpm nx run-many -t lint test check --projects=infra
 ```
 
 `lint` is `tofu fmt`, `terragrunt hcl fmt --check` and `shellcheck`. `test` runs, for each module, `tofu init -backend=false`
-in readonly-lock mode, `fmt`, `validate` and `tofu test` against mocked providers, then checks that the only state in git
-is a bootstrap unit's own and holds nothing secret-bearing. It needs OpenTofu 1.13, Terragrunt 1.1 and shellcheck.
+in readonly-lock mode, `fmt`, `validate` and `tofu test` against mocked providers. `check` (`nx run-many -t check`) confirms
+that the only state in git is a bootstrap unit's own and holds nothing secret-bearing; it reads git, not just this
+folder, so Nx never caches it. It needs OpenTofu 1.13, Terragrunt 1.1 and shellcheck.
 
 Applying is not an Nx target and never runs from CI. See section 3 of the design record for the order.

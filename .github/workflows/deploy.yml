@@ -75,7 +75,9 @@ jobs:
           node-version: 22
           cache: pnpm
 
-      - run: pnpm install --frozen-lockfile
+      # Only the site and what it is built from: this job can mint a cloud credential, so it does not install
+      # the mobile and web toolchains.
+      - run: pnpm install --frozen-lockfile --filter "@mwavuli/site..." --filter mwavuli
 
       # `nx build site` runs `astro check && astro build`: the typecheck and the bundle.
       - name: Build

@@ -3,9 +3,12 @@
 # the shared packages, and the infrastructure (OpenTofu validated and tested against mocked providers, no
 # AWS credentials). Pull requests, and pushes to main; deploy.yml publishes the site.
 #
-# Remote cache: none until the workspace is connected to Nx Cloud. Run `pnpm nx connect` once, commit the
-# `nxCloudId` it writes to nx.json, and add the repository secret NX_CLOUD_ACCESS_TOKEN. Nothing here
-# changes. Without the secret (and in forks) the job runs on Nx's local cache alone.
+# Remote cache: none until the workspace is connected to Nx Cloud. Run `pnpm nx connect` once and commit the
+# `nxCloudId` it writes to nx.json. Then create two access tokens in Nx Cloud and add them as repository
+# secrets: a read-write one, NX_CLOUD_ACCESS_TOKEN, which runs on main use, and a read-only one,
+# NX_CLOUD_READ_ONLY_TOKEN, for pull requests and other branches. That way a pull request, whose workflow is
+# its own to edit, cannot write the cache that main reads. Without the secrets (and in forks) the job runs on
+# Nx's local cache alone.
 #
 # Mobile releases are not built here: they run on a developer's Mac through Fastlane (mobile/shell). The
 # job checks the mobile code and bundles it with Expo's Metro, which is what CI can do without signing keys.
@@ -48,7 +51,6 @@ jobs:
       actions: read # nx-set-shas looks up the last successful run on main
     env:
       EXPO_NO_TELEMETRY: '1'
-      NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
     steps:
       # Nx finds what a change affects by comparing against the base, so it needs the history.
       - uses: actions/checkout@v5
@@ -79,3 +81,6 @@ jobs:
       - uses: nrwl/nx-set-shas@v5
       - run: pnpm format:check
       - run: pnpm nx affected -t lint typecheck test build check
+        env:
+          # Only this step sees a token, and only runs on main may write the cache.
+          NX_CLOUD_ACCESS_TOKEN: ${{ github.ref == 'refs/heads/main' && secrets.NX_CLOUD_ACCESS_TOKEN || secrets.NX_CLOUD_READ_ONLY_TOKEN }}

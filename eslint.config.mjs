@@ -25,7 +25,7 @@ export default defineConfig([
   tseslint.configs.recommended,
 
   {
-    files: ['**/*.{ts,tsx,mts}'],
+    files: ['**/*.{ts,tsx,mts,js,jsx,mjs,cjs}'],
     rules: {
       // What a project may import, by tag (each project's tags are in its package.json under "nx").
       //
@@ -54,20 +54,26 @@ export default defineConfig([
 
   // A shell loads a persona on demand and never imports one statically, so that only the chosen persona
   // is fetched and run. Nx's own check for this does not fire in a pnpm workspace (the dependency in
-  // package.json is always a static edge), so the rule is written out: a persona may be named only in
-  // `import()`.
-  ...['web', 'mobile'].map((platform) => ({
-    files: [`${platform}/shell/**/*.{ts,tsx}`],
-    rules: {
-      'no-restricted-syntax': [
-        'error',
-        ...['ImportDeclaration', 'ExportAllDeclaration', 'ExportNamedDeclaration'].map((type) => ({
-          selector: `${type}[source.value=/^@mwavuli\\/${platform}-(tenant|landlord|ops)(\\/|$)/]`,
-          message: 'A persona loads on demand: reach it with a dynamic import() in registry, never a static import.',
-        })),
-      ],
-    },
-  })),
+  // package.json is always a static edge), so the rule is written out. A persona may be named only in an
+  // `import()`, and an `import()` of one only in registry.ts, which is where the shell keeps the loaders.
+  // (The web build also fails if a portal ends up in the code that loads up front: see
+  // web/shell/plugins/isolate-portals.ts.)
+  ...['web', 'mobile'].flatMap((platform) => {
+    const persona = `/^@mwavuli\\/${platform}-(tenant|landlord|ops)(\\/|$)/`;
+    const files = ['ts', 'tsx', 'mts', 'js', 'jsx', 'mjs', 'cjs'].map((ext) => `${platform}/shell/**/*.${ext}`);
+    const message = 'A persona loads on demand: reach it with a dynamic import() in registry.ts, never any other way.';
+    const staticUse = [
+      ...['ImportDeclaration', 'ExportAllDeclaration', 'ExportNamedDeclaration'].map(
+        (type) => `${type}[source.value=${persona}]`,
+      ),
+      `CallExpression[callee.name='require'][arguments.0.value=${persona}]`,
+    ];
+    const rule = (selectors) => ['error', ...selectors.map((selector) => ({ selector, message }))];
+    return [
+      { files, rules: { 'no-restricted-syntax': rule([...staticUse, `ImportExpression[source.value=${persona}]`]) } },
+      { files: [`${platform}/shell/src/registry.ts`], rules: { 'no-restricted-syntax': rule(staticUse) } },
+    ];
+  }),
 
   {
     files: ['web/**/*.{ts,tsx}', 'mobile/**/*.{ts,tsx}'],

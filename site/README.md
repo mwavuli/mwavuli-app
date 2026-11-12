@@ -112,7 +112,7 @@ then runs `site/scripts/smoke.sh` against the distribution. It needs two reposit
 Checks that need no AWS credentials:
 
 ```bash
-pnpm nx run-many -t lint test --projects=infra   # OpenTofu fmt, validate and mocked tests; Terragrunt fmt; committed state
+pnpm nx run-many -t lint test check --projects=infra   # OpenTofu fmt, validate and mocked tests; Terragrunt fmt; committed state
 site/scripts/smoke.sh https://<domain>           # after `pnpm nx build site`, against a deployed copy
 ```
 

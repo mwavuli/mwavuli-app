@@ -10,3 +10,9 @@
 @source '../../tenant/src';
 @source '../../landlord/src';
 @source '../../ops/src';
+
+/* Test files hold class names too, but Nx leaves them out of what a build is cached on, so Tailwind must
+   leave them out of what it generates: a class used only in a test would otherwise change the CSS and not
+   the cache key. */
+@source not './**/*.test.tsx';
+@source not '../../*/src/**/*.test.tsx';

@@ -5,7 +5,7 @@
 # which would leave the bucket's own configuration out of code.
 #
 # Because that state file is in git, this unit creates only the backend and nothing that carries a
-# secret: no IAM user, access key, password or secret version. scripts/check-bootstrap-state.sh fails CI
+# secret: no IAM user, access key, password or secret version. infra/scripts/check-bootstrap-state.sh fails CI
 # if a committed bootstrap state holds one.
 #
 #   cd infra/live/_bootstrap/00-tfstate-backend && terragrunt apply
