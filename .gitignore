@@ -156,6 +156,8 @@ tfplan
 # --- Terragrunt ---
 **/.terragrunt-cache/
 terragrunt-debug.tfvars.json
+# Who belongs to which Identity Center group: user names, so not for a public repository.
+infra/live/**/memberships.local.json
 
 # --- Astro ---
 .astro/
