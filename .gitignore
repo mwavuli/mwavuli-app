@@ -156,6 +156,8 @@ tfplan
 # --- Terragrunt ---
 **/.terragrunt-cache/
 terragrunt-debug.tfvars.json
+# Terragrunt copies a module's committed lock file (infra/modules/*/.terraform.lock.hcl) next to each unit.
+infra/live/**/.terraform.lock.hcl
 # Who belongs to which Identity Center group: user names, so not for a public repository.
 infra/live/**/memberships.local.json
 
