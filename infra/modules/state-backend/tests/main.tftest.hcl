@@ -151,6 +151,33 @@ run "replication_may_use_each_key_only_through_s3_for_its_own_bucket" {
   }
 }
 
+# Both buckets use an S3 Bucket Key, and with one KMS sees the bucket's own ARN as the encryption context, not an
+# object's. A condition on the objects alone made every replication fail, on the first real apply.
+run "the_kms_conditions_admit_the_bucket_key_encryption_context" {
+  command = apply
+
+  assert {
+    condition = (
+      contains(flatten([for s in data.aws_iam_policy_document.replication.statement : [for c in s.condition : tolist(c.values) if c.variable == "kms:EncryptionContext:aws:s3:arn"] if s.sid == "DecryptSource"]), aws_s3_bucket.state.arn)
+      && contains(flatten([for s in data.aws_iam_policy_document.replication.statement : [for c in s.condition : tolist(c.values) if c.variable == "kms:EncryptionContext:aws:s3:arn"] if s.sid == "DecryptSource"]), "${aws_s3_bucket.state.arn}/*")
+    )
+    error_message = "Decrypting at the source must be allowed for the state bucket's own ARN and for its objects."
+  }
+
+  assert {
+    condition = (
+      contains(flatten([for s in data.aws_iam_policy_document.replication.statement : [for c in s.condition : tolist(c.values) if c.variable == "kms:EncryptionContext:aws:s3:arn"] if s.sid == "EncryptReplicas"]), aws_s3_bucket.replica.arn)
+      && contains(flatten([for s in data.aws_iam_policy_document.replication.statement : [for c in s.condition : tolist(c.values) if c.variable == "kms:EncryptionContext:aws:s3:arn"] if s.sid == "EncryptReplicas"]), "${aws_s3_bucket.replica.arn}/*")
+    )
+    error_message = "Encrypting a replica must be allowed for the replica bucket's own ARN and for its objects."
+  }
+
+  assert {
+    condition     = one(aws_s3_bucket_server_side_encryption_configuration.state.rule).bucket_key_enabled && one(aws_s3_bucket_server_side_encryption_configuration.replica.rule).bucket_key_enabled
+    error_message = "This test exists because both buckets use a bucket key. If that changes, so may the condition it guards."
+  }
+}
+
 run "plain_http_is_denied_on_both_buckets" {
   command = apply
 

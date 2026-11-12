@@ -274,7 +274,9 @@ data "aws_iam_policy_document" "replication" {
     resources = ["${aws_s3_bucket.replica.arn}/*"]
   }
 
-  # Each key is usable only through S3 and only for this bucket's objects.
+  # Each key is usable only through S3 and only for this bucket. Both buckets use an S3 Bucket Key, and then
+  # KMS sees the bucket's own ARN as the encryption context where it would see an object's ARN without one,
+  # so the condition allows both: with only the objects, replication fails on every object.
   statement {
     sid       = "DecryptSource"
     actions   = ["kms:Decrypt"]
@@ -289,7 +291,7 @@ data "aws_iam_policy_document" "replication" {
     condition {
       test     = "StringLike"
       variable = "kms:EncryptionContext:aws:s3:arn"
-      values   = ["${aws_s3_bucket.state.arn}/*"]
+      values   = [aws_s3_bucket.state.arn, "${aws_s3_bucket.state.arn}/*"]
     }
   }
 
@@ -307,7 +309,7 @@ data "aws_iam_policy_document" "replication" {
     condition {
       test     = "StringLike"
       variable = "kms:EncryptionContext:aws:s3:arn"
-      values   = ["${aws_s3_bucket.replica.arn}/*"]
+      values   = [aws_s3_bucket.replica.arn, "${aws_s3_bucket.replica.arn}/*"]
     }
   }
 }

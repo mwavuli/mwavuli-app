@@ -96,7 +96,8 @@ site and the deploy role, and depends on no account, organization or repository 
 Terragrunt, applied by a person, and `.github/workflows/deploy.yml` publishes `site/dist/` on a push to `main` that
 touches the site, the brand or the theme, or by hand. The decisions, and what the owner must do before the first apply,
 are in [`docs/design/aws-organization.md`](../docs/design/aws-organization.md) and
-[`docs/design/site-infrastructure.md`](../docs/design/site-infrastructure.md). **Nothing is applied yet.**
+[`docs/design/site-infrastructure.md`](../docs/design/site-infrastructure.md). **It is applied, and the site is live** on
+the distribution's own name, `d3g3tcova33n6t.cloudfront.net`, until it has a domain.
 
 | Files | `Cache-Control` |
 |---|---|
@@ -125,10 +126,10 @@ Open, and not for the code to decide:
 - **Photography (D14).** The design uses none.
 - **Legal text.** `src/content/legal/privacy.mdx` is a placeholder pending counsel.
 - **Web manifest** with 192 and 512 px icons, only if the site should be installable.
-- **Deploy.** The infrastructure and the workflow are written and not applied. The owner applies the organization and
-  Identity Center code and signs in through it, then bootstraps the prod state backend, and decides the domain: see
-  [`docs/design/aws-organization.md`](../docs/design/aws-organization.md), section 4, then
-  [`docs/design/site-infrastructure.md`](../docs/design/site-infrastructure.md), section 3.
+- **Deploy.** The infrastructure is applied and the first deploy ran: the site answers on its CloudFront name. What is
+  left is the domain (M2 in [`docs/design/site-infrastructure.md`](../docs/design/site-infrastructure.md)) and retiring
+  the management account's root access keys ([`docs/design/aws-organization.md`](../docs/design/aws-organization.md),
+  section 4).
 - **Analytics.**
 - **Commercial tenancies.** The model has no commercial tenancy form yet (BM9 counsel note), so the Businesses page
   describes the landlord's side and points to the Owners and Tenants pages instead of describing a shop tenant's terms.
