@@ -83,12 +83,14 @@ BM3 sets how every document is written.
 
 ## The company
 
-*Source: Owner. Supplied on 2026-11-10.*
+*Source: Owner. Supplied on 2026-11-10; phone and email on 2026-11-12.*
 
 | Detail          | Value                            |
 |-----------------|----------------------------------|
 | Registered name | Mwavuli Holdings Ltd             |
 | Postal address  | P.O. Box 170886, Kampala, Uganda |
+| Phone           | +256 751 569 838                 |
+| Email           | support@mwavuli.co               |
 
 Still to supply: the VAT status and the signatory. The agreements name the company by its registered name and
 P.O. Box only. The brand name on the card and the site is Mwavuli Property Management (brand F7). Confirm how it
