@@ -97,7 +97,8 @@ Terragrunt, applied by a person, and `.github/workflows/deploy.yml` publishes `s
 touches the site, the brand or the theme, or by hand. The decisions, and what the owner must do before the first apply,
 are in [`docs/design/aws-organization.md`](../docs/design/aws-organization.md) and
 [`docs/design/site-infrastructure.md`](../docs/design/site-infrastructure.md). **It is applied, and the site is live** on
-the distribution's own name, `d3g3tcova33n6t.cloudfront.net`, until it has a domain.
+`https://www.mwavuli.co` (the bare domain redirects there) and on the distribution's own name,
+`d3g3tcova33n6t.cloudfront.net`.
 
 | Files | `Cache-Control` |
 |---|---|
@@ -120,16 +121,16 @@ site/scripts/smoke.sh https://<domain>           # after `pnpm nx build site`, a
 
 Open, and not for the code to decide:
 
-- **Domain (brand D4).** `site` in `astro.config.mjs` is the reserved `.example` placeholder. Canonical URLs and the
-  `og:image` address follow it, so link previews work only once the domain is set.
+- **Domain (brand D4).** The site is at `https://www.mwavuli.co`, which `site` in `astro.config.mjs` names, and canonical
+  URLs and the `og:image` address follow it. D4, the address printed on the applications, is still the owner's to
+  confirm in `brand/`.
 - **Contact.** Phone and email read "to be added". There is no contact form: it needs a destination that can receive it.
 - **Photography (D14).** The design uses none.
 - **Legal text.** `src/content/legal/privacy.mdx` is a placeholder pending counsel.
 - **Web manifest** with 192 and 512 px icons, only if the site should be installable.
-- **Deploy.** The infrastructure is applied and the first deploy ran: the site answers on its CloudFront name. What is
-  left is putting the site on the domain, whose DNS is Route 53's already (M2 and M13 in
-  [`docs/design/site-infrastructure.md`](../docs/design/site-infrastructure.md)), and retiring
-  the management account's root access keys ([`docs/design/aws-organization.md`](../docs/design/aws-organization.md),
+- **Deploy.** The infrastructure is applied, the site is on its domain and its DNS is Route 53's (M2, M13 and M14 in
+  [`docs/design/site-infrastructure.md`](../docs/design/site-infrastructure.md)). What is left is retiring the
+  management account's root access keys ([`docs/design/aws-organization.md`](../docs/design/aws-organization.md),
   section 4).
 - **Analytics.**
 - **Commercial tenancies.** The model has no commercial tenancy form yet (BM9 counsel note), so the Businesses page
