@@ -37,4 +37,5 @@ pnpm nx run-many -t lint typecheck test build --projects=web-shell,web-tenant,we
 Add it to `PERSONAS` and `PERSONA_LABELS` in [`packages/personas`](../packages/personas/src/index.ts), then a portal
 package here and one in `mobile/`, each tagged `persona:<name>`, a loader in each shell's `registry.ts`, and an `@source`
 line (web) or a `content` glob (mobile). In `eslint.config.mjs`, add a `persona:<name>` constraint and the name to the
-shells' static-import rule, and the pattern in `shell/plugins/isolate-portals.ts`: each lists the three personas.
+shells' static-import rule, the pattern in `shell/plugins/isolate-portals.ts` and the shells' tests (which stand in for
+each portal): each lists the three personas.
