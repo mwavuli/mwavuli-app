@@ -295,6 +295,7 @@ The model does not settle these. The owner and counsel decide them before the ag
 
 - Who sets the rent for each unit and any increase, and who chooses tenants.
 - The tenant's notice period, and the conditions for refunding unused prepaid rent.
+- When a part month is charged at move-in or refunded at move-out, and to whom it is paid.
 - How electricity, water and garbage costs are charged to tenants.
 - Who pays the contractor first for damage a tenant causes, and whether our coordination fee is charged to the
   tenant.

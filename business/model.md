@@ -74,7 +74,7 @@ on 1st April, we pause that room until it is settled, we keep chasing, and if it
 |---------------------------|----------|----------------------------------------|
 | Landlord agreement        | Landlord | BM1, BM2, BM4 to BM12, BM20, Numbers   |
 | Schedule to the agreement | Landlord | The same terms, with the words defined |
-| Tenancy form              | Tenant   | P3, P7, P13, BM5, BM6, BM20            |
+| Tenancy form              | Tenant   | P3, P7, P13, P14, BM5, BM6, BM20       |
 | Inspection report         | Landlord | P4, P9                                 |
 
 | Landlord pitch            | Landlord | BM18 and the plain statements          |
@@ -172,10 +172,9 @@ the 5th to the 20th of April are charged pro rata: half a month, UGX 200,000. We
 tenant's due date where that helps the work run well, and the tenant pays pro rata for the days between. The payout
 date stays on the 1st, so the landlord's day never moves.
 
-**Rule** A due-date move is counted on a 30-day month: every month counts as 30 days, so each day is one-thirtieth
-of the monthly rent. The days run forward from the old due date to the new one, so the 5th to the 20th is 15 days
-and the 20th to the 5th is 15 days. The amount is rounded to the nearest UGX 1,000: 10 days on UGX 400,000 is
-UGX 133,333, charged as UGX 133,000.
+**Rule** A due-date move is a part month, counted as P14 says. The days run forward from the old due date to the new
+one, so the 5th to the 20th is 15 days and the 20th to the 5th is 15 days. The amount is rounded to the nearest
+UGX 1,000: 10 days on UGX 400,000 is UGX 133,333, charged as UGX 133,000.
 
 **Counsel note**
 
@@ -189,9 +188,8 @@ UGX 133,333, charged as UGX 133,000.
   the landlord.
 - Confirm that the tenancy form the tenant signs lets Mwavuli move a due date on 30 days' notice without the tenant's
   agreement, how the notice is given and recorded, and what the updated form must carry.
-- Confirm that counting a due-date move on a 30-day month, rounded to the nearest UGX 1,000, is allowed and fair to
-  the tenant once the form says so. It charges about 1.4% more per day than the calendar average: 31-day months cost
-  the tenant more, February less.
+- The counting of the days is P14's. Its counsel note has the questions: the 30-day month, the rounding, and what is
+  charged or refunded at move-in and move-out.
 - Confirm whether a due date may move while the tenant owes rent. A later date must not undo a due date the tenant
   has already missed or restart the chasing (BM5).
 - For the accountant: how a pro rata amount is recorded and held, since the landlord's payout and statement do not
@@ -470,7 +468,8 @@ landlord's own language, with a witness the landlord chose.
 
 ### BM12 · The mechanics
 
-*Source: Owner. Proposed in the interview and approved by the owner.*
+*Source: Owner. Proposed in the interview and approved by the owner. P14 was decided on
+2026-11-13.*
 
 - **P1 Paying and statements.** Tenants pay only Mwavuli, by mobile money or bank, never cash to staff. The
   landlord gets one statement a month by SMS or WhatsApp in the chosen language, with paper on request.
@@ -502,6 +501,9 @@ landlord's own language, with a witness the landlord chose.
   15%. Months that haven't started stay there. If a tenant leaves early, unused months go back to the tenant under
   the tenancy form, with no fee on them. At exit, each tenant gets a note, "rent paid up to [month]", and the
   landlord honors it.
+- **P14 Part months.** When a part month of rent has to be worked out, for example for a tenant who moves in or out
+  part-way through a month or whose due date moves, every month counts as 30 days: each day is one-thirtieth of the
+  monthly rent. The amount is rounded to the nearest UGX 1,000.
 
 **Counsel note**
 
@@ -524,6 +526,10 @@ landlord's own language, with a witness the landlord chose.
 - P13: confirm that prepaid rent held for landlords and tenants is held in trust, kept apart from Mwavuli's own
   funds and safe from its creditors, and that the tenancy form says whether unused prepaid months are refundable
   when a tenant leaves early.
+- P14: confirm that counting a part month on a 30-day month, rounded to the nearest UGX 1,000, is allowed and fair to
+  the tenant once the form says so. It charges about 1.4% more per day than the calendar average: 31-day months cost
+  the tenant more, February less. P14 counts a part month only: whether one is charged at move-in or refunded at
+  move-out, and to whom it is paid. Open.
 
 ## Numbers
 
@@ -555,7 +561,7 @@ Each term's counsel note lists what to confirm. Start with these:
 - **Land and authority:** proof of title by tenure, mortgages, co-owners and estates (BM7).
 - **Tenancy and recovery:** the covered-month claim, eviction steps, when the written notice may go out, deposits
   and late fees under the Landlord and Tenant Act 2022 (BM5, BM6, P7, P8).
-- **Due dates:** the 30-day month and rounding of a pro rata amount, moving a due date on notice without the tenant's
+- **Due dates and part months:** the 30-day month and rounding (P14), moving a due date on notice without the tenant's
   agreement, and moving it without telling the landlord (BM20).
 - **Agency and works:** agent, not builder; disclosure of the coordination fee; re-billing utilities (BM2).
 - **Tax:** VAT and withholding tax on the 15% and on commercial rent, and the landlord's own duties (BM4, BM9, P5,
@@ -580,3 +586,4 @@ Not yet settled:
 - How the brand name Mwavuli Property Management relates to the registered name (see "The company").
 - When the written notice goes out once a tenant has missed a due date: with the pause on the next 1st, or at the end
   of the visits (BM5).
+- When a part month is charged at move-in or refunded at move-out, and to whom it is paid (P14).
