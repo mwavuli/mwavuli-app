@@ -163,7 +163,7 @@ Not part of the schedule. Remove before use.
 | S1     | BM1, BM4, P2, BM20 | Definitions match the agreement; the due date is per tenancy and can change          |
 | S2     | BM4, P7            | Fee base; pass-through costs; no other fees                                          |
 | S3     | BM1, BM5, BM20     | Cap per unit and its reset; assignment; the due-date trigger; timing of later months |
-| S3.6   | BM20               | Moving a due date: pro rata counting; notice, not agreement; agent's authority       |
+| S3.6   | BM20               | Moving a due date: notice, not agreement; agent's authority                          |
 | S4     | BM5                | Eviction steps; costs; who may act; when the written notice goes out                 |
 | S5     | BM6, P13           | Held in trust; refunds                                                               |
 | S6     | BM2, BM6, P6       | Agent, not builder; re-billing utilities; consent; tenant damage                     |

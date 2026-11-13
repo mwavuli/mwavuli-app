@@ -113,8 +113,9 @@ owe is taken from it, and the landlord gives it back to you when the tenancy end
 
 To keep our field work well organised, we may move your due date during the tenancy. We give you 30 days' notice,
 with the new date and the amount you pay for the days in between, and we update this form. The amount is a share of
-your monthly rent for the days between the old due date and the new one (pro rata). The new date is then the day
-written above.
+your monthly rent for the days between the old due date and the new one (pro rata). We count every month as 30 days,
+so each day is one-thirtieth of your monthly rent, and we round the amount to the nearest UGX 1,000. The new date is
+then the day written above.
 
 ## Signatures
 
@@ -146,7 +147,7 @@ Not part of the form. Remove before use.
 | 9                  | P12        | Governing law; mediation; the courts                                      |
 | 10                 | BM6, P13   | Tenant's notice (not decided); return of deposit and prepaid rent         |
 | 11                 | P8, P13    | Notes to tenants; handing over deposits                                   |
-| 12                 | BM20       | Pro rata counting (not decided); notice, not agreement; agent's authority |
+| 12                 | BM20       | 30-day month and rounding; notice, not agreement; agent's authority       |
 | Signatures         | P2         | Whether tenancy forms are bilingual and explained aloud (not decided)     |
 
 The form re-voices the model's plain statements to "we" and "you" and tightens the wording. The meaning is
@@ -158,7 +159,6 @@ agreement keeps.
 - The late fee, and what the Landlord and Tenant Act allows.
 - When the written notice goes out after a tenant misses a due date: with the pause on the next 1st, or at the end
   of the visits.
-- How the days between the old and the new due date are counted: calendar days or a 30-day month.
 - The tenant's notice period, and the conditions for refunding unused prepaid rent.
 - How electricity, water and garbage shares are worked out for a unit with no meter.
 - Who pays the contractor first for damage a tenant causes, and whether our coordination fee is charged to the

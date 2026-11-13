@@ -154,7 +154,8 @@ and the promise stays true for every month inside it.
 
 ### BM20 · Rent due dates
 
-*Source: Owner. That Mwavuli may move a due date during a tenancy was decided on 2026-11-13.*
+*Source: Owner. That Mwavuli may move a due date during a tenancy, and how the days are counted, were decided on
+2026-11-13.*
 
 **Plain statement** Each tenant's rent is due on a day of the month written in the tenancy form. The day can differ
 from tenant to tenant. To keep our field work well organised, we may move a tenant's due date during the tenancy.
@@ -171,6 +172,11 @@ the 5th to the 20th of April are charged pro rata: half a month, UGX 200,000. We
 tenant's due date where that helps the work run well, and the tenant pays pro rata for the days between. The payout
 date stays on the 1st, so the landlord's day never moves.
 
+**Rule** A due-date move is counted on a 30-day month: every month counts as 30 days, so each day is one-thirtieth
+of the monthly rent. The days run forward from the old due date to the new one, so the 5th to the 20th is 15 days
+and the 20th to the 5th is 15 days. The amount is rounded to the nearest UGX 1,000: 10 days on UGX 400,000 is
+UGX 133,333, charged as UGX 133,000.
+
 **Counsel note**
 
 - The covered month and the chasing start when a tenant misses its due date (BM5). The test that stops the cover
@@ -183,8 +189,9 @@ date stays on the 1st, so the landlord's day never moves.
   the landlord.
 - Confirm that the tenancy form the tenant signs lets Mwavuli move a due date on 30 days' notice without the tenant's
   agreement, how the notice is given and recorded, and what the updated form must carry.
-- Confirm how pro rata is counted: by calendar days or on a 30-day month. The example uses April, where both give
-  the same figure.
+- Confirm that counting a due-date move on a 30-day month, rounded to the nearest UGX 1,000, is allowed and fair to
+  the tenant once the form says so. It charges about 1.4% more per day than the calendar average: 31-day months cost
+  the tenant more, February less.
 - Confirm whether a due date may move while the tenant owes rent. A later date must not undo a due date the tenant
   has already missed or restart the chasing (BM5).
 - For the accountant: how a pro rata amount is recorded and held, since the landlord's payout and statement do not
@@ -548,8 +555,8 @@ Each term's counsel note lists what to confirm. Start with these:
 - **Land and authority:** proof of title by tenure, mortgages, co-owners and estates (BM7).
 - **Tenancy and recovery:** the covered-month claim, eviction steps, when the written notice may go out, deposits
   and late fees under the Landlord and Tenant Act 2022 (BM5, BM6, P7, P8).
-- **Due dates:** how pro rata is counted, moving a due date on notice without the tenant's agreement, and moving it
-  without telling the landlord (BM20).
+- **Due dates:** the 30-day month and rounding of a pro rata amount, moving a due date on notice without the tenant's
+  agreement, and moving it without telling the landlord (BM20).
 - **Agency and works:** agent, not builder; disclosure of the coordination fee; re-billing utilities (BM2).
 - **Tax:** VAT and withholding tax on the 15% and on commercial rent, and the landlord's own duties (BM4, BM9, P5,
   P10).
