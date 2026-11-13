@@ -24,7 +24,7 @@ landlord named below. It says the same things as the agreement, in numbered para
 - **1.5** "Our fee" is 15% of the rent. "Net rent" is the rent minus our fee.
 - **1.6** The "payout date" is the 1st of each month.
 - **1.7** The "due date" of a tenancy is the day of the month on which the tenant's rent is due, as written in
-  the tenancy form. It can change during the tenancy, as set out in S3.
+  the tenancy form. We may move it during the tenancy, as set out in S3.
 - **1.8** The "covered month" of a unit is a month whose rent the tenant has not paid by its due date, after we
   have paid you the net rent for that month on the payout date, as set out in S3.
 - **1.9** "Arrears" is rent that a tenant owes and has not paid.
@@ -56,10 +56,9 @@ landlord named below. It says the same things as the agreement, in numbered para
 - **3.4** We earn our fee on a covered month only when that rent is collected.
 - **3.5** When a tenant pays what is owed, the oldest month is paid first. The covered month is repaid to us
   first. Later months are paid to you, minus our fee.
-- **3.6** A tenant's due date can change during the tenancy. We arrange the change with the tenant alone, we tell
-  the tenant a month before it takes effect, and we update the tenancy form. The change is pro rata: the tenant
-  pays a share of the monthly rent for the days between the old due date and the new one. We do not ask you or
-  tell you. The payout date does not change.
+- **3.6** To keep our field work well organised, we may move a tenant's due date during the tenancy. We give the
+  tenant 30 days' notice and update the tenancy form. The tenant pays a share of the monthly rent for the days
+  between the old due date and the new one (pro rata). The payout date stays the same.
 
 ### S4. When a tenant has not paid
 
@@ -164,7 +163,7 @@ Not part of the schedule. Remove before use.
 | S1     | BM1, BM4, P2, BM20 | Definitions match the agreement; the due date is per tenancy and can change          |
 | S2     | BM4, P7            | Fee base; pass-through costs; no other fees                                          |
 | S3     | BM1, BM5, BM20     | Cap per unit and its reset; assignment; the due-date trigger; timing of later months |
-| S3.6   | BM20               | Changing a due date: pro rata counting; notice or agreement; the agent's authority   |
+| S3.6   | BM20               | Moving a due date: pro rata counting; notice, not agreement; agent's authority       |
 | S4     | BM5                | Eviction steps; costs; who may act; when the written notice goes out                 |
 | S5     | BM6, P13           | Held in trust; refunds                                                               |
 | S6     | BM2, BM6, P6       | Agent, not builder; re-billing utilities; consent; tenant damage                     |

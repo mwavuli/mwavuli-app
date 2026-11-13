@@ -76,13 +76,13 @@ For example: a room rents for UGX 400,000 and the tenant does not pay in March. 
 for it (the rent minus our 15%). On 1st April it is still unpaid, so we send nothing for that room until it is
 settled.
 
-A tenant's due day can change during the tenancy. The change is pro rata: the tenant pays a share of the month's
-rent for the days between the old day and the new day. We arrange it with the tenant ourselves, tell the tenant a
-month ahead and update the tenancy form. We do not ask you or tell you, and we still pay you on the 1st.
+To keep our field work well organised, we may move a tenant's due date during the tenancy. We give the tenant
+30 days' notice and update the tenancy form. The tenant pays a share of the monthly rent for the days between the
+old due date and the new one (pro rata). Your payout stays on the 1st.
 
-For example: a tenant who pays UGX 400,000 a month moves the due day from the 5th to the 20th, starting in April.
-The 15 days from the 5th to the 20th of April are charged to the tenant pro rata: half a month, UGX 200,000. You
-are paid on 1st April as always.
+For example: we move a tenant's due date from the 5th to the 20th, starting in April. The tenant pays UGX 400,000 a
+month, and the 15 days from the 5th to the 20th of April are charged pro rata: half a month, UGX 200,000. You are
+paid on 1st April as always.
 
 ### 8. How tenants pay, and your statement
 
@@ -265,7 +265,7 @@ Not part of the agreement. Remove before use.
 | 4                   | BM7          | Proof by kind of land; mortgage consent; family and estate authority        |
 | 5                   | P4, P9       | Define "unsafe" as a short list; keep the signed report                     |
 | 6                   | P2, P3       | "Occupied" in the same words as the schedule; fee on old arrears            |
-| 7                   | BM1, BM20    | Insurance or suretyship; assignment of the covered month; due-day changes   |
+| 7                   | BM1, BM20    | Insurance or suretyship; assignment of the covered month; due-date changes  |
 | 8                   | P1           | Payment-service and anti-money-laundering duties                            |
 | 9                   | BM4          | VAT and withholding tax on the fee; whether 15% is final                    |
 | 10                  | BM2, BM6, P6 | Agent, not builder; fee disclosure; SMS and WhatsApp consent; tenant damage |
