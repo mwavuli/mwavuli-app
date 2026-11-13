@@ -14,6 +14,7 @@ and no API.
   [schedule](agreements/landlord-agreement-schedule.md), `Annex` in the [agreement](agreements/landlord-agreement.md),
   `form` clauses in the [tenancy form](agreements/tenancy-form.md), `brand` IDs in [brand/](../brand/README.md).
 - `proposed` is added here and the owner decides. `open` waits on a term nobody has decided (see the end).
+- `owner` and a date mark a decision the owner gave after the model was written.
 
 ## Context
 
@@ -53,10 +54,11 @@ Uganda shapes every story:
 
 ## Use cases
 
-- **A tenant misses March.** The due day passes unpaid, so the room has its covered month → the landlord keeps the
-  UGX 340,000 paid on 1st March and gets a message → still unpaid on 1st April: the room's payout pauses and a written
-  notice goes out → the tenant pays UGX 400,000 on 20th April, which repays March → April is still owed, nothing on 1st
-  May → April is paid and the landlord gets UGX 340,000. [BM1, BM5]
+- **A tenant misses March.** The due day passes unpaid, so the room has its covered month and the chasing starts:
+  reminder, call, visit, written notice → the landlord keeps the UGX 340,000 paid on 1st March and gets a message →
+  still unpaid on 1st April: the room's payout pauses → the tenant pays UGX 400,000 on 20th April, which repays March
+  → April is still owed, nothing on 1st May → April is paid and the landlord gets UGX 340,000.
+  [BM1, BM5, owner 2026-11-13]
 - **A roof leaks.** Tenant reports with photos → Support triages it → Officer gets a UGX 600,000 quote plus a UGX 60,000
   fee → above the approval limit and the emergency amount, so the landlord is asked first and replies YES → the
   contractor works and sends photos → the statement lists UGX 660,000. [BM2, P6]
@@ -71,6 +73,10 @@ Uganda shapes every story:
   "paid up to" notes issued. [BM8, P8, P13]
 - **A tenant leaves early with months prepaid.** Notice recorded → move-out photos → deposit settled with an itemized
   note → unused months refunded with no fee → unit vacant, filling starts. [BM6, P13]
+- **A tenant's due day moves.** The tenant asks, or Mwavuli proposes, to move it from the 5th to the 20th → Support
+  records the new day and the pro rata amount → the tenant is told in writing a month ahead and the form is updated →
+  from that date reminders and the covered month follow the 20th → the landlord is not told and the payout stays on the
+  1st. [BM20, owner 2026-11-13]
 
 ## User stories
 
@@ -160,6 +166,11 @@ Uganda shapes every story:
   [launch · proposed]
 - **Tenant:** gets a reminder before the due day and a notice on it; due days differ per tenancy and reminders stop
   when paid. [launch · BM20, proposed]
+- **Officer, Support:** change a tenant's due day, pro rata. Mwavuli coordinates it with the tenant alone; the landlord
+  is not asked or told and the payout stays on the 1st. From the date given, reminders and the covered month follow the
+  new day. [launch · BM20, owner 2026-11-13]
+- **Tenant:** is told in writing, in their language, a month before a due day moves, with the new day and the pro rata
+  amount; the form is updated. [launch · BM20, owner 2026-11-13]
 - **Tenant:** pays in parts; each payment goes to the oldest month first and a month shows paid only when settled in
   full. [launch · BM5, open: part payments]
 - **Tenant:** pays months ahead; unused months are held and the tenant is told "paid up to [month]". [launch · P13]
@@ -196,12 +207,13 @@ Uganda shapes every story:
 
 - **Landlord:** keeps the net rent paid on the 1st for a month a tenant misses, and is told in one message who missed it
   and that Mwavuli is chasing. A paused unit gets its own message and the reason.
-  [launch · BM1, BM18, open: when chasing starts]
+  [launch · BM1, BM18, owner 2026-11-13]
 - **Finance:** sees each unit's covered month, the amount advanced and the amount recovered; one covered month per unit
   at a time. A paused unit is paid again when its arrears clear or a new tenant moves in, and can then have a new
   covered month. [launch · BM1, S3]
-- **Officer:** works an arrears queue by building and age; the steps are remind, call, visit, written notice, each
-  logged with date, channel and outcome. [launch · BM5, open: when chasing starts]
+- **Officer:** works an arrears queue by building and age, from the day a due date is missed; the steps are remind,
+  call, visit, written notice, each logged with date, channel and outcome.
+  [launch · BM5, form 5, owner 2026-11-13, open: when the notice goes out]
 - **Tenant:** gets the reminder, call, visit and written notice in their language; proof of each is kept, including who
   received the notice. [launch · BM5, form 5]
 - **Officer:** records a promise to pay and is alerted when it is missed. [next · proposed]
@@ -373,6 +385,8 @@ Uganda shapes every story:
 ## Rules the product enforces
 
 - No cash from tenants to staff. [P1]
+- A due day changes only pro rata, with a month's written notice to the tenant and the form updated; the landlord is
+  not asked. [BM20, owner 2026-11-13]
 - No building goes live until the ownership check passes, unsafe items are fixed and the funding test passes.
   [BM7, P4, BM17]
 - No unit is paid on the 1st unless it is occupied on the form with rent and deposit written down. [P2]
@@ -409,12 +423,13 @@ documents. Stage numbers are in brackets.
 - Who sets each unit's rent and increases, and who chooses tenants (4, 5).
 - Which mobile money providers and banks the product takes payments from and pays out to, and who bears their charges
   on collections and payouts (5, 6).
-- Part payments, payment plans, and rent for a part month when a tenant moves in or out (5, 7, 11).
+- Part payments, payment plans, and how a part month is counted (calendar days or a 30-day month) for a move-in, a
+  move-out or a due-day move (5, 7, 11).
 - The late fee, eviction steps and deposit rules under the Landlord and Tenant Act 2022 (5, 7, 10, 11).
-- Whether a due date can change during a tenancy, and who may change it (5).
 - What separates rent a tenant paid to the landlord, who passed it on the same day (P5), from the landlord collecting
   rent, a ground to end at once (BM8) (5, 12).
-- When chasing starts: at the missed due date (tenancy form 5) or after the covered month (BM5, S4.1) (7).
+- When the written notice goes out: with the pause on the next 1st, as the BM5 example has it, or at the end of the
+  visits (7).
 - When rent collected after a covered month reaches the landlord, and who collects rent after the end date (7, 12).
 - Whether a deposit the landlord holds can be used against a covered month, proposed in BM6 and not approved (7, 11).
 - What counts as an urgent safety repair; the inspection's unsafe list is roof, wiring, water and stairs (8).
