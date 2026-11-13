@@ -66,17 +66,18 @@ Uganda shapes every story:
   → Officer checks all four → inspection finds bad wiring, 30 days to fix → the funding test passes → the agreement is
   explained in Luganda and signed with a thumbprint before the landlord's sister → existing tenants are visited and
   moved onto the form → first payout on the next 1st. [BM7, P4, BM17, BM11, P3]
-- **A new tenant takes a room.** Viewing → form explained and signed → deposit and any rent ahead paid to Mwavuli by
-  mobile money → unit occupied, landlord told → cover starts on the first 1st after. [BM6, P2, P13]
+- **A new tenant takes a room.** Viewing → form explained and signed → deposit, the days up to the first due date and
+  any rent ahead paid to Mwavuli by mobile money → unit occupied, landlord told → the part month reaches the landlord,
+  less 15%, on the first payout after move-in, and cover starts on the first 1st after. [BM6, P2, P13, P14]
 - **A payout does not arrive.** Finance is alerted at the end of the 2nd → still unpaid on the 3rd → the landlord gives
   notice and leaves with no fee → final statement and payment within 14 days, tenant files handed over, tenants told,
   "paid up to" notes issued. [BM8, P8, P13]
 - **A tenant leaves early with months prepaid.** Notice recorded → move-out photos → deposit settled with an itemized
   note → unused months refunded with no fee → unit vacant, filling starts. [BM6, P13]
-- **A tenant's due day moves.** The tenant asks, or Mwavuli proposes, to move it from the 5th to the 20th → Support
-  records the new day and the pro rata amount → the tenant is told in writing a month ahead and the form is updated →
-  from that date reminders and the covered month follow the 20th → the landlord is not told and the payout stays on the
-  1st. [BM20, owner 2026-11-13]
+- **A tenant's due day moves.** To keep its field work organised, Mwavuli moves a UGX 400,000 rent from the 5th to the
+  20th → Support records the new day and the 15 days between, UGX 200,000 → the tenant is told in writing 30 days
+  ahead and the form is updated → from April the rent is due on the 20th, and reminders and the covered month follow
+  → the landlord is not told and the payout stays on the 1st. [BM20, P14, owner 2026-11-13]
 
 ## User stories
 
@@ -130,7 +131,7 @@ Uganda shapes every story:
 - **Officer:** visits each existing tenant, explains the tenancy form aloud, records language and explainer, takes a
   signature or thumbprint. [launch · P3]
 - **Officer:** records each tenancy: unit, tenant's NIN and phone, start date, rent, due day, deposit and who holds it,
-  months paid ahead, rent paid ahead and rent owed from before sign-up. [launch · form]
+  part month paid, months paid ahead, rent paid ahead and rent owed from before sign-up. [launch · form]
 - **Officer:** keeps rent owed from before sign-up apart; it is not covered, and Mwavuli collects it for the same 15%.
   [launch · P3]
 - **Landlord:** reads on the statement which units are on the form and which are waiting; only occupied units on the
@@ -147,10 +148,10 @@ Uganda shapes every story:
 - **Officer:** lists vacant units (photos, rent, type, area) as a WhatsApp link, books viewings with reminders to both
   sides, and takes the applicant's NIN, phone and move-in date. [next · brand I6]
 - **Tenant:** asks about a unit by WhatsApp or call and gets a viewing time. [next · proposed]
-- **Tenant:** pays the deposit to Mwavuli by mobile money, with any rent ahead; the form is signed and the unit turns
-  occupied. [launch · BM6, P2, P13, open: payments before move-in]
-- **Landlord:** is told when a tenant moves in: name, rent, start date, deposit held by Mwavuli, and which 1st cover
-  starts. [launch · P2]
+- **Tenant:** pays Mwavuli by mobile money the deposit and the days from move-in to the first due date, with any rent
+  ahead; the form is signed and the unit turns occupied. [launch · BM6, P2, P13, P14]
+- **Landlord:** is told when a tenant moves in: name, rent, start date, deposit held by Mwavuli, the part month paid,
+  and which 1st cover starts. [launch · P2, P14]
 
 ### 5. Collect rent
 
@@ -166,11 +167,13 @@ Uganda shapes every story:
   [launch · proposed]
 - **Tenant:** gets a reminder before the due day and a notice on it; due days differ per tenancy and reminders stop
   when paid. [launch · BM20, proposed]
-- **Officer, Support:** change a tenant's due day, pro rata. Mwavuli coordinates it with the tenant alone; the landlord
-  is not asked or told and the payout stays on the 1st. From the date given, reminders and the covered month follow the
-  new day. [launch · BM20, owner 2026-11-13]
-- **Tenant:** is told in writing, in their language, a month before a due day moves, with the new day and the pro rata
-  amount; the form is updated. [launch · BM20, owner 2026-11-13]
+- **Officer, Support:** move a tenant's due day to keep field work organised, on Mwavuli's own initiative; the landlord
+  is not asked or told and the payout stays on the 1st. From the new date, reminders and the covered month follow the
+  new day. [launch · BM20, owner 2026-11-13, open: moving a due date while rent is owed]
+- **Tenant:** is told in writing, in their language, 30 days before a due day moves, with the new day and the amount
+  for the days between; the form is updated. [launch · BM20, P14, owner 2026-11-13]
+- **Finance:** counts every part month on a 30-day month, each day one-thirtieth of the rent, rounded to the nearest
+  UGX 1,000, for a move-in or a due-day move. [launch · P14]
 - **Tenant:** pays in parts; each payment goes to the oldest month first and a month shows paid only when settled in
   full. [launch · BM5, open: part payments]
 - **Tenant:** pays months ahead; unused months are held and the tenant is told "paid up to [month]". [launch · P13]
@@ -185,8 +188,8 @@ Uganda shapes every story:
 
 ### 6. Pay the landlord on the 1st
 
-- **Finance:** sees each landlord's payout worked out before the 1st: net rent of every occupied unit, less approved
-  costs, plus VAT passed on. [launch · BM4, S2]
+- **Finance:** sees each landlord's payout worked out before the 1st: net rent of every occupied unit, a new tenant's
+  part month less the 15%, less approved costs, plus VAT passed on. [launch · BM4, S2, P14]
 - **Finance:** reviews the batch and its exceptions (paused units, new payout details, holds), then releases it so money
   lands on the 1st. [launch · BM1]
 - **Finance:** schedules bank payouts to land on the 1st, weekends and public holidays included. [launch · BM1, BM8]
@@ -278,14 +281,16 @@ Uganda shapes every story:
   [launch · P13]
 - **Officer:** itemizes each deduction from a deposit (unpaid rent, damage, legal costs) with evidence; Finance approves
   it. [launch · BM6]
-- **Tenant:** gets unused prepaid months back, with no fee, when leaving early under the form's terms.
-  [launch · P13, open: refund conditions]
+- **Tenant:** gets prepaid months that have not started back, with no fee, when leaving early; a month that has
+  started is not refunded. [launch · P13, P14]
 - **Landlord:** sees deposits and prepaid rent on the statement as held for tenants, not income. [next · proposed]
 
 ### 11. Move out
 
 - **Tenant:** gives notice by call or WhatsApp; the system records who, when and the move-out date.
   [launch · form 10, open: tenant notice]
+- **Support:** when a tenant gives notice, tells them which move-out dates end on a due date, since a month that has
+  started is paid in full. [launch · P14, proposed]
 - **Landlord:** is told when a tenant gives notice, with the move-out date, and again when the unit is vacant.
   [launch · proposed]
 - **Officer:** photographs the unit at move-in and again at move-out to settle damage. [next · proposed]
@@ -385,8 +390,11 @@ Uganda shapes every story:
 ## Rules the product enforces
 
 - No cash from tenants to staff. [P1]
-- A due day changes only pro rata, with a month's written notice to the tenant and the form updated; the landlord is
-  not asked. [BM20, owner 2026-11-13]
+- A due day moves only on 30 days' written notice to the tenant, with the form updated and the days between charged;
+  the landlord is not asked. [BM20, P14, owner 2026-11-13]
+- Every part month is counted on a 30-day month, each day one-thirtieth of the rent, rounded to the nearest UGX 1,000.
+  [P14]
+- A month that has started is paid in full; a tenant who leaves part-way through it gets none of it back. [P14]
 - No building goes live until the ownership check passes, unsafe items are fixed and the funding test passes.
   [BM7, P4, BM17]
 - No unit is paid on the 1st unless it is occupied on the form with rent and deposit written down. [P2]
@@ -418,14 +426,17 @@ documents. Stage numbers are in brackets.
 - The Luganda text of the agreement set, statements and messages, not written or reviewed yet, and whether the tenancy
   form is bilingual (2, 3, 13).
 - What ID a tenant without a NIN may give, and whether joint tenants share one tenancy; the form names one tenant (3).
-- What is paid at the start of a tenancy: for an existing tenant not yet on the form, and by a new tenant before moving
-  in (3, 4).
+- What is paid for an existing tenant not yet on the form (3).
 - Who sets each unit's rent and increases, and who chooses tenants (4, 5).
 - Which mobile money providers and banks the product takes payments from and pays out to, and who bears their charges
   on collections and payouts (5, 6).
-- Part payments, payment plans, and how a part month is counted (calendar days or a 30-day month) for a move-in, a
-  move-out or a due-day move (5, 7, 11).
-- The late fee, eviction steps and deposit rules under the Landlord and Tenant Act 2022 (5, 7, 10, 11).
+- Part payments and payment plans (5, 7).
+- Whether a due date may move while the tenant owes rent; a later date must not undo a missed due date or restart the
+  chasing (5).
+- Whether Mwavuli may move a due date on 30 days' notice without the tenant's agreement, and without telling the
+  landlord (5).
+- The late fee, eviction steps, deposit rules, and keeping the rent of a month that has started under the Landlord and
+  Tenant Act 2022 (5, 7, 10, 11).
 - What separates rent a tenant paid to the landlord, who passed it on the same day (P5), from the landlord collecting
   rent, a ground to end at once (BM8) (5, 12).
 - When the written notice goes out: with the pause on the next 1st, as the BM5 example has it, or at the end of the
@@ -438,7 +449,7 @@ documents. Stage numbers are in brackets.
 - Response-time promises for repairs and support (8, 13).
 - Who pays the electricity, water and garbage providers, how a tenant's share is collected, and the share for a unit
   with no meter; the agreement leaves it open while tenancy form 7 commits the tenant to a share (9).
-- The tenant's notice period, and when unused prepaid rent is refundable (10, 11).
+- The tenant's notice period; notice that ends on a due date leaves no part month (11).
 - How a notice to leave is given, from when it counts, and whether leaving on 30 days' notice carries a fee; none is
   stated (12).
 - What ends the agreement at once: any breach of a landlord duty (P5) or only the three events in BM8 (12).
