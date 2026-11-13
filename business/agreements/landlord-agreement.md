@@ -113,10 +113,10 @@ statement. A roof repair at UGX 660,000 (UGX 600,000 plus our UGX 60,000) needs 
 ### 11. When a tenant has not paid
 
 If a tenant misses the due date, we do the chasing from that day: we remind, call and visit, then send a written
-notice. If it must go to court, we ask you first and you say YES. We never lock a tenant out, and our time costs
-you nothing extra. A lawyer, the court and a bailiff are paid at cost, from the tenant's deposit first and then by
-you. The month we covered is ours to collect. When a tenant pays what is owed, the oldest month is paid first, so
-the month we covered is repaid before later months reach you.
+notice. Should the matter need to go to court, the case is brought in your name, and only with your YES. We never
+lock a tenant out, and our time costs you nothing extra. A lawyer, the court and a bailiff are paid at cost, from
+the tenant's deposit first and then by you. The month we covered is ours to collect. When a tenant pays what is
+owed, the oldest month is paid first, so the month we covered is repaid before later months reach you.
 
 For example: a room rents for UGX 400,000, due on the 5th, and the tenant misses 5th March. We pay you UGX 340,000
 on 1st March, start chasing on 5th March, and send nothing for that room on 1st April. If the tenant then pays

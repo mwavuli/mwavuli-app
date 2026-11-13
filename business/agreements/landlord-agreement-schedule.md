@@ -64,8 +64,8 @@ landlord named below. It says the same things as the agreement, in numbered para
 
 - **4.1** From the day a tenant misses its due date, we remind, call and visit the tenant, and then send a written
   notice.
-- **4.2** If the matter must go to court, we ask you first. We take legal steps only in your name and only with
-  your YES.
+- **4.2** Should the matter need to go to court, the case is brought in your name, and only with your YES. The same
+  holds for any other legal step we take.
 - **4.3** We never lock a tenant out and never remove a tenant's belongings.
 - **4.4** Our own time costs you nothing extra. A lawyer, the court and a bailiff are paid at cost. They are
   paid from the tenant's deposit first, if we hold it. Where you hold the deposit, or it is not enough, you pay

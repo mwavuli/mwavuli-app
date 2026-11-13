@@ -251,10 +251,11 @@ and building liability stay with the contractor, and Mwavuli earns from a fee th
 chasing starts on the missed due date was decided on 2026-11-13.*
 
 **Plain statement** If a tenant misses the due date, we do the chasing for you from that day. We remind, call and
-visit, then send a written notice. If it must go to court, we ask you first and you say YES. We never lock a
-tenant out. Our time costs you nothing extra. A lawyer, the court and a bailiff are paid at cost: from the
-tenant's deposit first, then by you. The month we covered is ours to collect. When a tenant pays what is owed, the
-oldest month is paid first, so the month we covered is repaid before later months reach you.
+visit, then send a written notice. Should the matter need to go to court, the case is brought in your name, and
+only with your YES. We never lock a tenant out. Our time costs you nothing extra. A lawyer, the court and a bailiff
+are paid at cost: from the tenant's deposit first, then by you. The month we covered is ours to collect. When a
+tenant pays what is owed, the oldest month is paid first, so the month we covered is repaid before later months
+reach you.
 
 **Example** A room rents for UGX 400,000, due on the 5th. On 1st March we pay you UGX 340,000 for it. The tenant
 has not paid by 5th March, so we start chasing that day. On 1st April it is still unpaid: we send nothing for that

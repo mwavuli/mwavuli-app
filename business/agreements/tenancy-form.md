@@ -64,8 +64,8 @@ not use go back to you, on these terms.
 
 ### 5. If you do not pay
 
-If you miss your due date, we remind you, call you and visit you, then send a written notice. If it must go to
-court, the landlord says YES first and the case is in the landlord's name. Any late fee goes to us.
+If you miss your due date, we remind you, call you and visit you, then send a written notice. Should the matter
+need to go to court, the case is brought in the landlord's name at their approval. Any late fee goes to us.
 
 - **Late fee:** [amount]
 - **When it applies:** [when it applies; 2 lines]
