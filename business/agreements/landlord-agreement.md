@@ -61,9 +61,10 @@ report](inspection-report.md).
 ### 6. Your tenants
 
 A unit is occupied when a tenant lives in it under our [tenancy form](tenancy-form.md), with the rent and
-deposit written down. The first-month cover starts on the first 1st after that. Tenants already in your building
-move onto our form after a visit. Rent owed from before you sign up is not covered; we collect it for the same
-15%.
+deposit written down. The first-month cover starts on the first 1st after that. A new tenant also pays for the days
+from moving in to the first due date, and we pay you that rent, minus our 15%, with your first payout for the unit.
+Tenants already in your building move onto our form after a visit. Rent owed from before you sign up is not
+covered; we collect it for the same 15%.
 
 ### 7. Rent on the 1st
 
@@ -136,7 +137,7 @@ UGX 350,000 goes back to the tenant.
 
 Rent a tenant pays ahead is held in a separate account, like deposits, and paid out month by month on the 1st,
 minus 15%. Months that have not started stay there. If a tenant leaves early, unused months go back to the
-tenant under the tenancy form, with no fee on them.
+tenant under the tenancy form, with no fee on them. A month that has started is not refunded.
 
 ### 14. VAT on commercial rent
 
@@ -264,14 +265,14 @@ Not part of the agreement. Remove before use.
 | 3                   | BM9, BM10    | Commercial tenancy form; rent currency; VAT and withholding tax             |
 | 4                   | BM7          | Proof by kind of land; mortgage consent; family and estate authority        |
 | 5                   | P4, P9       | Define "unsafe" as a short list; keep the signed report                     |
-| 6                   | P2, P3       | "Occupied" in the same words as the schedule; fee on old arrears            |
+| 6                   | P2, P3, P14  | "Occupied" as in the schedule; fee on old arrears; part month at move-in    |
 | 7                   | BM1, BM20    | Insurance or suretyship; assignment of the covered month; due-date changes  |
 | 8                   | P1           | Payment-service and anti-money-laundering duties                            |
 | 9                   | BM4          | VAT and withholding tax on the fee; whether 15% is final                    |
 | 10                  | BM2, BM6, P6 | Agent, not builder; fee disclosure; SMS and WhatsApp consent; tenant damage |
 | 11                  | BM5          | Eviction steps; costs; oldest-month-first wording; when the notice goes out |
 | 12                  | BM6          | Deposit amount, holding and return; the register                            |
-| 13                  | P13          | Held in trust; refund of unused months                                      |
+| 13                  | P13, P14     | Held in trust; refund of unused months, none for a started month            |
 | 14                  | P10          | VAT treatment; who issues tax invoices                                      |
 | 15                  | P5           | Landlord's tax duties; align with BM8 (see the list below)                  |
 | 16                  | BM8, P8, P13 | Notice mechanics; the late-payment test; exit mechanics                     |
@@ -295,7 +296,6 @@ The model does not settle these. The owner and counsel decide them before the ag
 
 - Who sets the rent for each unit and any increase, and who chooses tenants.
 - The tenant's notice period, and the conditions for refunding unused prepaid rent.
-- When a part month is charged at move-in or refunded at move-out, and to whom it is paid.
 - How electricity, water and garbage costs are charged to tenants.
 - Who pays the contractor first for damage a tenant causes, and whether our coordination fee is charged to the
   tenant.

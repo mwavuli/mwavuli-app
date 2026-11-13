@@ -188,8 +188,7 @@ UGX 1,000: 10 days on UGX 400,000 is UGX 133,333, charged as UGX 133,000.
   the landlord.
 - Confirm that the tenancy form the tenant signs lets Mwavuli move a due date on 30 days' notice without the tenant's
   agreement, how the notice is given and recorded, and what the updated form must carry.
-- The counting of the days is P14's. Its counsel note has the questions: the 30-day month, the rounding, and what is
-  charged or refunded at move-in and move-out.
+- The counting of the days is P14's. Its counsel note has the questions.
 - Confirm whether a due date may move while the tenant owes rent. A later date must not undo a due date the tenant
   has already missed or restart the chasing (BM5).
 - For the accountant: how a pro rata amount is recorded and held, since the landlord's payout and statement do not
@@ -501,9 +500,11 @@ landlord's own language, with a witness the landlord chose.
   15%. Months that haven't started stay there. If a tenant leaves early, unused months go back to the tenant under
   the tenancy form, with no fee on them. At exit, each tenant gets a note, "rent paid up to [month]", and the
   landlord honors it.
-- **P14 Part months.** When a part month of rent has to be worked out, for example for a tenant who moves in or out
-  part-way through a month or whose due date moves, every month counts as 30 days: each day is one-thirtieth of the
-  monthly rent. The amount is rounded to the nearest UGX 1,000.
+- **P14 Part months.** Every month counts as 30 days, so each day is one-thirtieth of the monthly rent, rounded to the
+  nearest UGX 1,000. A new tenant pays the days from move-in to the first due date when moving in, and we pay them
+  to the landlord, minus our 15%, on the first payout after move-in. A tenant whose due date moves pays the days
+  between the old date and the new one. A month that has started is paid in full: a tenant who leaves part-way
+  through it gets none of it back.
 
 **Counsel note**
 
@@ -528,8 +529,12 @@ landlord's own language, with a witness the landlord chose.
   when a tenant leaves early.
 - P14: confirm that counting a part month on a 30-day month, rounded to the nearest UGX 1,000, is allowed and fair to
   the tenant once the form says so. It charges about 1.4% more per day than the calendar average: 31-day months cost
-  the tenant more, February less. P14 counts a part month only: whether one is charged at move-in or refunded at
-  move-out, and to whom it is paid. Open.
+  the tenant more, February less.
+- P14: confirm that keeping the rent of a month that has started, when a tenant leaves part-way through it, is allowed
+  under the Landlord and Tenant Act 2022. The tenant's notice period is still open: notice that ends on a due date
+  leaves no part month.
+- P14, for the accountant: the part month a new tenant pays at move-in is rent, so the 15% applies (BM4). Confirm how
+  it is recorded and held until the first payout.
 
 ## Numbers
 
@@ -561,8 +566,9 @@ Each term's counsel note lists what to confirm. Start with these:
 - **Land and authority:** proof of title by tenure, mortgages, co-owners and estates (BM7).
 - **Tenancy and recovery:** the covered-month claim, eviction steps, when the written notice may go out, deposits
   and late fees under the Landlord and Tenant Act 2022 (BM5, BM6, P7, P8).
-- **Due dates and part months:** the 30-day month and rounding (P14), moving a due date on notice without the tenant's
-  agreement, and moving it without telling the landlord (BM20).
+- **Due dates and part months:** the 30-day month and rounding, and keeping the rent of a month a tenant leaves
+  part-way through (P14); moving a due date on notice without the tenant's agreement, and moving it without telling
+  the landlord (BM20).
 - **Agency and works:** agent, not builder; disclosure of the coordination fee; re-billing utilities (BM2).
 - **Tax:** VAT and withholding tax on the 15% and on commercial rent, and the landlord's own duties (BM4, BM9, P5,
   P10).
@@ -586,4 +592,3 @@ Not yet settled:
 - How the brand name Mwavuli Property Management relates to the registered name (see "The company").
 - When the written notice goes out once a tenant has missed a due date: with the pause on the next 1st, or at the end
   of the visits (BM5).
-- When a part month is charged at move-in or refunded at move-out, and to whom it is paid (P14).

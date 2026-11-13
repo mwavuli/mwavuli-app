@@ -19,6 +19,7 @@ The landlord and the tenant sign this form, and Mwavuli Holdings Ltd signs for t
 | The tenancy starts on   | [day month year]                                       |
 | Rent each month (UGX)   | [amount]                                               |
 | Rent due each month on  | [day]                                                  |
+| Part month paid (UGX)   | [amount]                                               |
 | Deposit (UGX)           | [amount]                                               |
 | Who holds the deposit   | [ ] Mwavuli (new tenant) [ ] the landlord (old tenant) |
 | Months paid ahead       | [number]                                               |
@@ -118,9 +119,10 @@ The new date is then the day written above.
 
 ### 13. Part months
 
-If a part month of rent has to be worked out, for example when you move in or out part-way through a month or your
-due date moves, we count every month as 30 days, so each day is one-thirtieth of your monthly rent. We round the
-amount to the nearest UGX 1,000.
+We count every month as 30 days, so each day is one-thirtieth of your monthly rent, and we round any part month to
+the nearest UGX 1,000. When you move in, you pay for the days from your move-in date to your first due date. When
+your due date moves, clause 12 applies. A month that has started is paid in full: if you leave part-way through it,
+the rest of it does not go back to you.
 
 ## Signatures
 
@@ -153,7 +155,7 @@ Not part of the form. Remove before use.
 | 10                 | BM6, P13   | Tenant's notice (not decided); return of deposit and prepaid rent         |
 | 11                 | P8, P13    | Notes to tenants; handing over deposits                                   |
 | 12                 | BM20       | Notice, not agreement; the agent's authority                              |
-| 13                 | P14        | 30-day month and rounding; charge or refund of a part month (not decided) |
+| 13                 | P14        | 30-day month and rounding; move-in charge; no refund of a started month   |
 | Signatures         | P2         | Whether tenancy forms are bilingual and explained aloud (not decided)     |
 
 The form re-voices the model's plain statements to "we" and "you" and tightens the wording. The meaning is
@@ -166,7 +168,6 @@ agreement keeps.
 - When the written notice goes out after a tenant misses a due date: with the pause on the next 1st, or at the end
   of the visits.
 - The tenant's notice period, and the conditions for refunding unused prepaid rent.
-- When a part month is charged at move-in or refunded at move-out, and to whom it is paid.
 - How electricity, water and garbage shares are worked out for a unit with no meter.
 - Who pays the contractor first for damage a tenant causes, and whether our coordination fee is charged to the
   tenant.

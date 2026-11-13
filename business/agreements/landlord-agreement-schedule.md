@@ -43,6 +43,9 @@ landlord named below. It says the same things as the agreement, in numbered para
 - **2.5** We charge no sign-up fee, no letting fee and no yearly fee, and we charge none to tenants. Late fees
   written in the tenancy form go to us.
 - **2.6** We pay you at the account or mobile money number in Annex 4 of the agreement.
+- **2.7** A new tenant pays for the days from move-in to the first due date, as a share of the monthly rent counted
+  on a 30-day month and rounded to the nearest UGX 1,000. We charge our fee on it as on any rent, and we pay you the
+  rest on the first payout date after move-in.
 
 ### S3. Due dates and the covered month
 
@@ -79,7 +82,7 @@ landlord named below. It says the same things as the agreement, in numbered para
   amount in Annex 3 of the agreement, and you stay responsible for giving it back.
 - **5.3** Rent paid ahead for months that have not started is held in a separate account, like deposits. We pay
   it out month by month on the payout date, minus our fee. If a tenant leaves early, the unused months go back
-  to the tenant under the tenancy form, with no fee on them.
+  to the tenant under the tenancy form, with no fee on them. A month that has started is not refunded.
 
 ### S6. Repairs, utilities and garbage
 
@@ -161,11 +164,11 @@ Not part of the schedule. Remove before use.
 | Clause | Takes from         | Counsel to confirm                                                                   |
 |--------|--------------------|--------------------------------------------------------------------------------------|
 | S1     | BM1, BM4, P2, BM20 | Definitions match the agreement; the due date is per tenancy and can change          |
-| S2     | BM4, P7            | Fee base; pass-through costs; no other fees                                          |
+| S2     | BM4, P7, P14       | Fee base; pass-through costs; no other fees; part month at move-in                   |
 | S3     | BM1, BM5, BM20     | Cap per unit and its reset; assignment; the due-date trigger; timing of later months |
 | S3.6   | BM20               | Moving a due date: notice, not agreement; agent's authority                          |
 | S4     | BM5                | Eviction steps; costs; who may act; when the written notice goes out                 |
-| S5     | BM6, P13           | Held in trust; refunds                                                               |
+| S5     | BM6, P13, P14      | Held in trust; refunds; none for a started month                                     |
 | S6     | BM2, BM6, P6       | Agent, not builder; re-billing utilities; consent; tenant damage                     |
 | S7     | BM7, P4, P9        | Proof by kind of land; "unsafe"; declining a building                                |
 | S8     | P5                 | Landlord duties and their remedies; align with BM8                                   |
