@@ -1,6 +1,6 @@
 # Mwavuli business model
 
-Status: version 0.5, for owner sign-off and counsel review. Ticket SNT-25. Interview started on 2026-11-10.
+Status: version 0.6, for owner sign-off and counsel review. Ticket SNT-25. Interview started on 2026-11-10.
 Interview transcript: [grill-me session](../.scratch/grill-me/1794346863-mwavuli-business-model.md).
 
 What Mwavuli Property Management offers a landlord, what it charges and what each side does. It is the single
@@ -53,8 +53,8 @@ isn't working, leave with 30 days' notice.
 | Paid to you on the 1st                        | 2,950,000 |
 
 The empty room earns no rent and costs no fee, and we look for a tenant. If a tenant misses March, we still pay
-you for that room on 1st March (UGX 340,000). If it is still unpaid on 1st April, we pause that room until it
-is settled, we chase, and if it goes to court you say YES first.
+you for that room on 1st March (UGX 340,000), and we start chasing on the missed due date. If it is still unpaid
+on 1st April, we pause that room until it is settled, we keep chasing, and if it goes to court you say YES first.
 
 **Rules for using it**
 
@@ -154,24 +154,39 @@ and the promise stays true for every month inside it.
 
 ### BM20 · Rent due dates
 
-*Source: Owner*
+*Source: Owner. That a due date can change during a tenancy was decided on 2026-11-13.*
 
 **Plain statement** Each tenant's rent is due on a day of the month written in the tenancy form. The day can differ
-from tenant to tenant. We always pay you on the 1st.
+from tenant to tenant, and it can change during the tenancy. A change is pro rata: the tenant pays a share of the
+month's rent for the days between the old day and the new day. We arrange it with the tenant ourselves, tell the
+tenant a month ahead and update the tenancy form. We do not ask you or tell you. We always pay you on the 1st.
 
 **Example** One tenant's rent is due on the 5th and another's on the 20th. On 1st March we pay you for both rooms.
-If the tenant due on the 20th has not paid by 20th March, March is that room's covered month.
+If the tenant due on the 20th has not paid by 20th March, March is that room's covered month. The tenant due on the
+5th pays UGX 400,000 a month and asks to pay on the 20th instead. We tell the tenant a month ahead and update the
+tenancy form, and from April the rent is due on the 20th. The 15 days from the 5th to the 20th of April are
+charged pro rata: half a month, UGX 200,000. You are not asked or told, and we pay you on 1st April as always.
 
-**Why** Tenants move in and are paid on different days. The payout date stays on the 1st, so the landlord's day
-never moves.
+**Why** Tenants move in and are paid on different days, and a tenant's pay day can change during a tenancy. The
+payout date stays on the 1st, so the landlord's day never moves, the landlord has nothing to arrange, and Mwavuli
+can deal with the tenant alone.
 
 **Counsel note**
 
-- The covered month starts when a tenant misses its due date. The test that stops the cover still runs on payout
-  dates: if the covered month is unpaid on the next 1st, we stop paying for that unit (BM1).
+- The covered month and the chasing start when a tenant misses its due date (BM5). The test that stops the cover
+  still runs on payout dates: if the covered month is unpaid on the next 1st, we stop paying for that unit (BM1).
 - A later due date means Mwavuli carries that tenant's rent for longer. The payout account test (BM17) already
   assumes that no rent has come in.
-- Confirm whether a due date can change during a tenancy, and who may change it.
+- Confirm how pro rata is counted: by calendar days or on a 30-day month. The example uses April, where both give
+  the same figure.
+- Confirm whether a month's notice is enough or the tenant must agree to the new day, how the notice is given and
+  recorded, and what the updated form must carry.
+- Confirm that the landlord agreement is the landlord's authority for Mwavuli to change a due day without asking or
+  telling the landlord.
+- Confirm whether a due day may change while the tenant owes rent. A later day must not undo a due date the tenant
+  has already missed or restart the chasing (BM5).
+- For the accountant: how a pro rata amount is recorded and held, since the landlord's payout and statement do not
+  change.
 
 ### BM4 · What we charge and how you are paid
 
@@ -228,31 +243,38 @@ and building liability stay with the contractor, and Mwavuli earns from a fee th
   coordination fee is charged to the tenant. Open.
 - Construction scope is not settled: new buildings and extensions may need a separate works agreement. Open.
 
-### BM5 · When a tenant still has not paid
+### BM5 · When a tenant has not paid
 
-*Source: Owner. The covered-month claim and the oldest-month-first rule were proposed and accepted.*
+*Source: Owner. The covered-month claim and the oldest-month-first rule were proposed and accepted. That the
+chasing starts on the missed due date was decided on 2026-11-13.*
 
-**Plain statement** If a tenant still has not paid after the month we covered, we do the chasing for you. We
-remind, call and visit, then send a written notice. If it must go to court, we ask you first and you say YES.
-We never lock a tenant out. Our time costs you nothing extra. A lawyer, the court and a bailiff are paid at
-cost: from the tenant's deposit first, then by you. The month we covered is ours to collect. When a tenant
-pays what is owed, the oldest month is paid first, so the month we covered is repaid before later months
-reach you.
+**Plain statement** If a tenant misses the due date, we do the chasing for you from that day. We remind, call and
+visit, then send a written notice. If it must go to court, we ask you first and you say YES. We never lock a
+tenant out. Our time costs you nothing extra. A lawyer, the court and a bailiff are paid at cost: from the
+tenant's deposit first, then by you. The month we covered is ours to collect. When a tenant pays what is owed, the
+oldest month is paid first, so the month we covered is repaid before later months reach you.
 
-**Example** A room rents for UGX 400,000. The tenant does not pay in March, so we pay you UGX 340,000 on
-1st March. On 1st April it is still unpaid: we send nothing for that room and give the tenant a written notice.
-On 20th April the tenant pays UGX 400,000. It repays March, so we keep it (UGX 340,000 we advanced and
+**Example** A room rents for UGX 400,000, due on the 5th. On 1st March we pay you UGX 340,000 for it. The tenant
+has not paid by 5th March, so we start chasing that day. On 1st April it is still unpaid: we send nothing for that
+room. On 20th April the tenant pays UGX 400,000. It repays March, so we keep it (UGX 340,000 we advanced and
 UGX 60,000 fee). April is still owed, so we still send nothing on 1st May. When April is paid, we send you
 UGX 340,000 of it.
 
-**Why** The landlord gets real help when a tenant stops paying. Mwavuli's own time is part of the 15%, and its
-loss on one room stops at one month's net rent. The landlord carries the outside legal costs because the claim
-is the landlord's and the landlord decides whether to go to court.
+**Why** The landlord gets real help when a tenant stops paying. Chasing from the day a due date is missed gives
+the tenant the earliest chance to pay, and Mwavuli the most time to collect before the cover stops on the next
+1st. Mwavuli's own time is part of the 15%, and its loss on one room stops at one month's net rent. The landlord
+carries the outside legal costs because the claim is the landlord's and the landlord decides whether to go to
+court.
 
 **Counsel note**
 
 - Mwavuli acts as the landlord's agent. Legal steps are taken in the landlord's name and need the landlord's
   YES, recorded in writing or by message.
+- The chasing starts on the missed due date and runs alongside the cover. The pause on the next 1st (BM1) is a
+  separate test.
+- When the written notice goes out is open: with the pause on the next 1st, or at the end of the visits. Confirm
+  how soon after a missed due date the Landlord and Tenant Act 2022 lets a landlord or agent send a written notice,
+  and what it must say. Open.
 - The covered month passes to Mwavuli as a claim. Draft the assignment (or subrogation) and the
   oldest-month-first rule so a court reads them the same way.
 - Mwavuli never locks a tenant out or removes belongings. Confirm the eviction steps and who may carry them out
@@ -521,8 +543,10 @@ Each term's counsel note lists what to confirm. Start with these:
 - **Client money:** deposits, prepaid rent and the payout account (BM6, P13, BM17).
 - **Language and signing:** which version governs, the Illiterates Protection Act and witnesses (BM11, BM3).
 - **Land and authority:** proof of title by tenure, mortgages, co-owners and estates (BM7).
-- **Tenancy and recovery:** the covered-month claim, eviction steps, deposits and late fees under the Landlord and
-  Tenant Act 2022 (BM5, BM6, P7, P8).
+- **Tenancy and recovery:** the covered-month claim, eviction steps, when the written notice may go out, deposits
+  and late fees under the Landlord and Tenant Act 2022 (BM5, BM6, P7, P8).
+- **Due dates:** how pro rata is counted when a due day changes, the tenant's notice, and Mwavuli changing a due day
+  without telling the landlord (BM20).
 - **Agency and works:** agent, not builder; disclosure of the coordination fee; re-billing utilities (BM2).
 - **Tax:** VAT and withholding tax on the 15% and on commercial rent, and the landlord's own duties (BM4, BM9, P5,
   P10).
@@ -544,3 +568,5 @@ Not yet settled:
 - Proposed landlord duty, for the owner to approve: a deposit the landlord holds is not used against a month
   Mwavuli has covered (BM6).
 - How the brand name Mwavuli Property Management relates to the registered name (see "The company").
+- When the written notice goes out once a tenant has missed a due date: with the pause on the next 1st, or at the end
+  of the visits (BM5).

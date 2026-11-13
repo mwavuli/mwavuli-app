@@ -1,6 +1,6 @@
 # Tenancy form
 
-Version 1.0. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at the end say
+Version 1.1. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at the end say
 which term each clause takes from.
 
 The landlord and the tenant sign this form, and Mwavuli Holdings Ltd signs for the landlord.
@@ -37,7 +37,8 @@ building.
 ### 2. Paying your rent
 
 Pay your rent to us only, by mobile money or bank, never cash to our staff. Your rent is due on the day written
-above, each month. Pay to the mobile money number or the bank account below.
+above, each month, or on the new day if the day changes (clause 12). Pay to the mobile money number or the bank
+account below.
 
 - **Mobile money number:** [mobile money number]
 - **Bank:** [bank]
@@ -63,8 +64,9 @@ not use go back to you, on these terms.
 
 ### 5. If you do not pay
 
-If you have not paid by your due date, we remind you, call you and visit you, then send a written notice. If it
-must go to court, the landlord says YES first and the case is in the landlord's name. Any late fee goes to us.
+If you miss your due date, we start chasing you that day: we remind you, call you and visit you, then send a
+written notice. If it must go to court, the landlord says YES first and the case is in the landlord's name. Any
+late fee goes to us.
 
 - **Late fee:** [amount]
 - **When it applies:** [when it applies; 2 lines]
@@ -108,6 +110,13 @@ We tell you. Rent you paid ahead for months after we stop goes to the landlord, 
 note saying the month your rent is paid up to. A deposit we hold goes to the landlord after any rent you still
 owe is taken from it, and the landlord gives it back to you when the tenancy ends.
 
+### 12. Changing your due day
+
+Your due day can change during the tenancy. We arrange it with you, and we tell you a month before the new day
+starts, with the new day and the amount you pay for the days in between. The change is pro rata: you pay a share of
+the month's rent for the days between the old day and the new day. We update this form, and the new day is then
+the day written above.
+
 ## Signatures
 
 |                                                             | Name | Signature or thumbprint | Date |
@@ -128,26 +137,29 @@ Not part of the form. Remove before use.
 |--------------------|------------|---------------------------------------------------------------------------|
 | About this tenancy | P3, BM20   | The due date is set per tenancy; rent owed from before sign-up            |
 | 1                  | BM2, BM5   | The agent's authority; telling the tenant who the landlord is             |
-| 2                  | P1, BM20   | Payment-service duties; the due date is set per tenancy                   |
+| 2                  | P1, BM20   | Payment-service duties; the due date is set per tenancy and can change    |
 | 3                  | BM6        | Deposit rules: amount, holding, return                                    |
 | 4                  | P13        | Held in trust; refund conditions (not decided)                            |
-| 5                  | BM5, P7    | Eviction steps; late fees allowed; the late fee itself (not decided)      |
+| 5                  | BM5, P7    | Eviction steps; late fees allowed; late fee, notice timing (not decided)  |
 | 6                  | BM2, BM6   | Tenant pays for damage, deposit as fallback; response times (not decided) |
 | 7                  | BM2        | Re-billing rules; shares for a unit with no meter (not decided)           |
 | 8                  | P11        | Data protection duties                                                    |
 | 9                  | P12        | Governing law; mediation; the courts                                      |
 | 10                 | BM6, P13   | Tenant's notice (not decided); return of deposit and prepaid rent         |
 | 11                 | P8, P13    | Notes to tenants; handing over deposits                                   |
+| 12                 | BM20       | Pro rata counting (not decided); notice or agreement; agent's authority   |
 | Signatures         | P2         | Whether tenancy forms are bilingual and explained aloud (not decided)     |
 
 The form re-voices the model's plain statements to "we" and "you" and tightens the wording. The meaning is
 unchanged, except that the form does not repeat the promise never to lock a tenant out, which the landlord
-agreement keeps.
+agreement keeps, or say that the landlord is not told of a change of due day (BM20).
 
 ### Not decided in the model
 
-- Whether a tenant's due date can change during a tenancy, and who may change it.
 - The late fee, and what the Landlord and Tenant Act allows.
+- When the written notice goes out after a tenant misses a due date: with the pause on the next 1st, or at the end
+  of the visits.
+- How the days between the old and the new due day are counted: calendar days or a 30-day month.
 - The tenant's notice period, and the conditions for refunding unused prepaid rent.
 - How electricity, water and garbage shares are worked out for a unit with no meter.
 - Who pays the contractor first for damage a tenant causes, and whether our coordination fee is charged to the

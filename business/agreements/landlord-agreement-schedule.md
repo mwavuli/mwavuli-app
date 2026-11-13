@@ -1,6 +1,6 @@
 # Schedule to the landlord agreement: the full terms
 
-Version 1.0. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at the end are not
+Version 1.1. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at the end are not
 part of the schedule and are removed before use.
 
 This schedule goes with the [landlord agreement](landlord-agreement.md) between Mwavuli Holdings Ltd and the
@@ -24,7 +24,7 @@ landlord named below. It says the same things as the agreement, in numbered para
 - **1.5** "Our fee" is 15% of the rent. "Net rent" is the rent minus our fee.
 - **1.6** The "payout date" is the 1st of each month.
 - **1.7** The "due date" of a tenancy is the day of the month on which the tenant's rent is due, as written in
-  the tenancy form.
+  the tenancy form. It can change during the tenancy, as set out in S3.
 - **1.8** The "covered month" of a unit is a month whose rent the tenant has not paid by its due date, after we
   have paid you the net rent for that month on the payout date, as set out in S3.
 - **1.9** "Arrears" is rent that a tenant owes and has not paid.
@@ -44,7 +44,7 @@ landlord named below. It says the same things as the agreement, in numbered para
   written in the tenancy form go to us.
 - **2.6** We pay you at the account or mobile money number in Annex 4 of the agreement.
 
-### S3. The covered month
+### S3. Due dates and the covered month
 
 - **3.1** If a tenant has not paid a month's rent by its due date, that month is the covered month of that unit.
   We have already paid you the net rent for it on the payout date.
@@ -56,10 +56,15 @@ landlord named below. It says the same things as the agreement, in numbered para
 - **3.4** We earn our fee on a covered month only when that rent is collected.
 - **3.5** When a tenant pays what is owed, the oldest month is paid first. The covered month is repaid to us
   first. Later months are paid to you, minus our fee.
+- **3.6** A tenant's due date can change during the tenancy. We arrange the change with the tenant alone, we tell
+  the tenant a month before it takes effect, and we update the tenancy form. The change is pro rata: the tenant
+  pays a share of the monthly rent for the days between the old due date and the new one. We do not ask you or
+  tell you. The payout date does not change.
 
-### S4. When a tenant has not paid after the covered month
+### S4. When a tenant has not paid
 
-- **4.1** We remind, call and visit the tenant, and then send a written notice.
+- **4.1** From the day a tenant misses its due date, we remind, call and visit the tenant, and then send a written
+  notice.
 - **4.2** If the matter must go to court, we ask you first. We take legal steps only in your name and only with
   your YES.
 - **4.3** We never lock a tenant out and never remove a tenant's belongings.
@@ -156,10 +161,11 @@ Not part of the schedule. Remove before use.
 
 | Clause | Takes from         | Counsel to confirm                                                                   |
 |--------|--------------------|--------------------------------------------------------------------------------------|
-| S1     | BM1, BM4, P2, BM20 | Definitions match the agreement; the due date is per tenancy                         |
+| S1     | BM1, BM4, P2, BM20 | Definitions match the agreement; the due date is per tenancy and can change          |
 | S2     | BM4, P7            | Fee base; pass-through costs; no other fees                                          |
 | S3     | BM1, BM5, BM20     | Cap per unit and its reset; assignment; the due-date trigger; timing of later months |
-| S4     | BM5                | Eviction steps; costs; who may act                                                   |
+| S3.6   | BM20               | Changing a due date: pro rata counting; notice or agreement; the agent's authority   |
+| S4     | BM5                | Eviction steps; costs; who may act; when the written notice goes out                 |
 | S5     | BM6, P13           | Held in trust; refunds                                                               |
 | S6     | BM2, BM6, P6       | Agent, not builder; re-billing utilities; consent; tenant damage                     |
 | S7     | BM7, P4, P9        | Proof by kind of land; "unsafe"; declining a building                                |

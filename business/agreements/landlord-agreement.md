@@ -1,6 +1,6 @@
 # Landlord agreement
 
-Version 1.0. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at the end say
+Version 1.1. Ticket SNT-27. Built from [the business model](../model.md). The drafting notes at the end say
 which term each clause takes from, are not part of the agreement and are removed before use.
 
 An officer hands you this agreement and sits down with you to explain it, in your language. That is all that is
@@ -76,6 +76,14 @@ For example: a room rents for UGX 400,000 and the tenant does not pay in March. 
 for it (the rent minus our 15%). On 1st April it is still unpaid, so we send nothing for that room until it is
 settled.
 
+A tenant's due day can change during the tenancy. The change is pro rata: the tenant pays a share of the month's
+rent for the days between the old day and the new day. We arrange it with the tenant ourselves, tell the tenant a
+month ahead and update the tenancy form. We do not ask you or tell you, and we still pay you on the 1st.
+
+For example: a tenant who pays UGX 400,000 a month moves the due day from the 5th to the 20th, starting in April.
+The 15 days from the 5th to the 20th of April are charged to the tenant pro rata: half a month, UGX 200,000. You
+are paid on 1st April as always.
+
 ### 8. How tenants pay, and your statement
 
 Tenants pay only us, by mobile money or bank, never cash to our staff. You get one statement a month by SMS or
@@ -102,17 +110,17 @@ water and garbage bills are paid at cost, with no markup.
 For example: a UGX 100,000 tap repair plus our 10% is UGX 110,000, so we just fix it and list it on your
 statement. A roof repair at UGX 660,000 (UGX 600,000 plus our UGX 60,000) needs your YES first.
 
-### 11. When a tenant still has not paid
+### 11. When a tenant has not paid
 
-After the month we covered, we do the chasing: we remind, call and visit, then send a written notice. If it must
-go to court, we ask you first and you say YES. We never lock a tenant out, and our time costs you nothing extra.
-A lawyer, the court and a bailiff are paid at cost, from the tenant's deposit first and then by you. The month
-we covered is ours to collect. When a tenant pays what is owed, the oldest month is paid first, so the month we
-covered is repaid before later months reach you.
+If a tenant misses the due date, we do the chasing from that day: we remind, call and visit, then send a written
+notice. If it must go to court, we ask you first and you say YES. We never lock a tenant out, and our time costs
+you nothing extra. A lawyer, the court and a bailiff are paid at cost, from the tenant's deposit first and then by
+you. The month we covered is ours to collect. When a tenant pays what is owed, the oldest month is paid first, so
+the month we covered is repaid before later months reach you.
 
-For example: a room rents for UGX 400,000 and the tenant misses March. We pay you UGX 340,000 on 1st March, and
-nothing for that room on 1st April. If the tenant then pays UGX 400,000, it repays March to us, so April is
-still owed. When April is paid, we send you UGX 340,000 of it.
+For example: a room rents for UGX 400,000, due on the 5th, and the tenant misses 5th March. We pay you UGX 340,000
+on 1st March, start chasing on 5th March, and send nothing for that room on 1st April. If the tenant then pays
+UGX 400,000, it repays March to us, so April is still owed. When April is paid, we send you UGX 340,000 of it.
 
 ### 12. Deposits
 
@@ -257,11 +265,11 @@ Not part of the agreement. Remove before use.
 | 4                   | BM7          | Proof by kind of land; mortgage consent; family and estate authority        |
 | 5                   | P4, P9       | Define "unsafe" as a short list; keep the signed report                     |
 | 6                   | P2, P3       | "Occupied" in the same words as the schedule; fee on old arrears            |
-| 7                   | BM1, BM20    | Insurance or suretyship; assignment of the covered month; due dates         |
+| 7                   | BM1, BM20    | Insurance or suretyship; assignment of the covered month; due-day changes   |
 | 8                   | P1           | Payment-service and anti-money-laundering duties                            |
 | 9                   | BM4          | VAT and withholding tax on the fee; whether 15% is final                    |
 | 10                  | BM2, BM6, P6 | Agent, not builder; fee disclosure; SMS and WhatsApp consent; tenant damage |
-| 11                  | BM5          | Eviction steps; costs; the oldest-month-first wording                       |
+| 11                  | BM5          | Eviction steps; costs; oldest-month-first wording; when the notice goes out |
 | 12                  | BM6          | Deposit amount, holding and return; the register                            |
 | 13                  | P13          | Held in trust; refund of unused months                                      |
 | 14                  | P10          | VAT treatment; who issues tax invoices                                      |
@@ -297,5 +305,6 @@ The model does not settle these. The owner and counsel decide them before the ag
   BM8 lists three events.
 - A fee for ending on 30 days' notice: none is stated.
 - Whether the examples stay in the signed text.
-- Whether a tenant's due date can change during a tenancy, and who may change it.
+- When the written notice goes out after a tenant misses a due date: with the pause on the next 1st, or at the end
+  of the visits.
 - The late fee in the tenancy form.
