@@ -62,14 +62,14 @@ report](inspection-report.md).
 
 A unit is occupied when a tenant lives in it under our [tenancy form](tenancy-form.md), with the rent and
 deposit written down. The first-month cover starts on the first 1st after that. A new tenant also pays, at move-in,
-for the days from move-in to the first due date, and we pay you that rent, minus our 15%, with your first payout for
-the unit. Tenants already in your building move onto our form after a visit. Rent owed from before you sign up is
-not covered; we collect it for the same 15%.
+for the days from move-in to the first due date, and we pay you that rent, minus our 15%, with your first payout
+after move-in. Tenants already in your building move onto our form after a visit. Rent owed from before you sign up
+is not covered; we collect it for the same 15%.
 
-A tenant's rent month runs from one due date to the next. A tenant leaves by giving us 30 days' notice. The tenancy
-ends on the day before a due date, at least 30 days after we get the notice, so the last rent month is always whole.
-A tenant who leaves without the notice owes the rent until it would have ended, and we take it from the deposit
-first.
+A tenant's rent month runs from one due date to the next. A tenant on our form leaves by giving us 30 days' notice.
+The tenancy ends on the day before a due date, at least 30 days after we get the notice, so the last rent month is
+always whole. A tenant who leaves without the notice owes the rent until it would have ended, and we take it from
+the deposit first, if we hold it. We visit the unit when the tenancy ends, or when we learn the tenant has gone.
 
 ### 7. Rent on the 1st
 
@@ -82,7 +82,7 @@ For example: a room rents for UGX 400,000 and the tenant does not pay in March. 
 for it (the rent minus our 15%). On 1st April it is still unpaid, so we send nothing for that room until it is
 settled.
 
-To keep our field work well organised, we may move a tenant's due date during the tenancy. We give the tenant
+To keep our field work well organized, we may move a tenant's due date during the tenancy. We give the tenant
 30 days' notice and update the tenancy form. The tenant pays a share of the monthly rent for the days counted
 forward from the old due date to the new one (pro rata). Your payout stays on the 1st.
 
@@ -142,10 +142,10 @@ UGX 350,000 goes back to the tenant.
 ### 13. Prepaid rent
 
 Rent a tenant pays ahead is held in a separate account, like deposits, and paid out month by month on the 1st,
-minus 15%. Rent months that have not started stay there. When a tenant leaves, the rent months that start after
-the tenancy ends go back to the tenant, with no fee on them, within 14 days of our visit to the unit. We first take
-what the tenant still owes from the deposit, and then from this rent. A rent month that has started is not
-refunded.
+minus 15%. What has not been paid out stays there. When a tenant leaves, the rent still held for rent months that
+start after the tenancy ends goes back to the tenant, with no fee on it, within 14 days of our visit to the unit. We
+first take what the tenant still owes from the deposit, if we hold it, and then from this rent. A rent month that
+has started is not refunded.
 
 ### 14. VAT on commercial rent
 
@@ -168,10 +168,11 @@ leave straight away, with no fee. We can end the agreement straight away if you 
 yourself, interfere with tenants, or refuse a repair that is urgent for safety.
 
 When the agreement ends, we send you a final statement and pay you within 14 days of the end date: the rent we
-collected and have not paid out, plus prepaid rent for months after the end date in full with no 15%, less costs
-you approved and any covered month a tenant still owes us. Tenant files go to you. A deposit we hold goes to you
-after any rent the tenant still owes is taken from it, and tenants are told. Each tenant gets a note saying the
-month their rent is paid up to, and you honor it.
+collected and have not paid out, plus prepaid rent for rent months that start after the end date, in full with no
+15%, except rent that goes back to a tenant whose tenancy has ended, less costs you approved and any covered month a
+tenant still owes us. Tenant files go to you. A deposit we hold goes to you after any rent the tenant still owes is
+taken from it, and tenants are told. Each tenant gets a note saying the date their rent is paid up to, and you
+honor it.
 
 ### 17. Privacy
 
@@ -193,7 +194,7 @@ give your thumbprint, in front of a witness you choose. You keep a copy.
 |-----------------------------|---------------------------------------------------|
 | Our fee                     | 15% of rent                                       |
 | First-month cover           | 1 month of rent per unit                          |
-| Notice to leave             | 30 days, either side                              |
+| Notice to end the agreement | 30 days, either side                              |
 | Latest payout day           | the 3rd of the month                              |
 | Notice to move a due date   | 30 days, given to the tenant                      |
 | Notice a tenant gives       | 30 days, ending on a due date                     |
@@ -288,7 +289,7 @@ Not part of the agreement. Remove before use.
 | 13                  | P13 to P15   | Held in trust; refund after what is owed; none for a started month          |
 | 14                  | P10          | VAT treatment; who issues tax invoices                                      |
 | 15                  | P5           | Landlord's tax duties; align with BM8 (see the list below)                  |
-| 16                  | BM8, P8, P13 | Notice mechanics; the late-payment test; exit mechanics                     |
+| 16                  | BM8, P8, P13 | Notice mechanics; late-payment test; exit mechanics; tenants who left       |
 | 17                  | P11          | Data protection duties                                                      |
 | 18                  | P12          | Governing law; the mediation step; the courts                               |
 | 19                  | BM11         | That the signed version governs; the Illiterates Protection Act; witnesses  |
@@ -321,10 +322,18 @@ The model does not settle these. The owner and counsel decide them before the ag
 - When the written notice goes out after a tenant misses a due date: with the pause on the next 1st, or at the end
   of the visits.
 - For a due-date move: who receives the pro rata amount, whether our 15% applies to it, and when it falls due.
-- Limits on moving a due date: whether it may move while the tenant owes rent, how often it may move, and what the
-  updated tenancy form must carry.
+- Limits on moving a due date: whether it may move while the tenant owes rent, while a notice is running and while
+  rent is paid ahead, how often it may move, and what the updated tenancy form must carry.
 - Who brings a case for a covered month: you, in your name and with your YES, or we, in our own right, since the
   claim for that month passes to us (clause 11).
 - How a tenant gives notice (by phone, SMS or WhatsApp, confirmed by message) and, for a tenant who leaves without
   notice, counting the 30 days from the day we learn the tenant has gone: proposed in the model, not approved.
+- Which rent month each payout pays, and who funds or recovers the last payout when a tenant leaves.
+- When we do not hold a tenant's deposit (a tenant already in your building): who recovers the rent the tenant owes
+  when leaving, from rent paid ahead or you from the deposit you hold.
+- How soon after a tenancy ends we visit the unit, and the latest day for the refund of rent paid ahead if no visit
+  happens.
+- Whether you refund a tenant who leaves after the agreement ends, for rent paid ahead that we paid to you.
+- The notice a landlord gives a tenant to end a tenancy.
+- Due days 29 to 31 in months without them, and a tenant who moves in on the due day.
 - The late fee in the tenancy form.

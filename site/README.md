@@ -159,6 +159,7 @@ from the model or the tenancy form:
   "Your rent is due on the day written in your tenancy form, each month, unless we move your due date." and "Any late
   fee is written in your tenancy form." adapt clauses 2 and 5 where the form leaves a term open; "this tenancy" is
   "your tenancy" in the deposit text. The "Changing your due date" row says "your tenancy form" for "this form",
-  "written in your tenancy form" for "written above" and "“Part months” says" for "clause 13 says".
+  "written in your tenancy form" for "written above" and "“Part months” says" for "clause 13 says". The "Rent paid
+  ahead" row leaves out the pointer "(clause 10)".
 - Businesses: the headline "Shops and offices. Same terms." compresses BM9 and BM10 (the hero's last two lines must
   stay short, or they run under the card); "That is the rent minus our 15%…" is BM10's example reworded.
