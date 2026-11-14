@@ -144,8 +144,8 @@ UGX 350,000 goes back to the tenant.
 
 Rent a tenant pays ahead is held in a separate account, like deposits, and paid out month by month on the 1st,
 minus 15%. When a tenant leaves, the rent held for rent months that start after the tenancy ends goes back to the
-tenant, with no fee on it, within 14 days of our visit to the unit. We first take what the tenant still owes from
-the deposit, if we hold it, and then from this rent. A rent month that has started is not refunded.
+tenant, with no fee on it, within 14 days of our visit to the unit. If we hold the deposit, we first take what the
+tenant still owes from there, and then from this rent. A rent month that has started is not refunded.
 
 ### 14. VAT on commercial rent
 
@@ -197,7 +197,7 @@ give your thumbprint, in front of a witness you choose. You keep a copy.
 | Notice to end the agreement | 30 days, either side                              |
 | Latest payout day           | the 3rd of the month                              |
 | Notice to move a due date   | 30 days, given to the tenant                      |
-| Notice a tenant gives       | 30 days, ending on a due date                     |
+| Notice a tenant gives       | 30 days, ending the day before a due date         |
 | Part month                  | 30-day month, rounded to the nearest UGX 1,000    |
 | Refund of rent paid ahead   | within 14 days of our visit to the unit           |
 | Coordination fee on repairs | 10% of the contractor's price, shown on the quote |
@@ -270,36 +270,36 @@ Pay my rent to the mobile money number or the bank account below.
 
 Not part of the agreement. Remove before use.
 
-| Clause              | Takes from   | Counsel to confirm                                                          |
-|---------------------|--------------|-----------------------------------------------------------------------------|
-| Who this is between | The company  | The contracting company                                                     |
-| 1                   | BM2, BM5     | Agent's authority; legal steps in the landlord's name; for a covered month  |
-| 2                   | BM18, P1, P7 | How utilities and garbage are paid and charged to tenants                   |
-| 3                   | BM9, BM10    | Commercial tenancy form; rent currency; VAT and withholding tax             |
-| 4                   | BM7          | Proof by kind of land; mortgage consent; family and estate authority        |
-| 5                   | P4, P9       | Define "unsafe" as a short list; keep the signed report                     |
-| 6                   | P2, P3, P14  | "Occupied" as in the schedule; fee on old arrears; part month at move-in    |
-| 6, leaving          | P15          | Tenant's notice ends on a due date; rent until it would have ended          |
-| 7                   | BM1, BM20    | Insurance or suretyship; assignment of the covered month; due-date changes  |
-| 7, payout           | P16          | Payout ahead of the due date; a rent month that never starts is not paid    |
-| 8                   | P1           | Payment-service and anti-money-laundering duties                            |
-| 9                   | BM4          | VAT and withholding tax on the fee; whether 15% is final                    |
-| 10                  | BM2, BM6, P6 | Agent, not builder; fee disclosure; SMS and WhatsApp consent; tenant damage |
-| 11                  | BM5          | Eviction steps; costs; oldest-month-first wording; when the notice goes out |
-| 12                  | BM6          | Deposit amount, holding and return; the register                            |
-| 13                  | P13 to P15   | Held in trust; refund after what is owed; none for a started month          |
-| 14                  | P10          | VAT treatment; who issues tax invoices                                      |
-| 15                  | P5           | Landlord's tax duties; align with BM8 (see the list below)                  |
-| 16                  | BM8, P8, P13 | Notice mechanics; late-payment test; exit mechanics; tenants who left       |
-| 17                  | P11          | Data protection duties                                                      |
-| 18                  | P12          | Governing law; the mediation step; the courts                               |
-| 19                  | BM11         | That the signed version governs; the Illiterates Protection Act; witnesses  |
-| 20                  | Numbers      | The last six are starting figures, to test with the first landlords         |
-| Signatures          | BM11         | Who may witness; what Mwavuli records                                       |
-| Annex 1             | P2, P3       | Who sets each unit's rent (not decided)                                     |
-| Annex 2             | BM7          | What counts as proof for each kind of land                                  |
-| Annex 3             | BM6, P3      | Deposit register; proof of the amount                                       |
-| Annex 4             | P1, BM4, BM8 | The "reached you" test for a payout                                         |
+| Clause              | Takes from        | Counsel to confirm                                                         |
+|---------------------|-------------------|----------------------------------------------------------------------------|
+| Who this is between | The company       | The contracting company                                                    |
+| 1                   | BM2, BM5          | Agent's authority; legal steps in the landlord's name; for a covered month |
+| 2                   | BM18, P1, P7      | How utilities and garbage are paid and charged to tenants                  |
+| 3                   | BM9, BM10         | Commercial tenancy form; rent currency; VAT and withholding tax            |
+| 4                   | BM7               | Proof by kind of land; mortgage consent; family and estate authority       |
+| 5                   | P4, P9            | Define "unsafe" as a short list; keep the signed report                    |
+| 6                   | P2, P3, P14       | "Occupied" as in the schedule; fee on old arrears; part month at move-in   |
+| 6, leaving          | P15               | Notice ends the day before a due date; rent until it would have ended      |
+| 7                   | BM1, BM20         | Insurance or suretyship; assignment of the covered month; due-date changes |
+| 7, payout           | P16               | Payout ahead of the due date; a rent month that never starts is not paid   |
+| 8                   | P1                | Payment-service and anti-money-laundering duties                           |
+| 9                   | BM4               | VAT and withholding tax on the fee; whether 15% is final                   |
+| 10                  | BM2, BM6, P6      | Agent, not builder; fee disclosure; SMS/WhatsApp consent; tenant damage    |
+| 11                  | BM5               | Eviction steps; costs; oldest-month-first wording; when notice goes out    |
+| 12                  | BM6               | Deposit amount, holding and return; the register                           |
+| 13                  | P13 to P15        | Held in trust; refund after what is owed; none for a started month         |
+| 14                  | P10               | VAT treatment; who issues tax invoices                                     |
+| 15                  | P5                | Landlord's tax duties; align with BM8 (see the list below)                 |
+| 16                  | BM8, P8, P13, P15 | Notice mechanics; late-payment test; exit mechanics; tenants who left      |
+| 17                  | P11               | Data protection duties                                                     |
+| 18                  | P12               | Governing law; the mediation step; the courts                              |
+| 19                  | BM11              | That the signed version governs; the Illiterates Protection Act; witnesses |
+| 20                  | Numbers           | The last six are starting figures, to test with the first landlords        |
+| Signatures          | BM11              | Who may witness; what Mwavuli records                                      |
+| Annex 1             | P2, P3            | Who sets each unit's rent (not decided)                                    |
+| Annex 2             | BM7               | What counts as proof for each kind of land                                 |
+| Annex 3             | BM6, P3           | Deposit register; proof of the amount                                      |
+| Annex 4             | P1, BM4, BM8      | The "reached you" test for a payout                                        |
 
 The clauses re-voice the model's plain statements to "we" and "you" and tighten the wording. The meaning is
 unchanged. Clauses 1 and 2 are drawn from the model's notes on BM2 and BM5 and from the approved pitch (BM18).
@@ -324,7 +324,8 @@ The model does not settle these. The owner and counsel decide them before the ag
   of the visits.
 - For a due-date move: who receives the pro rata amount, whether our 15% applies to it, and when it falls due.
 - Limits on moving a due date: whether it may move while the tenant owes rent, while a notice is running and while
-  rent is paid ahead, how often it may move, and what the updated tenancy form must carry.
+  rent is paid ahead, how often it may move, from when the new date applies, and what the updated tenancy form must
+  carry.
 - Who brings a case for a covered month: you, in your name and with your YES, or we, in our own right, since the
   claim for that month passes to us (clause 11).
 - How a tenant gives notice (by phone, SMS or WhatsApp, confirmed by message) and, for a tenant who leaves without

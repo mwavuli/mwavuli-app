@@ -92,8 +92,8 @@ landlord named below. It says the same things as the agreement, in numbered para
   amount in Annex 3 of the agreement, and you stay responsible for giving it back.
 - **5.3** Rent paid ahead is held in a separate account, like deposits. We pay it out month by month on the payout
   date, minus our fee, as 2.8 says. When a tenant leaves, the rent held for rent months that start after the tenancy
-  ends goes back to the tenant, with no fee on it, within 14 days of the move-out visit. We first take what the
-  tenant still owes from the deposit, if we hold it, and then from this rent. A rent month that has started is not
+  ends goes back to the tenant, with no fee on it, within 14 days of the move-out visit. If we hold the deposit, we
+  first take what the tenant still owes from there, and then from this rent. A rent month that has started is not
   refunded.
 
 ### S6. Repairs, utilities and garbage
@@ -174,22 +174,22 @@ landlord named below. It says the same things as the agreement, in numbered para
 
 Not part of the schedule. Remove before use.
 
-| Clause | Takes from              | Counsel to confirm                                                                   |
-|--------|-------------------------|--------------------------------------------------------------------------------------|
-| S1     | BM1, BM4, P2, P14, BM20 | Definitions match the agreement; due date per tenancy and can change; rent month     |
-| S2     | BM4, P7, P14, P16       | Fee base; pass-through costs; no other fees; part month at move-in; payout ahead     |
-| S3     | BM1, BM5, BM20          | Cap per unit and its reset; assignment; the due-date trigger; timing of later months |
-| S3.6   | BM20, P14               | Notice, not agreement; authority; limits; recipient, 15% and due date (not decided)  |
-| S3.7   | P15                     | Tenant's notice ends on a due date; rent until it would have ended; no penalty       |
-| S4     | BM5                     | Eviction steps; costs; who sues for a covered month; when the notice goes out        |
-| S5     | BM6, P13 to P15         | Held in trust; refunds after what is owed; none for a started month                  |
-| S6     | BM2, BM6, P6            | Agent, not builder; re-billing utilities; consent; tenant damage                     |
-| S7     | BM7, P4, P9             | Proof by kind of land; "unsafe"; declining a building                                |
-| S8     | P5                      | Landlord duties and their remedies; align with BM8                                   |
-| S9     | BM8, P8, P13, P15       | Notice; the "not paid" test; final payment; fee on notice exit; tenants who left     |
-| S10    | P10, P11, P12           | VAT; data protection; governing law and mediation                                    |
-| S11    | BM11                    | That the signed version governs; the Illiterates Protection Act                      |
-| S12    | BM9, BM10               | Commercial tenancy form; rent currency                                               |
+| Clause | Takes from                   | Counsel to confirm                                                           |
+|--------|------------------------------|------------------------------------------------------------------------------|
+| S1     | BM1, BM4, P2, P14, P15, BM20 | Definitions match the agreement; due date; rent month; move-out visit        |
+| S2     | BM4, P7, P14, P16            | Fee base; pass-throughs; no other fees; move-in part month; payout ahead     |
+| S3     | BM1, BM5, BM20               | Cap per unit, its reset; assignment; due-date trigger; later months' timing  |
+| S3.6   | BM20, P14                    | Notice, not agreement; authority; limits; recipient, 15%, due date (open)    |
+| S3.7   | P15                          | Notice ends the day before a due date; rent in place of notice, no penalty   |
+| S4     | BM5                          | Eviction steps; costs; who sues for a covered month; when notice goes out    |
+| S5     | BM6, P13 to P15              | Held in trust; refunds after what is owed; none for a started month          |
+| S6     | BM2, BM6, P6                 | Agent, not builder; re-billing utilities; consent; tenant damage             |
+| S7     | BM7, P4, P9                  | Proof by kind of land; "unsafe"; declining a building                        |
+| S8     | P5                           | Landlord duties and their remedies; align with BM8                           |
+| S9     | BM8, P8, P13, P15            | Notice; "not paid" test; final payment; fee on notice exit; tenants who left |
+| S10    | P10, P11, P12                | VAT; data protection; governing law and mediation                            |
+| S11    | BM11                         | That the signed version governs; the Illiterates Protection Act              |
+| S12    | BM9, BM10                    | Commercial tenancy form; rent currency                                       |
 
 S3.1 is the one place the schedule goes beyond the model's wording. Because due dates vary (BM20), the covered
 month starts when a tenant misses its due date, and the cover is stopped on payout dates (BM1).

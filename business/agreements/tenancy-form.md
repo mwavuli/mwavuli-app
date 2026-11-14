@@ -59,8 +59,9 @@ above) and gives it back to you.
 
 If you pay rent ahead, we hold it in a separate account, like deposits, and pay it to the landlord month by
 month on the 1st. We never pay the landlord a month that starts after your tenancy ends: when your tenancy ends,
-that rent goes back to you, with no fee, within 14 days of our visit to the unit (clause 10). What you still owe is
-taken from your deposit first, if we hold it, and then from this rent. A month that has started is paid in full.
+that rent goes back to you, with no fee, within 14 days of our visit to the unit (clause 10). If we hold your
+deposit, we first take what you still owe from there, and then from this rent. A month that has started is paid in
+full.
 
 ### 5. If you do not pay
 
@@ -105,8 +106,8 @@ your tenancy ends, or when we learn you have gone.
 
 - **Notice the landlord gives:** [notice]
 
-Your deposit goes back to you after any rent you still owe and the cost of any damage are taken from it. Rent
-you paid ahead for months you did not use goes back to you (clause 4).
+Your deposit goes back to you after any rent you still owe and the cost of any damage are taken from it. The
+rent held for the months that start after your tenancy ends goes back to you (clause 4).
 
 ### 11. If we stop acting for the landlord
 
@@ -157,7 +158,7 @@ Not part of the form. Remove before use.
 | 7                  | BM2           | Re-billing rules; shares for a unit with no meter (not decided)           |
 | 8                  | P11           | Data protection duties                                                    |
 | 9                  | P12           | Governing law; mediation; the courts                                      |
-| 10                 | BM6, P15      | Notice ends on a due date; rent in place of notice; deposit return        |
+| 10                 | BM6, P15      | Notice ends the day before a due date; rent for notice; deposit return    |
 | 11                 | P8, P13, P15  | Notes to tenants; handing over deposits; rent due to tenants who left     |
 | 12                 | BM20          | Notice, not agreement; agent's authority; limits (not decided)            |
 | 13                 | P14           | 30-day month and rounding; move-in charge; no refund of a started month   |
@@ -174,7 +175,7 @@ agreement keeps.
   of the visits.
 - For a due-date move: who receives the amount, whether our 15% applies to it, and when it falls due.
 - Limits on moving a due date: whether it may move while the tenant owes rent, while a notice is running and while
-  rent is paid ahead, how often it may move, and what the updated form must carry.
+  rent is paid ahead, how often it may move, from when the new date applies, and what the updated form must carry.
 - Who brings a case for a covered month: the landlord, in the landlord's name (clause 5), or Mwavuli, in its own right
   as the claim for that month passes to it.
 - How a tenant gives notice (proposed: phone, SMS or WhatsApp, confirmed by message) and, for a tenant who leaves

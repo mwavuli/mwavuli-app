@@ -520,8 +520,8 @@ for a tenant's notice, and counting the 30 days from the day we learn the tenant
   notice, so the last rent month is always whole. A tenant who leaves without the notice owes the rent until the
   tenancy would have ended, counted from the day we learn the tenant has gone, and we take it from the deposit
   first, if we hold it. We visit the unit when the tenancy ends, or when we learn the tenant has gone. Within 14 days
-  of that visit, the rent held for rent months that start after the tenancy ends goes back to the tenant, once we have
-  taken what the tenant still owes from the deposit first, if we hold it, and then from this rent.
+  of that visit, the rent held for rent months that start after the tenancy ends goes back to the tenant. If we hold
+  the deposit, we first take what the tenant still owes from there, and then from this rent.
 - **P16 What a payout pays.** Each payout on the 1st pays the rent month that starts that month, as the examples
   show, so the landlord is paid on the 1st even when the tenant's due date comes later. A rent month that starts
   after a tenancy has ended is not paid, and the rent held for it goes back to the tenant (P15).
@@ -580,7 +580,7 @@ for a tenant's notice, and counting the 30 days from the day we learn the tenant
 | Notice to end the agreement | 30 days, either side                                     |
 | Latest payout day           | the 3rd of the month                                     |
 | Notice to move a due date   | 30 days, given to the tenant                             |
-| Notice a tenant gives       | 30 days, ending on a due date                            |
+| Notice a tenant gives       | 30 days, ending the day before a due date                |
 | Part month                  | 30-day month, rounded to the nearest UGX 1,000           |
 | Refund of rent paid ahead   | within 14 days of our visit to the unit                  |
 | Coordination fee on repairs | 10% of the contractor's price, shown on the quote        |
@@ -606,8 +606,8 @@ Each term's counsel note lists what to confirm. Start with these:
 - **Due dates and part months:** the 30-day month and rounding, and keeping the rent of a rent month a tenant leaves
   part-way through (P14); moving a due date on notice without the tenant's agreement, moving it without telling the
   landlord, and the limits on moving it (BM20).
-- **Tenants leaving:** the 30 days' notice that ends on a due date, rent until the notice would have ended, and what
-  is taken from the deposit and from rent paid ahead before the rest goes back (P15, P13).
+- **Tenants leaving:** the 30 days' notice that ends the day before a due date, rent until the notice would have
+  ended, and what is taken from the deposit and from rent paid ahead before the rest goes back (P15, P13).
 - **Payouts and rent months:** the payout runs up to a month ahead of the tenant's rent, so Mwavuli carries a float,
   and a rent month that starts after a tenancy ends is not paid (P16, BM17).
 - **Agency and works:** agent, not builder; disclosure of the coordination fee; re-billing utilities (BM2).
@@ -636,7 +636,8 @@ Not yet settled:
 - For a due-date move: who receives the pro rata amount, whether our 15% applies to it as to the move-in part month,
   and when it falls due (BM20, P14).
 - Limits on moving a due date: whether it may move while the tenant owes rent, while a notice is running and while
-  rent is paid ahead, how often it may move, and what the updated tenancy form must carry (BM20).
+  rent is paid ahead, how often it may move, from when the new date applies, and what the updated tenancy form must
+  carry (BM20).
 - Who brings a case for a covered month: the landlord, in its name and with its YES (BM5), or Mwavuli, in its own
   right, since the claim for that month passes to it (BM1).
 - Proposed, for the owner to approve: a tenant gives notice by phone, SMS or WhatsApp and we confirm it by message,
@@ -646,6 +647,6 @@ Not yet settled:
 - How soon after a tenancy ends we visit the unit, and the latest day for the refund of rent paid ahead if no visit
   happens (P15).
 - Whether the landlord refunds a tenant who leaves after the agreement ends, since P8 pays the landlord the prepaid
-  rent for rent months after the end date (P8, P15).
+  rent for rent months that start after the end date (P8, P15).
 - The notice a landlord gives a tenant to end a tenancy.
 - Due days 29 to 31 in months without them, and a tenant who moves in on the due day (BM20, P14).
