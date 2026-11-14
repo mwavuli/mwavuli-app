@@ -57,11 +57,9 @@ above) and gives it back to you.
 ### 4. Rent paid ahead
 
 If you pay rent ahead, we hold it in a separate account, like deposits, and pay it to the landlord month by
-month on the 1st. Months that have not started stay there. If you leave early, the months you paid for and did
-not use go back to you, on these terms.
-
-- **Notice you give:** [notice]
-- **Other conditions:** [other conditions; 2 lines]
+month on the 1st. Months that have not started stay there. When your tenancy ends, the months that start after
+it go back to you, with no fee, within 14 days of our visit to the unit. What you still owe is taken from your
+deposit first, and then from this rent.
 
 ### 5. If you do not pay
 
@@ -98,7 +96,11 @@ We talk first, then a mediator we both accept, and only then the courts of Ugand
 
 ### 10. When the tenancy ends
 
-- **Notice you give:** [notice]
+To leave, give us 30 days' notice by phone, SMS or WhatsApp, and we confirm it by message. Your tenancy ends on
+the day before a due date, at least 30 days after we get your notice, so your last month is always a whole
+month. If you leave without giving notice, you owe the rent until your tenancy would have ended, counted from
+the day we learn you have gone, and we take it from your deposit first.
+
 - **Notice the landlord gives:** [notice]
 
 Your deposit goes back to you after any rent you still owe and the cost of any damage are taken from it. Rent
@@ -146,13 +148,13 @@ Not part of the form. Remove before use.
 | 1                  | BM2, BM5   | The agent's authority; telling the tenant who the landlord is             |
 | 2                  | P1, BM20   | Payment-service duties; the due date is set per tenancy and can change    |
 | 3                  | BM6        | Deposit rules: amount, holding, return                                    |
-| 4                  | P13        | Held in trust; refund conditions (not decided)                            |
+| 4                  | P13, P15   | Held in trust; what is owed taken after the deposit; refund in 14 days    |
 | 5                  | BM5, P7    | Eviction steps; late fees allowed; late fee, notice timing (not decided)  |
 | 6                  | BM2, BM6   | Tenant pays for damage, deposit as fallback; response times (not decided) |
 | 7                  | BM2        | Re-billing rules; shares for a unit with no meter (not decided)           |
 | 8                  | P11        | Data protection duties                                                    |
 | 9                  | P12        | Governing law; mediation; the courts                                      |
-| 10                 | BM6, P13   | Tenant's notice (not decided); return of deposit and prepaid rent         |
+| 10                 | BM6, P15   | Notice ends on a due date; rent in place of notice; deposit return        |
 | 11                 | P8, P13    | Notes to tenants; handing over deposits                                   |
 | 12                 | BM20       | Notice, not agreement; the agent's authority                              |
 | 13                 | P14        | 30-day month and rounding; move-in charge; no refund of a started month   |
@@ -167,7 +169,7 @@ agreement keeps.
 - The late fee, and what the Landlord and Tenant Act allows.
 - When the written notice goes out after a tenant misses a due date: with the pause on the next 1st, or at the end
   of the visits.
-- The tenant's notice period, and the conditions for refunding unused prepaid rent.
+- The notice the landlord gives a tenant to end a tenancy.
 - How electricity, water and garbage shares are worked out for a unit with no meter.
 - Who pays the contractor first for damage a tenant causes, and whether our coordination fee is charged to the
   tenant.

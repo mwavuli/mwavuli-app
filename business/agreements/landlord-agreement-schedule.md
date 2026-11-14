@@ -62,6 +62,9 @@ landlord named below. It says the same things as the agreement, in numbered para
 - **3.6** To keep our field work well organised, we may move a tenant's due date during the tenancy. We give the
   tenant 30 days' notice and update the tenancy form. The tenant pays a share of the monthly rent for the days
   between the old due date and the new one (pro rata). The payout date stays the same.
+- **3.7** A tenant leaves by giving us 30 days' notice. The tenancy ends on the day before a due date, at least
+  30 days after we get the notice, so the last month is always a whole month. A tenant who leaves without the
+  notice owes the rent until it would have ended, and we take it from the tenant's deposit first.
 
 ### S4. When a tenant has not paid
 
@@ -81,8 +84,9 @@ landlord named below. It says the same things as the agreement, in numbered para
 - **5.2** For a tenant who was in the building before you signed up, you keep the deposit you hold. We write the
   amount in Annex 3 of the agreement, and you stay responsible for giving it back.
 - **5.3** Rent paid ahead for months that have not started is held in a separate account, like deposits. We pay
-  it out month by month on the payout date, minus our fee. If a tenant leaves early, the unused months go back
-  to the tenant under the tenancy form, with no fee on them. A month that has started is not refunded.
+  it out month by month on the payout date, minus our fee. When a tenant leaves, the months that start after the
+  tenancy ends go back to the tenant, with no fee on them, within 14 days of our visit to the unit. We first take
+  what the tenant still owes from the deposit, and then from this rent. A month that has started is not refunded.
 
 ### S6. Repairs, utilities and garbage
 
@@ -167,8 +171,9 @@ Not part of the schedule. Remove before use.
 | S2     | BM4, P7, P14       | Fee base; pass-through costs; no other fees; part month at move-in                   |
 | S3     | BM1, BM5, BM20     | Cap per unit and its reset; assignment; the due-date trigger; timing of later months |
 | S3.6   | BM20               | Moving a due date: notice, not agreement; agent's authority                          |
+| S3.7   | P15                | Tenant's notice ends on a due date; rent until it would have ended; no penalty       |
 | S4     | BM5                | Eviction steps; costs; who may act; when the written notice goes out                 |
-| S5     | BM6, P13, P14      | Held in trust; refunds; none for a started month                                     |
+| S5     | BM6, P13 to P15    | Held in trust; refunds after what is owed; none for a started month                  |
 | S6     | BM2, BM6, P6       | Agent, not builder; re-billing utilities; consent; tenant damage                     |
 | S7     | BM7, P4, P9        | Proof by kind of land; "unsafe"; declining a building                                |
 | S8     | P5                 | Landlord duties and their remedies; align with BM8                                   |

@@ -74,7 +74,7 @@ on 1st April, we pause that room until it is settled, we keep chasing, and if it
 |---------------------------|----------|----------------------------------------|
 | Landlord agreement        | Landlord | BM1, BM2, BM4 to BM12, BM20, Numbers   |
 | Schedule to the agreement | Landlord | The same terms, with the words defined |
-| Tenancy form              | Tenant   | P3, P7, P13, P14, BM5, BM6, BM20       |
+| Tenancy form              | Tenant   | P3, P7, P13 to P15, BM5, BM6, BM20     |
 | Inspection report         | Landlord | P4, P9                                 |
 
 | Landlord pitch            | Landlord | BM18 and the plain statements          |
@@ -467,7 +467,7 @@ landlord's own language, with a witness the landlord chose.
 
 ### BM12 · The mechanics
 
-*Source: Owner. Proposed in the interview and approved by the owner. P14 was decided on
+*Source: Owner. Proposed in the interview and approved by the owner. P14 and P15 were decided on
 2026-11-13.*
 
 - **P1 Paying and statements.** Tenants pay only Mwavuli, by mobile money or bank, never cash to staff. The
@@ -497,14 +497,20 @@ landlord's own language, with a witness the landlord chose.
   shared otherwise.
 - **P12 Disagreements.** We talk first, then a mediator we both accept, and only then the courts of Uganda.
 - **P13 Prepaid rent.** Held in a separate account, like deposits, and paid out month by month on the 1st, minus
-  15%. Months that haven't started stay there. If a tenant leaves early, unused months go back to the tenant under
-  the tenancy form, with no fee on them. At exit, each tenant gets a note, "rent paid up to [month]", and the
-  landlord honors it.
+  15%. Months that haven't started stay there. If a tenant leaves, unused months go back to the tenant as P15
+  says, with no fee on them. At exit, each tenant gets a note, "rent paid up to [month]", and the landlord
+  honors it.
 - **P14 Part months.** Every month counts as 30 days, so each day is one-thirtieth of the monthly rent, rounded to the
   nearest UGX 1,000. A new tenant pays the days from move-in to the first due date when moving in, and we pay them
   to the landlord, minus our 15%, on the first payout after move-in. A tenant whose due date moves pays the days
   between the old date and the new one. A month that has started is paid in full: a tenant who leaves part-way
   through it gets none of it back.
+- **P15 A tenant leaving.** A tenant gives us 30 days' notice, by phone, SMS or WhatsApp, and we confirm it by
+  message. The tenancy ends on the day before a due date, at least 30 days after we get the notice, so the last
+  month is always a whole month. A tenant who leaves without the notice owes the rent until the tenancy would have
+  ended, counted from the day we learn the tenant has gone, and we take it from the deposit first. Months that
+  start after the tenancy ends go back to the tenant within 14 days of our visit to the unit, once we have taken
+  what the tenant still owes from the deposit first and then from this rent.
 
 **Counsel note**
 
@@ -525,16 +531,24 @@ landlord's own language, with a witness the landlord chose.
 - P11: confirm duties under the Data Protection and Privacy Act, 2019 (registration, consent notices, retention).
 - P12: confirm governing law, the mediation step and the courts with jurisdiction.
 - P13: confirm that prepaid rent held for landlords and tenants is held in trust, kept apart from Mwavuli's own
-  funds and safe from its creditors, and that the tenancy form says whether unused prepaid months are refundable
-  when a tenant leaves early.
+  funds and safe from its creditors.
 - P14: confirm that counting a part month on a 30-day month, rounded to the nearest UGX 1,000, is allowed and fair to
   the tenant once the form says so. It charges about 1.4% more per day than the calendar average: 31-day months cost
   the tenant more, February less.
 - P14: confirm that keeping the rent of a month that has started, when a tenant leaves part-way through it, is allowed
-  under the Landlord and Tenant Act 2022. The tenant's notice period is still open: notice that ends on a due date
-  leaves no part month.
+  under the Landlord and Tenant Act 2022. A tenant's notice ends the tenancy on the day before a due date (P15), so no
+  part month is left at the end of a notice.
 - P14, for the accountant: the part month a new tenant pays at move-in is rent, so the 15% applies (BM4). Confirm how
   it is recorded and held until the first payout.
+- P15: confirm that a notice of 30 days, ending the tenancy on the day before a due date, is allowed under the
+  Landlord and Tenant Act 2022, so a tenant leaves 30 to 60 days after giving it, and how notice is given and from
+  when it counts (by phone, SMS or WhatsApp, confirmed by message).
+- P15: confirm that the rent until the notice would have ended is rent and not a penalty, that the deposit may be used
+  for it (BM6), and whether it stops when a new tenant moves in sooner.
+- P15: confirm that what a tenant owes may be taken from rent paid ahead, after the deposit, while that rent is held
+  in trust (P13), and the 14 days to repay the rest.
+- P15, for the accountant: rent owed for the notice period is rent (BM4, BM5): the 15% applies and the oldest month is
+  paid first. Confirm how it is recorded and paid to the landlord when the unit is empty.
 
 ## Numbers
 
@@ -569,6 +583,8 @@ Each term's counsel note lists what to confirm. Start with these:
 - **Due dates and part months:** the 30-day month and rounding, and keeping the rent of a month a tenant leaves
   part-way through (P14); moving a due date on notice without the tenant's agreement, and moving it without telling
   the landlord (BM20).
+- **Tenants leaving:** the 30 days' notice that ends on a due date, rent until the notice would have ended, and what
+  is taken from the deposit and from rent paid ahead before the rest goes back (P15, P13).
 - **Agency and works:** agent, not builder; disclosure of the coordination fee; re-billing utilities (BM2).
 - **Tax:** VAT and withholding tax on the 15% and on commercial rent, and the landlord's own duties (BM4, BM9, P5,
   P10).
