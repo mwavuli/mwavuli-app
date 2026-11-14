@@ -61,14 +61,15 @@ report](inspection-report.md).
 ### 6. Your tenants
 
 A unit is occupied when a tenant lives in it under our [tenancy form](tenancy-form.md), with the rent and
-deposit written down. The first-month cover starts on the first 1st after that. A new tenant also pays for the days
-from moving in to the first due date, and we pay you that rent, minus our 15%, with your first payout for the unit.
-Tenants already in your building move onto our form after a visit. Rent owed from before you sign up is not
-covered; we collect it for the same 15%.
+deposit written down. The first-month cover starts on the first 1st after that. A new tenant also pays, at move-in,
+for the days from move-in to the first due date, and we pay you that rent, minus our 15%, with your first payout for
+the unit. Tenants already in your building move onto our form after a visit. Rent owed from before you sign up is
+not covered; we collect it for the same 15%.
 
-A tenant leaves by giving us 30 days' notice. The tenancy ends on the day before a due date, at least 30 days
-after we get the notice, so the last month is always a whole month. A tenant who leaves without the notice owes
-the rent until it would have ended, and we take it from the deposit first.
+A tenant's rent month runs from one due date to the next. A tenant leaves by giving us 30 days' notice. The tenancy
+ends on the day before a due date, at least 30 days after we get the notice, so the last rent month is always whole.
+A tenant who leaves without the notice owes the rent until it would have ended, and we take it from the deposit
+first.
 
 ### 7. Rent on the 1st
 
@@ -82,12 +83,13 @@ for it (the rent minus our 15%). On 1st April it is still unpaid, so we send not
 settled.
 
 To keep our field work well organised, we may move a tenant's due date during the tenancy. We give the tenant
-30 days' notice and update the tenancy form. The tenant pays a share of the monthly rent for the days between the
-old due date and the new one (pro rata). Your payout stays on the 1st.
+30 days' notice and update the tenancy form. The tenant pays a share of the monthly rent for the days counted
+forward from the old due date to the new one (pro rata). Your payout stays on the 1st.
 
 For example: we move a tenant's due date from the 5th to the 20th, starting in April. The tenant pays UGX 400,000 a
 month, and the 15 days from the 5th to the 20th of April are charged pro rata: half a month, UGX 200,000. You are
-paid on 1st April as always.
+paid on 1st April as always. Moving a date from the 25th to the 5th counts 10 days, which on that rent is
+UGX 133,000.
 
 ### 8. How tenants pay, and your statement
 
@@ -140,9 +142,10 @@ UGX 350,000 goes back to the tenant.
 ### 13. Prepaid rent
 
 Rent a tenant pays ahead is held in a separate account, like deposits, and paid out month by month on the 1st,
-minus 15%. Months that have not started stay there. When a tenant leaves, the months that start after the
-tenancy ends go back to the tenant, with no fee on them, within 14 days of our visit to the unit. We first take
-what the tenant still owes from the deposit, and then from this rent. A month that has started is not refunded.
+minus 15%. Rent months that have not started stay there. When a tenant leaves, the rent months that start after
+the tenancy ends go back to the tenant, with no fee on them, within 14 days of our visit to the unit. We first take
+what the tenant still owes from the deposit, and then from this rent. A rent month that has started is not
+refunded.
 
 ### 14. VAT on commercial rent
 
@@ -192,6 +195,10 @@ give your thumbprint, in front of a witness you choose. You keep a copy.
 | First-month cover           | 1 month of rent per unit                          |
 | Notice to leave             | 30 days, either side                              |
 | Latest payout day           | the 3rd of the month                              |
+| Notice to move a due date   | 30 days, given to the tenant                      |
+| Notice a tenant gives       | 30 days, ending on a due date                     |
+| Part month                  | 30-day month, rounded to the nearest UGX 1,000    |
+| Refund of rent paid ahead   | within 14 days of our visit to the unit           |
 | Coordination fee on repairs | 10% of the contractor's price, shown on the quote |
 | Approval limit              | UGX 200,000 on the quote; above it you say YES    |
 | Emergency amount            | UGX 500,000; urgent safety repairs go first       |
@@ -265,7 +272,7 @@ Not part of the agreement. Remove before use.
 | Clause              | Takes from   | Counsel to confirm                                                          |
 |---------------------|--------------|-----------------------------------------------------------------------------|
 | Who this is between | The company  | The contracting company                                                     |
-| 1                   | BM2, BM5     | Scope of the agent's authority; legal steps in the landlord's name          |
+| 1                   | BM2, BM5     | Agent's authority; legal steps in the landlord's name; for a covered month  |
 | 2                   | BM18, P1, P7 | How utilities and garbage are paid and charged to tenants                   |
 | 3                   | BM9, BM10    | Commercial tenancy form; rent currency; VAT and withholding tax             |
 | 4                   | BM7          | Proof by kind of land; mortgage consent; family and estate authority        |
@@ -285,7 +292,7 @@ Not part of the agreement. Remove before use.
 | 17                  | P11          | Data protection duties                                                      |
 | 18                  | P12          | Governing law; the mediation step; the courts                               |
 | 19                  | BM11         | That the signed version governs; the Illiterates Protection Act; witnesses  |
-| 20                  | Numbers      | Starting figures, to test with the first landlords                          |
+| 20                  | Numbers      | The last six are starting figures, to test with the first landlords         |
 | Signatures          | BM11         | Who may witness; what Mwavuli records                                       |
 | Annex 1             | P2, P3       | Who sets each unit's rent (not decided)                                     |
 | Annex 2             | BM7          | What counts as proof for each kind of land                                  |
@@ -313,4 +320,11 @@ The model does not settle these. The owner and counsel decide them before the ag
 - Whether the examples stay in the signed text.
 - When the written notice goes out after a tenant misses a due date: with the pause on the next 1st, or at the end
   of the visits.
+- For a due-date move: who receives the pro rata amount, whether our 15% applies to it, and when it falls due.
+- Limits on moving a due date: whether it may move while the tenant owes rent, how often it may move, and what the
+  updated tenancy form must carry.
+- Who brings a case for a covered month: you, in your name and with your YES, or we, in our own right, since the
+  claim for that month passes to us (clause 11).
+- How a tenant gives notice (by phone, SMS or WhatsApp, confirmed by message) and, for a tenant who leaves without
+  notice, counting the 30 days from the day we learn the tenant has gone: proposed in the model, not approved.
 - The late fee in the tenancy form.

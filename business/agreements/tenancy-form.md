@@ -38,8 +38,8 @@ building.
 ### 2. Paying your rent
 
 Pay your rent to us only, by mobile money or bank, never cash to our staff. Your rent is due on the day written
-above, each month, unless we move your due date (clause 12). Pay to the mobile money number or the bank account
-below.
+above, each month, unless we move your due date (clause 12). Your month runs from one due date to the next. Pay to
+the mobile money number or the bank account below.
 
 - **Mobile money number:** [mobile money number]
 - **Bank:** [bank]
@@ -59,7 +59,7 @@ above) and gives it back to you.
 If you pay rent ahead, we hold it in a separate account, like deposits, and pay it to the landlord month by
 month on the 1st. Months that have not started stay there. When your tenancy ends, the months that start after
 it go back to you, with no fee, within 14 days of our visit to the unit. What you still owe is taken from your
-deposit first, and then from this rent.
+deposit first, and then from this rent. A month that has started is paid in full.
 
 ### 5. If you do not pay
 
@@ -115,16 +115,16 @@ owe is taken from it, and the landlord gives it back to you when the tenancy end
 ### 12. Changing your due date
 
 To keep our field work well organised, we may move your due date during the tenancy. We give you 30 days' notice,
-with the new date and the amount you pay for the days in between, and we update this form. The amount is a share of
-your monthly rent for the days between the old due date and the new one (pro rata), worked out as clause 13 says.
-The new date is then the day written above.
+with the new date and the amount you pay, worked out as clause 13 says, and we update this form. The new date is
+then the day written above.
 
 ### 13. Part months
 
-We count every month as 30 days, so each day is one-thirtieth of your monthly rent, and we round any part month to
-the nearest UGX 1,000. When you move in, you pay for the days from your move-in date to your first due date. When
-your due date moves, clause 12 applies. A month that has started is paid in full: if you leave part-way through it,
-the rest of it does not go back to you.
+To work out a part month, we count every month as 30 days, so each day is one-thirtieth of your monthly rent, and we
+round what you pay for the days to the nearest UGX 1,000, with UGX 500 rounding up. When you move in, you pay for the
+days from your move-in date to your first due date. When your due date moves, you pay a share of your monthly rent
+(pro rata) for the days counted forward from your old due date to the new one. A month that has started is paid in
+full: if you leave part-way through it, the rest of it does not go back to you.
 
 ## Signatures
 
@@ -156,7 +156,7 @@ Not part of the form. Remove before use.
 | 9                  | P12        | Governing law; mediation; the courts                                      |
 | 10                 | BM6, P15   | Notice ends on a due date; rent in place of notice; deposit return        |
 | 11                 | P8, P13    | Notes to tenants; handing over deposits                                   |
-| 12                 | BM20       | Notice, not agreement; the agent's authority                              |
+| 12                 | BM20       | Notice, not agreement; agent's authority; limits (not decided)            |
 | 13                 | P14        | 30-day month and rounding; move-in charge; no refund of a started month   |
 | Signatures         | P2         | Whether tenancy forms are bilingual and explained aloud (not decided)     |
 
@@ -169,6 +169,13 @@ agreement keeps.
 - The late fee, and what the Landlord and Tenant Act allows.
 - When the written notice goes out after a tenant misses a due date: with the pause on the next 1st, or at the end
   of the visits.
+- For a due-date move: who receives the amount, whether our 15% applies to it, and when it falls due.
+- Limits on moving a due date: whether it may move while the tenant owes rent, how often it may move, and what the
+  updated form must carry.
+- Who brings a case for a covered month: the landlord, in the landlord's name (clause 5), or Mwavuli, in its own right
+  as the claim for that month passes to it.
+- How a tenant gives notice (proposed: phone, SMS or WhatsApp, confirmed by message) and, for a tenant who leaves
+  without notice, when the 30 days start to count (proposed: the day we learn the tenant has gone).
 - The notice the landlord gives a tenant to end a tenancy.
 - How electricity, water and garbage shares are worked out for a unit with no meter.
 - Who pays the contractor first for damage a tenant causes, and whether our coordination fee is charged to the

@@ -31,6 +31,7 @@ landlord named below. It says the same things as the agreement, in numbered para
 - **1.10** A "quote" is the price for a job, shown to you in writing, with our coordination fee on it.
 - **1.11** "YES" is your reply by SMS or WhatsApp, or on a recorded call that we confirm by text.
 - **1.12** The "end date" is the day the agreement ends.
+- **1.13** A "rent month" of a tenancy runs from one due date to the next.
 
 ### S2. How we pay you
 
@@ -43,9 +44,10 @@ landlord named below. It says the same things as the agreement, in numbered para
 - **2.5** We charge no sign-up fee, no letting fee and no yearly fee, and we charge none to tenants. Late fees
   written in the tenancy form go to us.
 - **2.6** We pay you at the account or mobile money number in Annex 4 of the agreement.
-- **2.7** A new tenant pays for the days from move-in to the first due date, as a share of the monthly rent counted
-  on a 30-day month and rounded to the nearest UGX 1,000. We charge our fee on it as on any rent, and we pay you the
-  rest on the first payout date after move-in.
+- **2.7** When moving in, a new tenant pays for the days from move-in to the first due date. Every month counts as
+  30 days, so each day is one-thirtieth of the monthly rent, and the amount for the days is rounded to the nearest
+  UGX 1,000, a half rounding up. We charge our fee on it as on any rent, and we pay you the rest on the first payout
+  date after move-in.
 
 ### S3. Due dates and the covered month
 
@@ -61,17 +63,17 @@ landlord named below. It says the same things as the agreement, in numbered para
   first. Later months are paid to you, minus our fee.
 - **3.6** To keep our field work well organised, we may move a tenant's due date during the tenancy. We give the
   tenant 30 days' notice and update the tenancy form. The tenant pays a share of the monthly rent for the days
-  between the old due date and the new one (pro rata). The payout date stays the same.
+  counted forward from the old due date to the new one (pro rata), worked out as in 2.7. The payout date stays the
+  same.
 - **3.7** A tenant leaves by giving us 30 days' notice. The tenancy ends on the day before a due date, at least
-  30 days after we get the notice, so the last month is always a whole month. A tenant who leaves without the
-  notice owes the rent until it would have ended, and we take it from the tenant's deposit first.
+  30 days after we get the notice, so the last rent month is always whole. A tenant who leaves without the notice
+  owes the rent until it would have ended, and we take it from the tenant's deposit first.
 
 ### S4. When a tenant has not paid
 
 - **4.1** From the day a tenant misses its due date, we remind, call and visit the tenant, and then send a written
   notice.
-- **4.2** Should the matter need to go to court, the case is brought in your name, and only with your YES. The same
-  holds for any other legal step we take.
+- **4.2** Should the matter need to go to court, the case is brought in your name, and only with your YES.
 - **4.3** We never lock a tenant out and never remove a tenant's belongings.
 - **4.4** Our own time costs you nothing extra. A lawyer, the court and a bailiff are paid at cost. They are
   paid from the tenant's deposit first, if we hold it. Where you hold the deposit, or it is not enough, you pay
@@ -83,10 +85,11 @@ landlord named below. It says the same things as the agreement, in numbered para
   tenancy allows (unpaid rent, damage, legal costs), and the rest goes back to the tenant.
 - **5.2** For a tenant who was in the building before you signed up, you keep the deposit you hold. We write the
   amount in Annex 3 of the agreement, and you stay responsible for giving it back.
-- **5.3** Rent paid ahead for months that have not started is held in a separate account, like deposits. We pay
-  it out month by month on the payout date, minus our fee. When a tenant leaves, the months that start after the
-  tenancy ends go back to the tenant, with no fee on them, within 14 days of our visit to the unit. We first take
-  what the tenant still owes from the deposit, and then from this rent. A month that has started is not refunded.
+- **5.3** Rent paid ahead for rent months that have not started is held in a separate account, like deposits. We
+  pay it out month by month on the payout date, minus our fee. When a tenant leaves, the rent months that start
+  after the tenancy ends go back to the tenant, with no fee on them, within 14 days of our visit to the unit. We
+  first take what the tenant still owes from the deposit, and then from this rent. A rent month that has started is
+  not refunded.
 
 ### S6. Repairs, utilities and garbage
 
@@ -167,12 +170,12 @@ Not part of the schedule. Remove before use.
 
 | Clause | Takes from         | Counsel to confirm                                                                   |
 |--------|--------------------|--------------------------------------------------------------------------------------|
-| S1     | BM1, BM4, P2, BM20 | Definitions match the agreement; the due date is per tenancy and can change          |
+| S1     | BM1, BM4, P2, BM20 | Definitions match the agreement; due date per tenancy and can change; rent month     |
 | S2     | BM4, P7, P14       | Fee base; pass-through costs; no other fees; part month at move-in                   |
 | S3     | BM1, BM5, BM20     | Cap per unit and its reset; assignment; the due-date trigger; timing of later months |
-| S3.6   | BM20               | Moving a due date: notice, not agreement; agent's authority                          |
+| S3.6   | BM20               | Moving a due date: notice, not agreement; agent's authority; limits (not decided)    |
 | S3.7   | P15                | Tenant's notice ends on a due date; rent until it would have ended; no penalty       |
-| S4     | BM5                | Eviction steps; costs; who may act; when the written notice goes out                 |
+| S4     | BM5                | Eviction steps; costs; who sues for a covered month; when the notice goes out        |
 | S5     | BM6, P13 to P15    | Held in trust; refunds after what is owed; none for a started month                  |
 | S6     | BM2, BM6, P6       | Agent, not builder; re-billing utilities; consent; tenant damage                     |
 | S7     | BM7, P4, P9        | Proof by kind of land; "unsafe"; declining a building                                |
