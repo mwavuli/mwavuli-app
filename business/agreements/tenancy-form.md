@@ -58,10 +58,9 @@ above) and gives it back to you.
 ### 4. Rent paid ahead
 
 If you pay rent ahead, we hold it in a separate account, like deposits, and pay it to the landlord month by
-month on the 1st. What we have not yet paid to the landlord stays there. When your tenancy ends, what is still held
-for the months that start after it goes back to you, with no fee, within 14 days of our visit to the unit (clause
-10). What you still owe is taken from your deposit first, if we hold it, and then from this rent. A month that has
-started is paid in full.
+month on the 1st. We never pay the landlord a month that starts after your tenancy ends: when your tenancy ends,
+that rent goes back to you, with no fee, within 14 days of our visit to the unit (clause 10). What you still owe is
+taken from your deposit first, if we hold it, and then from this rent. A month that has started is paid in full.
 
 ### 5. If you do not pay
 
@@ -181,7 +180,6 @@ agreement keeps.
 - How a tenant gives notice (proposed: phone, SMS or WhatsApp, confirmed by message) and, for a tenant who leaves
   without notice, when the 30 days start to count (proposed: the day we learn the tenant has gone).
 - The notice the landlord gives a tenant to end a tenancy.
-- Which rent month each payout to the landlord pays, and who funds or recovers the last payout when a tenant leaves.
 - When the landlord holds the deposit (a tenant already in the building): who recovers the rent the tenant owes when
   leaving, from rent paid ahead or the landlord from the deposit it holds.
 - How soon after a tenancy ends we visit the unit, and the latest day for the refund of rent paid ahead if no visit

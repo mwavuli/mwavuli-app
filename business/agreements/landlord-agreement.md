@@ -76,7 +76,8 @@ the deposit first, if we hold it. We visit the unit when the tenancy ends, or wh
 For every unit with a tenant living in it, you get the rent on the 1st of the month. If the tenant has not paid,
 we still pay you for that month. If it is still unpaid by the next 1st, we stop paying for that unit until the
 tenant pays up or a new tenant moves in. Each tenant's rent is due on a day set in the tenancy form, but we
-always pay you on the 1st.
+always pay you on the 1st. Each payout pays the rent month that starts that month, and we do not pay a rent month
+that starts after a tenancy has ended.
 
 For example: a room rents for UGX 400,000 and the tenant does not pay in March. On 1st March you get UGX 340,000
 for it (the rent minus our 15%). On 1st April it is still unpaid, so we send nothing for that room until it is
@@ -142,10 +143,9 @@ UGX 350,000 goes back to the tenant.
 ### 13. Prepaid rent
 
 Rent a tenant pays ahead is held in a separate account, like deposits, and paid out month by month on the 1st,
-minus 15%. What has not been paid out stays there. When a tenant leaves, the rent still held for rent months that
-start after the tenancy ends goes back to the tenant, with no fee on it, within 14 days of our visit to the unit. We
-first take what the tenant still owes from the deposit, if we hold it, and then from this rent. A rent month that
-has started is not refunded.
+minus 15%. When a tenant leaves, the rent held for rent months that start after the tenancy ends goes back to the
+tenant, with no fee on it, within 14 days of our visit to the unit. We first take what the tenant still owes from
+the deposit, if we hold it, and then from this rent. A rent month that has started is not refunded.
 
 ### 14. VAT on commercial rent
 
@@ -281,6 +281,7 @@ Not part of the agreement. Remove before use.
 | 6                   | P2, P3, P14  | "Occupied" as in the schedule; fee on old arrears; part month at move-in    |
 | 6, leaving          | P15          | Tenant's notice ends on a due date; rent until it would have ended          |
 | 7                   | BM1, BM20    | Insurance or suretyship; assignment of the covered month; due-date changes  |
+| 7, payout           | P16          | Payout ahead of the due date; a rent month that never starts is not paid    |
 | 8                   | P1           | Payment-service and anti-money-laundering duties                            |
 | 9                   | BM4          | VAT and withholding tax on the fee; whether 15% is final                    |
 | 10                  | BM2, BM6, P6 | Agent, not builder; fee disclosure; SMS and WhatsApp consent; tenant damage |
@@ -328,7 +329,6 @@ The model does not settle these. The owner and counsel decide them before the ag
   claim for that month passes to us (clause 11).
 - How a tenant gives notice (by phone, SMS or WhatsApp, confirmed by message) and, for a tenant who leaves without
   notice, counting the 30 days from the day we learn the tenant has gone: proposed in the model, not approved.
-- Which rent month each payout pays, and who funds or recovers the last payout when a tenant leaves.
 - When we do not hold a tenant's deposit (a tenant already in your building): who recovers the rent the tenant owes
   when leaving, from rent paid ahead or you from the deposit you hold.
 - How soon after a tenancy ends we visit the unit, and the latest day for the refund of rent paid ahead if no visit

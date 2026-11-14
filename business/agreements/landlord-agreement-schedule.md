@@ -50,6 +50,8 @@ landlord named below. It says the same things as the agreement, in numbered para
   30 days, so each day is one-thirtieth of the monthly rent, and the amount for the days is rounded to the nearest
   UGX 1,000, a half rounding up. We charge our fee on it as on any rent, and we pay you the rest on the first payout
   date after move-in.
+- **2.8** Each payout pays the rent month that starts that month. We do not pay a rent month that starts after a
+  tenancy has ended.
 
 ### S3. Due dates and the covered month
 
@@ -89,10 +91,10 @@ landlord named below. It says the same things as the agreement, in numbered para
 - **5.2** For a tenant who was in the building before you signed up, you keep the deposit you hold. We write the
   amount in Annex 3 of the agreement, and you stay responsible for giving it back.
 - **5.3** Rent paid ahead is held in a separate account, like deposits. We pay it out month by month on the payout
-  date, minus our fee. What has not been paid out stays there. When a tenant leaves, the rent still held for rent
-  months that start after the tenancy ends goes back to the tenant, with no fee on it, within 14 days of the move-out
-  visit. We first take what the tenant still owes from the deposit, if we hold it, and then from this rent. A rent
-  month that has started is not refunded.
+  date, minus our fee, as 2.8 says. When a tenant leaves, the rent held for rent months that start after the tenancy
+  ends goes back to the tenant, with no fee on it, within 14 days of the move-out visit. We first take what the
+  tenant still owes from the deposit, if we hold it, and then from this rent. A rent month that has started is not
+  refunded.
 
 ### S6. Repairs, utilities and garbage
 
@@ -175,7 +177,7 @@ Not part of the schedule. Remove before use.
 | Clause | Takes from              | Counsel to confirm                                                                   |
 |--------|-------------------------|--------------------------------------------------------------------------------------|
 | S1     | BM1, BM4, P2, P14, BM20 | Definitions match the agreement; due date per tenancy and can change; rent month     |
-| S2     | BM4, P7, P14            | Fee base; pass-through costs; no other fees; part month at move-in                   |
+| S2     | BM4, P7, P14, P16       | Fee base; pass-through costs; no other fees; part month at move-in; payout ahead     |
 | S3     | BM1, BM5, BM20          | Cap per unit and its reset; assignment; the due-date trigger; timing of later months |
 | S3.6   | BM20, P14               | Notice, not agreement; authority; limits; recipient, 15% and due date (not decided)  |
 | S3.7   | P15                     | Tenant's notice ends on a due date; rent until it would have ended; no penalty       |
