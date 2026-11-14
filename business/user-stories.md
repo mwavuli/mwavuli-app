@@ -13,6 +13,7 @@ and no API.
 - After the `·` is the term the story comes from: `BM` and `P` IDs in [the model](model.md), `S` clauses in the
   [schedule](agreements/landlord-agreement-schedule.md), `Annex` in the [agreement](agreements/landlord-agreement.md),
   `form` clauses in the [tenancy form](agreements/tenancy-form.md), `brand` IDs in [brand/](../brand/README.md).
+- `BM13` to `BM15` are in the [rent advance addendum](addendum-rent-advance.md).
 - `proposed` is added here and the owner decides. `open` waits on a term nobody has decided (see the end).
 
 ## Context
@@ -21,18 +22,20 @@ and no API.
   occupied unit, with the first missed month covered (BM1, BM18).
 - Two limits recur: the approval limit, UGX 200,000 on a quote, above which the landlord says YES, and the emergency
   amount, UGX 500,000, up to which an urgent safety repair goes ahead first (BM2, P6).
+- The last six figures in the model's Numbers table (the 10% fee, the two limits, the 14 days, the 30 days to fix, no
+  minimum size) are starting figures to test with the first landlords, so the product keeps them as settings
+  (proposed).
 - A rent month runs from one due date of a tenancy to the next; a part month counts 30 days to the month (P14, S1.13).
-- Landlords and tenants work by SMS, WhatsApp, call and mobile money first. At launch only operations has a portal: web
-  in the office, mobile in the field. The landlord and tenant portals (Home, Properties, Payments, More; brand A5) show
-  the same data and come next.
+- Landlords and tenants work by SMS, WhatsApp, call and mobile money first. At launch only operations has a portal
+  (proposed): web in the office, mobile in the field. The landlord and tenant portals (Home, Properties, Payments,
+  More; brand A5) show the same data and come next.
 
 Uganda shapes every story:
 
 - Mobile money (MTN, Airtel; providers to confirm) and bank are the rails. Staff never take cash (P1).
 - Phone-first and officer-assisted: the main landlord has little formal education (BM3), so an officer sets everything
   up and explains it aloud.
-- English and Luganda, each a complete reviewed translation (BM11, brand F8). A signature or a thumbprint, before a
-  witness.
+- English and Luganda, each complete and reviewed (BM11, brand F8). A signature or a thumbprint, before a witness.
 - Local papers: NIN, LC1 letter, title by tenure: freehold, leasehold, mailo, customary (BM7).
 - Kampala and its surroundings (BM9). UGX at launch; rent currency is open. Written as brand F8 sets: UGX 1,200,000;
   9 Nov 2026; +256 7XX XXX XXX.
@@ -49,14 +52,14 @@ Uganda shapes every story:
   changes a habit. Wants repairs done and the deposit back.
 - **Business tenant:** a shop or office tenant, who may pay VAT on rent, depending on the landlord's VAT status.
 - **Officer, Finance, Support, Manager:** the operations persona. The team's WhatsApp groups are Ops, Finance, Support
-  and General (brand D18). Manager is the owner and senior staff.
+  and General (brand D18). Manager is the owner and senior staff (assumed).
 - **Caretaker, contractor:** outside the product; take jobs and report faults by WhatsApp or SMS, no login. A caretaker
-  never collects rent.
+  never collects rent (proposed).
 - **Accountant, counsel:** outside the product; read-only extracts.
 
 ## Use cases
 
-- **A tenant misses March.** The due day passes unpaid, so the room has its covered month and the chasing starts:
+- **A tenant misses March.** The due date passes unpaid, so the room has its covered month and the chasing starts:
   reminder, call, visit, then a written notice (when it goes out is open) → the landlord keeps the UGX 340,000 paid
   on 1st March → still unpaid on 1st April: the room's payout pauses → the tenant pays UGX 400,000 on 20th April,
   which repays March → April is still owed, nothing on 1st May → April is paid and the landlord gets UGX 340,000.
@@ -65,19 +68,19 @@ Uganda shapes every story:
   fee → above the approval limit and the emergency amount, so the landlord is asked first and replies YES → the
   contractor works and sends photos → the statement lists UGX 660,000. [BM2, P6]
 - **A family building with no title.** The landlord brings a sale agreement, an LC1 letter, a NIN and a signed statement
-  → Officer checks all four → inspection finds bad wiring, 30 days to fix → the funding test passes → the agreement is
+  → Officer checks all four → inspection finds bad wiring, 30 days to fix → the accept test passes → the agreement is
   explained in Luganda and signed with a thumbprint before the landlord's sister → existing tenants are visited and
   moved onto the form → first payout on the next 1st. [BM7, P4, BM17, BM11, P3]
 - **A new tenant takes a room.** Viewing → form explained and signed → deposit, the days up to the first due date and
   any rent ahead paid to Mwavuli by mobile money → unit occupied, landlord told → the part month reaches the landlord,
   less 15%, on the first payout after move-in, and cover starts on the first 1st after. [BM6, P2, P13, P14]
 - **A payout does not arrive.** Finance is alerted at the end of the 2nd → still unpaid at the end of the 3rd → the
-  landlord gives notice and leaves with no fee → final statement and payment within 14 days, tenant files handed over,
-  tenants told, "paid up to" notes issued. [BM8, P8, P13]
+  landlord tells Mwavuli in writing and the agreement ends that day, with no fee → final statement and payment within
+  14 days, tenant files handed over, tenants told, "paid up to" notes issued. [BM8, P8, P13]
 - **A tenant leaves with months prepaid.** The tenant gives 30 days' notice → the end date is the day before a due date
   → move-out photos → deposit settled with an itemized note → the rent months that start after the end date go back,
   with no fee, within 14 days of the visit → unit vacant, filling starts. [BM6, P13, P15]
-- **A tenant's due day moves.** To keep its field work organized, Mwavuli moves a UGX 400,000 rent from the 5th to the
+- **A tenant's due date moves.** To keep its field work organized, Mwavuli moves a UGX 400,000 rent from the 5th to the
   20th → Support records the new day and the 15 days between, UGX 200,000 → the tenant is told 30 days ahead and the
   form is updated → from April the rent is due on the 20th, and reminders and the covered month follow → the landlord
   is not told and the payout stays on the 1st. [BM20, P14, S3.6, form 12]
@@ -87,12 +90,12 @@ Uganda shapes every story:
 ### 1. Find us and enquire
 
 - **Landlord:** reads the offer in three lines (the 1st, 15%, 30 days' notice) and a worked statement, in English now
-  and Luganda once translated. [launch · BM18]
+  and Luganda once translated. [launch · BM18, open: Luganda text]
 - **Landlord:** opens WhatsApp or a call from the site with area and number of units prefilled; the chat becomes a
   lead. [next · proposed]
 - **Support:** logs every enquiry (call, WhatsApp, walk-in, referral) as a lead with source, area, units and next step,
   and books the building visit; the landlord gets a confirmation and a reminder. [next · proposed]
-- **Landlord, tenant:** checks an officer is genuine (name, photo, number) before letting them in or paying anything.
+- **Landlord, tenant:** check an officer is genuine (name, photo, number) before letting them in or paying anything.
   [next · proposed]
 
 ### 2. Take on a building
@@ -103,7 +106,8 @@ Uganda shapes every story:
   signs. [launch · BM7, Annex 2]
 - **Officer:** ticks the proof list (title; or sale agreement or letters of administration, LC1 letter and signed
   statement; NIN of every owner), photographs each paper, records the title search and its result, and notes any
-  dispute, debt, mortgage or charge the landlord declares. Acceptance waits on all of it. [launch · BM7, Annex 2]
+  dispute, debt, mortgage or charge the landlord declares. A building in dispute is not taken (S7.2). Acceptance waits
+  on all of it. [launch · BM7, Annex 2, S7.2, open: mortgage or charge]
 - **Officer:** walks the building with the landlord and fills the inspection report on a phone: roof, wiring, water,
   stairs and other safety items as OK, needs fixing or unsafe, with numbered photos. [launch · P4]
 - **Officer:** captures the building, the tenants and the inspection on a phone without data and syncs when it is back.
@@ -114,13 +118,13 @@ Uganda shapes every story:
   and photo. [launch · P4]
 - **Officer:** records the result for the building or per unit: accept, accept once items are fixed by a date, or
   decline with every reason that applies; the landlord sees the reasons. [launch · P9]
-- **Manager:** sees the funding test before accepting: payout account less what is committed, against two months of the
+- **Manager:** runs the accept test before accepting: payout account less what is committed, against two months of the
   building's net rent. Short means no accept. [launch · BM17]
 - **Officer:** prints the agreement, schedule and annexes in English or Luganda, filled from the captured data; until
   then the PDFs are filled by hand. [next · BM11]
 - **Officer:** explains the agreement aloud in the landlord's language and records language and explainer. The landlord
   signs or gives a thumbprint before a witness of their choice, whose name is kept, and keeps a copy.
-  [launch · BM11, BM3, open: Luganda text]
+  [launch · BM11, BM3, open: Luganda text, open: license]
 - **Landlord:** gives a payout number or account, a statement language and a phone for SMS and WhatsApp, and says if
   paper is wanted. [launch · Annex 4]
 - **Officer:** checks the payout account name matches the landlord before the first payout. [launch · proposed]
@@ -128,16 +132,17 @@ Uganda shapes every story:
   named holder. [launch · BM6, Annex 3]
 - **Manager:** signs off and the building goes live. The landlord is told, as each unit is occupied on the form, which
   1st its cover starts. [launch · P9, P2, open: contracting company]
-- **Landlord:** adds a building or a unit after signing; it goes through the same ownership, inspection and funding
-  checks, the units list is amended, and it joins the same payout and statement. [next · P9, BM17]
+- **Landlord:** adds a building or a unit after signing; it goes through the same ownership check, inspection and
+  accept test, the units list is amended, and it joins the same payout and statement. [next · P9, BM17]
 
 ### 3. Put tenants on the form
 
 - **Officer:** visits each existing tenant, explains the tenancy form aloud, records language and explainer, takes a
   signature or thumbprint. [launch · P3, open: Luganda text]
-- **Officer:** records each tenancy: unit, tenant's NIN and phone, start date, rent, due day, deposit and who holds it,
-  part month paid, months paid ahead, rent paid ahead, rent owed from before sign-up and the late fee, if the form
-  states one. [launch · form, open: tenant without a NIN, open: late fee]
+- **Officer:** records each tenancy: unit, tenant's NIN and phone, start date, rent, due date, deposit and who holds it,
+  part month paid, months paid ahead, rent paid ahead, rent owed from before sign-up, the late fee and the notice the
+  landlord gives, if the form states them. [launch · form table, form 10, open: tenant without a NIN, open: late fee,
+  open: notice the landlord gives a tenant]
 - **Officer:** keeps rent owed from before sign-up apart; it is not covered, and Mwavuli collects it for the same 15%.
   [launch · P3, open: order of repayment]
 - **Landlord:** reads on the statement which units are on the form and which are waiting; only occupied units on the
@@ -149,6 +154,8 @@ Uganda shapes every story:
 
 - **Landlord:** sees a vacant unit with days empty, viewings held and next step; an empty room earns no rent and costs
   no fee. [next · BM18]
+- **Officer:** finds tenants for vacant units by hand at launch, from referrals, calls and a WhatsApp listing, and
+  brings the applicant to the landlord. [launch · BM18, proposed]
 - **Landlord:** agrees the asking rent, and the tenant where the landlord chooses, by replying YES.
   [launch · open: who sets rent and chooses tenants]
 - **Officer:** lists vacant units (photos, rent, type, area) as a WhatsApp link, books viewings with reminders to both
@@ -157,35 +164,36 @@ Uganda shapes every story:
 - **Tenant:** pays Mwavuli by mobile money the deposit and the days from move-in to the first due date, with any rent
   ahead; the form is signed and the unit turns occupied. [launch · BM6, P2, P13, P14]
 - **Landlord:** is told when a tenant moves in: name, rent, start date, deposit held by Mwavuli, the part month paid,
-  and which 1st cover starts. [launch · P2, P14]
+  and which 1st cover starts. [launch · P2, P14, open: cover for a new tenant in a paused unit]
 
 ### 5. Collect rent
 
 - **Tenant:** pays Mwavuli only, by mobile money or bank, to the number or account on the form; never cash to staff.
-  [launch · P1, form 2, open: payment providers and charges]
+  [launch · P1, form 2, open: payment providers and charges, open: license]
 - **Tenant:** pays from any phone, or through a mobile money agent, quoting the unit reference, and the payment still
   reaches the right unit. [launch · proposed]
 - **Finance:** works one queue of unmatched, duplicate and reversed payments; each is matched to a unit or refunded.
   [launch · proposed]
 - **Support:** traces a payment a tenant says they made, from the mobile money transaction ID and the provider's
   record. [launch · proposed]
-- **Tenant:** gets an SMS or WhatsApp payment confirmation at once: amount, unit, months covered, balance, transaction
+- **Tenant:** gets an SMS or WhatsApp payment confirmation at once: amount, unit, rent months paid, balance, transaction
   ID. [launch · proposed]
-- **Tenant:** gets a reminder before the due day and a notice on it; due days differ per tenancy and reminders stop
+- **Tenant:** gets a reminder before the due date and a notice on it; due dates differ per tenancy and reminders stop
   when paid. [launch · BM20, proposed]
-- **Officer, Support:** move a tenant's due day to keep field work organized, on Mwavuli's own initiative; the landlord
+- **Officer, Support:** move a tenant's due date to keep field work organized, on Mwavuli's own initiative; the landlord
   is not asked or told and the payout stays on the 1st. From the new date, reminders and the covered month follow the
   new day. [launch · BM20, S3.6, open: moving a due date while rent is owed, open: moving a due date without agreement]
-- **Tenant:** is told 30 days before a due day moves, with the new day and the amount for the days counted forward from
-  the old date to the new one; the form is updated. [launch · BM20, P14, form 12, open: pro rata for a due-day move]
+- **Tenant:** is told 30 days before a due date moves, with the new day and the amount for the days counted forward from
+  the old date to the new one; the form is updated. [launch · BM20, P14, form 12, open: pro rata for a due-date move]
 - **Tenant:** gets that notice in their language, in writing, with a record of when and how it was given.
-  [launch · proposed, open: how notice is given]
+  [launch · proposed, open: how notice is given, open: Luganda text]
 - **Finance:** counts the days of a part month on a 30-day month, each day one-thirtieth of the rent, for a move-in or a
-  due-day move (forward from the old due date to the new one), and rounds the amount to the nearest UGX 1,000, a half
-  rounding up. [launch · P14, form 13, open: pro rata for a due-day move]
+  due-date move (forward from the old due date to the new one), and rounds the amount to the nearest UGX 1,000, a half
+  rounding up. [launch · P14, form 13, open: pro rata for a due-date move]
 - **Tenant:** pays in parts; each payment goes to the oldest month first and a month shows paid only when settled in
   full. [launch · BM5, open: part payments]
-- **Tenant:** pays months ahead; unused months are held and the tenant is told "paid up to [month]". [launch · P13]
+- **Tenant:** pays months ahead; unused rent months are held, and at exit the tenant gets a "rent paid up to [month]"
+  note. [launch · P13]
 - **Tenant:** sees what is due, what is paid, the next due date and months ahead, in the app or by a WhatsApp reply.
   [next · brand A5]
 - **Tenant:** gets a rent receipt or proof-of-tenancy letter on request, for an employer or a bank.
@@ -200,32 +208,34 @@ Uganda shapes every story:
 ### 6. Pay the landlord on the 1st
 
 - **Finance:** sees each landlord's payout worked out before the 1st: net rent of every occupied unit, a new tenant's
-  part month less the 15%, less approved costs, plus VAT passed on. [launch · BM4, S2, P14]
+  part month less the 15%, less approved costs, plus VAT passed on.
+  [launch · BM4, S2, P14, open: rent owed for a missing notice]
 - **Finance:** reviews the batch and its exceptions (paused units, new payout details, holds), then releases it so money
   lands on the 1st. [launch · BM1, open: payment providers and charges]
 - **Finance:** schedules bank payouts to land on the 1st, and releases them the banking day before when the 1st is not
   one. [launch · BM1, BM8, proposed]
 - **Landlord:** gets one payment to the number or account on file and one statement in the chosen language.
   [launch · BM4, P1, open: co-owners, open: Luganda text]
-- **Landlord:** confirms the money arrived with one word, or says it did not; Finance sees the answer. [launch · BM8]
-- **Finance:** is alerted at the end of the 2nd to any payout not confirmed as reached, so no landlord reaches the 3rd
-  unpaid. [launch · BM8, S9.2]
+- **Landlord:** confirms the money arrived with one word, or says it did not; Finance sees the answer. The provider's
+  record decides whether it reached. [launch · BM8]
+- **Finance:** is alerted at the end of the 2nd to any payout the provider's record does not show as received, so no
+  landlord reaches the end of the 3rd unpaid. [launch · BM8, S9.2]
 - **Landlord:** changes the payout number or account only after an officer's call-back, from the next payout, and the
-  old number is told; this blocks SIM-swap and impersonation fraud. [launch · proposed]
+  old number is told; this reduces SIM-swap and impersonation fraud. [launch · proposed]
 - **Finance:** corrects a wrong statement or payout, adjusts the next payout and tells the landlord. [launch · proposed]
 - **Finance:** can export the payout batch and pay by hand if the system is down on the 1st, then reconcile.
   [launch · proposed]
-- **Finance:** sees a 30-day cash forecast: payouts due on the 1st against rent expected by each tenant's due day.
+- **Finance:** sees a 30-day cash forecast: payouts due on the 1st against rent expected by each tenant's due date.
   [next · BM20]
 
 ### 7. When a tenant does not pay
 
-- **Landlord:** keeps the net rent paid on the 1st for a month a tenant misses. [launch · BM1, BM18]
+- **Landlord:** keeps the net rent paid on the 1st for a month a tenant misses. [launch · BM1, BM18, open: license]
 - **Landlord:** is told in one message who missed the rent and that Mwavuli is chasing, and a paused unit gets its own
   message with the reason. [launch · proposed]
 - **Finance:** sees each unit's covered month, the amount advanced and the amount recovered; one covered month per unit
   at a time. A paused unit is paid again when its arrears clear or a new tenant moves in, but gets a new covered month
-  only once the old arrears are cleared. [launch · BM1, S3.2]
+  only once the old arrears are cleared. [launch · BM1, S3.2, open: cover for a new tenant in a paused unit]
 - **Officer:** works an arrears queue by building and age, from the day a due date is missed; the steps are remind,
   call, visit, written notice, each logged with date, channel and outcome.
   [launch · BM5, form 5, S4.1, open: when the notice goes out]
@@ -239,8 +249,8 @@ Uganda shapes every story:
   name. [launch · BM5, S4.2, open: who brings a case for a covered month]
 - **Landlord:** says YES or NO to court by reply, or on a recorded call confirmed by text; the system keeps it.
   [launch · P6, open: co-owners]
-- **Finance:** records lawyer, court and bailiff costs at cost, takes them from the deposit Mwavuli holds, and bills the
-  landlord for the rest. [launch · S4.4]
+- **Finance:** records lawyer, court and bailiff costs at cost, takes them from the deposit Mwavuli holds, and takes the
+  rest off the landlord's next payout, as the landlord approved with the YES. [launch · S4.4, S2.2]
 - **Tenant:** asks for a payment plan; Officer records the offer and the landlord says YES before it applies.
   [next · open: part payments]
 - **Support:** logs a tenant's report of a lock-out, cut water or power, or cash demanded by a landlord or caretaker,
@@ -288,15 +298,16 @@ Uganda shapes every story:
 ### 10. Deposits and prepaid rent
 
 - **Finance:** holds each new tenant's deposit and every prepaid month in client-money accounts apart from Mwavuli's
-  own, with a register by tenant, unit, amount and holder. [launch · BM6, P13, BM17]
-- **Tenant:** is told their deposit, who holds it, and any deduction with its reason. [launch · form 3]
+  own, with a register by tenant, unit, amount and holder. [launch · BM6, P13, BM17, open: license]
+- **Tenant:** is told their deposit and who holds it. [launch · form 3]
+- **Tenant:** gets any deduction from the deposit with its reason. [launch · proposed]
 - **Finance:** pays prepaid rent to the landlord month by month on the 1st, less 15%; later months stay held.
   [launch · P13]
 - **Officer:** itemizes each deduction from a deposit (unpaid rent, damage, legal costs) with evidence; Finance approves
-  it. [launch · BM6]
+  it. [launch · BM6, proposed]
 - **Tenant:** gets back the rent months that start after the tenancy ends, with no fee, within 14 days of the officer's
-  visit to the unit, after what the tenant still owes is taken from the deposit and then from this rent. A rent month
-  that has started is paid in full. [launch · P13, P14, P15, S5.3, form 4]
+  visit to the unit, after what the tenant still owes is taken from the deposit, if Mwavuli holds it, and then from this
+  rent. A rent month that has started is paid in full. [launch · P13, P14, P15, S5.3, form 4]
 - **Landlord:** sees deposits and prepaid rent on the statement as held for tenants, not income. [next · proposed]
 
 ### 11. Move out
@@ -308,7 +319,11 @@ Uganda shapes every story:
 - **Support:** tells the tenant the end date when the notice comes in, and that a rent month that has started is paid
   in full. [launch · P14, P15]
 - **Finance:** bills a tenant who leaves without notice the rent until the tenancy would have ended, counted from the
-  day Mwavuli learns the tenant has gone, and takes it from the deposit first. [launch · P15, S3.7, proposed]
+  day Mwavuli learns the tenant has gone, and takes it from the deposit first if Mwavuli holds it.
+  [launch · P15, S3.7, proposed, open: rent owed for a missing notice]
+- **Officer:** visits the unit when a tenancy ends or the tenant has gone, and logs the visit date and the day Mwavuli
+  learned the tenant had gone; the visit starts the 14 days for the refund.
+  [launch · P15, S5.3, form 4, open: visit after a tenant leaves]
 - **Landlord:** is told when a tenant gives notice, with the end date, and again when the unit is vacant.
   [launch · proposed]
 - **Officer:** photographs the unit at move-in and again at move-out to settle damage. [next · proposed]
@@ -318,13 +333,15 @@ Uganda shapes every story:
   [next · P12]
 - **Landlord:** is reminded to return a deposit the landlord holds for an existing tenant.
   [next · BM6, open: landlord-held deposit]
+- **Landlord:** asks Mwavuli to end a tenancy; Officer gives the tenant the notice the form states and records it.
+  [next · form 10, open: notice the landlord gives a tenant]
 
 ### 12. Landlord leaves
 
 - **Landlord, Manager:** give 30 days' written notice; the system records it and sets the end date.
   [launch · BM8, open: how notice is given]
 - **Landlord:** leaves at once, with no fee, when a payout has not reached by the end of the 3rd; the system recognizes
-  the trigger. [launch · BM8]
+  the trigger from the provider's record. [launch · BM8]
 - **Manager:** ends the agreement at once for rent the landlord collects themselves, interference with tenants or a
   refused urgent safety repair, with evidence and reason recorded. [launch · BM8, P5, open: what ends it at once]
 - **Finance:** issues the final statement and payment within 14 days of the end date: rent collected and not paid out,
@@ -340,7 +357,9 @@ Uganda shapes every story:
 ### 13. Statements, messages and support
 
 - **Landlord:** gets one statement a month by SMS or WhatsApp in the chosen language, paper on request; the message
-  holds the totals and a link to the detail. [launch · BM4, P1, open: Luganda text]
+  holds the totals and the detail follows on request. [launch · BM4, P1, open: Luganda text]
+- **Landlord:** opens a link in the statement message to see each line's detail on a web page, with no app or login.
+  [next · proposed]
 - **Landlord:** reads rent from occupied units, the 15% fee, repairs with the 10% fee, VAT passed on, covered months
   repaid and the amount paid, with each unit's tenant, rent and status. [launch · BM18]
 - **Landlord:** asks for the statement read aloud, by an officer's call or a voice note in Luganda or English.
@@ -391,9 +410,10 @@ Uganda shapes every story:
   about 40 rooms. [launch · BM10]
 - **Landlord:** reads VAT a tenant pays on rent as passed on in the same payment and shown on the statement; filing is
   theirs. [launch · P10]
-- **Business tenant:** gets a receipt that splits rent and VAT, by email or paper. [next · P10]
+- **Business tenant:** gets a receipt that splits rent and VAT, by email or paper.
+  [next · P10, proposed, open: tax receipts on rent]
 - **Business tenant:** signs the standard tenancy form for a shop or office until a commercial form exists.
-  [launch · BM9, form]
+  [launch · BM9, form table, proposed, open: commercial form]
 - **Business tenant:** signs a commercial tenancy form under the same agreement. [next · BM9, open: commercial form]
 - **Officer:** tracks a commercial lease's term and renewal date and reminds landlord and tenant. [next · proposed]
 - **Finance:** quotes and takes rent in UGX only. [launch · BM9, open: rent currency]
@@ -408,33 +428,35 @@ Uganda shapes every story:
 - **Tenant:** browses vacant units online and books a viewing. [later · proposed]
 - **Landlord:** who lives abroad or upcountry gets the same statements, YES requests and payouts remotely, paid to a
   local account. [later · proposed]
-- **Landlord, tenant:** get messages in other languages, each a complete reviewed translation. [later · brand F8]
+- **Landlord, tenant:** get messages in other languages, each complete and reviewed. [later · brand F8]
 
 ## Rules the product enforces
 
 - No cash from tenants to staff. [P1]
-- A due day moves only on 30 days' notice to the tenant, with the form updated and the days charged, counted forward
+- A due date moves only on 30 days' notice to the tenant, with the form updated and the days charged, counted forward
   from the old due date to the new one; the landlord is not asked. [BM20, P14, S3.6, form 12]
 - Every part month is counted on a 30-day month, and the amount for the days is rounded to the nearest UGX 1,000, a
   half rounding up. [P14, S2.7, form 13]
 - A rent month runs from one due date to the next. A rent month that has started is paid in full; a tenant who leaves
   part-way through it gets none of it back. [P14, S1.13]
 - A tenant leaves on 30 days' notice, and the tenancy ends on the day before a due date; leaving without notice costs
-  the rent until it would have ended, taken from the deposit first. [P15, S3.7, form 10]
-- No building goes live until the ownership check passes, unsafe items are fixed and the funding test passes.
+  the rent until it would have ended, taken from the deposit first if Mwavuli holds it. [P15, S3.7, form 10]
+- No building goes live until the ownership check passes, unsafe items are fixed and the accept test passes.
   [BM7, P4, BM17]
 - No unit is paid on the 1st unless it is occupied on the form with rent and deposit written down. [P2]
 - One covered month per unit, never two. A unit whose covered month is unpaid on the next 1st is not paid until its
-  arrears clear or a new tenant moves in. [BM1, S3.2]
+  arrears clear or a new tenant moves in. [BM1, S3.2, open: cover for a new tenant in a paused unit]
 - Mwavuli earns its 15% on a covered month only when that rent is collected. [S3.4]
 - The 15% applies to rent only, not to deposits, utilities, repairs, VAT or late fees. [BM4, S1.4]
 - No work above the approval limit without YES, except urgent safety up to the emergency amount. [BM2, P6]
-- No job takes more than one payout; the balance is paid first. [BM4]
-- No legal step without the landlord's YES, and only in the landlord's name. [BM5, S4.2]
+- No job takes more than one payout; the balance is paid first. [BM4, S2.3, open: urgent repair above one payout]
+- No legal step without the landlord's YES, and only in the landlord's name. [BM5, S4.2, open: who brings a case for
+  a covered month]
 - Staff never lock a tenant out or remove belongings (S4.3). The landlord does not lock a tenant out or cut water or
   power (S8.3). [BM5, P5]
-- Deposits and prepaid rent are held apart from Mwavuli's own money and used only as BM6, P13 and P15 allow.
-  [BM6, P13, P15]
+- The landlord tells tenants to pay only Mwavuli and makes no side deals with tenants on rent or on who lives in a
+  unit. [P5, S8.1, S8.2]
+- Deposits and prepaid rent are held apart from Mwavuli's own money and used only as the model allows. [BM6, P13, P15]
 - No markup on utilities, no sign-up, letting or yearly fee, and no fee to tenants beyond a late fee in the form,
   which Mwavuli keeps. [BM2, P7, S2.5]
 - Personal data is used only to manage the building. [P11]
@@ -447,16 +469,19 @@ Terms the stories wait on. The model and the agreements list most of them as not
 documents. Stage numbers are in brackets.
 
 - Who may say YES, and who receives the statement and the payout, when a building has co-owners or an estate
-  (2, 6, 7, 8).
+  (6, 7, 8).
 - License and law: paid cover as insurance or suretyship, payment-service and money-laundering duties, a money-lender
   license for the rent advance (addendum), the explanation statement under the Illiterates Protection Act, stamp duty
   and registration of the agreements (2, 5, 7, 10, 14, 16).
-- The contracting company, the VAT status and the signatory (2, 14).
-- The Luganda text of the agreement set, statements and messages, not written or reviewed yet; without it no
-  Luganda-speaking landlord can sign. Also whether the tenancy form is bilingual and explained aloud (2, 3, 6, 7, 13).
+- The contracting company, the VAT status and the signatory (2).
+- Whether a mortgage or other charge on a building limits letting, and whether the lender must consent (2).
+- The Luganda text of the agreement set, statements and messages: it is not in the repository, so its review status is
+  unknown, and the clauses changed on 2026-11-13 need review. Without it no Luganda-speaking landlord can sign. Also
+  whether the tenancy form is bilingual and explained aloud (1, 2, 3, 5, 6, 7, 13).
 - What ID a tenant without a NIN may give, and whether joint tenants share one tenancy; the form names one tenant (3).
 - What is paid for an existing tenant not yet on the form (3).
 - How a payment is split between rent owed from before sign-up and a covered month (3, 7).
+- The notice the landlord gives a tenant to end a tenancy; the form leaves it blank (3, 11).
 - Who sets each unit's rent and increases, and who chooses tenants (4, 5).
 - Which mobile money providers and banks the product takes payments from and pays out to, and who bears their charges
   on collections and payouts (5, 6).
@@ -466,22 +491,29 @@ documents. Stage numbers are in brackets.
 - Whether Mwavuli may move a due date on 30 days' notice without the tenant's agreement, and without telling the
   landlord (5).
 - Who receives the pro rata amount for a due-date move, whether the 15% applies as it does to a move-in part month,
-  and when it falls due (5, 6).
+  and when it falls due (5).
 - The late fee, eviction steps, deposit rules, keeping the rent of a month that has started, a 30-day notice that ends
-  on a due date, and rent owed when no notice is given, under the Landlord and Tenant Act 2022 (5, 7, 10, 11).
+  on a due date, and rent owed when no notice is given, under the Landlord and Tenant Act 2022 (3, 5).
 - What separates rent a tenant paid to the landlord, who passed it on the same day (P5), from the landlord collecting
-  rent, a ground to end at once (BM8) (5, 12).
+  rent, a ground to end at once (BM8) (5).
 - When the written notice goes out: with the pause on the next 1st, or at the end of the visits (7).
+- Cover for a new tenant in a paused unit: whether a unit re-let to a new tenant gets a covered month while the old one
+  is unpaid. S3.2 allows a new covered month only once the old arrears clear; P2 starts cover on the first 1st after a
+  unit is occupied (4, 7).
 - Who brings a case for a covered month: the landlord in its name and with YES (S4.2, BM5), or Mwavuli in its own
   right (S3.3) (7).
-- When rent collected after a covered month reaches the landlord, and who collects rent after the end date (7, 12).
-- Whether a deposit the landlord holds can be used against a covered month, proposed in BM6 and not approved (7, 11).
+- When rent collected after a covered month reaches the landlord, and who collects rent after the end date (7).
+- Whether a deposit the landlord holds can be used against a covered month, proposed in BM6 and not approved (11).
+- The visit after a tenant leaves: when Mwavuli makes it, and the latest day the refund is due if no visit happens
+  (11).
+- How rent owed for a missing notice is recorded and paid to the landlord when the unit is empty, and whether the 15%
+  applies to it; and how the move-in part month is held until the first payout (6, 11).
 - What counts as an urgent safety repair; the inspection's unsafe list is roof, wiring, water and stairs (8).
 - An urgent safety repair that costs more than one payout: whether it goes ahead before the balance arrives, and who
   pays the contractor the balance (8).
 - Whether the emergency amount counts the 10% fee, as the approval limit does (8).
 - Who pays the contractor first for tenant damage, and whether the 10% is charged to the tenant (8).
-- Response-time promises for repairs and support (8, 13).
+- Response-time promises for repairs and support (8).
 - Who pays the electricity, water and garbage providers, how a tenant's share is collected, and the share for a unit
   with no meter; the agreement leaves it open while tenancy form 7 commits the tenant to a share (9).
 - How a notice is given and recorded, and from when it counts: a landlord leaving, a tenant leaving, a due date
