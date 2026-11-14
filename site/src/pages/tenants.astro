@@ -6,7 +6,7 @@ import RuledList from '../components/RuledList.astro';
 import Layout from '../layouts/Layout.astro';
 
 // The tenancy form's other clauses, headed as the form heads them (clauses 2 and 3 have the two
-// bands above). Rent paid ahead follows P13, which fixes what the form leaves open.
+// bands above).
 const CLAUSES = [
   {
     title: 'Repairs',
@@ -18,11 +18,23 @@ const CLAUSES = [
   },
   {
     title: 'Rent paid ahead',
-    text: 'If you pay rent ahead, we hold it in a separate account, like deposits, and pay it to the landlord month by month on the 1st. Months that have not started stay there. If you leave early, the months you paid for and did not use go back to you under your tenancy form, with no fee on them.',
+    text: 'If you pay rent ahead, we hold it in a separate account, like deposits, and pay it to the landlord month by month on the 1st. We never pay the landlord a month that starts after your tenancy ends: when your tenancy ends, that rent goes back to you, with no fee, within 14 days of our visit to the unit. If we hold your deposit, we first take what you still owe from there, and then from this rent. A month that has started is paid in full.',
+  },
+  {
+    title: 'Changing your due date',
+    text: 'To keep our field work well organized, we may move your due date during the tenancy. We give you 30 days’ notice, with the new date and the amount you pay, worked out as “Part months” says, and we update your tenancy form. The new date is then the day written in your tenancy form.',
+  },
+  {
+    title: 'Part months',
+    text: 'To work out a part month, we count every month as 30 days, so each day is one-thirtieth of your monthly rent, and we round what you pay for the days to the nearest UGX 1,000, with UGX 500 rounding up. When you move in, you pay for the days from your move-in date to your first due date. When your due date moves, you pay a share of your monthly rent (pro rata) for the days counted forward from your old due date to the new one. A month that has started is paid in full: if you leave part-way through it, the rest of it does not go back to you.',
   },
   {
     title: 'If you do not pay',
-    text: 'We remind you, call you and visit you, then send a written notice. If it must go to court, the landlord says YES first and the case is in the landlord’s name. We never lock a tenant out. Any late fee is written in your tenancy form.',
+    text: 'We remind you, call you and visit you, then send a written notice. Should the matter need to go to court, the case is brought in the landlord’s name at their approval. We never lock a tenant out. Any late fee is written in your tenancy form.',
+  },
+  {
+    title: 'When the tenancy ends',
+    text: 'To leave, give us 30 days’ notice by phone, SMS or WhatsApp, and we confirm it by message. Your tenancy ends on the day before a due date, at least 30 days after we get your notice, so your last month is always a whole month. If you leave without giving notice, you owe the rent until your tenancy would have ended, counted from the day we learn you have gone, and we take it from your deposit first, if we hold it. We visit the unit when your tenancy ends, or when we learn you have gone.',
   },
   {
     title: 'If we disagree',
@@ -54,7 +66,8 @@ const CLAUSES = [
         Pay your rent to us only, by mobile money or bank, never cash to our staff.
       </p>
       <p class="mt-4 max-w-3xl text-body-lg text-ink">
-        Your rent is due on the day written in your tenancy form.
+        Your rent is due on the day written in your tenancy form, each month, unless we move your due date. Your
+        month runs from one due date to the next.
       </p>
     </div>
   </section>

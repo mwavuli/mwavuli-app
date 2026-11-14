@@ -156,8 +156,12 @@ from the model or the tenancy form:
   with "The 15%" as "It"; "There is no sign-up fee, no letting fee and no yearly fee." joins BM18 and P7; the
   chasing and court rows combine BM18's example with BM5.
 - Tenants: the headline "Great spaces, happy tenants." is the People-Centric pillar (F2), backed by the repair line;
-  "Your rent is due on the day written in your tenancy form.", "Any late fee is written in your tenancy form." and the
-  early-leaver line (P13, "with no fee on them") adapt clauses 2, 4 and 5 where the form leaves a term open; "this
-  tenancy" is "your tenancy" in the deposit text.
+  "Your rent is due on the day written in your tenancy form, each month, unless we move your due date." and "Any late
+  fee is written in your tenancy form." adapt clauses 2 and 5 where the form leaves a term open; "this tenancy" is
+  "your tenancy" in the deposit text. The "Changing your due date" row says "your tenancy form" for "this form",
+  "written in your tenancy form" for "written above" and "“Part months” says" for "clause 13 says". The "Rent paid
+  ahead" row leaves out the pointer "(clause 10)". The "When the tenancy ends" row repeats two proposals in P15 that
+  the owner has not approved: the notice channel (phone, SMS or WhatsApp, confirmed by message), and counting the 30
+  days from the day we learn a tenant has gone.
 - Businesses: the headline "Shops and offices. Same terms." compresses BM9 and BM10 (the hero's last two lines must
   stay short, or they run under the card); "That is the rent minus our 15%…" is BM10's example reworded.

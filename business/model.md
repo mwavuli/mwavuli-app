@@ -1,6 +1,6 @@
 # Mwavuli business model
 
-Status: version 0.5, for owner sign-off and counsel review. Ticket SNT-25. Interview started on 2026-11-10.
+Status: version 0.6, for owner sign-off and counsel review. Ticket SNT-25. Interview started on 2026-11-10.
 Interview transcript: [grill-me session](../.scratch/grill-me/1794346863-mwavuli-business-model.md).
 
 What Mwavuli Property Management offers a landlord, what it charges and what each side does. It is the single
@@ -53,8 +53,9 @@ isn't working, leave with 30 days' notice.
 | Paid to you on the 1st                        | 2,950,000 |
 
 The empty room earns no rent and costs no fee, and we look for a tenant. If a tenant misses March, we still pay
-you for that room on 1st March (UGX 340,000). If it is still unpaid on 1st April, we pause that room until it
-is settled, we chase, and if it goes to court you say YES first.
+you for that room on 1st March (UGX 340,000), and we start chasing on the day the tenant's rent was due. If it is
+still unpaid on 1st April, we pause that room until it is settled, we keep chasing, and if it goes to court you say
+YES first.
 
 **Rules for using it**
 
@@ -74,7 +75,7 @@ is settled, we chase, and if it goes to court you say YES first.
 |---------------------------|----------|----------------------------------------|
 | Landlord agreement        | Landlord | BM1, BM2, BM4 to BM12, BM20, Numbers   |
 | Schedule to the agreement | Landlord | The same terms, with the words defined |
-| Tenancy form              | Tenant   | P3, P7, P13, BM5, BM6, BM20            |
+| Tenancy form              | Tenant   | P3, P7, P13 to P15, BM5, BM6, BM20     |
 | Inspection report         | Landlord | P4, P9                                 |
 
 | Landlord pitch            | Landlord | BM18 and the plain statements          |
@@ -147,31 +148,56 @@ and the promise stays true for every month inside it.
 
 - The cap is per unit and resets when the arrears are cleared.
 - When Mwavuli pays a month the tenant has not paid, the claim for that rent passes to Mwavuli. Draft it so
-  Mwavuli can collect that month in its own right.
+  Mwavuli can collect that month from the tenant. Who brings a case for it is open (BM5).
+- P16 says which rent month a payout pays: the one that starts that month, so a payout comes before the tenant's due
+  date. A rent month that starts after a tenancy has ended is not paid.
 - A paid guarantee of rent may count as insurance or suretyship. Confirm whether it needs a license or an
   approval and how to word it.
 - "Occupied" is defined in P2.
 
 ### BM20 · Rent due dates
 
-*Source: Owner*
+*Source: Owner. That Mwavuli may move a due date during a tenancy, and how the days are counted, were decided on
+2026-11-13.*
 
 **Plain statement** Each tenant's rent is due on a day of the month written in the tenancy form. The day can differ
-from tenant to tenant. We always pay you on the 1st.
+from tenant to tenant. To keep our field work well organized, we may move a tenant's due date during the tenancy.
+We give the tenant 30 days' notice and update the tenancy form. The tenant pays a share of the monthly rent for the
+days counted forward from the old due date to the new one (pro rata). We always pay you on the 1st.
 
 **Example** One tenant's rent is due on the 5th and another's on the 20th. On 1st March we pay you for both rooms.
-If the tenant due on the 20th has not paid by 20th March, March is that room's covered month.
+If the tenant due on the 20th has not paid by 20th March, March is that room's covered month. The tenant due on the
+5th pays UGX 400,000 a month. To keep our field work well organized, we move that due date to the 20th: we give the
+tenant 30 days' notice and update the tenancy form, and from April the rent is due on the 20th. The 15 days from
+the 5th to the 20th of April are charged pro rata: half a month, UGX 200,000. We pay you on 1st April as always.
 
-**Why** Tenants move in and are paid on different days. The payout date stays on the 1st, so the landlord's day
-never moves.
+**Why** Tenants move in and are paid on different days. Mwavuli plans its field work around due dates, so it moves a
+tenant's due date where that helps the work run well, and the tenant pays pro rata for the days from the old date to
+the new one. The payout date stays on the 1st, so the landlord's day never moves.
+
+**Rule** A due-date move is a part month, counted as P14 says. The days are counted forward from the old due date to
+the new one: the 5th to the 20th is 15 days, the 20th to the 5th is 15 days, and the 25th to the 5th is 10 days. The
+amount for the days is rounded to the nearest UGX 1,000, a half rounding up: on UGX 400,000, the 25th to the 5th is
+10 days, UGX 133,333, charged as UGX 133,000.
 
 **Counsel note**
 
-- The covered month starts when a tenant misses its due date. The test that stops the cover still runs on payout
-  dates: if the covered month is unpaid on the next 1st, we stop paying for that unit (BM1).
+- The covered month and the chasing start when a tenant misses its due date (BM5). The test that stops the cover
+  still runs on payout dates: if the covered month is unpaid on the next 1st, we stop paying for that unit (BM1).
 - A later due date means Mwavuli carries that tenant's rent for longer. The payout account test (BM17) already
   assumes that no rent has come in.
-- Confirm whether a due date can change during a tenancy, and who may change it.
+- Mwavuli moves a due date on its own initiative, with 30 days' notice and the tenancy form updated (owner,
+  2026-11-13). The landlord is not informed. The landlord-facing texts say that we may move a due date, but not that
+  the landlord is not told, so confirm that the landlord's signature on the agreement is enough authority for
+  Mwavuli to move a due date without asking or telling the landlord.
+- Confirm that the tenancy form the tenant signs lets Mwavuli move a due date on 30 days' notice without the tenant's
+  agreement, how the notice is given and recorded, and what the updated form must carry.
+- The counting of the days is P14's. Its counsel note has the questions.
+- Confirm whether a due date may move while the tenant owes rent, while a notice is running and while rent is paid
+  ahead, since a later date could undo a due date the tenant has already missed, restart the chasing (BM5) or leave a
+  notice ending on a day that is no longer the day before a due date, and how often a due date may move. Open.
+- For the accountant: how a pro rata amount is recorded and held. Who receives it, whether the 15% applies to it and
+  when it falls due are open; the owner's rule is only that the payout stays on the 1st.
 
 ### BM4 · What we charge and how you are paid
 
@@ -228,33 +254,43 @@ and building liability stay with the contractor, and Mwavuli earns from a fee th
   coordination fee is charged to the tenant. Open.
 - Construction scope is not settled: new buildings and extensions may need a separate works agreement. Open.
 
-### BM5 · When a tenant still has not paid
+### BM5 · When a tenant has not paid
 
-*Source: Owner. The covered-month claim and the oldest-month-first rule were proposed and accepted.*
+*Source: Owner. The covered-month claim and the oldest-month-first rule were proposed and accepted. That the
+chasing starts on the missed due date was decided on 2026-11-13.*
 
-**Plain statement** If a tenant still has not paid after the month we covered, we do the chasing for you. We
-remind, call and visit, then send a written notice. If it must go to court, we ask you first and you say YES.
-We never lock a tenant out. Our time costs you nothing extra. A lawyer, the court and a bailiff are paid at
-cost: from the tenant's deposit first, then by you. The month we covered is ours to collect. When a tenant
-pays what is owed, the oldest month is paid first, so the month we covered is repaid before later months
+**Plain statement** If a tenant misses the due date, we do the chasing for you from that day. We remind, call and
+visit, then send a written notice. Should the matter need to go to court, the case is brought in your name, and
+only with your YES. We never lock a tenant out. Our time costs you nothing extra. A lawyer, the court and a bailiff
+are paid at cost: from the tenant's deposit first, then by you. The month we covered is ours to collect. When a
+tenant pays what is owed, the oldest month is paid first, so the month we covered is repaid before later months
 reach you.
 
-**Example** A room rents for UGX 400,000. The tenant does not pay in March, so we pay you UGX 340,000 on
-1st March. On 1st April it is still unpaid: we send nothing for that room and give the tenant a written notice.
-On 20th April the tenant pays UGX 400,000. It repays March, so we keep it (UGX 340,000 we advanced and
+**Example** A room rents for UGX 400,000, due on the 5th. On 1st March we pay you UGX 340,000 for it. The tenant
+has not paid by 5th March, so we start chasing that day. On 1st April it is still unpaid: we send nothing for that
+room. On 20th April the tenant pays UGX 400,000. It repays March, so we keep it (UGX 340,000 we advanced and
 UGX 60,000 fee). April is still owed, so we still send nothing on 1st May. When April is paid, we send you
 UGX 340,000 of it.
 
-**Why** The landlord gets real help when a tenant stops paying. Mwavuli's own time is part of the 15%, and its
-loss on one room stops at one month's net rent. The landlord carries the outside legal costs because the claim
-is the landlord's and the landlord decides whether to go to court.
+**Why** The landlord gets real help when a tenant stops paying. Chasing from the day a due date is missed gives
+the tenant the earliest chance to pay, and Mwavuli the most time to collect before the cover stops on the next
+1st. Mwavuli's own time is part of the 15%, and its loss on one room stops at one month's net rent. The landlord
+carries the outside legal costs because the claim is the landlord's and the landlord decides whether to go to
+court.
 
 **Counsel note**
 
 - Mwavuli acts as the landlord's agent. Legal steps are taken in the landlord's name and need the landlord's
   YES, recorded in writing or by message.
+- The chasing starts on the missed due date and runs alongside the cover. The pause on the next 1st (BM1) is a
+  separate test.
+- When the written notice goes out is open: with the pause on the next 1st, or at the end of the visits. Confirm
+  how soon after a missed due date the Landlord and Tenant Act 2022 lets a landlord or agent send a written notice,
+  and what it must say. Open.
 - The covered month passes to Mwavuli as a claim. Draft the assignment (or subrogation) and the
   oldest-month-first rule so a court reads them the same way.
+- Who brings a case for the covered month is open: the landlord, in its name and with its YES (above), or Mwavuli, in
+  its own right as the claim passes to it (BM1). Open.
 - Mwavuli never locks a tenant out or removes belongings. Confirm the eviction steps and who may carry them out
   under the Landlord and Tenant Act 2022 and related rules.
 - Legal costs come from the deposit where Mwavuli holds one (BM6). On an existing tenant's unit the landlord
@@ -438,7 +474,9 @@ landlord's own language, with a witness the landlord chose.
 
 ### BM12 · The mechanics
 
-*Source: Owner. Proposed in the interview and approved by the owner.*
+*Source: Owner. Proposed in the interview and approved by the owner. P14, P15 and the rule in P16 that a rent month
+that starts after a tenancy has ended is not paid were decided on 2026-11-13, except two proposals in P15: the channel
+for a tenant's notice, and counting the 30 days from the day we learn the tenant has gone (see Open).*
 
 - **P1 Paying and statements.** Tenants pay only Mwavuli, by mobile money or bank, never cash to staff. The
   landlord gets one statement a month by SMS or WhatsApp in the chosen language, with paper on request.
@@ -456,9 +494,10 @@ landlord's own language, with a witness the landlord chose.
 - **P7 Fees.** Only the 15% on rent and the coordination fee on repair quotes. No sign-up, letting or yearly
   fee, and none charged to tenants. Late fees written in the tenancy form go to Mwavuli.
 - **P8 On exit.** A final statement and payment within 14 days of the end date. It pays the rent we collected
-  and haven't paid out, plus prepaid rent for months after the end date in full with no 15%, less costs you
-  approved and any covered month a tenant still owes us. Tenant files go to the landlord. A deposit we hold
-  goes to the landlord after any rent the tenant still owes is taken from it, and tenants are told.
+  and haven't paid out, plus prepaid rent for rent months that start after the end date, in full with no 15%, except
+  rent that goes back to a tenant whose tenancy has ended (P15), less costs you approved and any covered month a
+  tenant still owes us. Tenant files go to the landlord. A deposit we hold goes to the landlord after any rent the
+  tenant still owes is taken from it, and tenants are told.
 - **P9 Right to decline.** We may decline a building or unit we cannot fund, or that fails the ownership
   check or the inspection. Once we accept it, the promise applies.
 - **P10 VAT on commercial rent.** VAT a tenant pays on rent is not part of the rent for the 15%. We pass it
@@ -467,9 +506,25 @@ landlord's own language, with a witness the landlord chose.
   shared otherwise.
 - **P12 Disagreements.** We talk first, then a mediator we both accept, and only then the courts of Uganda.
 - **P13 Prepaid rent.** Held in a separate account, like deposits, and paid out month by month on the 1st, minus
-  15%. Months that haven't started stay there. If a tenant leaves early, unused months go back to the tenant under
-  the tenancy form, with no fee on them. At exit, each tenant gets a note, "rent paid up to [month]", and the
+  15%, as P16 says. If a tenant leaves, the rent held for rent months that start after the tenancy ends goes back to
+  the tenant as P15 says, with no fee on them. At exit, each tenant gets a note, "rent paid up to [date]", and the
   landlord honors it.
+- **P14 Part months.** A rent month runs from one due date of a tenancy to the next. For part months, every month
+  counts as 30 days, so each day is one-thirtieth of the monthly rent. A new tenant pays for the days from move-in to
+  the first due date when moving in, and we pay that rent to the landlord, minus our 15%, on the first payout after
+  move-in. A tenant whose due date moves pays for the days counted forward from the old due date to the new one. In
+  each case the amount for the days is rounded to the nearest UGX 1,000, a half rounding up. A rent month that has
+  started is paid in full: a tenant who leaves part-way through it gets none of it back.
+- **P15 A tenant leaving.** A tenant on our tenancy form gives us 30 days' notice, by phone, SMS or WhatsApp, and
+  we confirm it by message. The tenancy ends on the day before a due date, at least 30 days after we get the
+  notice, so the last rent month is always whole. A tenant who leaves without the notice owes the rent until the
+  tenancy would have ended, counted from the day we learn the tenant has gone, and we take it from the deposit
+  first, if we hold it. We visit the unit when the tenancy ends, or when we learn the tenant has gone. Within 14 days
+  of that visit, the rent held for rent months that start after the tenancy ends goes back to the tenant. If we hold
+  the deposit, we first take what the tenant still owes from there, and then from this rent.
+- **P16 What a payout pays.** Each payout on the 1st pays the rent month that starts that month, as the examples
+  show, so the landlord is paid on the 1st even when the tenant's due date comes later. A rent month that starts
+  after a tenancy has ended is not paid, and the rent held for it goes back to the tenant (P15).
 
 **Counsel note**
 
@@ -490,8 +545,29 @@ landlord's own language, with a witness the landlord chose.
 - P11: confirm duties under the Data Protection and Privacy Act, 2019 (registration, consent notices, retention).
 - P12: confirm governing law, the mediation step and the courts with jurisdiction.
 - P13: confirm that prepaid rent held for landlords and tenants is held in trust, kept apart from Mwavuli's own
-  funds and safe from its creditors, and that the tenancy form says whether unused prepaid months are refundable
-  when a tenant leaves early.
+  funds and safe from its creditors.
+- P14: confirm that counting a part month on a 30-day month, with the amount for the days rounded to the nearest
+  UGX 1,000, is allowed and fair to the tenant once the form says so. It can charge a few days more or fewer than the
+  calendar: 25 January to 5 February is 11 days charged as 10, and 25 February to 5 March is 8 days charged as 10.
+- P14: confirm that keeping the rent of a rent month that has started, when a tenant leaves part-way through it, is
+  allowed under the Landlord and Tenant Act 2022. A tenant's notice ends the tenancy on the day before a due date
+  (P15), so no part month is left at the end of a notice.
+- P14, for the accountant: the part month a new tenant pays at move-in is rent, so the 15% applies (BM4). Confirm how
+  it is recorded and held until the first payout.
+- P15: confirm that a notice of 30 days, ending the tenancy on the day before a due date, is allowed under the
+  Landlord and Tenant Act 2022, so a tenant leaves 30 to 60 days after giving it, and how notice is given and from
+  when it counts (by phone, SMS or WhatsApp, confirmed by message).
+- P15: confirm that the rent until the notice would have ended is rent and not a penalty, that the deposit may be used
+  for it (BM6), and whether it stops when a new tenant moves in sooner.
+- P15: confirm that what a tenant owes may be taken from rent paid ahead, after the deposit, while that rent is held
+  in trust (P13), and the 14 days to repay the rest.
+- P15, for the accountant: rent owed for the notice period is rent, so BM4 and BM5 point to the 15% and the
+  oldest-month-first order. Confirm that, and how it is recorded and paid to the landlord when the unit is empty.
+- P16, for the accountant: a payout pays a rent month before the tenant's due date, so Mwavuli carries the days
+  between (the float, BM17). The tenant's notice, or the day we learn the tenant has gone, is always known before the
+  1st on which a rent month that starts after the tenancy ends would be paid, because the tenancy ends at least 30
+  days after it. Confirm how the skipped payout is recorded. A tenant who leaves without notice owes the rent until
+  the tenancy would have ended (P15); the deposit and the cover's one-month cap (BM1) limit what we carry.
 
 ## Numbers
 
@@ -501,8 +577,12 @@ landlord's own language, with a witness the landlord chose.
 |-----------------------------|----------------------------------------------------------|
 | Management fee              | 15% of rent                                              |
 | Guarantee cap               | 1 month of rent per unit                                 |
-| Notice to leave             | 30 days, either side                                     |
+| Notice to end the agreement | 30 days, either side                                     |
 | Latest payout day           | the 3rd of the month                                     |
+| Notice to move a due date   | 30 days, given to the tenant                             |
+| Notice a tenant gives       | 30 days, ending the day before a due date                |
+| Part month                  | 30-day month, rounded to the nearest UGX 1,000           |
+| Refund of rent paid ahead   | within 14 days of our visit to the unit                  |
 | Coordination fee on repairs | 10% of the contractor's price, shown on the quote        |
 | Approval limit              | UGX 200,000 on the quote; above it the landlord says YES |
 | Emergency amount            | UGX 500,000; urgent safety repairs go first              |
@@ -521,8 +601,15 @@ Each term's counsel note lists what to confirm. Start with these:
 - **Client money:** deposits, prepaid rent and the payout account (BM6, P13, BM17).
 - **Language and signing:** which version governs, the Illiterates Protection Act and witnesses (BM11, BM3).
 - **Land and authority:** proof of title by tenure, mortgages, co-owners and estates (BM7).
-- **Tenancy and recovery:** the covered-month claim, eviction steps, deposits and late fees under the Landlord and
-  Tenant Act 2022 (BM5, BM6, P7, P8).
+- **Tenancy and recovery:** the covered-month claim and who brings a case for it, eviction steps, when the written
+  notice may go out, deposits and late fees under the Landlord and Tenant Act 2022 (BM1, BM5, BM6, P7, P8).
+- **Due dates and part months:** the 30-day month and rounding, and keeping the rent of a rent month a tenant leaves
+  part-way through (P14); moving a due date on notice without the tenant's agreement, moving it without telling the
+  landlord, and the limits on moving it (BM20).
+- **Tenants leaving:** the 30 days' notice that ends the day before a due date, rent until the notice would have
+  ended, and what is taken from the deposit and from rent paid ahead before the rest goes back (P15, P13).
+- **Payouts and rent months:** the payout runs up to a month ahead of the tenant's rent, so Mwavuli carries a float,
+  and a rent month that starts after a tenancy ends is not paid (P16, BM17).
 - **Agency and works:** agent, not builder; disclosure of the coordination fee; re-billing utilities (BM2).
 - **Tax:** VAT and withholding tax on the 15% and on commercial rent, and the landlord's own duties (BM4, BM9, P5,
   P10).
@@ -544,3 +631,22 @@ Not yet settled:
 - Proposed landlord duty, for the owner to approve: a deposit the landlord holds is not used against a month
   Mwavuli has covered (BM6).
 - How the brand name Mwavuli Property Management relates to the registered name (see "The company").
+- When the written notice goes out once a tenant has missed a due date: with the pause on the next 1st, or at the end
+  of the visits (BM5).
+- For a due-date move: who receives the pro rata amount, whether our 15% applies to it as to the move-in part month,
+  and when it falls due (BM20, P14).
+- Limits on moving a due date: whether it may move while the tenant owes rent, while a notice is running and while
+  rent is paid ahead, how often it may move, from when the new date applies, and what the updated tenancy form must
+  carry (BM20).
+- Who brings a case for a covered month: the landlord, in its name and with its YES (BM5), or Mwavuli, in its own
+  right, since the claim for that month passes to it (BM1).
+- Proposed, for the owner to approve: a tenant gives notice by phone, SMS or WhatsApp and we confirm it by message,
+  and a tenant who leaves without notice has the 30 days counted from the day we learn the tenant has gone (P15).
+- When the landlord holds the deposit (an existing tenant, P3): who recovers the rent a tenant owes at an exit, from
+  rent paid ahead or the landlord from the deposit it holds (BM6, P15).
+- How soon after a tenancy ends we visit the unit, and the latest day for the refund of rent paid ahead if no visit
+  happens (P15).
+- Whether the landlord refunds a tenant who leaves after the agreement ends, since P8 pays the landlord the prepaid
+  rent for rent months that start after the end date (P8, P15).
+- The notice a landlord gives a tenant to end a tenancy.
+- Due days 29 to 31 in months without them, and a tenant who moves in on the due day (BM20, P14).

@@ -19,12 +19,16 @@ const MISSED_RENT = [
     text: 'A tenant misses March. We still pay you for that room on 1st March: UGX 340,000.',
   },
   {
+    title: 'The day the rent was due',
+    text: 'We start chasing that day. We remind, call and visit, then send a written notice. Our time costs you nothing extra.',
+  },
+  {
     title: '1st April',
-    text: 'Still unpaid? We pause that room until it is settled. We remind, call and visit, then send a written notice. Our time costs you nothing extra.',
+    text: 'Still unpaid? We pause that room until it is settled, and we keep chasing.',
   },
   {
     title: 'If it goes to court',
-    text: 'We ask you first and you say YES. A lawyer, the court and a bailiff are paid at cost: from the tenant’s deposit first, then by you. We never lock a tenant out.',
+    text: 'The case is brought in your name, and only with your YES. A lawyer, the court and a bailiff are paid at cost: from the tenant’s deposit first, then by you. We never lock a tenant out.',
   },
 ] as const;
 
@@ -130,7 +134,7 @@ const ASKS = [
     </div>
   </section>
 
-  <!-- 2. When a tenant does not pay: the first month is covered, then the chasing (BM1, BM5). -->
+  <!-- 2. When a tenant does not pay: the chasing starts on the due date, beside the cover (BM1, BM5). -->
   <section id="missed-rent" aria-labelledby="missed-rent-title" class="bg-surface">
     <div class="mx-auto max-w-page px-6 py-16 lg:px-8 lg:py-20">
       <h2 id="missed-rent-title" class="t-statement max-w-4xl font-display text-brand">
