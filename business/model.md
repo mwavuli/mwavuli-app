@@ -551,8 +551,8 @@ landlord's own language, with a witness the landlord chose.
   for it (BM6), and whether it stops when a new tenant moves in sooner.
 - P15: confirm that what a tenant owes may be taken from rent paid ahead, after the deposit, while that rent is held
   in trust (P13), and the 14 days to repay the rest.
-- P15, for the accountant: rent owed for the notice period is rent (BM4, BM5): the 15% applies and the oldest month is
-  paid first. Confirm how it is recorded and paid to the landlord when the unit is empty.
+- P15, for the accountant: rent owed for the notice period is rent, so BM4 and BM5 point to the 15% and the
+  oldest-month-first order. Confirm that, and how it is recorded and paid to the landlord when the unit is empty.
 
 ## Numbers
 
